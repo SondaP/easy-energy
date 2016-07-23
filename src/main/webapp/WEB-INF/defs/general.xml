@@ -1,0 +1,64 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="common" template="/WEB-INF/layout/classic.jsp">
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+    </definition><!-- commons -->
+    <definition name="index" extends="common">
+        <put-attribute name="title" value="Easy energy"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
+        <put-attribute name="current" value="index"/>
+    </definition>
+    <!--<definition name="login" extends="common">
+        <put-attribute name="title" value="Login"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-common/login.jsp"/>
+        <put-attribute name="current" value="login"/>
+    </definition>
+    <definition name="logout-info" extends="common">
+        <put-attribute name="title" value="Logout"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-common/logout-info.jsp"/>
+        <put-attribute name="current" value="logout-info"/>
+    </definition>
+    <definition name="expired-session" extends="common">
+        <put-attribute name="title" value="Invalid Session"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-common/expired-session.jsp"/>
+        <put-attribute name="current" value="expired-session"/>
+    </definition>
+    <definition name="user-register" extends="common">
+        <put-attribute name="title" value="Register form"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-common/user-register.jsp"/>
+        <put-attribute name="current" value="user-register"/>
+    </definition>&lt;!&ndash; admin &ndash;&gt;
+    <definition name="companies" extends="common">
+        <put-attribute name="title" value="Companies"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-admin/companies.jsp"/>
+        <put-attribute name="current" value="companies"/>
+    </definition>
+    <definition name="company-users" extends="common">
+        <put-attribute name="title" value="Company users"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-admin/company-users.jsp"/>
+        <put-attribute name="current" value="companies"/>
+    </definition>&lt;!&ndash; user &ndash;&gt;
+    <definition name="user-details" extends="common">
+        <put-attribute name="title" value="Company details"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-user/user-details.jsp"/>
+        <put-attribute name="current" value="user-details"/>
+    </definition>
+    <definition name="user-settings" extends="common">
+        <put-attribute name="title" value="Settings"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-user/user-settings.jsp"/>
+        <put-attribute name="current" value="user-settings"/>
+    </definition>
+    <definition name="edit-company" extends="common">
+        <put-attribute name="title" value="Edit company details"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-user/edit-company.jsp"/>
+        <put-attribute name="current" value="edit-company"/>
+    </definition>
+    <definition name="company-details" extends="common">
+        <put-attribute name="title" value="Company details"/>
+        <put-attribute name="body" value="/WEB-INF/jsp-user/company-details.jsp"/>
+        <put-attribute name="current" value="company-details"/>
+    </definition>-->
+</tiles-definitions>
