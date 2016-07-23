@@ -1,4 +1,6 @@
-package paxxa.com.ees.entity;
+package paxxa.com.ees.entity.company;
+
+import paxxa.com.ees.entity.client.Client;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

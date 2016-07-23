@@ -3,10 +3,10 @@ package paxxa.com.ees.service.initDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import paxxa.com.ees.entity.Role;
-import paxxa.com.ees.entity.User;
-import paxxa.com.ees.repository.RoleRepository;
-import paxxa.com.ees.repository.UserRepository;
+import paxxa.com.ees.entity.role.Role;
+import paxxa.com.ees.entity.user.User;
+import paxxa.com.ees.repository.role.RoleRepository;
+import paxxa.com.ees.repository.user.UserRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;

@@ -1,4 +1,6 @@
-package paxxa.com.ees.entity;
+package paxxa.com.ees.entity.user;
+
+import paxxa.com.ees.entity.role.Role;
 
 import javax.persistence.*;
 import java.util.List;

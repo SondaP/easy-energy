@@ -1,4 +1,6 @@
-package paxxa.com.ees.entity;
+package paxxa.com.ees.entity.role;
+
+import paxxa.com.ees.entity.user.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

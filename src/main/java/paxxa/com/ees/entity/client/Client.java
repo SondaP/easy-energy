@@ -1,4 +1,7 @@
-package paxxa.com.ees.entity;
+package paxxa.com.ees.entity.client;
+
+import paxxa.com.ees.entity.company.Company;
+import paxxa.com.ees.entity.user.User;
 
 import javax.persistence.*;
 
