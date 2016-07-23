@@ -158,8 +158,7 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- Required dependencies to start project and run jsp files
--->
+        <!-- Required dependencies to start project and run jsp files-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -172,6 +171,35 @@
             <version>2.2.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--Dependency for Hipersonic sql data base for develompent puropses IT
+			is REQUIRED IN ORDER TO RUN PRUDUCTION DB-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <!--  Dependencies for SPRING DATA JPA + ENTITY MANAGER  -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.8.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.4.Final</version>
+        </dependency>
+
+        <!--Dependency for Hypersonic sql data base for develompent puropses IT
+			is REQUIRED IN ORDER TO RUN PRUDUCTION DB-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+
 
     </dependencies>
 
