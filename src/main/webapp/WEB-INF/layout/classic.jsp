@@ -52,6 +52,8 @@
                     <li class="active"><a href="#about">Wylicz ofertę</a></li>
                     <li><a href="#contact">Oferty</a></li>
                     <li><a href="#contact">Klienci</a></li>
+                    <li> <a href="<spring:url value="/users.html"/>">Użytkownicy</a></li>
+
                 </ul>
 
 

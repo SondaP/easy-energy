@@ -12,7 +12,7 @@
         <put-attribute name="current" value="index"/>
     </definition>
 
-    <definition name="superAdmin-users" extends="common">
+    <definition name="users" extends="common">
         <put-attribute name="title" value="Users"/>
         <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/users.jsp"/>
         <put-attribute name="current" value="users"/>
