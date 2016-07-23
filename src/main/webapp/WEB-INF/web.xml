@@ -13,4 +13,24 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
+
+    <!-- 1. We need to add servlet and servlet mapping 2. Servlet is for spring
+		and it must have references to xml configuration file 3. XML configuration
+		file must be in the WEB-INF folder and it's name must start from name described
+		in servlet For example servlet name: dispatcher , xml configuration name:
+		dispatcher-servlet.xml Best practice is to use DispatcherServlet for just
+		presentation layer and the rest (DB connection etc) is defined in ContextLoaderListener
+    -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.htm</url-pattern>
+        <url-pattern>*.xml</url-pattern>
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
 </web-app>
