@@ -39,7 +39,7 @@
     <!--REQUIREMENTS for REPOSIOTRIES In namespaces tick "JPA" and then add following tag which points to repository folder -->
     <jpa:repositories base-package="paxxa.com.ees.repository" entity-manager-factory-ref="emf"
                       transaction-manager-ref="transactionManager"/>
-<!--    &lt;!&ndash;  import Spring security configuration file   &ndash;&gt;
-    <import resource="security.xml"/>-->
+    <!--  import Spring security configuration file   -->
+    <import resource="security.xml"/>
 
 </beans>
