@@ -8,29 +8,25 @@
     <title><tiles:getAsString name="title"></tiles:getAsString></title>
     <%-- REQUIRED taglib for spring linksExample: href='<spring:url value="/" />absolute url	 --%>
     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
     <!-- Optional theme -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
     <!-- jQuery  -->
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-
-
     <!--  TAG FOR JQUERY VALIDATION PLUGIN -->
     <script type="text/javascript"
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
-
     <!-- Latest compiled and minified JavaScript -->
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
+    <!-- this tag will read value of the current attribute from general - depend on the jsp page value will be the name of the page -->
+    <%@ taglib uri="http://tiles.apache.org/tags-tiles-extras"
+               prefix="tilesx" %>
+    <tilesx:useAttribute name="currentDef"/>
 </head>
 <body>
 <div class="custom-full-container">
@@ -49,10 +45,13 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#about">Wylicz ofertę</a></li>
+                    <li><a href="#about">Wylicz ofertę</a></li>
                     <li><a href="#contact">Oferty</a></li>
                     <li><a href="#contact">Klienci</a></li>
-                    <li> <a href="<spring:url value="/users.html"/>">Użytkownicy</a></li>
+
+
+                    <li class="${currentDef == 'superAdmin-users' ? 'active' : ''}"><a
+                            href="<spring:url value="/users.html"/>">Użytkownicy</a></li>
 
                 </ul>
 

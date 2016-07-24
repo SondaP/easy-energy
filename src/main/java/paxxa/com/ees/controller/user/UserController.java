@@ -15,7 +15,7 @@ public class UserController {
     @RequestMapping("/users")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "users";
+        return "superAdmin-users";
     }
 
 }
