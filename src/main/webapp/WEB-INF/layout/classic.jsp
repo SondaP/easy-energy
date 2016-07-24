@@ -49,9 +49,11 @@
                     <li><a href="#contact">Oferty</a></li>
                     <li><a href="#contact">Klienci</a></li>
 
-
-                    <li class="${currentDef == 'superAdmin-users' ? 'active' : ''}"><a
+                    <%-- SUPER ADMIN --%>
+                    <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
                             href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
+                    <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
+                            href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
 
                 </ul>
 
