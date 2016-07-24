@@ -18,6 +18,12 @@
         <put-attribute name="currentDef" value="superAdmin-users"/>
     </definition>
 
+    <definition name="superAdmin-userDetails" extends="common">
+        <put-attribute name="title" value="User details"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/userDetails.jsp"/>
+        <put-attribute name="currentDef" value="superAdmin-users"/>
+    </definition>
+
 
 
 

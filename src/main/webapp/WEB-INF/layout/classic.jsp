@@ -51,7 +51,7 @@
 
 
                     <li class="${currentDef == 'superAdmin-users' ? 'active' : ''}"><a
-                            href="<spring:url value="/users.html"/>">Użytkownicy</a></li>
+                            href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
 
                 </ul>
 
