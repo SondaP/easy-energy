@@ -45,6 +45,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li><a href="#about">Wylicz ofertę</a></li>
                     <li><a href="#contact">Oferty</a></li>
                     <li><a href="#contact">Klienci</a></li>
@@ -54,6 +55,10 @@
                             href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
                     <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
                             href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
+
+                    <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
+                            href="<spring:url value="/login.html"/>">Login</a></li>
+
 
                 </ul>
 

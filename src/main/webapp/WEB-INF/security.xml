@@ -8,10 +8,11 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
 
-    <http>
+    <http use-expressions="true">
         <intercept-url pattern="/sa/**" access="hasRole('ROLE_SUPER_ADMIN')" />
-        <form-login />
+        <form-login login-page="/login.html"/>
         <logout />
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
