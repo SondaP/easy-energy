@@ -10,8 +10,8 @@
 
     <http use-expressions="true">
         <intercept-url pattern="/sa/**" access="hasRole('ROLE_SUPER_ADMIN')" />
-        <form-login login-page="/login.html"/>
-        <logout />
+        <form-login login-page="/login.html" default-target-url="/index.html"/>
+        <logout logout-success-url="/logout.html?logoutSuccess=true" delete-cookies="JSESSIONID"/>
         <csrf disabled="true"/>
     </http>
 

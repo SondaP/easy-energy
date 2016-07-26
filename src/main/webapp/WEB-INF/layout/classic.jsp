@@ -26,6 +26,8 @@
     <!-- this tag will read value of the current attribute from general - depend on the jsp page value will be the name of the page -->
     <%@ taglib uri="http://tiles.apache.org/tags-tiles-extras"
                prefix="tilesx" %>
+    <!-- taglib for Security expressions   -->
+    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
     <tilesx:useAttribute name="currentDef"/>
 </head>
 <body>
@@ -46,21 +48,27 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li><a href="#about">Wylicz ofertę</a></li>
-                    <li><a href="#contact">Oferty</a></li>
-                    <li><a href="#contact">Klienci</a></li>
+                    <%-- No AUTHENTICATION --%>
+                    <security:authorize access="!isAuthenticated()">
+                        <li class="${currentDef == 'login' ? 'active' : ''}"><a
+                                href="<spring:url value="/login.html"/>">Login</a></li>
+                    </security:authorize>
 
-                    <%-- SUPER ADMIN --%>
+
+                        <%-- SUPER ADMIN --%>
                     <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
                             href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
                     <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
                             href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
 
-                    <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
-                            href="<spring:url value="/login.html"/>">Login</a></li>
 
+                        <%-- USER --%>
+                    <li><a href="#about">Wylicz ofertę</a></li>
+                    <li><a href="#contact">Oferty</a></li>
+                    <li><a href="#contact">Klienci</a></li>
 
                 </ul>
+
 
 
                 <!-- Right site of menu -->
@@ -113,8 +121,6 @@
                     </security:authorize>
                 </ul>
 
-
-            </div><!--/.nav-collapse -->
         </div>
     </nav>
 
