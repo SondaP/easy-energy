@@ -38,10 +38,6 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                         aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<spring:url value="/"/>">Easy-energy</a>
             </div>
@@ -55,20 +51,24 @@
                     </security:authorize>
 
 
-                        <%-- SUPER ADMIN --%>
-                    <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
-                            href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
-                    <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
-                            href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
+                    <%-- SUPER ADMIN --%>
+                    <security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
+                        <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
+                                href="<spring:url value="/sa/users.html"/>">Użytkownicy</a></li>
+                        <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
+                                href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
+                    </security:authorize>
 
+                    <%-- ADMIN --%>
 
-                        <%-- USER --%>
-                    <li><a href="#about">Wylicz ofertę</a></li>
-                    <li><a href="#contact">Oferty</a></li>
-                    <li><a href="#contact">Klienci</a></li>
+                    <%-- USER --%>
+                    <security:authorize access="hasRole('ROLE_USER')">
+                        <li><a href="#about">Wylicz ofertę</a></li>
+                        <li><a href="#contact">Oferty</a></li>
+                        <li><a href="#contact">Klienci</a></li>
+                    </security:authorize>
 
                 </ul>
-
 
 
                 <!-- Right site of menu -->
@@ -98,9 +98,8 @@
                     </security:authorize>
                 </ul>
 
-
                 <ul class="nav navbar-pills navbar-right">
-                    <security:authorize access="hasRole('USER')">
+                    <security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
                         <li><p>
                             <p>
                                 <a href="<spring:url value="/user-settings.html"></spring:url>"
@@ -121,7 +120,21 @@
                     </security:authorize>
                 </ul>
 
-        </div>
+
+                <ul class="nav navbar-pills navbar-right">
+                    <security:authorize access="hasRole('USER')">
+                        <li><p>
+                            <p>
+                                <a href="<spring:url value="/user-settings.html"></spring:url>"
+                                   type="button" class="btn btn-default">${pageContext.request.userPrincipal.name}
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </a></li>
+                    </security:authorize>
+                </ul>
+
+
+
+            </div>
     </nav>
 
     <tiles:insertAttribute name="body"/>
