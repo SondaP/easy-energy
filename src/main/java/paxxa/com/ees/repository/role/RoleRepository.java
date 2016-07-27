@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import paxxa.com.ees.entity.role.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer>{
+
+    Role findByName(String name);
 }

@@ -1,4 +1,4 @@
-package paxxa.com.ees.controller;
+package paxxa.com.ees.controller.logout;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
