@@ -106,7 +106,7 @@
                                    type="button" class="btn btn-default">${pageContext.request.userPrincipal.name}
                                     <span class="glyphicon glyphicon-cog"></span>
                                 </a></li>
-                    </security:authorize> 
+                    </security:authorize>
                 </ul>
 
                 <ul class="nav navbar-pills navbar-right">

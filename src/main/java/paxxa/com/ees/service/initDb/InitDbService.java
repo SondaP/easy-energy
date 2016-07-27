@@ -50,14 +50,20 @@ public class InitDbService {
          * Setting USERS
          */
         User userSuperAdmin = new User();
-        userSuperAdmin.setName("SuperAdmin");
+        userSuperAdmin.setName("sa");
         userSuperAdmin.setPassword("a");
-        userSuperAdmin.setRoles(Arrays.asList(roleSuperAdmin, roleUser));
+        userSuperAdmin.setRoles(Arrays.asList(roleSuperAdmin));
         userRepository.save(userSuperAdmin);
 
+        User userAdmin = new User();
+        userAdmin.setName("a");
+        userAdmin.setPassword("a");
+        userAdmin.setRoles(Arrays.asList(roleAdmin));
+        userRepository.save(userAdmin);
+
         User user_a = new User();
-        user_a.setName("Doradca A");
-        user_a.setPassword("Doradca A");
+        user_a.setName("d");
+        user_a.setPassword("d");
         user_a.setRoles(Arrays.asList(roleUser));
         userRepository.save(user_a);
 
