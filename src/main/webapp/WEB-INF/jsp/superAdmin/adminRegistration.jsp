@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../layout/taglib.jsp" %>
 
+<c:if test="${param.success eq true}">
+    <div class="alert alert-success">Rejestracja zakończona powodzeniem</div>
+</c:if>
 
 <form:form commandName="user" action="/sa/register.html" cssClass="form-horizontal">
     <div class="form-group">

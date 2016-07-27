@@ -41,7 +41,7 @@ public class SuperAdminController {
     @RequestMapping(value="/sa/register", method = RequestMethod.POST)
     public String doRegister(@ModelAttribute("user") User user) {
         userService.saveAdmin(user);
-        return "sa-adminRegister";
+        return "redirect:/sa/register.html?success=true";
     }
 
 
