@@ -24,8 +24,8 @@
                     ${user.password}
             </td>
             <td>
-                <a href="<spring:url value="/sa/users/remove/${user.id}.html" />" class="btn btn-danger">
-                       usuń
+                <a href="<spring:url value="/sa/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">
+                    usuń
                 </a>
             </td>
         </tr>
@@ -34,3 +34,35 @@
     </tbody>
 
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Usuń użytkownika</h4>
+            </div>
+            <div class="modal-body">
+                Czy na pewno chcesz usunąć użytkownika?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">anuluj</button>
+                <a href="" class="btn btn-danger removeBtn">usuń</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".triggerRemove").click(function(e) {
+            e.preventDefault();
+            $("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
+            $("#modalRemove").modal();
+        });
+    });
+</script>

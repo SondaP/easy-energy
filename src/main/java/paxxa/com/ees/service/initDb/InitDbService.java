@@ -1,6 +1,5 @@
 package paxxa.com.ees.service.initDb;
 
-import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
