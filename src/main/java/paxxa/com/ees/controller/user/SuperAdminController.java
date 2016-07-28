@@ -44,6 +44,13 @@ public class SuperAdminController {
         return "redirect:/sa/register.html?success=true";
     }
 
+    @RequestMapping(value = "/sa/users/remove/{id}")
+    public String removeUser(@PathVariable int id){
+        userService.removeUser(id);
+        return "redirect:/sa/users.html";
+
+    }
+
 
 
 }
