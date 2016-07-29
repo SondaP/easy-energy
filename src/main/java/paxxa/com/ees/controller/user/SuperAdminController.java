@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import paxxa.com.ees.dto.UserDTO;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.service.user.UserService;
 
@@ -18,7 +19,7 @@ public class SuperAdminController {
     private UserService userService;
 
     @ModelAttribute("user")
-    public User construct(){
+    public User constructUser() {
         return new User();
     }
 
@@ -39,26 +40,24 @@ public class SuperAdminController {
         return "sa-adminRegister";
     }
 
-    @RequestMapping(value="/sa/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/sa/register", method = RequestMethod.POST)
     public String doRegister(@ModelAttribute("user") User user) {
         userService.saveAdmin(user);
         return "redirect:/sa/register.html?success=true";
     }
 
     @RequestMapping(value = "/sa/users/remove/{id}")
-    public String removeUser(@PathVariable int id){
+    public String removeUser(@PathVariable int id) {
         userService.removeUser(id);
         return "redirect:/sa/users.html";
     }
 
-  /*  @RequestMapping(value="/sa/users/reset/{id}")
-    public String resetPassword(@PathVariable int id, String password){
+    @RequestMapping(value = "/sa/users/{id}/{pass}")
+    public String resetPassword(@PathVariable int id, @PathVariable String pass) {
         User userEntity = userService.findById(id);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userEntity.setPassword(encoder.encode(password));
-        userService.updatePassword(userEntity, password);
+        userService.updatePassword(userEntity, pass);
         return "";
-    }*/
+    }
 
 
 }

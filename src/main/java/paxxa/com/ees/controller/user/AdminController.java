@@ -15,4 +15,12 @@ public class AdminController {
         String name = principal.getName();
         return "a-account";
     }
+
+    @RequestMapping("/a/settings")
+    public String settings(Model model, Principal principal){
+        String name = principal.getName();
+        return "a-settings";
+    }
+
+
 }
