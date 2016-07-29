@@ -1,6 +1,7 @@
 package paxxa.com.ees.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,9 +49,16 @@ public class SuperAdminController {
     public String removeUser(@PathVariable int id){
         userService.removeUser(id);
         return "redirect:/sa/users.html";
-
     }
 
+  /*  @RequestMapping(value="/sa/users/reset/{id}")
+    public String resetPassword(@PathVariable int id, String password){
+        User userEntity = userService.findById(id);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userEntity.setPassword(encoder.encode(password));
+        userService.updatePassword(userEntity, password);
+        return "";
+    }*/
 
 
 }

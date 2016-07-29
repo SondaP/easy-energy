@@ -76,4 +76,9 @@ public class UserService {
     }
 
 
+    public void updatePassword(User userEntity, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userEntity.setPassword(encoder.encode(password));
+        userRepository.saveAndFlush(userEntity);
+    }
 }
