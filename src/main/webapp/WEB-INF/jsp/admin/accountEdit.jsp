@@ -1,13 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../layout/taglib.jsp" %>
 
-<c:if test="${param.success eq true}">
-    <div class="alert alert-success">Zmiana zakończona powodzeniem</div>
-</c:if>
 
 <div class="row">
     <div class="col-md-6">
-        <form:form modelAttribute="personalDataDTO" >
+        <form:form modelAttribute="personalDataDTO" method="post" action="/a/accountEdit.html">
             <!-- left Company -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -93,10 +90,13 @@
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
                         <center>
-                            <a href="<spring:url value="/a/accountEdit.html"></spring:url>"
-                               type="button" class="btn btn-warning">Edytuj <span
+                            <a href="<spring:url value="/a/account.html"></spring:url>"
+                               type="button" class="btn btn-danger">Anuluj <span
                                     class="glyphicon glyphicon-remove"></span>
                             </a>
+                            <button type="submit" class="btn btn-primary">Zatwierdź zmiany <span
+                                    class="glyphicon glyphicon-ok"></span>
+                            </button>
                         </center>
                     </div>
                 </div>

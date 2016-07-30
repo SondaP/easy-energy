@@ -1,5 +1,6 @@
 package paxxa.com.ees.entity.user;
 
+import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.entity.role.Role;
 
 import javax.persistence.*;
@@ -18,6 +19,10 @@ public class User {
     @ManyToMany
     @JoinTable
     private List<Role> roles;
+    @OneToOne
+    @JoinColumn
+    private PersonalData personalData;
+
 
     public Integer getId() {
         return id;
@@ -65,5 +70,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public PersonalData getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
     }
 }

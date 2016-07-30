@@ -34,6 +34,42 @@
             </div>
         </div>
 
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <strong>Zarządzanie dostawcami energi</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Lista dostawców</a>
+                    <a href="#" class="list-group-item">Zarejestruj dostawcę</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <strong>Zarządzanie klientem</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Lista globalnych klientów</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-6">
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -48,10 +84,6 @@
             </div>
         </div>
 
-
-
-    </div>
-    <div class="col-md-6">
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -80,25 +112,13 @@
 
                 <div class="list-group">
                     <a href="#" class="list-group-item">Lista użytkowników</a>
+                    <a href="#" class="list-group-item">Zarejestruj użytkownika</a>
                 </div>
             </div>
         </div>
 
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <strong>Inne</strong>
-                </h3>
-            </div>
-            <div class="panel-body">
 
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Inne</a>
-                </div>
-
-            </div>
-        </div>
 
     </div>
 </div>

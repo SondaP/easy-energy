@@ -33,6 +33,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/admin/account.jsp"/>
         <put-attribute name="currentDef" value="a-account"/>
     </definition>
+    <definition name="a-accountEdit" extends="common">
+        <put-attribute name="title" value="Educja konta"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/accountEdit.jsp"/>
+        <put-attribute name="currentDef" value="a-account"/>
+    </definition>
 
 
     <!-- SUPER ADMIN -->

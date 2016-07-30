@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
+import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.entity.role.Role;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.company.CompanyRepository;
+import paxxa.com.ees.repository.personalData.PersonalDataRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.user.UserRepository;
 import paxxa.com.utils.DomainConstans;
@@ -29,6 +31,8 @@ public class InitDbService {
     private CompanyRepository companyRepository;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private PersonalDataRepository personalDataRepository;
 
 
     @PostConstruct
@@ -60,10 +64,19 @@ public class InitDbService {
         userSuperAdmin.setRoles(Arrays.asList(roleSuperAdmin));
         userRepository.save(userSuperAdmin);
 
+        PersonalData personalDataAdmin = new PersonalData();
+        personalDataAdmin.setFirstName("Pawel");
+        personalDataAdmin.setSurname("Pawski");
+        personalDataAdmin.setEmail("pawskI@gmail.com");
+        personalDataAdmin.setPhoneNumber("792600330");
+        personalDataRepository.save(personalDataAdmin);
+
+
         User userAdmin = new User();
         userAdmin.setEnabled(true);
         userAdmin.setName("a");
         userAdmin.setPassword(encoder.encode("a"));
+        userAdmin.setPersonalData(personalDataAdmin);
         userAdmin.setRoles(Arrays.asList(roleAdmin));
         userRepository.save(userAdmin);
 
@@ -73,6 +86,8 @@ public class InitDbService {
         user_a.setPassword(encoder.encode("d"));
         user_a.setRoles(Arrays.asList(roleUser));
         userRepository.save(user_a);
+
+
 
         /**
          * Setting COMPANIES
