@@ -41,7 +41,7 @@ public class AdminController {
     }
 
     @RequestMapping("/a/accountEdit")
-    public String accountEditPersonalData(Model model, Principal principal){
+    public String showAccountEditPersonalData(Model model, Principal principal){
         String userName = principal.getName();
         model.addAttribute("personalData", userService.findByUserName(userName));
         return "a-accountEdit";
