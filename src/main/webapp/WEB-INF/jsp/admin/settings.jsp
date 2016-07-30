@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../layout/taglib.jsp"%>
 
 <div class="row">
     <div class="col-md-6">
@@ -94,7 +95,7 @@
             <div class="panel-body">
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Edycja konta</a>
+                    <a href='<spring:url value="/a/account.html"></spring:url>' class="list-group-item">Edycja konta</a>
                     <a href="#" class="list-group-item">Reset hasła</a>
                 </div>
 
