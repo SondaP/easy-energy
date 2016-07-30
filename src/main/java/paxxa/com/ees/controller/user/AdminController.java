@@ -48,10 +48,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/a/accountEdit", method = RequestMethod.POST)
-    public String updatePersonalData(@ModelAttribute("personalDataDTO") PersonalDataDTO personalDataDTO){
-        personalDataService.updatePersonalData(personalDataDTO);
+    public String updatePersonalData(@ModelAttribute("personalDataDTO") PersonalDataDTO personalDataDTO, Principal principal){
+        personalDataService.addOrUpdatePersonalData(personalDataDTO, principal.getName());
         return "redirect:/a/account.html?success=true";
     }
+
+
 
 
 
