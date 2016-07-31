@@ -7,6 +7,7 @@
     <thead>
     <tr>
         <th>Nazwa</th>
+        <th>Email</th>
         <th>Hasło</th>
         <th>Akcja</th>
     </tr>
@@ -19,6 +20,9 @@
                 <a href="<spring:url value="/sa/users/${user.id}.html" />">
                         ${user.name}
                 </a>
+            </td>
+            <td>
+                    ${user.email}
             </td>
             <td>
                     ${user.password}
@@ -66,7 +70,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
@@ -82,8 +87,8 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".triggerRemove").click(function(e) {
+    $(document).ready(function () {
+        $(".triggerRemove").click(function (e) {
             e.preventDefault();
             $("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
             $("#modalRemove").modal();

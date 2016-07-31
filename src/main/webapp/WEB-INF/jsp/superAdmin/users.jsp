@@ -7,6 +7,7 @@
     <thead>
     <tr>
         <th>Nazwa</th>
+        <th>Email</th>
         <th>Hasło</th>
         <th>Akcja</th>
     </tr>
@@ -19,6 +20,9 @@
                 <a href="<spring:url value="/sa/users/${user.id}.html" />">
                         ${user.name}
                 </a>
+            </td>
+            <td>
+                    ${user.email}
             </td>
             <td>
                     ${user.password}

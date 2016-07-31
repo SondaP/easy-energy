@@ -61,6 +61,7 @@ public class InitDbService {
         userSuperAdmin.setName("sa");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userSuperAdmin.setPassword(encoder.encode("a"));
+        userSuperAdmin.setEmail("superAdmin@gmial.com");
         userSuperAdmin.setRoles(Arrays.asList(roleSuperAdmin));
         userRepository.save(userSuperAdmin);
 
@@ -71,21 +72,26 @@ public class InitDbService {
         personalDataAdmin.setPhoneNumber("792600330");
         personalDataRepository.save(personalDataAdmin);
 
+        User paxxa_user1 = new User();
+        paxxa_user1.setEnabled(true);
+        paxxa_user1.setName("d");
+        paxxa_user1.setPassword(encoder.encode("d"));
+        paxxa_user1.setEmail("handlowiec_paxxa@gmail.com");
+        paxxa_user1.setRoles(Arrays.asList(roleUser));
+        userRepository.save(paxxa_user1);
+
 
         User userAdmin = new User();
         userAdmin.setEnabled(true);
         userAdmin.setName("paxxa");
         userAdmin.setPassword(encoder.encode("a"));
+        userAdmin.setEmail("paxxa.kontakt@gmail.com");
         userAdmin.setPersonalData(personalDataAdmin);
         userAdmin.setRoles(Arrays.asList(roleAdmin));
+        userAdmin.setUserList(Arrays.asList(paxxa_user1));
         userRepository.save(userAdmin);
 
-        User user_a = new User();
-        user_a.setEnabled(true);
-        user_a.setName("d");
-        user_a.setPassword(encoder.encode("d"));
-        user_a.setRoles(Arrays.asList(roleUser));
-        userRepository.save(user_a);
+
 
 
 
@@ -105,7 +111,7 @@ public class InitDbService {
          * Setting CLIENTS
          */
         Client client_1 = new Client();
-        client_1.setCurrentAdvisor(user_a);
+        client_1.setCurrentAdvisor(paxxa_user1);
         client_1.setCompany(company_1);
         clientRepository.save(client_1);
     }
