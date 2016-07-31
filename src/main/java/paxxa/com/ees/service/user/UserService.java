@@ -46,7 +46,7 @@ public class UserService {
         return userRepository.findOne(userId);
     }
 
-    public void saveAdmin(User user) {
+    public void saveUserRoleAdmin(User user) {
         user.setEnabled(true);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -55,6 +55,10 @@ public class UserService {
         user.setRoles(Arrays.asList(role));
 
         userRepository.save(user);
+    }
+
+    public void saveUserRoleUser(User user, String adminName){
+        User adminEntity = userRepository.findByName(adminName);
     }
 
     public void removeUser(int id) {

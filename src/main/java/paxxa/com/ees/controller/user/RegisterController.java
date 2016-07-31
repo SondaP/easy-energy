@@ -40,11 +40,11 @@ public class RegisterController {
             if (result.hasErrors()) {
                 return "sa-adminRegister";
             }
-            userService.saveAdmin(user);
+            userService.saveUserRoleAdmin(user);
             return "redirect:/sa/register.html?success=true";
         }
         if (userService.hasUserExpectedRole(principal.getName(), DomainConstans.ROLE.ROLE_ADMIN)) {
-            userService.saveAdmin(user);
+            userService.saveUserRoleUser(user, principal.getName());
             return "redirect:/a/register.html?success=true";
         }
         return null;
