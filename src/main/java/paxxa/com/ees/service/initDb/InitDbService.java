@@ -65,16 +65,16 @@ public class InitDbService {
         userRepository.save(userSuperAdmin);
 
         PersonalData personalDataAdmin = new PersonalData();
-        personalDataAdmin.setFirstName("Pawel");
-        personalDataAdmin.setSurname("Pawski");
-        personalDataAdmin.setEmail("pawskI@gmail.com");
+        personalDataAdmin.setFirstName("Paxxa");
+        personalDataAdmin.setSurname("Paxxa");
+        personalDataAdmin.setEmail("paxxa.kontakt@gmail.com");
         personalDataAdmin.setPhoneNumber("792600330");
         personalDataRepository.save(personalDataAdmin);
 
 
         User userAdmin = new User();
         userAdmin.setEnabled(true);
-        userAdmin.setName("a");
+        userAdmin.setName("paxxa");
         userAdmin.setPassword(encoder.encode("a"));
         userAdmin.setPersonalData(personalDataAdmin);
         userAdmin.setRoles(Arrays.asList(roleAdmin));

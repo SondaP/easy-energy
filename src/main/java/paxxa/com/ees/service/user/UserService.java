@@ -46,7 +46,7 @@ public class UserService {
         return userRepository.findOne(userId);
     }
 
-    public void saveUserRoleAdmin(User user) {
+    public void saveUserWithRoleAdmin(User user) {
         user.setEnabled(true);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -57,8 +57,18 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void saveUserRoleUser(User user, String adminName){
+    public void saveUserWithRoleUser(User user, String adminName){
         User adminEntity = userRepository.findByName(adminName);
+
+        user.setEnabled(true);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        Role role = roleRepository.findByName(DomainConstans.ROLE.ROLE_USER);
+        user.setRoles(Arrays.asList(role));
+        userRepository.saveAndFlush(user);
+
+        adminEntity.getUserList().add(user);
+        userRepository.save(adminEntity);
     }
 
     public void removeUser(int id) {

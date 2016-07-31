@@ -113,7 +113,7 @@
 
                 <div class="list-group">
                     <a href="#" class="list-group-item">Lista użytkowników</a>
-                    <a href="#" class="list-group-item">Zarejestruj użytkownika</a>
+                    <a href='<spring:url value="/a/register.html"></spring:url>' class="list-group-item">Zarejestruj handlowca</a>
                 </div>
             </div>
         </div>

@@ -22,24 +22,6 @@
         <put-attribute name="currentDef" value="logout"/>
     </definition>
 
-    <!-- ADMIN -->
-    <definition name="a-settings" extends="common">
-        <put-attribute name="title" value="Konto"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/settings.jsp"/>
-        <put-attribute name="currentDef" value="a-settings"/>
-    </definition>
-    <definition name="a-account" extends="common">
-        <put-attribute name="title" value="Konto"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/account.jsp"/>
-        <put-attribute name="currentDef" value="a-account"/>
-    </definition>
-    <definition name="a-accountEdit" extends="common">
-        <put-attribute name="title" value="Educja konta"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/accountEdit.jsp"/>
-        <put-attribute name="currentDef" value="a-account"/>
-    </definition>
-
-
     <!-- SUPER ADMIN -->
     <definition name="sa-users" extends="common">
         <put-attribute name="title" value="Użytkownicy"/>
@@ -58,6 +40,24 @@
         <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/adminRegistration.jsp"/>
         <put-attribute name="currentDef" value="sa-adminRegister"/>
     </definition>
+
+    <!-- ADMIN -->
+    <definition name="a-settings" extends="common">
+        <put-attribute name="title" value="Konto"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/settings.jsp"/>
+        <put-attribute name="currentDef" value="a-settings"/>
+    </definition>
+    <definition name="a-account" extends="common">
+        <put-attribute name="title" value="Konto"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/account.jsp"/>
+        <put-attribute name="currentDef" value="a-account"/>
+    </definition>
+    <definition name="a-accountEdit" extends="common">
+        <put-attribute name="title" value="Educja konta"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/accountEdit.jsp"/>
+        <put-attribute name="currentDef" value="a-account"/>
+    </definition>
+
 
     <!-- USER -->
     <definition name="a-userRegister" extends="common">

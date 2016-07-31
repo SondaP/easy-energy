@@ -31,6 +31,9 @@ public class User {
     @OneToOne
     @JoinColumn
     private PersonalData personalData;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name ="OWNED_USER_ID")
+    private List<User> userList;
 
 
     public Integer getId() {
@@ -87,5 +90,13 @@ public class User {
 
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

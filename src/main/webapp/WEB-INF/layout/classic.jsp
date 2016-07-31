@@ -67,10 +67,15 @@
 
                     <%-- ADMIN --%>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
-                                href="<spring:url value="/a/account.html"/>">Konto</a></li>
+                        <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
+                                href="<spring:url value="#"/>">Aktualizuj cenniki</a></li>
+                        <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
+                                href="<spring:url value="#"/>">Handlowcy</a></li>
                         <li class="${currentDef == 'a-userRegister' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/register.html"/>">Rejestracja Handlowca</a></li>
+                        <li class="${currentDef == 'a-account' ? 'active' : ''}"><a
+                                href="<spring:url value="/a/account.html"/>">Konto</a></li>
+
                     </security:authorize>
 
 
