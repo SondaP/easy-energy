@@ -10,7 +10,7 @@ $(document).ready(function() {
                 name: {
                     required: true,
                     minlength: 1,
-                    remote: {
+                    /*remote: {
                         url: window.location.protocol + "/easy-reporting/register/available.html",
                         type: "get",
                         data: {
@@ -18,7 +18,7 @@ $(document).ready(function() {
                                 return $("#name").val();
                             }
                         }
-                    }
+                    }*/
                 },
                 email: {
                     required: true,

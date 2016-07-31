@@ -15,14 +15,14 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    @Size(min = 1, message = "Name must be at least 3 characters")
-  /*  @Column(unique=true)
-    @UniqueUserName(message = "Such username already exists")*/
+    @Size(min = 1, message = "Nazwa konta musi posiadać conajmniej jeden znak")
+    @Column(unique=true)
+    @UniqueUserName(message = "Podana nazwa jest już zajęta")
     private String name;
-    @Size(min = 1, message = "Invalid email address")
+    @Size(min = 1, message = "Nieprawidłowy adres email")
     @Email
     private String email;
-    @Size(min = 5, message = "Name must be at least 5 characters")
+    @Size(min = 5, message = "Hasło musi składać się z conajmniej 5 znaków")
     private String password;
     private boolean enabled;
     @ManyToMany
