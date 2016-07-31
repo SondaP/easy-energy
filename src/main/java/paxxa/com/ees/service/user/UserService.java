@@ -4,7 +4,10 @@ import com.sun.java.browser.plugin2.DOM;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,6 +45,22 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> findAllUsersForUser(String userName){
+        Session session = entityManager.unwrap(Session.class);
+
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+        detachedCriteria.createAlias("userList", "userList");
+        detachedCriteria.add(Restrictions.eq("name", userName));
+        detachedCriteria.setProjection(Property.forName("userList.id"));
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Subqueries.propertyIn("id", detachedCriteria));
+
+        List<User> list = criteria.list();
+        return list;
+    }
+
+
     public User findById(final int userId) {
         return userRepository.findOne(userId);
     }
@@ -59,7 +78,6 @@ public class UserService {
 
     public void saveUserWithRoleUser(User user, String adminName){
         User adminEntity = userRepository.findByName(adminName);
-
         user.setEnabled(true);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));

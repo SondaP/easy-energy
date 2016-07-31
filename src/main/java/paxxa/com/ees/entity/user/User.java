@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue
     private Integer id;
     @Size(min = 1, message = "Nazwa konta musi posiadać conajmniej jeden znak")
-    @Column(unique=true)
+    @Column(unique = true)
     @UniqueUserName(message = "Podana nazwa jest już zajęta")
     private String name;
     @Size(min = 1, message = "Nieprawidłowy adres email")
@@ -32,7 +32,7 @@ public class User {
     @JoinColumn
     private PersonalData personalData;
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name ="OWNED_USER_ID")
+    @JoinColumn(name = "OWNED_USER_ID")
     private List<User> userList;
 
 

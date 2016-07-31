@@ -37,12 +37,12 @@ public class SuperAdminController {
         return "redirect:/sa/users.html";
     }
 
-    @RequestMapping(value = "/users/{id}/{pass}")
+    /*@RequestMapping(value = "/users/{id}/{pass}")
     public String resetPassword(@PathVariable int id, @PathVariable String pass) {
         User userEntity = userService.findById(id);
         userService.updatePassword(userEntity, pass);
         return "";
-    }
+    }*/
 
 
 
