@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import paxxa.com.ees.dto.PersonalDataDTO;
@@ -57,6 +58,12 @@ public class AdminController {
     public String getUsers(Model model, Principal principal) {
         model.addAttribute("users", userService.findAllUsersForUser(principal.getName()));
         return "a-users";
+    }
+
+    @RequestMapping(value = "/users/remove/{id}")
+    public String removeUser(@PathVariable int id) {
+        userService.removeUser(id);
+        return "redirect:/a/users.html";
     }
 
 

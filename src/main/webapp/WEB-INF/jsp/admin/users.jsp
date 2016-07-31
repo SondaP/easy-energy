@@ -28,7 +28,7 @@
                     ${user.password}
             </td>
             <td>
-                <a href="<spring:url value="/sa/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">
+                <a href="<spring:url value="/a/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">
                     dezaktywuj
                 </a>
             </td>
