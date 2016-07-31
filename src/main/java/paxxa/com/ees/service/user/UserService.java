@@ -83,8 +83,13 @@ public class UserService {
         userRepository.saveAndFlush(userEntity);
     }
 
-    public PersonalData findByUserName(String userName){
+    public PersonalData findPersonalDataByUserName(String userName){
         User user = userRepository.findByName(userName);
         return user.getPersonalData();
+    }
+
+    public User findUserByUserName(String userName){
+        User user = userRepository.findByName(userName);
+        return user;
     }
 }

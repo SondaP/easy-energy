@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import paxxa.com.ees.dto.PersonalDataDTO;
-import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.service.personalData.PersonalDataService;
 import paxxa.com.ees.service.user.UserService;
 
@@ -36,14 +35,14 @@ public class AdminController {
     @RequestMapping("/a/account")
     public String account(Model model, Principal principal){
         String userName = principal.getName();
-        model.addAttribute("personalData", userService.findByUserName(userName));
+        model.addAttribute("personalData", userService.findPersonalDataByUserName(userName));
         return "a-account";
     }
 
     @RequestMapping("/a/accountEdit")
     public String showAccountEditPersonalData(Model model, Principal principal){
         String userName = principal.getName();
-        model.addAttribute("personalData", userService.findByUserName(userName));
+        model.addAttribute("personalData", userService.findPersonalDataByUserName(userName));
         return "a-accountEdit";
     }
 

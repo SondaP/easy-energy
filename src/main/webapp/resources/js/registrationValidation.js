@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     /*
      * Register new user validation
@@ -10,15 +10,15 @@ $(document).ready(function() {
                 name: {
                     required: true,
                     minlength: 1,
-                    /*remote: {
-                        url: window.location.protocol + "/easy-reporting/register/available.html",
+                    remote: {
+                        url: window.location.protocol + "/register/available.html",
                         type: "get",
                         data: {
                             username: function () {
                                 return $("#name").val();
                             }
                         }
-                    }*/
+                    }
                 },
                 email: {
                     required: true,
@@ -44,8 +44,25 @@ $(document).ready(function() {
             },
             messages: {
                 name: {
-                    remote: "Podana nazwa użytkownika już istnieje"
+                    remote: "Podana nazwa użytkownika jest już zajęta",
+                    required: "Pole jest wymagane",
+                    minlength: "Pole powinno zawierać co najmniej 1 znak"
+                },
+                email: {
+                    required: "Pole jest wymagane",
+                    email: "Wpisz poprawny adres mailowy"
+                },
+                password: {
+                    required: "Pole jest wymagane",
+                    minlength: "Pole powinno zawierać co najmniej 5 znaków"
+                },
+                password_again: {
+                    required: "Pole jest wymagane",
+                    minlength: "Pole powinno zawierać co najmniej 5 znaków",
+                    equalTo: "Powtórzone hasło różni się od poprzednio wpisanego hasła"
                 }
+
+
             }
 
         }
