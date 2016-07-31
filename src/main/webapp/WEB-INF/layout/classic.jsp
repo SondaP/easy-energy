@@ -143,7 +143,7 @@
                     <security:authorize access="hasRole('USER')">
                         <li><p>
                             <p>
-                                <a href="<spring:url value="/user-settings.html"></spring:url>"
+                                <a href="<spring:url value="#"></spring:url>"
                                    type="button" class="btn btn-default">${pageContext.request.userPrincipal.name}
                                     <span class="glyphicon glyphicon-cog"></span>
                                 </a></li>
