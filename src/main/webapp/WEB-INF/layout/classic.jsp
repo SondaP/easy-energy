@@ -69,6 +69,8 @@
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="${currentDef == 'sa-users' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/account.html"/>">Konto</a></li>
+                        <li class="${currentDef == 'a-userRegister' ? 'active' : ''}"><a
+                                href="<spring:url value="/a/register.html"/>">Rejestracja Handlowca</a></li>
                     </security:authorize>
 
 

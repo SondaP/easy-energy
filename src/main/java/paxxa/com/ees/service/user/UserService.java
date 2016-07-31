@@ -1,10 +1,12 @@
 package paxxa.com.ees.service.user;
 
+import com.sun.java.browser.plugin2.DOM;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,7 +78,6 @@ public class UserService {
         }
     }
 
-
     public void updatePassword(User userEntity, String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userEntity.setPassword(encoder.encode(password));
@@ -92,4 +93,22 @@ public class UserService {
         User user = userRepository.findByName(userName);
         return user;
     }
+
+    public boolean hasUserExpectedRole(String userName, String expectedRole){
+        User user = userRepository.findByName(userName);
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Role.class);
+        criteria.createAlias("users", "users");
+        criteria.add(Restrictions.eq("users.id", user.getId()));
+        criteria.add(Restrictions.eq("name", expectedRole));
+        List<Role> role = criteria.list();
+        if(role.isEmpty()){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
 }

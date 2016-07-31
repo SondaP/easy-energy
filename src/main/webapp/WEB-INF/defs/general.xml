@@ -59,6 +59,12 @@
         <put-attribute name="currentDef" value="sa-adminRegister"/>
     </definition>
 
+    <!-- USER -->
+    <definition name="a-userRegister" extends="common">
+        <put-attribute name="title" value="Rejestracja konta handlowca"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/userRegistration.jsp"/>
+        <put-attribute name="currentDef" value="a-userRegister"/>
+    </definition>
 
 
 
