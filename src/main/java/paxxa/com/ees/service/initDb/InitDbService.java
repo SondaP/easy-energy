@@ -41,7 +41,7 @@ public class InitDbService {
          * Setting ROLES
          */
         Role roleUser = new Role();
-        roleUser.setName(DomainConstans.ROLE.ROLE_USER);
+        roleUser.setName(DomainConstans.ROLE.ROLE_TRADER);
         roleRepository.save(roleUser);
 
 

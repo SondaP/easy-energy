@@ -1,20 +1,16 @@
 package paxxa.com.ees.service.user;
 
-import com.sun.java.browser.plugin2.DOM;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.entity.client.Client;
-import paxxa.com.ees.entity.company.Company;
 import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.entity.role.Role;
 import paxxa.com.ees.entity.user.User;
@@ -76,12 +72,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void saveUserWithRoleUser(User user, String adminName){
+    public void saveUserWithRoleTrader(User user, String adminName){
         User adminEntity = userRepository.findByName(adminName);
         user.setEnabled(true);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        Role role = roleRepository.findByName(DomainConstans.ROLE.ROLE_USER);
+        Role role = roleRepository.findByName(DomainConstans.ROLE.ROLE_TRADER);
         user.setRoles(Arrays.asList(role));
         userRepository.saveAndFlush(user);
 

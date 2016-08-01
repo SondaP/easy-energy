@@ -44,7 +44,7 @@ public class RegisterController {
             return "redirect:/sa/register.html?success=true";
         }
         if (userService.hasUserExpectedRole(principal.getName(), DomainConstans.ROLE.ROLE_ADMIN)) {
-            userService.saveUserWithRoleUser(user, principal.getName());
+            userService.saveUserWithRoleTrader(user, principal.getName());
             return "redirect:/a/register.html?success=true";
         }
         return null;

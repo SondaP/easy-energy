@@ -79,8 +79,8 @@
                     </security:authorize>
 
 
-                    <%-- USER --%>
-                    <security:authorize access="hasRole('ROLE_USER')">
+                    <%-- TRADER --%>
+                    <security:authorize access="hasRole('ROLE_TRADER')">
                         <li><a href="#about">Wylicz ofertę</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
@@ -140,7 +140,7 @@
 
 
                 <ul class="nav navbar-pills navbar-right">
-                    <security:authorize access="hasRole('USER')">
+                    <security:authorize access="hasRole('ROLE_TRADER')">
                         <li><p>
                             <p>
                                 <a href="<spring:url value="#"></spring:url>"
