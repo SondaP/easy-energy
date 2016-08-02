@@ -84,6 +84,8 @@
                         <li><a href="#about">Wylicz ofertę</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
+                        <li class="${currentDef == 'a-account' ? 'active' : ''}"><a
+                                href="<spring:url value="/t/account.html"/>">Konto</a></li>
                     </security:authorize>
 
                 </ul>

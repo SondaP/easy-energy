@@ -11,6 +11,7 @@
     <http use-expressions="true">
         <intercept-url pattern="/sa/**" access="hasRole('ROLE_SUPER_ADMIN')"/>
         <intercept-url pattern="/a/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/t/**" access="hasRole('ROLE_TRADER')"/>
         <form-login login-page="/login.html" default-target-url="/index.html"/>
         <logout logout-success-url="/logout.html?logoutSuccess=true" delete-cookies="JSESSIONID"/>
         <csrf disabled="true"/>

@@ -64,11 +64,21 @@
     </definition>
 
 
-    <!-- USER -->
+    <!-- TRADER -->
     <definition name="a-userRegister" extends="common">
         <put-attribute name="title" value="Rejestracja konta handlowca"/>
         <put-attribute name="body" value="/WEB-INF/jsp/admin/userRegistration.jsp"/>
         <put-attribute name="currentDef" value="a-userRegister"/>
+    </definition>
+    <definition name="t-account" extends="common">
+        <put-attribute name="title" value="Konto"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/trader/account.jsp"/>
+        <put-attribute name="currentDef" value="t-account"/>
+    </definition>
+    <definition name="t-accountEdit" extends="common">
+        <put-attribute name="title" value="Educja konta"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/trader/accountEdit.jsp"/>
+        <put-attribute name="currentDef" value="t-account"/>
     </definition>
 
 

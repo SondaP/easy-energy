@@ -77,7 +77,7 @@
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
                         <center>
-                            <a href="<spring:url value="/a/accountEdit.html"></spring:url>"
+                            <a href="<spring:url value="/t/accountEdit.html"></spring:url>"
                                type="button" class="btn btn-warning">Edytuj <span
                                     class="glyphicon glyphicon-remove"></span>
                             </a>
