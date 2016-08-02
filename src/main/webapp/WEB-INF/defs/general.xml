@@ -62,6 +62,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/admin/accountEdit.jsp"/>
         <put-attribute name="currentDef" value="a-account"/>
     </definition>
+    <definition name="a-sellers" extends="common">
+        <put-attribute name="title" value="Sprzedawcy"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/sellers.jsp"/>
+        <put-attribute name="currentDef" value="a-sellers"/>
+    </definition>
 
 
     <!-- TRADER -->

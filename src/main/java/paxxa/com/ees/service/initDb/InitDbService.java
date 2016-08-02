@@ -8,11 +8,13 @@ import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
 import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.entity.role.Role;
+import paxxa.com.ees.entity.seller.Seller;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.company.CompanyRepository;
 import paxxa.com.ees.repository.personalData.PersonalDataRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
+import paxxa.com.ees.repository.seller.SellerRepository;
 import paxxa.com.ees.repository.user.UserRepository;
 import paxxa.com.utils.DomainConstans;
 
@@ -33,6 +35,8 @@ public class InitDbService {
     private ClientRepository clientRepository;
     @Autowired
     private PersonalDataRepository personalDataRepository;
+    @Autowired
+    private SellerRepository sellerRepository;
 
 
     @PostConstruct
@@ -93,8 +97,6 @@ public class InitDbService {
 
 
 
-
-
         /**
          * Setting COMPANIES
          */
@@ -114,5 +116,16 @@ public class InitDbService {
         client_1.setCurrentAdvisor(paxxa_user1);
         client_1.setCompany(company_1);
         clientRepository.save(client_1);
+
+
+        /**
+         * Setting SELLER
+         */
+        Seller seller_1 = new Seller();
+        seller_1.setName("TAURON");
+        seller_1.setEnabled(true);
+        sellerRepository.save(seller_1);
     }
+
+
 }

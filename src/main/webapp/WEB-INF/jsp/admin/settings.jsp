@@ -45,7 +45,7 @@
             <div class="panel-body">
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Lista dostawców</a>
+                    <a href='<spring:url value="/a/sellers.html"></spring:url>' class="list-group-item">Lista dostawców</a>
                     <a href="#" class="list-group-item">Zarejestruj dostawcę</a>
                 </div>
 
