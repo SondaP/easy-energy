@@ -7,28 +7,25 @@
     <thead>
     <tr>
         <th>Nazwa</th>
-        <th>Email</th>
-        <th>Hasło</th>
+        <th>Aktywny</th>
         <th>Akcja</th>
+
     </tr>
 
     </thead>
     <tbody>
-    <c:forEach items="${users}" var="user">
+    <c:forEach items="${sellers}" var="seller">
         <tr>
             <td>
-                <a href="<spring:url value="/sa/users/${user.id}.html" />">
-                        ${user.name}
+                <a href="<spring:url value="/sa/users/${seller.name}.html" />">
+                        ${seller.name}
                 </a>
             </td>
             <td>
-                    ${user.email}
+                    ${seller.enabled}
             </td>
             <td>
-                    ${user.password}
-            </td>
-            <td>
-                <a href="<spring:url value="/a/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">
+                <a href="<spring:url value="/a/users/remove/${seller.id}.html" />" class="btn btn-danger triggerRemove">
                     dezaktywuj
                 </a>
             </td>
