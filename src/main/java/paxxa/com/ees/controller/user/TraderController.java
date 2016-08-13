@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import paxxa.com.ees.dto.PersonalDataDTO;
+import paxxa.com.ees.dto.PersonalData.PersonalDataDTO;
 import paxxa.com.ees.service.personalData.PersonalDataService;
 import paxxa.com.ees.service.user.UserService;
 

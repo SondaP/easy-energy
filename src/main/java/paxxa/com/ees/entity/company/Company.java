@@ -21,8 +21,6 @@ public class Company {
     private String StreetNumber;
     private String zipCode;
     private String city;
-    @OneToOne(mappedBy = "company")
-    private Client client;
 
     public Integer getId() {
         return id;
@@ -95,12 +93,5 @@ public class Company {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
+    
 }

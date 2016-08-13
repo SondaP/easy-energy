@@ -1,4 +1,4 @@
-package paxxa.com.ees.dto;
+package paxxa.com.ees.dto.PersonalData;
 
 public class PersonalDataDTO {
 
