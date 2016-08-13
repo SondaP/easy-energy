@@ -1,5 +1,7 @@
 package paxxa.com.ees.dto.PersonalData;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class PersonalDataDTO {
 
     private Integer id;
@@ -46,5 +48,16 @@ public class PersonalDataDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("firstName", firstName)
+                .append("surname", surname)
+                .append("email", email)
+                .append("phoneNumber", phoneNumber)
+                .toString();
     }
 }

@@ -13,6 +13,7 @@
         <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
         <apache.tiles>3.0.3</apache.tiles>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
+        <jackson.version>2.5.3</jackson.version>
     </properties>
 
     <dependencies>
@@ -172,6 +173,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Rest Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <!--Dependency for Hipersonic sql data base for develompent puropses IT
 			is REQUIRED IN ORDER TO RUN PRUDUCTION DB-->
         <dependency>
@@ -226,6 +234,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
         </dependency>
 
 
