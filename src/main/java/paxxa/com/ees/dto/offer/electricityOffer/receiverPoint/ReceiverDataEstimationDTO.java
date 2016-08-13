@@ -11,4 +11,52 @@ public class ReceiverDataEstimationDTO {
     private BigDecimal estimatedSavingsInYearScale;
     private BigDecimal estimatedSavingsInContractScale;
     private BigDecimal estimatedSavingsInPercentage;
+
+    public Date getTariffIssueDate() {
+        return tariffIssueDate;
+    }
+
+    public void setTariffIssueDate(Date tariffIssueDate) {
+        this.tariffIssueDate = tariffIssueDate;
+    }
+
+    public BigDecimal getEstimatedContractValue() {
+        return estimatedContractValue;
+    }
+
+    public void setEstimatedContractValue(BigDecimal estimatedContractValue) {
+        this.estimatedContractValue = estimatedContractValue;
+    }
+
+    public BigDecimal getEstimatedContractValueInYearScale() {
+        return estimatedContractValueInYearScale;
+    }
+
+    public void setEstimatedContractValueInYearScale(BigDecimal estimatedContractValueInYearScale) {
+        this.estimatedContractValueInYearScale = estimatedContractValueInYearScale;
+    }
+
+    public BigDecimal getEstimatedSavingsInYearScale() {
+        return estimatedSavingsInYearScale;
+    }
+
+    public void setEstimatedSavingsInYearScale(BigDecimal estimatedSavingsInYearScale) {
+        this.estimatedSavingsInYearScale = estimatedSavingsInYearScale;
+    }
+
+    public BigDecimal getEstimatedSavingsInContractScale() {
+        return estimatedSavingsInContractScale;
+    }
+
+    public void setEstimatedSavingsInContractScale(BigDecimal estimatedSavingsInContractScale) {
+        this.estimatedSavingsInContractScale = estimatedSavingsInContractScale;
+    }
+
+    public BigDecimal getEstimatedSavingsInPercentage() {
+        return estimatedSavingsInPercentage;
+    }
+
+    public void setEstimatedSavingsInPercentage(BigDecimal estimatedSavingsInPercentage) {
+        this.estimatedSavingsInPercentage = estimatedSavingsInPercentage;
+    }
 }
