@@ -1,0 +1,86 @@
+package paxxa.com.ees.dto.company;
+
+public class CompanyDTO {
+
+    private Integer id;
+    private String companyName;
+    private String companyCode;
+    private String nip;
+    private String regon;
+    private String StreetName;
+    private String StreetNumber;
+    private String zipCode;
+    private String city;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    public String getRegon() {
+        return regon;
+    }
+
+    public void setRegon(String regon) {
+        this.regon = regon;
+    }
+
+    public String getStreetName() {
+        return StreetName;
+    }
+
+    public void setStreetName(String streetName) {
+        StreetName = streetName;
+    }
+
+    public String getStreetNumber() {
+        return StreetNumber;
+    }
+
+    public void setStreetNumber(String streetNumber) {
+        StreetNumber = streetNumber;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+}
