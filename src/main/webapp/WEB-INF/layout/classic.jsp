@@ -81,7 +81,7 @@
 
                     <%-- TRADER --%>
                     <security:authorize access="hasRole('ROLE_TRADER')">
-                        <li><a href="#about">Wylicz ofertę</a></li>
+                        <li><a href="<spring:url value="/t/electricityOffer.json"/>">Wylicz ofertę</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
                         <li class="${currentDef == 'a-account' ? 'active' : ''}"><a

@@ -2,11 +2,11 @@ package paxxa.com.ees.dto.offer.electricityOffer.offerSummary;
 
 import java.math.BigDecimal;
 
-public class AllReceiverPointsProvisionDTO {
+public class AllReceiverPointsProvisionForSellerDTO {
 
     private String levelCode;
     private BigDecimal provisionInYearScaleForAllPoint;
-    private BigDecimal getProvisionInContractScaleForAllPoint;
+    private BigDecimal provisionInContractScaleForAllPoint;
 
     public String getLevelCode() {
         return levelCode;
@@ -24,11 +24,11 @@ public class AllReceiverPointsProvisionDTO {
         this.provisionInYearScaleForAllPoint = provisionInYearScaleForAllPoint;
     }
 
-    public BigDecimal getGetProvisionInContractScaleForAllPoint() {
-        return getProvisionInContractScaleForAllPoint;
+    public BigDecimal getProvisionInContractScaleForAllPoint() {
+        return provisionInContractScaleForAllPoint;
     }
 
-    public void setGetProvisionInContractScaleForAllPoint(BigDecimal getProvisionInContractScaleForAllPoint) {
-        this.getProvisionInContractScaleForAllPoint = getProvisionInContractScaleForAllPoint;
+    public void setProvisionInContractScaleForAllPoint(BigDecimal provisionInContractScaleForAllPoint) {
+        this.provisionInContractScaleForAllPoint = provisionInContractScaleForAllPoint;
     }
 }

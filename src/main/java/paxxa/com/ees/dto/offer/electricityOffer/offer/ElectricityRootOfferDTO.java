@@ -13,7 +13,8 @@ public class ElectricityRootOfferDTO implements AbstractOfferDTO{
     private String offerNumber;
     private Date creationDate;
     private Date lastEditionDate;
-    private Integer proposoalContractMonthLenght;
+    private String region;
+    private Integer proposalContractMonthLength;
     private CompanyDTO companyDTO;
     private List<ReceiverPointDTO> receiverPointDTOList;
     private String offerNote;
@@ -43,12 +44,20 @@ public class ElectricityRootOfferDTO implements AbstractOfferDTO{
         this.lastEditionDate = lastEditionDate;
     }
 
-    public Integer getProposoalContractMonthLenght() {
-        return proposoalContractMonthLenght;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProposoalContractMonthLenght(Integer proposoalContractMonthLenght) {
-        this.proposoalContractMonthLenght = proposoalContractMonthLenght;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public Integer getProposalContractMonthLength() {
+        return proposalContractMonthLength;
+    }
+
+    public void setProposalContractMonthLength(Integer proposalContractMonthLength) {
+        this.proposalContractMonthLength = proposalContractMonthLength;
     }
 
     public CompanyDTO getCompanyDTO() {

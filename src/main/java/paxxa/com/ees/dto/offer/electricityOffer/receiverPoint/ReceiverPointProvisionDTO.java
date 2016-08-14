@@ -6,7 +6,7 @@ public class ReceiverPointProvisionDTO {
 
     private String levelCode;
     private BigDecimal provisionInYearScale;
-    private BigDecimal getProvisionInContractScale;
+    private BigDecimal provisionInContractScale;
 
     public String getLevelCode() {
         return levelCode;
@@ -24,11 +24,11 @@ public class ReceiverPointProvisionDTO {
         this.provisionInYearScale = provisionInYearScale;
     }
 
-    public BigDecimal getGetProvisionInContractScale() {
-        return getProvisionInContractScale;
+    public BigDecimal getProvisionInContractScale() {
+        return provisionInContractScale;
     }
 
-    public void setGetProvisionInContractScale(BigDecimal getProvisionInContractScale) {
-        this.getProvisionInContractScale = getProvisionInContractScale;
+    public void setProvisionInContractScale(BigDecimal provisionInContractScale) {
+        this.provisionInContractScale = provisionInContractScale;
     }
 }

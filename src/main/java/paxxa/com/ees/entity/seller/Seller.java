@@ -13,6 +13,7 @@ public class Seller {
     @GeneratedValue
     private Integer id;
     private String name;
+    private String sellerCode;
     private boolean enabled;
 
     @OneToOne
@@ -37,6 +38,14 @@ public class Seller {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSellerCode() {
+        return sellerCode;
+    }
+
+    public void setSellerCode(String sellerCode) {
+        this.sellerCode = sellerCode;
     }
 
     public boolean isEnabled() {
