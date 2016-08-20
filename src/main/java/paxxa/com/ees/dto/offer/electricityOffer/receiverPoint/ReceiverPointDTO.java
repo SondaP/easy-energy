@@ -7,12 +7,11 @@ public class ReceiverPointDTO {
 
     private String receiverPointDescription;
     private BigDecimal actualTradeFee;
-    private BigDecimal proposalTradeFee;
     private int actualTariffsNumber;
     private int proposalTariffsNumber;
-    private List<TariffConsumptionDTO> tariffConsumptionDTOList;
-    private List<TariffDetailsDTO> tariffDetailsDTOList;
+    private List<ActualTariff> actualTariffList;
     private ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO;
+    private List<ProposalSeller> proposalSellerList;
     private List<ReceiverPointEstimationDTO> electricityReceiverPointEstimationList;
 
     public String getReceiverPointDescription() {
@@ -31,14 +30,6 @@ public class ReceiverPointDTO {
         this.actualTradeFee = actualTradeFee;
     }
 
-    public BigDecimal getProposalTradeFee() {
-        return proposalTradeFee;
-    }
-
-    public void setProposalTradeFee(BigDecimal proposalTradeFee) {
-        this.proposalTradeFee = proposalTradeFee;
-    }
-
     public int getActualTariffsNumber() {
         return actualTariffsNumber;
     }
@@ -55,20 +46,20 @@ public class ReceiverPointDTO {
         this.proposalTariffsNumber = proposalTariffsNumber;
     }
 
-    public List<TariffConsumptionDTO> getTariffConsumptionDTOList() {
-        return tariffConsumptionDTOList;
+    public List<ActualTariff> getActualTariffList() {
+        return actualTariffList;
     }
 
-    public void setTariffConsumptionDTOList(List<TariffConsumptionDTO> tariffConsumptionDTOList) {
-        this.tariffConsumptionDTOList = tariffConsumptionDTOList;
+    public void setActualTariffList(List<ActualTariff> actualTariffList) {
+        this.actualTariffList = actualTariffList;
     }
 
-    public List<TariffDetailsDTO> getTariffDetailsDTOList() {
-        return tariffDetailsDTOList;
+    public List<ProposalSeller> getProposalSellerList() {
+        return proposalSellerList;
     }
 
-    public void setTariffDetailsDTOList(List<TariffDetailsDTO> tariffDetailsDTOList) {
-        this.tariffDetailsDTOList = tariffDetailsDTOList;
+    public void setProposalSellerList(List<ProposalSeller> proposalSellerList) {
+        this.proposalSellerList = proposalSellerList;
     }
 
     public ReceiverPointConsumptionSummaryDTO getReceiverPointConsumptionSummaryDTO() {

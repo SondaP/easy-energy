@@ -1,3 +1,4 @@
+/*
 package paxxa.com.ees.controllerRest.electricityOffer;
 
 import org.springframework.http.HttpStatus;
@@ -80,13 +81,13 @@ public class ElectricityOfferController {
         tariffPeriodConsumptionDTO_A1_1.setPeriodStart(new Date());
         tariffPeriodConsumptionDTO_A1_1.setPeriodEnd(new Date());
         tariffPeriodConsumptionDTO_A1_1.setUnitConsumption(new BigDecimal(500));
-        tariffPeriodConsumptionDTO_A1_1.setPeriodDocumentNumber("FA 28951/08/2016");
+        tariffPeriodConsumptionDTO_A1_1.setDocumentNumber("FA 28951/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_2 = new TariffPeriodConsumptionDTO();
         tariffPeriodConsumptionDTO_A1_2.setPeriodStart(new Date());
         tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(new Date());
         tariffPeriodConsumptionDTO_A1_2.setUnitConsumption(new BigDecimal(250));
-        tariffPeriodConsumptionDTO_A1_2.setPeriodDocumentNumber("FA 28951/08/2016");
+        tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 28951/08/2016");
 
         tariffConsumptionDTO_1.setTariffPeriodConsumptionDTOList(Arrays.asList(tariffPeriodConsumptionDTO_A1_1,
                 tariffPeriodConsumptionDTO_A1_2));
@@ -98,13 +99,13 @@ public class ElectricityOfferController {
         tariffPeriodConsumptionDTO_C2_1.setPeriodStart(new Date());
         tariffPeriodConsumptionDTO_C2_1.setPeriodEnd(new Date());
         tariffPeriodConsumptionDTO_C2_1.setUnitConsumption(new BigDecimal(100));
-        tariffPeriodConsumptionDTO_C2_1.setPeriodDocumentNumber("FA 5483/08/2016");
+        tariffPeriodConsumptionDTO_C2_1.setDocumentNumber("FA 5483/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_C2_2 = new TariffPeriodConsumptionDTO();
         tariffPeriodConsumptionDTO_C2_2.setPeriodStart(new Date());
         tariffPeriodConsumptionDTO_C2_2.setPeriodEnd(new Date());
         tariffPeriodConsumptionDTO_C2_2.setUnitConsumption(new BigDecimal(150));
-        tariffPeriodConsumptionDTO_C2_2.setPeriodDocumentNumber("FA 5483/08/2016");
+        tariffPeriodConsumptionDTO_C2_2.setDocumentNumber("FA 5483/08/2016");
 
         tariffConsumptionDTO_2.setTariffPeriodConsumptionDTOList(Arrays.asList(tariffPeriodConsumptionDTO_C2_1,
                 tariffPeriodConsumptionDTO_C2_2));
@@ -313,3 +314,4 @@ public class ElectricityOfferController {
 
 
 
+*/

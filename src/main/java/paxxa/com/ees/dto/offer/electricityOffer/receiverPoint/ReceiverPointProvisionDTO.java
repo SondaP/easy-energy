@@ -5,8 +5,9 @@ import java.math.BigDecimal;
 public class ReceiverPointProvisionDTO {
 
     private String levelCode;
-    private BigDecimal provisionInYearScale;
-    private BigDecimal provisionInContractScale;
+    private BigDecimal traderProvisionInYearScale;
+    private BigDecimal traderProvisionInContractScale;
+    private BigDecimal partnerProvisionInContractScale;
 
     public String getLevelCode() {
         return levelCode;
@@ -16,19 +17,27 @@ public class ReceiverPointProvisionDTO {
         this.levelCode = levelCode;
     }
 
-    public BigDecimal getProvisionInYearScale() {
-        return provisionInYearScale;
+    public BigDecimal getTraderProvisionInYearScale() {
+        return traderProvisionInYearScale;
     }
 
-    public void setProvisionInYearScale(BigDecimal provisionInYearScale) {
-        this.provisionInYearScale = provisionInYearScale;
+    public void setTraderProvisionInYearScale(BigDecimal traderProvisionInYearScale) {
+        this.traderProvisionInYearScale = traderProvisionInYearScale;
     }
 
-    public BigDecimal getProvisionInContractScale() {
-        return provisionInContractScale;
+    public BigDecimal getTraderProvisionInContractScale() {
+        return traderProvisionInContractScale;
     }
 
-    public void setProvisionInContractScale(BigDecimal provisionInContractScale) {
-        this.provisionInContractScale = provisionInContractScale;
+    public void setTraderProvisionInContractScale(BigDecimal traderProvisionInContractScale) {
+        this.traderProvisionInContractScale = traderProvisionInContractScale;
+    }
+
+    public BigDecimal getPartnerProvisionInContractScale() {
+        return partnerProvisionInContractScale;
+    }
+
+    public void setPartnerProvisionInContractScale(BigDecimal partnerProvisionInContractScale) {
+        this.partnerProvisionInContractScale = partnerProvisionInContractScale;
     }
 }

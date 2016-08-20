@@ -8,7 +8,7 @@ public class TariffPeriodConsumptionDTO {
     private Date periodStart;
     private Date periodEnd;
     private BigDecimal unitConsumption;
-    private String periodDocumentNumber;
+    private String documentNumber;
 
     public Date getPeriodStart() {
         return periodStart;
@@ -34,11 +34,11 @@ public class TariffPeriodConsumptionDTO {
         this.unitConsumption = unitConsumption;
     }
 
-    public String getPeriodDocumentNumber() {
-        return periodDocumentNumber;
+    public String getDocumentNumber() {
+        return documentNumber;
     }
 
-    public void setPeriodDocumentNumber(String periodDocumentNumber) {
-        this.periodDocumentNumber = periodDocumentNumber;
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
 }

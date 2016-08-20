@@ -5,8 +5,9 @@ import java.math.BigDecimal;
 public class AllReceiverPointsProvisionForSellerDTO {
 
     private String levelCode;
-    private BigDecimal provisionInYearScaleForAllPoint;
-    private BigDecimal provisionInContractScaleForAllPoint;
+    private BigDecimal traderProvisionInYearScaleForAllPoint;
+    private BigDecimal traderProvisionInContractScaleForAllPoint;
+    private BigDecimal partnerProvisionInContractScaleForAllPoint;
 
     public String getLevelCode() {
         return levelCode;
@@ -16,19 +17,27 @@ public class AllReceiverPointsProvisionForSellerDTO {
         this.levelCode = levelCode;
     }
 
-    public BigDecimal getProvisionInYearScaleForAllPoint() {
-        return provisionInYearScaleForAllPoint;
+    public BigDecimal getTraderProvisionInYearScaleForAllPoint() {
+        return traderProvisionInYearScaleForAllPoint;
     }
 
-    public void setProvisionInYearScaleForAllPoint(BigDecimal provisionInYearScaleForAllPoint) {
-        this.provisionInYearScaleForAllPoint = provisionInYearScaleForAllPoint;
+    public void setTraderProvisionInYearScaleForAllPoint(BigDecimal traderProvisionInYearScaleForAllPoint) {
+        this.traderProvisionInYearScaleForAllPoint = traderProvisionInYearScaleForAllPoint;
     }
 
-    public BigDecimal getProvisionInContractScaleForAllPoint() {
-        return provisionInContractScaleForAllPoint;
+    public BigDecimal getTraderProvisionInContractScaleForAllPoint() {
+        return traderProvisionInContractScaleForAllPoint;
     }
 
-    public void setProvisionInContractScaleForAllPoint(BigDecimal provisionInContractScaleForAllPoint) {
-        this.provisionInContractScaleForAllPoint = provisionInContractScaleForAllPoint;
+    public void setTraderProvisionInContractScaleForAllPoint(BigDecimal traderProvisionInContractScaleForAllPoint) {
+        this.traderProvisionInContractScaleForAllPoint = traderProvisionInContractScaleForAllPoint;
+    }
+
+    public BigDecimal getPartnerProvisionInContractScaleForAllPoint() {
+        return partnerProvisionInContractScaleForAllPoint;
+    }
+
+    public void setPartnerProvisionInContractScaleForAllPoint(BigDecimal partnerProvisionInContractScaleForAllPoint) {
+        this.partnerProvisionInContractScaleForAllPoint = partnerProvisionInContractScaleForAllPoint;
     }
 }

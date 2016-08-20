@@ -5,7 +5,7 @@ import java.util.List;
 public class ReceiverPointEstimationDTO {
 
     private String sellerCode;
-    private ReceiverDataEstimationDTO receiverDataEstimationDTO;
+    private ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO;
     private List<ReceiverPointProvisionDTO> receiverPointProvisionDTOList;
 
     public String getSellerCode() {
@@ -16,12 +16,12 @@ public class ReceiverPointEstimationDTO {
         this.sellerCode = sellerCode;
     }
 
-    public ReceiverDataEstimationDTO getReceiverDataEstimationDTO() {
-        return receiverDataEstimationDTO;
+    public ReceiverPointDataEstimationDTO getReceiverPointDataEstimationDTO() {
+        return receiverPointDataEstimationDTO;
     }
 
-    public void setReceiverDataEstimationDTO(ReceiverDataEstimationDTO receiverDataEstimationDTO) {
-        this.receiverDataEstimationDTO = receiverDataEstimationDTO;
+    public void setReceiverPointDataEstimationDTO(ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO) {
+        this.receiverPointDataEstimationDTO = receiverPointDataEstimationDTO;
     }
 
     public List<ReceiverPointProvisionDTO> getReceiverPointProvisionDTOList() {
