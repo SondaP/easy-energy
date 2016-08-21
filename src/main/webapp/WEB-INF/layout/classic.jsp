@@ -19,7 +19,7 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <!--  TAG FOR JQUERY VALIDATION PLUGIN -->
     <script type="text/javascript"
-            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+            src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -81,7 +81,7 @@
 
                     <%-- TRADER --%>
                     <security:authorize access="hasRole('ROLE_TRADER')">
-                        <li><a href="<spring:url value="/t/electricityOffer.json"/>">Wylicz ofertę</a></li>
+                        <li><a href="<spring:url value="${pageContext.request.contextPath}/t/electricityOffer.json"/>">Wylicz ofertę</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
                         <li class="${currentDef == 'a-account' ? 'active' : ''}"><a
