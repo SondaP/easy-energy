@@ -1,4 +1,3 @@
-/*
 package paxxa.com.ees.controllerRest.electricityOffer;
 
 import org.springframework.http.HttpStatus;
@@ -35,16 +34,16 @@ public class ElectricityOfferController {
         electricityRootOfferDTO.setOfferNumber("1");
         electricityRootOfferDTO.setCreationDate(new Date());
         electricityRootOfferDTO.setLastEditionDate(new Date());
-        electricityRootOfferDTO.setRegion("LUBELSKIE");
+        //electricityRootOfferDTO.setRegion("LUBELSKIE");
         electricityRootOfferDTO.setProposalContractMonthLength(24);
-        electricityRootOfferDTO.setCompanyDTO(createCompany());
+       // electricityRootOfferDTO.setCompanyDTO(createCompany());
         electricityRootOfferDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
-        electricityRootOfferDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint()));
-        electricityRootOfferDTO.setOfferSummaryDTO(createOfferSummaryDTO());
+        //electricityRootOfferDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint()));
+        //electricityRootOfferDTO.setOfferSummaryDTO(createOfferSummaryDTO());
         return electricityRootOfferDTO;
     }
 
-    private CompanyDTO createCompany() {
+   /* private CompanyDTO createCompany() {
         CompanyDTO companyDTO = new CompanyDTO();
         companyDTO.setCompanyName("Paxxa");
         companyDTO.setNip("5641713529");
@@ -288,7 +287,7 @@ public class ElectricityOfferController {
                 allReceiverPointsEstimationForSellerDTO_TAURON, allReceiverPointsEstimationForSellerDTO_CEZ));
         return offerSummaryDTO;
 
-    }
+    }*/
 
 }
 
@@ -314,4 +313,3 @@ public class ElectricityOfferController {
 
 
 
-*/
