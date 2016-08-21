@@ -37,7 +37,7 @@ public class ElectricityOfferController {
         electricityRootOfferDTO.setProposalContractMonthLength(24);
         electricityRootOfferDTO.setCompanyDTO(createCompany());
         electricityRootOfferDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
-        electricityRootOfferDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint_1()));
+        electricityRootOfferDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint_1(), createReceiverPoint_2() ));
         electricityRootOfferDTO.setOfferSummaryDTO(createOfferSummaryDTO());
         return electricityRootOfferDTO;
     }
