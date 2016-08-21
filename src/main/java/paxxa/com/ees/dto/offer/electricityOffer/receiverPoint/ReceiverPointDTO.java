@@ -12,7 +12,7 @@ public class ReceiverPointDTO {
     private List<ActualTariff> actualTariffList;
     private ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO;
     private List<ProposalSeller> proposalSellerList;
-    private List<ReceiverPointEstimationDTO> electricityReceiverPointEstimationList;
+    private List<ReceiverPointEstimationDTO> receiverPointEstimationList;
 
     public String getReceiverPointDescription() {
         return receiverPointDescription;
@@ -70,11 +70,11 @@ public class ReceiverPointDTO {
         this.receiverPointConsumptionSummaryDTO = receiverPointConsumptionSummaryDTO;
     }
 
-    public List<ReceiverPointEstimationDTO> getElectricityReceiverPointEstimationList() {
-        return electricityReceiverPointEstimationList;
+    public List<ReceiverPointEstimationDTO> getReceiverPointEstimationList() {
+        return receiverPointEstimationList;
     }
 
-    public void setElectricityReceiverPointEstimationList(List<ReceiverPointEstimationDTO> electricityReceiverPointEstimationList) {
-        this.electricityReceiverPointEstimationList = electricityReceiverPointEstimationList;
+    public void setReceiverPointEstimationList(List<ReceiverPointEstimationDTO> receiverPointEstimationList) {
+        this.receiverPointEstimationList = receiverPointEstimationList;
     }
 }

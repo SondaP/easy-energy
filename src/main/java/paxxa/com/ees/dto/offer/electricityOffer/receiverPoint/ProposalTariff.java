@@ -31,5 +31,4 @@ public class ProposalTariff {
     public void setProposalTariffCode(String proposalTariffCode) {
         this.proposalTariffCode = proposalTariffCode;
     }
-
 }
