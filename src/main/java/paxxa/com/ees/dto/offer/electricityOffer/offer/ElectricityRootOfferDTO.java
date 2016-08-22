@@ -8,7 +8,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
 import java.util.Date;
 import java.util.List;
 
-public class ElectricityRootOfferDTO implements AbstractOfferDTO{
+public class ElectricityRootOfferDTO extends AbstractOfferDTO{
 
     private String offerNumber;
     private Date creationDate;
