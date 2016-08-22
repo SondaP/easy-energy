@@ -14,6 +14,10 @@ public class OfferStorageService {
 
     }
 
+    public String cokolwiek(){
+        return "oooo";
+    }
+
 
 
 
