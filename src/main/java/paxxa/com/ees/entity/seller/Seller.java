@@ -1,10 +1,8 @@
 package paxxa.com.ees.entity.seller;
 
 import paxxa.com.ees.entity.company.Company;
-import paxxa.com.ees.entity.ratingDefinition.RatingDefinition;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Seller {
@@ -20,9 +18,6 @@ public class Seller {
     @JoinColumn
     private Company company;
 
-    @OneToMany
-    @JoinColumn(name = "FK_RATING_DEFINITION")
-    private List<RatingDefinition> ratingDefinitionList;
 
     public Integer getId() {
         return id;
@@ -64,11 +59,5 @@ public class Seller {
         this.company = company;
     }
 
-    public List<RatingDefinition> getRatingDefinitionList() {
-        return ratingDefinitionList;
-    }
 
-    public void setRatingDefinitionList(List<RatingDefinition> ratingDefinitionList) {
-        this.ratingDefinitionList = ratingDefinitionList;
-    }
 }
