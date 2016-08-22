@@ -5,10 +5,12 @@ import paxxa.com.ees.dto.offer.AbstractOfferDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
 
-public class ElectricityRootOfferDTO extends AbstractOfferDTO{
+@XmlRootElement
+public class ElectricityOfferRootDTO extends AbstractOfferDTO{
 
     private String offerNumber;
     private Date creationDate;

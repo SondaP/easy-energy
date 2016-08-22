@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import paxxa.com.ees.dto.company.CompanyDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityRootOfferDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSellerDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEstimationForSellerDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSellerDTO;
@@ -24,22 +24,22 @@ public class ElectricityOfferController {
 
 
     @RequestMapping(value = "/t/electricityOffer", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ElectricityRootOfferDTO> getPersonalData() {
-        return new ResponseEntity<ElectricityRootOfferDTO>(createElectricityRootOfferDTO(), HttpStatus.OK);
+    public ResponseEntity<ElectricityOfferRootDTO> getPersonalData() {
+        return new ResponseEntity<ElectricityOfferRootDTO>(createElectricityRootOfferDTO(), HttpStatus.OK);
     }
 
 
-    private ElectricityRootOfferDTO createElectricityRootOfferDTO() {
-        ElectricityRootOfferDTO electricityRootOfferDTO = new ElectricityRootOfferDTO();
-        electricityRootOfferDTO.setOfferNumber("1");
-        electricityRootOfferDTO.setCreationDate(new Date());
-        electricityRootOfferDTO.setLastEditionDate(new Date());
-        electricityRootOfferDTO.setProposalContractMonthLength(24);
-        electricityRootOfferDTO.setCompanyDTO(createCompany());
-        electricityRootOfferDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
-        electricityRootOfferDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint_1(), createReceiverPoint_2() ));
-        electricityRootOfferDTO.setOfferSummaryDTO(createOfferSummaryDTO());
-        return electricityRootOfferDTO;
+    private ElectricityOfferRootDTO createElectricityRootOfferDTO() {
+        ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
+        electricityOfferRootDTO.setOfferNumber("1");
+        electricityOfferRootDTO.setCreationDate(new Date());
+        electricityOfferRootDTO.setLastEditionDate(new Date());
+        electricityOfferRootDTO.setProposalContractMonthLength(24);
+        electricityOfferRootDTO.setCompanyDTO(createCompany());
+        electricityOfferRootDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
+        electricityOfferRootDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint_1(), createReceiverPoint_2() ));
+        electricityOfferRootDTO.setOfferSummaryDTO(createOfferSummaryDTO());
+        return electricityOfferRootDTO;
     }
 
     private CompanyDTO createCompany() {

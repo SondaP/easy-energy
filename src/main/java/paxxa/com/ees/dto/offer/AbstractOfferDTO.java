@@ -1,4 +1,6 @@
 package paxxa.com.ees.dto.offer;
 
-public abstract class AbstractOfferDTO {
+import java.io.Serializable;
+
+public abstract class AbstractOfferDTO implements Serializable {
 }
