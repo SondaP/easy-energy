@@ -12,23 +12,33 @@ import java.io.ByteArrayOutputStream;
 @Service
 public class UtilsService {
 
-    public byte[] marshall(Class className, Object input) throws JAXBException, ClassNotFoundException {
-        JAXBContext jaxContextObj = JAXBContext.newInstance(className);
+    public byte[] marshall(Class className, Object input) {
+        JAXBContext jaxContextObj;
+        try {
+            jaxContextObj = JAXBContext.newInstance(className);
+            Marshaller marshallerObj = jaxContextObj.createMarshaller();
+            marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        Marshaller marshallerObj = jaxContextObj.createMarshaller();
-        marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
-        marshallerObj.marshal(input, byteArrayOut);
-        return byteArrayOut.toByteArray();
-
+            ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+            marshallerObj.marshal(input, byteArrayOut);
+            return byteArrayOut.toByteArray();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Error while marshaling");
     }
 
-    public Object unMarshall(Class className, byte[] bytes) throws JAXBException {
-        JAXBContext jaxContextObj = JAXBContext.newInstance(className);
-        Unmarshaller jaxbUnmarshaller = jaxContextObj.createUnmarshaller();
+    public Object unMarshall(Class className, byte[] bytes) {
+        JAXBContext jaxContextObj = null;
+        try {
+            jaxContextObj = JAXBContext.newInstance(className);
+            Unmarshaller jaxbUnmarshaller = jaxContextObj.createUnmarshaller();
 
-        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-        return jaxbUnmarshaller.unmarshal(bis);
+            ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+            return jaxbUnmarshaller.unmarshal(bis);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Error while unMarshaling");
     }
 }

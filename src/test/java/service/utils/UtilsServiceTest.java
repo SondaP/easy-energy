@@ -1,10 +1,11 @@
-package service.offerStorage;
+package service.utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSellerDTO;
@@ -12,8 +13,9 @@ import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEs
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSellerDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
-import paxxa.com.ees.service.offerStorage.OfferStorageService;
+import paxxa.com.ees.service.utils.UtilsService;
 
+import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -21,21 +23,32 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
-public class OfferStorageServiceTest {
+public class UtilsServiceTest {
 
     @Autowired
-    private OfferStorageService offerStorageService;
+    private UtilsService utilsService;
 
     @Test
-    public void shouldSaveOfferToUser(){
+    public void shouldMarshalObject() throws JAXBException, ClassNotFoundException {
+        //give
+        ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
+        //when
+        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
+        //then
+        Assert.notNull(serialized);
+        System.out.println(serialized.toString());
+        System.err.println(new String(serialized));
+    }
+
+    @Test
+    public void shouldUnMarshalObject() throws JAXBException, ClassNotFoundException {
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
-        offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, 3);
-
-
-
+        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
         //when
+        Object unMarshaledObject = utilsService.unMarshall(ElectricityOfferRootDTO.class, serialized);
         //then
+        Assert.isTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
 
     }
 
@@ -530,4 +543,6 @@ public class OfferStorageServiceTest {
         return offerSummaryDTO;
 
     }
+
+
 }

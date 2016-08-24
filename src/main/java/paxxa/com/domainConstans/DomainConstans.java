@@ -9,8 +9,8 @@ public class DomainConstans {
     }
 
     public interface PRODUCT_CODE {
-        String ELECTRICITY = "ELECTRICITY";
-        String GAS = "GAS";
+        String ELECTRICITY = "Energia elektryczna";
+        String GAS = "Gas";
     }
 
 
