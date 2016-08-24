@@ -16,7 +16,7 @@ import paxxa.com.ees.repository.personalData.PersonalDataRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.seller.SellerRepository;
 import paxxa.com.ees.repository.user.UserRepository;
-import paxxa.com.utils.DomainConstans;
+import paxxa.com.domainConstans.DomainConstans;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;

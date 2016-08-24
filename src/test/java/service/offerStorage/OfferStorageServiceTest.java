@@ -13,7 +13,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEs
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSellerDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
-import paxxa.com.ees.service.offerStorage.OfferStorageService;
+import paxxa.com.ees.service.utils.UtilsService;
 
 import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
@@ -26,14 +26,14 @@ import java.util.List;
 public class OfferStorageServiceTest {
 
     @Autowired
-    private OfferStorageService offerStorageService;
+    private UtilsService utilsService;
 
     @Test
     public void shouldMarshalObject() throws JAXBException, ClassNotFoundException {
         //give
         ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
         //when
-        byte[] serialized = offerStorageService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
+        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
         //then
         Assert.notNull(serialized);
         System.out.println(serialized.toString());
@@ -44,9 +44,9 @@ public class OfferStorageServiceTest {
     public void shouldUnMarshalObject() throws JAXBException, ClassNotFoundException {
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
-        byte[] serialized = offerStorageService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
+        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
         //when
-        Object unMarshaledObject = offerStorageService.unMarshall(ElectricityOfferRootDTO.class, serialized);
+        Object unMarshaledObject = utilsService.unMarshall(ElectricityOfferRootDTO.class, serialized);
         //then
         Assert.isTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
 

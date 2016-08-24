@@ -17,7 +17,7 @@ import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.user.UserRepository;
-import paxxa.com.utils.DomainConstans;
+import paxxa.com.domainConstans.DomainConstans;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

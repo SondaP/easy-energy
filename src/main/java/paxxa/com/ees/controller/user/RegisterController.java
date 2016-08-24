@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.service.user.UserService;
-import paxxa.com.utils.DomainConstans;
+import paxxa.com.domainConstans.DomainConstans;
 
 import java.security.Principal;
 

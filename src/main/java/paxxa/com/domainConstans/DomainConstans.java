@@ -1,4 +1,4 @@
-package paxxa.com.utils;
+package paxxa.com.domainConstans;
 
 public class DomainConstans {
 
