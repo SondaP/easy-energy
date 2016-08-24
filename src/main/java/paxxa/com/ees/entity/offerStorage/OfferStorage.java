@@ -15,7 +15,10 @@ public class OfferStorage {
     private Date creationDate;
     private Date lastEdition;
     private String offerNumber;
-    private byte[] offer;
+
+    @Lob
+    @Column(name = "ABSTRACT_OFFER_DTO")
+    private byte[] abstractOfferDTO;
 
     @OneToOne
     @JoinColumn(name = "FK_USER")
@@ -61,12 +64,12 @@ public class OfferStorage {
         this.offerNumber = offerNumber;
     }
 
-    public byte[] getOffer() {
-        return offer;
+    public byte[] getAbstractOfferDTO() {
+        return abstractOfferDTO;
     }
 
-    public void setOffer(byte[] offer) {
-        this.offer = offer;
+    public void setAbstractOfferDTO(byte[] abstractOfferDTO) {
+        this.abstractOfferDTO = abstractOfferDTO;
     }
 
     public User getUser() {
