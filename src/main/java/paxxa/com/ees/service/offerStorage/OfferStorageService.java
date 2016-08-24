@@ -33,6 +33,7 @@ public class OfferStorageService {
             offerStorage.setCreationDate(electricityOfferRootDTO.getCreationDate());
             offerStorage.setLastEdition(electricityOfferRootDTO.getLastEditionDate());
             offerStorage.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
+            offerStorage.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
 
             byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
             offerStorage.setAbstractOfferDTO(marshallOffer);

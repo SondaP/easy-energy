@@ -1,5 +1,6 @@
 package paxxa.com.ees.entity.offerStorage;
 
+import org.hibernate.annotations.Type;
 import paxxa.com.ees.entity.user.User;
 
 import javax.persistence.*;
@@ -12,8 +13,11 @@ public class OfferStorage {
     @GeneratedValue
     private Integer id;
     private String productCode;
+    @Temporal(TemporalType.DATE)
     private Date creationDate;
+    @Type(type="date")
     private Date lastEdition;
+    private String companyName;
     private String offerNumber;
 
     @Lob
@@ -54,6 +58,14 @@ public class OfferStorage {
 
     public void setLastEdition(Date lastEdition) {
         this.lastEdition = lastEdition;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getOfferNumber() {

@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
+import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.entity.personalData.PersonalData;
 import paxxa.com.ees.entity.role.Role;
 import paxxa.com.ees.entity.seller.Seller;
@@ -17,6 +19,8 @@ import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.seller.SellerRepository;
 import paxxa.com.ees.repository.user.UserRepository;
 import paxxa.com.domainConstans.DomainConstans;
+import paxxa.com.ees.service.offerStorage.OfferStorageService;
+import paxxa.com.ees.service.utils.SampleDataService;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -37,6 +41,10 @@ public class InitDbService {
     private PersonalDataRepository personalDataRepository;
     @Autowired
     private SellerRepository sellerRepository;
+    @Autowired
+    private SampleDataService sampleDataService;
+    @Autowired
+    private OfferStorageService offerStorageService;
 
 
     @PostConstruct
@@ -82,7 +90,7 @@ public class InitDbService {
         paxxa_user1.setPassword(encoder.encode("d"));
         paxxa_user1.setEmail("handlowiec_paxxa@gmail.com");
         paxxa_user1.setRoles(Arrays.asList(roleUser));
-        userRepository.save(paxxa_user1);
+        User paxxa = userRepository.save(paxxa_user1);
 
 
         User userAdmin = new User();
@@ -94,7 +102,6 @@ public class InitDbService {
         userAdmin.setRoles(Arrays.asList(roleAdmin));
         userAdmin.setUserList(Arrays.asList(paxxa_user1));
         userRepository.save(userAdmin);
-
 
 
         /**
@@ -125,7 +132,13 @@ public class InitDbService {
         seller_1.setName("TAURON");
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
-    }
 
+
+        /**
+         * Setting electricity offer to Paxxa
+         */
+        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        OfferStorage savedOfferStorage = offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, userAdmin.getName());
+    }
 
 }
