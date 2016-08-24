@@ -67,8 +67,8 @@
 
                     <%-- ADMIN --%>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li class="${currentDef == 'sa-adminRegister' ? 'active' : ''}"><a
-                                href="<spring:url value="#"/>">Aktualizuj cenniki</a></li>
+                        <li><a href="<spring:url value="${pageContext.request.contextPath}/a/electricityOffer.json"/>">Wylicz
+                            ofertę</a></li>
                         <li class="${currentDef == 'a-users' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/users.html"/>">Handlowcy</a></li>
                         <li class="${currentDef == 'a-userRegister' ? 'active' : ''}"><a
@@ -81,7 +81,8 @@
 
                     <%-- TRADER --%>
                     <security:authorize access="hasRole('ROLE_TRADER')">
-                        <li><a href="<spring:url value="${pageContext.request.contextPath}/t/electricityOffer.json"/>">Wylicz ofertę</a></li>
+                        <li><a href="<spring:url value="${pageContext.request.contextPath}/t/electricityOffer.json"/>">Wylicz
+                            ofertę</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
                         <li class="${currentDef == 'a-account' ? 'active' : ''}"><a

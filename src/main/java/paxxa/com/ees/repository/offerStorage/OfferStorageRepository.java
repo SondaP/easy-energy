@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface OfferStorageRepository extends JpaRepository<OfferStorage, Integer> {
-    List<OfferStorage> findByUserIdOrderByCreationDateAsc(Integer id);
+    List<OfferStorage> findByUser_IdOrderByCreationDateAsc(Integer id);
 }

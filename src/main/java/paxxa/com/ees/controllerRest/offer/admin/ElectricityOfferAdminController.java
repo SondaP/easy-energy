@@ -1,4 +1,4 @@
-package paxxa.com.ees.controllerRest.electricityOffer;
+package paxxa.com.ees.controllerRest.offer.admin;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,10 +20,10 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-public class ElectricityOfferController {
+public class ElectricityOfferAdminController {
 
 
-    @RequestMapping(value = "/t/electricityOffer", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/a/electricityOffer", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ElectricityOfferRootDTO> getPersonalData() {
         return new ResponseEntity<ElectricityOfferRootDTO>(createElectricityRootOfferDTO(), HttpStatus.OK);
     }
