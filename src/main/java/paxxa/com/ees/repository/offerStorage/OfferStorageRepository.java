@@ -5,6 +5,7 @@ import paxxa.com.ees.entity.offerStorage.OfferStorage;
 
 import java.util.List;
 
+
 public interface OfferStorageRepository extends JpaRepository<OfferStorage, Integer> {
     List<OfferStorage> findByUserId(Integer id);
 }
