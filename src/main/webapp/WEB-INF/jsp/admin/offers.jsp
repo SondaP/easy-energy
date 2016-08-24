@@ -44,7 +44,8 @@
                 <a href="<spring:url value="#" />" class="btn btn-success">
                     Drukuj
                 </a>
-                <a href="<spring:url value="#" />" class="btn btn-danger triggerRemove">
+                <a href="<spring:url value="/a/electricityOffer/remove/${offer.id}.html"/>"
+                   class="btn btn-danger triggerRemove">
                     Usuń
                 </a>
 

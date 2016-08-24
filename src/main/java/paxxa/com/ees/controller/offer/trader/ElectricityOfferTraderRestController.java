@@ -1,4 +1,4 @@
-package paxxa.com.ees.controllerRest.offer.trader;
+package paxxa.com.ees.controller.offer.trader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-public class ElectricityOfferTraderController {
+public class ElectricityOfferTraderRestController {
 
 
     @Autowired

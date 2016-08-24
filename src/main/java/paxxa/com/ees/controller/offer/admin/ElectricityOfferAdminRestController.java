@@ -1,4 +1,4 @@
-package paxxa.com.ees.controllerRest.offer.admin;
+package paxxa.com.ees.controller.offer.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-public class ElectricityOfferAdminController {
+public class ElectricityOfferAdminRestController {
 
     @Autowired
     private SampleDataService sampleDataService;
@@ -34,7 +34,7 @@ public class ElectricityOfferAdminController {
 
 
     @RequestMapping(value = "/a/electricityOffer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ElectricityOfferRootDTO> getPersonalData(@PathVariable int id) {
+    public ResponseEntity<ElectricityOfferRootDTO> getOfferByOfferStorageId(@PathVariable int id) {
 
         Object offer = offerStorageService.getOffer(id);
         if (offer instanceof ElectricityOfferRootDTO) {
