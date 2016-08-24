@@ -30,14 +30,25 @@ public class OfferStorageServiceTest {
 
     @Test
     public void shouldMarshalObject() throws JAXBException, ClassNotFoundException {
-        //when
+        //give
         ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
-        //then
+        //when
         byte[] serialized = offerStorageService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
         //then
         Assert.notNull(serialized);
         System.out.println(serialized.toString());
         System.err.println(new String(serialized));
+    }
+
+    @Test
+    public void shouldUnMarshalObject() throws JAXBException, ClassNotFoundException {
+        //given
+        ElectricityOfferRootDTO electricityRootOfferDTO = createElectricityRootOfferDTO();
+        byte[] serialized = offerStorageService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
+        //when
+        Object unMarshaledObject = offerStorageService.unMarshall(ElectricityOfferRootDTO.class, serialized);
+        //then
+        Assert.isTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
 
     }
 
