@@ -44,7 +44,7 @@ public class OfferStorageService {
 
     public List<OfferStorage> getUserOffers(String userName){
         User userByUserName = userService.findUserByUserName(userName);
-        return offerStorageRepository.findByUserId(userByUserName.getId());
+        return offerStorageRepository.findByUserIdOrderByCreationDateAsc(userByUserName.getId());
     }
 
     public Object getOffer(final int offerStorageId){
