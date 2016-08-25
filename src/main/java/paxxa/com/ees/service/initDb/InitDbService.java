@@ -138,7 +138,7 @@ public class InitDbService {
          * Setting electricity offer to Paxxa
          */
         ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
-        OfferStorage savedOfferStorage = offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, userAdmin.getName());
+        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, userAdmin.getName());
     }
 
 }

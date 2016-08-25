@@ -68,7 +68,7 @@
                     <%-- ADMIN --%>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <li><a href="<spring:url value="${pageContext.request.contextPath}/a/electricityOffer.json"/>">Dodaj
-                            ofertę</a></li>
+                            ofertę energii</a></li>
                         <li class="${currentDef == 'a-offers' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/offers.html"/>">Oferty partnera</a></li>
                         <li class="${currentDef == 'a-users' ? 'active' : ''}"><a
@@ -84,7 +84,7 @@
                     <%-- TRADER --%>
                     <security:authorize access="hasRole('ROLE_TRADER')">
                         <li><a href="<spring:url value="${pageContext.request.contextPath}/t/electricityOffer.json"/>">Dodaj
-                            ofertę</a></li>
+                            ofertę energii</a></li>
                         <li><a href="#contact">Oferty</a></li>
                         <li><a href="#contact">Klienci</a></li>
                         <li class="${currentDef == 'a-account' ? 'active' : ''}"><a

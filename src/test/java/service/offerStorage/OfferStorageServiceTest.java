@@ -8,11 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
+import paxxa.com.ees.repository.offerStorage.OfferStorageRepository;
 import paxxa.com.ees.service.offerStorage.OfferStorageService;
 import paxxa.com.ees.service.utils.SampleDataService;
 
 import java.util.List;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
 public class OfferStorageServiceTest {
@@ -22,13 +22,15 @@ public class OfferStorageServiceTest {
     private OfferStorageService offerStorageService;
     @Autowired
     private SampleDataService sampleDataService;
+    @Autowired
+    private OfferStorageRepository offerStorageRepository;
 
     @Test
     public void shouldSaveOfferToUser(){
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         //when
-        OfferStorage savedOfferStorage = offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, USER_NAME);
+        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //then
         Assert.assertNotNull(savedOfferStorage);
         Assert.assertTrue(savedOfferStorage.getId() != 0);
@@ -38,7 +40,7 @@ public class OfferStorageServiceTest {
     public void shouldReturnListOfOfferStorage(){
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
-        OfferStorage savedOfferStorage = offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, USER_NAME);
+        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //when
         List<OfferStorage> userOffers = offerStorageService.getUserOffers(USER_NAME);
         //then
@@ -50,7 +52,7 @@ public class OfferStorageServiceTest {
     public void shouldReturnOffer(){
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
-        OfferStorage savedOfferStorage = offerStorageService.saveOfferToOfferStorage(electricityRootOfferDTO, USER_NAME);
+        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //when
         Object offer = offerStorageService.getOffer(savedOfferStorage.getId());
         //then
@@ -58,6 +60,22 @@ public class OfferStorageServiceTest {
         Assert.assertTrue(offer instanceof ElectricityOfferRootDTO);
 
     }
+
+    @Test
+    public void shouldCheckIfOfferExists(){
+        //given
+        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
+        //when
+        OfferStorage byCreationDateAndProductCodeAndUser_id =
+                offerStorageRepository.findByCreationDateAndProductCodeAndUser_idAndOfferNumber(savedOfferStorage.getCreationDate(),
+                savedOfferStorage.getProductCode(), savedOfferStorage.getUser().getId(), savedOfferStorage.getOfferNumber());
+        //then
+        Assert.assertNotNull(byCreationDateAndProductCodeAndUser_id);
+    }
+
+
+
 
 
 }
