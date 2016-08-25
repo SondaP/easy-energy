@@ -27,7 +27,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="emf" value="dataSource" />
+        </datasource-mapping>
       </configuration>
     </facet>
   </component>

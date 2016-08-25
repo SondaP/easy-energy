@@ -12,7 +12,7 @@ import java.util.List;
 @XmlRootElement
 public class ElectricityOfferRootDTO extends AbstractOfferDTO{
 
-    private String offerNumber;
+    private Integer offerNumber;
     private Date creationDate;
     private Date lastEditionDate;
     private Integer proposalContractMonthLength;
@@ -21,11 +21,11 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO{
     private String offerNote;
     private OfferSummaryDTO offerSummaryDTO;
 
-    public String getOfferNumber() {
+    public Integer getOfferNumber() {
         return offerNumber;
     }
 
-    public void setOfferNumber(String offerNumber) {
+    public void setOfferNumber(Integer offerNumber) {
         this.offerNumber = offerNumber;
     }
 

@@ -20,7 +20,20 @@ public class SampleDataService {
 
     public ElectricityOfferRootDTO createElectricityRootOfferDTO() {
         ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
-        electricityOfferRootDTO.setOfferNumber("1");
+        //electricityOfferRootDTO.setOfferNumber(1);
+        electricityOfferRootDTO.setCreationDate(new Date());
+        electricityOfferRootDTO.setLastEditionDate(new Date());
+        electricityOfferRootDTO.setProposalContractMonthLength(24);
+        electricityOfferRootDTO.setCompanyDTO(createCompany());
+        electricityOfferRootDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
+        electricityOfferRootDTO.setReceiverPointDTOList(Arrays.asList(createReceiverPoint_1(), createReceiverPoint_2() ));
+        electricityOfferRootDTO.setOfferSummaryDTO(createOfferSummaryDTO());
+        return electricityOfferRootDTO;
+    }
+
+    public ElectricityOfferRootDTO createElectricityRootOfferDTO2() {
+        ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
+        //electricityOfferRootDTO.setOfferNumber(1);
         electricityOfferRootDTO.setCreationDate(new Date());
         electricityOfferRootDTO.setLastEditionDate(new Date());
         electricityOfferRootDTO.setProposalContractMonthLength(24);

@@ -84,6 +84,10 @@ public class UserService {
         return userRepositoryApp.hasUserExpectedRole(userName, expectedRole);
     }
 
+    public Integer getUserIdByUserName(String userName){
+        return userRepository.findByName(userName).getId();
+    }
+
 
 
 }

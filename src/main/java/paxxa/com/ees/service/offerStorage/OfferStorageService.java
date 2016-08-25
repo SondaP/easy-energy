@@ -9,6 +9,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepository;
+import paxxa.com.ees.repository.offerStorage.OfferStorageRepositoryApp;
 import paxxa.com.ees.service.user.UserService;
 import paxxa.com.ees.service.utils.UtilsService;
 
@@ -26,24 +27,39 @@ public class OfferStorageService {
     private UserService userService;
     @Autowired
     private OfferStorageRepository offerStorageRepository;
+    @Autowired
+    private OfferStorageRepositoryApp offerStorageRepositoryApp;
 
     public OfferStorage saveOrUpdateOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
         if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
+            String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
             ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
-            byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
 
             if (checkIfOfferAlreadyExists(abstractOfferDTO, userName)) {
+                Date lastEditionDate = new Date();
+                electricityOfferRootDTO.setLastEditionDate(lastEditionDate);
+                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
+
                 OfferStorage existingElectricityOffer = getElectricityOffer(abstractOfferDTO, userName);
-                existingElectricityOffer.setLastEdition(new Date());
+                existingElectricityOffer.setLastEdition(lastEditionDate);
+                existingElectricityOffer.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
+
+                existingElectricityOffer.setAbstractOfferDTO(null);
                 existingElectricityOffer.setAbstractOfferDTO(marshallOffer);
+
                 return existingElectricityOffer;
+
             } else {
+                Integer nextAvailableNumberForProductCode = getNextAvailableNumberForProductCode(productCode, userName);
                 OfferStorage offerStorage = new OfferStorage();
-                offerStorage.setOfferNumber(electricityOfferRootDTO.getOfferNumber());
+                offerStorage.setOfferNumber(nextAvailableNumberForProductCode);
                 offerStorage.setCreationDate(electricityOfferRootDTO.getCreationDate());
                 offerStorage.setLastEdition(electricityOfferRootDTO.getLastEditionDate());
                 offerStorage.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
                 offerStorage.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
+
+                electricityOfferRootDTO.setOfferNumber(nextAvailableNumberForProductCode);
+                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
 
                 offerStorage.setAbstractOfferDTO(marshallOffer);
                 offerStorage.setUser(userService.findUserByUserName(userName));
@@ -56,15 +72,12 @@ public class OfferStorageService {
     private boolean checkIfOfferAlreadyExists(AbstractOfferDTO abstractOfferDTO, String userName) {
         if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
             OfferStorage offer = getElectricityOffer(abstractOfferDTO, userName);
-            if (offer != null) return true;
+            if (offer == null) return false;
+            return true;
         }
         return false;
     }
 
-    private OfferStorage getOffer(Date creationDate, String productCode, Integer userId, String offerNumber) {
-        return offerStorageRepository.findByCreationDateAndProductCodeAndUser_idAndOfferNumber(creationDate, productCode,
-                userId, offerNumber);
-    }
 
     private OfferStorage getElectricityOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
         String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
@@ -78,9 +91,12 @@ public class OfferStorageService {
         return null;
     }
 
-    /*private String getNextNumberForProductCode(String productCode,  String userName){
-
-    }*/
+    private Integer getNextAvailableNumberForProductCode(String productCode, String userName) {
+        Integer userIdByUserName = userService.getUserIdByUserName(userName);
+        Integer lastOfferNumberForProductCode = offerStorageRepositoryApp.getLastOfferNumberForProductCode(productCode, userIdByUserName);
+        Integer nextOfferNumber = lastOfferNumberForProductCode + 1;
+        return nextOfferNumber;
+    }
 
     public List<OfferStorage> getUserOffers(String userName) {
         User userByUserName = userService.findUserByUserName(userName);

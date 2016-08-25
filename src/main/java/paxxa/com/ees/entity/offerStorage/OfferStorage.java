@@ -1,6 +1,7 @@
 package paxxa.com.ees.entity.offerStorage;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.metamodel.source.annotations.attribute.type.LobTypeResolver;
 import paxxa.com.ees.entity.user.User;
 
 import javax.persistence.*;
@@ -13,15 +14,16 @@ public class OfferStorage {
     @GeneratedValue
     private Integer id;
     private String productCode;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @Type(type="date")
     private Date lastEdition;
     private String companyName;
-    private String offerNumber;
+    private Integer offerNumber;
 
     @Lob
-    @Column(name = "ABSTRACT_OFFER_DTO")
+
+    @Column(length=1024*1024*1024, name = "ABSTRACT_OFFER_DTO")
     private byte[] abstractOfferDTO;
 
     @OneToOne
@@ -68,11 +70,11 @@ public class OfferStorage {
         this.companyName = companyName;
     }
 
-    public String getOfferNumber() {
+    public Integer getOfferNumber() {
         return offerNumber;
     }
 
-    public void setOfferNumber(String offerNumber) {
+    public void setOfferNumber(Integer offerNumber) {
         this.offerNumber = offerNumber;
     }
 

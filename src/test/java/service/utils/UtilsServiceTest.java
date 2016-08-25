@@ -55,7 +55,7 @@ public class UtilsServiceTest {
 
     private ElectricityOfferRootDTO createElectricityRootOfferDTO() {
         ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
-        electricityOfferRootDTO.setOfferNumber("1");
+        electricityOfferRootDTO.setOfferNumber(1);
         electricityOfferRootDTO.setCreationDate(new Date());
         electricityOfferRootDTO.setLastEditionDate(new Date());
         electricityOfferRootDTO.setProposalContractMonthLength(24);
