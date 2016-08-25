@@ -16,7 +16,7 @@ public class OfferStorage {
     private String productCode;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-    @Type(type="date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastEdition;
     private String companyName;
     private Integer offerNumber;
