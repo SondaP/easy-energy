@@ -47,7 +47,7 @@ public class UtilsService {
         throw new RuntimeException("Error while unMarshaling");
     }
 
-    public Integer getDifferenceDays(Date startDate, Date endDate) {
+    public Integer countDaysBetweenTwoDates(Date startDate, Date endDate) {
         Long difference = endDate.getTime() - startDate.getTime();
         Long convert = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
         return convert.intValue();

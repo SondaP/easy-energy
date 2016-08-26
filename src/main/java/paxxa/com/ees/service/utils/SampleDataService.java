@@ -93,10 +93,10 @@ public class SampleDataService {
         tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 55/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_3 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-04-20"));
-        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-05-25"));
-        tariffPeriodConsumptionDTO_A1_2.setUnitConsumption(new BigDecimal(200));
-        tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 54444445/08/2016");
+        tariffPeriodConsumptionDTO_A1_3.setPeriodStart(utilsService.getDateObjectForPattern("2016-04-20"));
+        tariffPeriodConsumptionDTO_A1_3.setPeriodEnd(utilsService.getDateObjectForPattern("2016-05-25"));
+        tariffPeriodConsumptionDTO_A1_3.setUnitConsumption(new BigDecimal(200));
+        tariffPeriodConsumptionDTO_A1_3.setDocumentNumber("FA 54444445/08/2016");
 
         actualTariff_1.setTariffPeriodConsumptionDTOList(Arrays.asList(tariffPeriodConsumptionDTO_A1_1,
                 tariffPeriodConsumptionDTO_A1_2, tariffPeriodConsumptionDTO_A1_3));

@@ -6,6 +6,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ActualTariff;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.TariffPeriodConsumptionDTO;
+import paxxa.com.ees.service.exception.OfferCalculationException.MissingDataException;
 import paxxa.com.ees.service.utils.UtilsService;
 
 import java.util.List;
@@ -35,12 +36,22 @@ public class ElectricityOfferCalculationService {
                     actualTariff.getTariffPeriodConsumptionDTOList();
 
             for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
-                Integer differenceDays = utilsService.getDifferenceDays(tariffPeriodConsumptionDTO.getPeriodEnd(),
-                        tariffPeriodConsumptionDTO.getPeriodStart());
+                validIfDatesAreSet(tariffPeriodConsumptionDTO);
+                Integer differenceDays = utilsService.countDaysBetweenTwoDates(
+                        tariffPeriodConsumptionDTO.getPeriodStart(), tariffPeriodConsumptionDTO.getPeriodEnd());
                 totalNumberOfDays = totalNumberOfDays + differenceDays;
             }
         }
     return totalNumberOfDays;
+    }
+
+    private void validIfDatesAreSet(TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO){
+        if(tariffPeriodConsumptionDTO.getPeriodStart() == null) {
+            throw new MissingDataException("periodStart", "TariffPeriodConsumptionDTO");
+        }
+        if(tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
+            throw new MissingDataException("periodEnd", "TariffPeriodConsumptionDTO");
+        }
     }
 
 }

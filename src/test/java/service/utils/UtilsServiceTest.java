@@ -58,7 +58,7 @@ public class UtilsServiceTest {
         Date startDate = utilsService.getDateObjectForPattern("2016-01-01");
         Date endDate = utilsService.getDateObjectForPattern("2016-01-26");
         //when
-        Integer differenceDays = utilsService.getDifferenceDays(startDate, endDate);
+        Integer differenceDays = utilsService.countDaysBetweenTwoDates(startDate, endDate);
         //then
         Assert.assertTrue(differenceDays == 25);
     }
@@ -69,7 +69,7 @@ public class UtilsServiceTest {
         Date startDate = utilsService.getDateObjectForPattern("2016-01-01");
         Date endDate = utilsService.getDateObjectForPattern("2016-01-01");
         //when
-        Integer differenceDays = utilsService.getDifferenceDays(startDate, endDate);
+        Integer differenceDays = utilsService.countDaysBetweenTwoDates(startDate, endDate);
         //then
         Assert.assertTrue(differenceDays == 0);
     }
