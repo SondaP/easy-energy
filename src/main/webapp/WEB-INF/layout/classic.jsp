@@ -65,12 +65,12 @@
                                 href="<spring:url value="/sa/register.html"/>">Rejestracja Partnera</a></li>
                     </security:authorize>
 
-                    <%-- ADMIN --%>
+                    <%-- ADMIN (PARTNER) --%>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <li><a href="<spring:url value="${pageContext.request.contextPath}/a/electricityOffer.json"/>">Dodaj
                             ofertę energii</a></li>
                         <li class="${currentDef == 'a-offers' ? 'active' : ''}"><a
-                                href="<spring:url value="/a/offers.html"/>">Oferty partnera</a></li>
+                                href="<spring:url value="/a/offers.html"/>">Oferty</a></li>
                         <li class="${currentDef == 'a-users' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/users.html"/>">Handlowcy</a></li>
                         <li class="${currentDef == 'a-userRegister' ? 'active' : ''}"><a

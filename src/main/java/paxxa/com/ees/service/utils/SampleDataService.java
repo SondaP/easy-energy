@@ -46,13 +46,13 @@ public class SampleDataService {
 
     private CompanyDTO createCompany() {
         CompanyDTO companyDTO = new CompanyDTO();
-        companyDTO.setCompanyName("Paxxa");
+        companyDTO.setCompanyName("Hotel pod Dębami");
         companyDTO.setNip("5641713529");
-        companyDTO.setCompanyCode("Paxxa");
-        companyDTO.setStreetName("Nadbystrzycka");
+        companyDTO.setCompanyCode("Hotel pod Dębami");
+        companyDTO.setStreetName("Wysoki dołki");
         companyDTO.setStreetNumber("4");
         companyDTO.setZipCode("20-706");
-        companyDTO.setCity("Lublin");
+        companyDTO.setCity("Wrzosy");
         return companyDTO;
     }
 

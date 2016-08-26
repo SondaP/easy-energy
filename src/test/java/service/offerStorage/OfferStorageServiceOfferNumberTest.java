@@ -43,9 +43,9 @@ public class OfferStorageServiceOfferNumberTest {
     public void shouldGetProperLastOfferNumber() throws InterruptedException {
         //given
         ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
-        OfferStorage savedOfferStorage = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
+        OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         ElectricityOfferRootDTO electricityRootOfferDTO2 = sampleDataService.createElectricityRootOfferDTO2();
-        OfferStorage savedOfferStorage2 = offerStorageService.saveOrUpdateOffer(electricityRootOfferDTO2, USER_NAME);
+        OfferStorage savedOfferStorage2 = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO2, USER_NAME);
 
         String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
         //when

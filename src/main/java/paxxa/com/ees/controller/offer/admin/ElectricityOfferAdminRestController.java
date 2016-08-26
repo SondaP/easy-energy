@@ -4,35 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import paxxa.com.ees.dto.company.CompanyDTO;
+import org.springframework.web.bind.annotation.*;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEstimationForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
+import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.service.offerStorage.OfferStorageService;
 import paxxa.com.ees.service.utils.SampleDataService;
 
-import javax.xml.ws.Response;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.security.Principal;
 
 @RestController
-@Controller
 public class ElectricityOfferAdminRestController {
 
     @Autowired
     private SampleDataService sampleDataService;
     @Autowired
     private OfferStorageService offerStorageService;
+
 
 
     @RequestMapping(value = "/a/electricityOffer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,6 +32,16 @@ public class ElectricityOfferAdminRestController {
         }
         return null;
     }
+
+
+    @RequestMapping(value = "/a/electricityOffer", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<ElectricityOfferRootDTO> createOrUpdate(@RequestBody ElectricityOfferRootDTO electricityOfferRootDTO, Principal principal) {
+        OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRootDTO, principal.getName());
+        System.out.println(electricityOfferRootDTO.toString());
+        return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
+    }
+
+
 
 }
 

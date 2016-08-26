@@ -30,7 +30,7 @@ public class OfferStorageService {
     @Autowired
     private OfferStorageRepositoryApp offerStorageRepositoryApp;
 
-    public OfferStorage saveOrUpdateOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
+    public OfferStorage createOrUpdateOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
         if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
             String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
             ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
