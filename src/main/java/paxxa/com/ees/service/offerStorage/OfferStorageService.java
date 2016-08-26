@@ -50,22 +50,26 @@ public class OfferStorageService {
                 return existingElectricityOffer;
 
             } else {
+                Date creationDate = new Date();
                 Integer nextAvailableNumberForProductCode = getNextAvailableNumberForProductCode(productCode, userName);
                 OfferStorage initialOfferStorage = new OfferStorage();
                 OfferStorage offerStorage = offerStorageRepository.save(initialOfferStorage);
-                electricityOfferRootDTO.setOfferStorageId(offerStorage.getId());
 
                 offerStorage.setOfferNumber(nextAvailableNumberForProductCode);
-                offerStorage.setCreationDate(electricityOfferRootDTO.getCreationDate());
-                offerStorage.setLastEdition(electricityOfferRootDTO.getLastEditionDate());
+                offerStorage.setCreationDate(creationDate);
+                offerStorage.setLastEdition(creationDate);
                 offerStorage.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
                 offerStorage.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
+                offerStorage.setUser(userService.findUserByUserName(userName));
 
                 electricityOfferRootDTO.setOfferNumber(nextAvailableNumberForProductCode);
+                electricityOfferRootDTO.setOfferStorageId(offerStorage.getId());
+                electricityOfferRootDTO.setCreationDate(creationDate);
+                electricityOfferRootDTO.setLastEditionDate(creationDate);
                 byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
 
                 offerStorage.setAbstractOfferDTO(marshallOffer);
-                offerStorage.setUser(userService.findUserByUserName(userName));
+
                 return offerStorageRepository.save(offerStorage);
             }
         }
