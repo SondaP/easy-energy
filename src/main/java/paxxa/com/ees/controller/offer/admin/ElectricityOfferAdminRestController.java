@@ -41,6 +41,13 @@ public class ElectricityOfferAdminRestController {
         return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/a/CalculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<ElectricityOfferRootDTO> calculateElectricityOffer(@RequestBody ElectricityOfferRootDTO electricityOfferRootDTO, Principal principal) {
+        OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRootDTO, principal.getName());
+        System.out.println(electricityOfferRootDTO.toString());
+        return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
+    }
+
 
 
 }

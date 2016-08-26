@@ -30,7 +30,7 @@
             <div class="panel-body">
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Ustaw poziom prowizji dla kalkulatora oferty</a>
+                    <a href="#" class="list-group-item">Ustaw poziomy prowizji dla zarejestrowanych handlowców</a>
                 </div>
             </div>
         </div>

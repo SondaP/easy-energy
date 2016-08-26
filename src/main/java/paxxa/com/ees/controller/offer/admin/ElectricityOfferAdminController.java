@@ -15,6 +15,6 @@ public class ElectricityOfferAdminController {
     @RequestMapping(value = "/a/electricityOffer/remove/{id}")
     public String removeOffer(@PathVariable int id){
         offerStorageService.removeOffer(id);
-        return "a-offers";
+        return "redirect:/a/offers.html";
     }
 }
