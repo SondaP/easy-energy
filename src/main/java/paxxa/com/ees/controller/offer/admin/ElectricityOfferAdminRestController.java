@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
+import paxxa.com.ees.service.offerCalculation.electricityOffer.ElectricityOfferCalculationService;
 import paxxa.com.ees.service.offerStorage.OfferStorageService;
 import paxxa.com.ees.service.utils.SampleDataService;
 
@@ -19,6 +20,8 @@ public class ElectricityOfferAdminRestController {
     private SampleDataService sampleDataService;
     @Autowired
     private OfferStorageService offerStorageService;
+    @Autowired
+    private ElectricityOfferCalculationService electricityOfferCalculationService;
 
 
 
@@ -26,11 +29,12 @@ public class ElectricityOfferAdminRestController {
     public ResponseEntity<ElectricityOfferRootDTO> getOfferByOfferStorageId(@PathVariable int id) {
 
         Object offer = offerStorageService.getOffer(id);
+
         if (offer instanceof ElectricityOfferRootDTO) {
             ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) offer;
             return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
         }
-        return null;
+        throw new RuntimeException("Illegal offer type");
     }
 
 
@@ -41,12 +45,14 @@ public class ElectricityOfferAdminRestController {
         return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/a/CalculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "/a/calculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<ElectricityOfferRootDTO> calculateElectricityOffer(@RequestBody ElectricityOfferRootDTO electricityOfferRootDTO, Principal principal) {
-        OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRootDTO, principal.getName());
-        System.out.println(electricityOfferRootDTO.toString());
-        return new ResponseEntity<ElectricityOfferRootDTO>(electricityOfferRootDTO, HttpStatus.OK);
+
+        ElectricityOfferRootDTO calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(electricityOfferRootDTO, principal.getName());
+        return new ResponseEntity<ElectricityOfferRootDTO>(calculatedOffer, HttpStatus.OK);
     }
+
+
 
 
 

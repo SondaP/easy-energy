@@ -1,5 +1,6 @@
 package paxxa.com.ees.service.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
@@ -17,12 +18,13 @@ import java.util.List;
 @Service
 public class SampleDataService {
 
+    @Autowired
+    private UtilsService utilsService;
+
 
     public ElectricityOfferRootDTO createElectricityRootOfferDTO() {
         ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
 
-        electricityOfferRootDTO.setCreationDate(new Date());
-        electricityOfferRootDTO.setLastEditionDate(new Date());
         electricityOfferRootDTO.setProposalContractMonthLength(24);
         electricityOfferRootDTO.setCompanyDTO(createCompany());
         electricityOfferRootDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
@@ -79,20 +81,20 @@ public class SampleDataService {
         actualTariff_1.setTotalUnitConsumptionFromPeriods(new BigDecimal(750));
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_1 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_1.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_A1_1.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_A1_1.setPeriodStart(utilsService.getDateObjectForPattern("2016-05-20"));
+        tariffPeriodConsumptionDTO_A1_1.setPeriodEnd(utilsService.getDateObjectForPattern("2016-05-25"));
         tariffPeriodConsumptionDTO_A1_1.setUnitConsumption(new BigDecimal(250));
         tariffPeriodConsumptionDTO_A1_1.setDocumentNumber("FA 22/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_2 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-05-10"));
+        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-05-50"));
         tariffPeriodConsumptionDTO_A1_2.setUnitConsumption(new BigDecimal(300));
         tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 55/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_3 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-04-20"));
+        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-05-25"));
         tariffPeriodConsumptionDTO_A1_2.setUnitConsumption(new BigDecimal(200));
         tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 54444445/08/2016");
 
@@ -106,14 +108,14 @@ public class SampleDataService {
         actualTariff_2.setTotalUnitConsumptionFromPeriods(new BigDecimal(250));
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_C2_1 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_C2_1.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_C2_1.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_C2_1.setPeriodStart(utilsService.getDateObjectForPattern("2016-01-20"));
+        tariffPeriodConsumptionDTO_C2_1.setPeriodEnd(utilsService.getDateObjectForPattern("2016-02-20"));
         tariffPeriodConsumptionDTO_C2_1.setUnitConsumption(new BigDecimal(100));
         tariffPeriodConsumptionDTO_C2_1.setDocumentNumber("FA 58/07/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_C2_2 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_C2_2.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_C2_2.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_C2_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-03-20"));
+        tariffPeriodConsumptionDTO_C2_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-03-26"));
         tariffPeriodConsumptionDTO_C2_2.setUnitConsumption(new BigDecimal(150));
         tariffPeriodConsumptionDTO_C2_2.setDocumentNumber("FA 2569/07/2016");
 
@@ -271,14 +273,14 @@ public class SampleDataService {
         actualTariff_1.setTotalUnitConsumptionFromPeriods(new BigDecimal(300));
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_1 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_1.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_A1_1.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_A1_1.setPeriodStart(utilsService.getDateObjectForPattern("2016-08-01"));
+        tariffPeriodConsumptionDTO_A1_1.setPeriodEnd(utilsService.getDateObjectForPattern("2016-09-09"));
         tariffPeriodConsumptionDTO_A1_1.setUnitConsumption(new BigDecimal(50));
         tariffPeriodConsumptionDTO_A1_1.setDocumentNumber("FA 485/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_A1_2 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_A1_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-07-01"));
+        tariffPeriodConsumptionDTO_A1_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-10-01"));
         tariffPeriodConsumptionDTO_A1_2.setUnitConsumption(new BigDecimal(250));
         tariffPeriodConsumptionDTO_A1_2.setDocumentNumber("FA 363/07/2016");
 
@@ -292,14 +294,14 @@ public class SampleDataService {
         actualTariff_2.setTotalUnitConsumptionFromPeriods(new BigDecimal(700));
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_C2_1 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_C2_1.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_C2_1.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_C2_1.setPeriodStart(utilsService.getDateObjectForPattern("2016-09-08"));
+        tariffPeriodConsumptionDTO_C2_1.setPeriodEnd(utilsService.getDateObjectForPattern("2016-11-01"));
         tariffPeriodConsumptionDTO_C2_1.setUnitConsumption(new BigDecimal(100));
         tariffPeriodConsumptionDTO_C2_1.setDocumentNumber("FA 512265656565222/08/2016");
 
         TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO_C2_2 = new TariffPeriodConsumptionDTO();
-        tariffPeriodConsumptionDTO_C2_2.setPeriodStart(new Date());
-        tariffPeriodConsumptionDTO_C2_2.setPeriodEnd(new Date());
+        tariffPeriodConsumptionDTO_C2_2.setPeriodStart(utilsService.getDateObjectForPattern("2016-08-01"));
+        tariffPeriodConsumptionDTO_C2_2.setPeriodEnd(utilsService.getDateObjectForPattern("2016-10-01"));
         tariffPeriodConsumptionDTO_C2_2.setUnitConsumption(new BigDecimal(600));
         tariffPeriodConsumptionDTO_C2_2.setDocumentNumber("FA 566666688484848455/08/2016");
 

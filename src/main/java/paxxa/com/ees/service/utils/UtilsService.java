@@ -8,6 +8,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UtilsService {
@@ -40,5 +45,24 @@ public class UtilsService {
             e.printStackTrace();
         }
         throw new RuntimeException("Error while unMarshaling");
+    }
+
+    public Integer getDifferenceDays(Date startDate, Date endDate) {
+        Long difference = endDate.getTime() - startDate.getTime();
+        Long convert = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+        return convert.intValue();
+
+    }
+
+    public Date getDateObjectForPattern(String yyy_MM_dd){
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = yyy_MM_dd;
+        Date dateObject = null;
+        try {
+            dateObject = sdf.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateObject;
     }
 }

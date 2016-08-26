@@ -1,11 +1,11 @@
 package service.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSellerDTO;
@@ -17,6 +17,7 @@ import paxxa.com.ees.service.utils.UtilsService;
 
 import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class UtilsServiceTest {
         //when
         byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, createElectricityRootOfferDTO());
         //then
-        Assert.notNull(serialized);
+        Assert.assertNotNull(serialized);
         System.out.println(serialized.toString());
         System.err.println(new String(serialized));
     }
@@ -48,8 +49,29 @@ public class UtilsServiceTest {
         //when
         Object unMarshaledObject = utilsService.unMarshall(ElectricityOfferRootDTO.class, serialized);
         //then
-        Assert.isTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
+        Assert.assertTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
+    }
 
+    @Test
+    public void shouldCalculateNumberOfDaysBetweenDates() throws ParseException {
+        //given
+        Date startDate = utilsService.getDateObjectForPattern("2016-01-01");
+        Date endDate = utilsService.getDateObjectForPattern("2016-01-26");
+        //when
+        Integer differenceDays = utilsService.getDifferenceDays(startDate, endDate);
+        //then
+        Assert.assertTrue(differenceDays == 25);
+    }
+
+    @Test
+    public void shouldCalculateNumberOfDaysBetweenSameDates() throws ParseException {
+        //given
+        Date startDate = utilsService.getDateObjectForPattern("2016-01-01");
+        Date endDate = utilsService.getDateObjectForPattern("2016-01-01");
+        //when
+        Integer differenceDays = utilsService.getDifferenceDays(startDate, endDate);
+        //then
+        Assert.assertTrue(differenceDays == 0);
     }
 
 

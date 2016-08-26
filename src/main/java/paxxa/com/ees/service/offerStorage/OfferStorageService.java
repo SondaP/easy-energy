@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.domainConstans.DomainConstans;
+import paxxa.com.ees.controller.exception.offerStorage.OfferNotFountException;
 import paxxa.com.ees.dto.offer.AbstractOfferDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
@@ -120,6 +121,7 @@ public class OfferStorageService {
         offerStorage.setUser(null);
         offerStorageRepository.delete(offerId);
     }
+
 
 
 }
