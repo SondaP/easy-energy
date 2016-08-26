@@ -10,8 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 @XmlRootElement
-public class ElectricityOfferRootDTO extends AbstractOfferDTO{
+public class ElectricityOfferRootDTO extends AbstractOfferDTO {
 
+    private Integer offerStorageId;
     private Integer offerNumber;
     private Date creationDate;
     private Date lastEditionDate;
@@ -20,6 +21,14 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO{
     private List<ReceiverPointDTO> receiverPointDTOList;
     private String offerNote;
     private OfferSummaryDTO offerSummaryDTO;
+
+    public Integer getOfferStorageId() {
+        return offerStorageId;
+    }
+
+    public void setOfferStorageId(Integer offerStorageId) {
+        this.offerStorageId = offerStorageId;
+    }
 
     public Integer getOfferNumber() {
         return offerNumber;

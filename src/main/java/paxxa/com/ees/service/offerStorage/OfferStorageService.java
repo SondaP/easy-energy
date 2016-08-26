@@ -40,7 +40,7 @@ public class OfferStorageService {
                 electricityOfferRootDTO.setLastEditionDate(lastEditionDate);
                 byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
 
-                OfferStorage existingElectricityOffer = getElectricityOffer(abstractOfferDTO, userName);
+                OfferStorage existingElectricityOffer = getElectricityOffer(abstractOfferDTO);
                 existingElectricityOffer.setLastEdition(lastEditionDate);
                 existingElectricityOffer.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
 
@@ -51,7 +51,10 @@ public class OfferStorageService {
 
             } else {
                 Integer nextAvailableNumberForProductCode = getNextAvailableNumberForProductCode(productCode, userName);
-                OfferStorage offerStorage = new OfferStorage();
+                OfferStorage initialOfferStorage = new OfferStorage();
+                OfferStorage offerStorage = offerStorageRepository.save(initialOfferStorage);
+                electricityOfferRootDTO.setOfferStorageId(offerStorage.getId());
+
                 offerStorage.setOfferNumber(nextAvailableNumberForProductCode);
                 offerStorage.setCreationDate(electricityOfferRootDTO.getCreationDate());
                 offerStorage.setLastEdition(electricityOfferRootDTO.getLastEditionDate());
@@ -71,7 +74,9 @@ public class OfferStorageService {
 
     private boolean checkIfOfferAlreadyExists(AbstractOfferDTO abstractOfferDTO, String userName) {
         if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
-            OfferStorage offer = getElectricityOffer(abstractOfferDTO, userName);
+            ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
+            if (electricityOfferRootDTO.getOfferStorageId() == null) return false;
+            OfferStorage offer = getElectricityOffer(abstractOfferDTO);
             if (offer == null) return false;
             return true;
         }
@@ -79,16 +84,10 @@ public class OfferStorageService {
     }
 
 
-    private OfferStorage getElectricityOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
+    private OfferStorage getElectricityOffer(AbstractOfferDTO abstractOfferDTO) {
         String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
-        Integer userId = userService.findUserByUserName(userName).getId();
         ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
-        if (electricityOfferRootDTO.getOfferNumber() != null) {
-            return offerStorageRepository.findByCreationDateAndProductCodeAndUser_idAndOfferNumber(
-                    electricityOfferRootDTO.getCreationDate(),
-                    productCode, userId, electricityOfferRootDTO.getOfferNumber());
-        }
-        return null;
+        return offerStorageRepository.getOne(electricityOfferRootDTO.getOfferStorageId());
     }
 
     private Integer getNextAvailableNumberForProductCode(String productCode, String userName) {

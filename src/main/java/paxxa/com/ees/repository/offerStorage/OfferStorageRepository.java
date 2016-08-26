@@ -11,4 +11,5 @@ public interface OfferStorageRepository extends JpaRepository<OfferStorage, Inte
     List<OfferStorage> findByUser_IdOrderByCreationDateAsc(Integer id);
 
     OfferStorage findByCreationDateAndProductCodeAndUser_idAndOfferNumber(Date creationDate, String productCode, Integer userId, Integer offerNumber);
+
 }
