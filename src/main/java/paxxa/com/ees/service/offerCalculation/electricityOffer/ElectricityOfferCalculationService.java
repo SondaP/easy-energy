@@ -19,19 +19,22 @@ public class ElectricityOfferCalculationService {
 
     public ElectricityOfferRootDTO calculateElectricityOffer(ElectricityOfferRootDTO electricityOfferRootDTO, String userName) {
 
-        List<ReceiverPointDTO> receiverPointDTOList = electricityOfferRootDTO.getReceiverPointDTOList();
+        calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointDTOList());
+
+        return electricityOfferRootDTO;
+    }
 
 
+    private void calculateReceiversPoint(List<ReceiverPointDTO> receiverPointDTOList) {
         for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
             validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList, receiverPointDescription);
-            Integer integer = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
+
+            Integer totalDaysNumberForPeriods = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
+            receiverPointDTO.getReceiverPointConsumptionSummaryDTO().setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
 
         }
-
-
-        return null;
     }
 
 
@@ -66,7 +69,7 @@ public class ElectricityOfferCalculationService {
                                                String receiverPointDescription) {
         if (actualTariffList.size() != expectedNumberOfTariffs) throw new MissingDataException(
                 "Incorrect number of tariffs at actualTariffList, should be " + expectedNumberOfTariffs
-                + " positions. Receiver point: " + receiverPointDescription);
+                        + " positions. Receiver point: " + receiverPointDescription);
 
     }
 
