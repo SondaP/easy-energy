@@ -18,9 +18,15 @@ public class ElectricityOfferCalculationService {
     private UtilsService utilsService;
 
     public ElectricityOfferRootDTO calculateElectricityOffer(ElectricityOfferRootDTO electricityOfferRootDTO, String userName) {
+
         List<ReceiverPointDTO> receiverPointDTOList = electricityOfferRootDTO.getReceiverPointDTOList();
+
+
         for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
-            Integer integer = calculateTotalDaysNumberForPeriods(receiverPointDTO.getActualTariffList());
+            List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
+            String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
+            validateNumberOfActualTariffs(receiverPointDTO.getActualTariffsNumber(), actualTariffList, receiverPointDescription);
+            Integer integer = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
 
         }
 
@@ -29,29 +35,39 @@ public class ElectricityOfferCalculationService {
     }
 
 
-    private Integer calculateTotalDaysNumberForPeriods(List<ActualTariff> actualTariffList) {
+    private Integer calculateTotalDaysNumberForPeriods(List<ActualTariff> actualTariffList, String receiverPointDescription) {
         Integer totalNumberOfDays = 0;
         for (ActualTariff actualTariff : actualTariffList) {
             List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
                     actualTariff.getTariffPeriodConsumptionDTOList();
 
             for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
-                validIfDatesAreSet(tariffPeriodConsumptionDTO);
+                validIfDatesAreSet(tariffPeriodConsumptionDTO, receiverPointDescription);
                 Integer differenceDays = utilsService.countDaysBetweenTwoDates(
                         tariffPeriodConsumptionDTO.getPeriodStart(), tariffPeriodConsumptionDTO.getPeriodEnd());
                 totalNumberOfDays = totalNumberOfDays + differenceDays;
             }
         }
-    return totalNumberOfDays;
+        return totalNumberOfDays;
     }
 
-    private void validIfDatesAreSet(TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO){
-        if(tariffPeriodConsumptionDTO.getPeriodStart() == null) {
-            throw new MissingDataException("periodStart", "TariffPeriodConsumptionDTO");
+    private void validIfDatesAreSet(TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO, String receiverPointDescription) {
+        if (tariffPeriodConsumptionDTO.getPeriodStart() == null) {
+            throw new MissingDataException("Value for attribute: periodStart from Object: TariffPeriodConsumptionDTO at "
+                    + receiverPointDescription + ", is required");
         }
-        if(tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
-            throw new MissingDataException("periodEnd", "TariffPeriodConsumptionDTO");
+        if (tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
+            throw new MissingDataException("Value for attribute: periodStop from Object: TariffPeriodConsumptionDTO at "
+                    + receiverPointDescription + ", is required");
         }
+    }
+
+    private void validateNumberOfActualTariffs(Integer expectedNumberOfTariffs, List<ActualTariff> actualTariffList,
+                                               String receiverPointDescription) {
+        if (actualTariffList.size() != expectedNumberOfTariffs) throw new MissingDataException(
+                "Incorrect number of tariffs at actualTariffList, should be " + expectedNumberOfTariffs
+                + " positions. Receiver point: " + receiverPointDescription);
+
     }
 
 }
