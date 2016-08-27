@@ -105,8 +105,8 @@ public class UtilsServiceTest {
         ReceiverPointDTO receiverPointDTO = new ReceiverPointDTO();
         receiverPointDTO.setReceiverPointDescription("Licznik numer 894837");
         receiverPointDTO.setActualTradeFee(new BigDecimal(15));
-        receiverPointDTO.setActualTariffsNumber(2);
-        receiverPointDTO.setProposalTariffsNumber(2);
+        receiverPointDTO.setActualNumberOfTariffs(2);
+        receiverPointDTO.setProposalNumberOfTariffs(2);
         receiverPointDTO.setActualTariffList(createActualTariffs_forPoint_1());
         receiverPointDTO.setReceiverPointConsumptionSummaryDTO(createReceiverPointConsumptionSummaryDTO_ForPoint_1());
         receiverPointDTO.setProposalSellerList(createProposalSellerList_ForPoint_1());
@@ -297,8 +297,8 @@ public class UtilsServiceTest {
         ReceiverPointDTO receiverPointDTO = new ReceiverPointDTO();
         receiverPointDTO.setReceiverPointDescription("Licznik numer 150");
         receiverPointDTO.setActualTradeFee(new BigDecimal(20));
-        receiverPointDTO.setActualTariffsNumber(2);
-        receiverPointDTO.setProposalTariffsNumber(2);
+        receiverPointDTO.setActualNumberOfTariffs(2);
+        receiverPointDTO.setProposalNumberOfTariffs(2);
         receiverPointDTO.setActualTariffList(createActualTariffs_forPoint_2());
         receiverPointDTO.setReceiverPointConsumptionSummaryDTO(createReceiverPointConsumptionSummaryDTO_ForPoint_2());
         receiverPointDTO.setProposalSellerList(createProposalSellerList_ForPoint_2());

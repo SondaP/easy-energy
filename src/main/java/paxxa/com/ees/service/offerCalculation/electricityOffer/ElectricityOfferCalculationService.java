@@ -25,7 +25,7 @@ public class ElectricityOfferCalculationService {
         for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
-            validateNumberOfActualTariffs(receiverPointDTO.getActualTariffsNumber(), actualTariffList, receiverPointDescription);
+            validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList, receiverPointDescription);
             Integer integer = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
 
         }
