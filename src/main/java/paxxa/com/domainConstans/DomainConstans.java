@@ -13,5 +13,9 @@ public class DomainConstans {
         String GAS = "Gas";
     }
 
+    public interface HTTP_HEADERS_EXCEPTION_CODE {
+        String MISSING_DATA_EXCEPTION = "Missing-Data-Exception";
+    }
+
 
 }

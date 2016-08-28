@@ -1,6 +1,7 @@
 package paxxa.com.ees.controller.offer.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,8 @@ public class ElectricityOfferAdminRestController {
     @RequestMapping(value = "/a/calculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<ElectricityOfferRootDTO> calculateElectricityOffer(@RequestBody ElectricityOfferRootDTO electricityOfferRootDTO, Principal principal) {
 
-        ElectricityOfferRootDTO calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(electricityOfferRootDTO, principal.getName());
+        ElectricityOfferRootDTO calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(
+                electricityOfferRootDTO, principal.getName());
         return new ResponseEntity<ElectricityOfferRootDTO>(calculatedOffer, HttpStatus.OK);
     }
 

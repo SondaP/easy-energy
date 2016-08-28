@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ActualTariff;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointConsumptionSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.TariffPeriodConsumptionDTO;
 import paxxa.com.ees.service.exception.OfferCalculationException.MissingDataException;
 import paxxa.com.ees.service.utils.UtilsService;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -21,20 +24,57 @@ public class ElectricityOfferCalculationService {
 
         calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointDTOList());
 
+
         return electricityOfferRootDTO;
     }
 
 
     private void calculateReceiversPoint(List<ReceiverPointDTO> receiverPointDTOList) {
         for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
+
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
-            validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList, receiverPointDescription);
+            // Validation section
+            validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList,
+                    receiverPointDescription);
+            validateTariffPeriodsConsumptions(actualTariffList, receiverPointDescription);
 
+            // Variables
             Integer totalDaysNumberForPeriods = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
-            receiverPointDTO.getReceiverPointConsumptionSummaryDTO().setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
+            BigDecimal totalElectricityConsumptionUnitsForReceiverPoint = calculateTotalConsumptionUnits(actualTariffList, receiverPointDescription);
+            BigDecimal predictedElectricityUnitConsumptionPerYear = calculatePredictedElectricityUnitConsumptionPerYear(
+                    new BigDecimal(totalDaysNumberForPeriods), totalElectricityConsumptionUnitsForReceiverPoint);
 
+            // Setting variables
+            ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO = new ReceiverPointConsumptionSummaryDTO();
+            receiverPointConsumptionSummaryDTO.setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
+            receiverPointConsumptionSummaryDTO.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityConsumptionUnitsForReceiverPoint);
+            receiverPointConsumptionSummaryDTO.setPredictedElectricityUnitConsumptionPerYear(predictedElectricityUnitConsumptionPerYear);
+
+
+            receiverPointDTO.setReceiverPointConsumptionSummaryDTO(receiverPointConsumptionSummaryDTO);
         }
+    }
+
+    private BigDecimal calculateTotalConsumptionUnits(List<ActualTariff> actualTariffList, String receiverPointDescription) {
+        BigDecimal totalConsumptionUnits = BigDecimal.ZERO;
+        for (ActualTariff actualTariff : actualTariffList) {
+            List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
+                    actualTariff.getTariffPeriodConsumptionDTOList();
+
+            for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
+                BigDecimal unitConsumption = tariffPeriodConsumptionDTO.getUnitConsumption();
+                totalConsumptionUnits = totalConsumptionUnits.add(unitConsumption);
+            }
+        }
+        return totalConsumptionUnits;
+    }
+
+    private BigDecimal calculatePredictedElectricityUnitConsumptionPerYear(
+            BigDecimal totalDaysNumberForPeriods, BigDecimal totalElectricityConsumptionUnitsForReceiverPoint) {
+        return totalElectricityConsumptionUnitsForReceiverPoint
+                .divide(totalDaysNumberForPeriods, 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(365));
     }
 
 
@@ -45,7 +85,7 @@ public class ElectricityOfferCalculationService {
                     actualTariff.getTariffPeriodConsumptionDTOList();
 
             for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
-                validIfDatesAreSet(tariffPeriodConsumptionDTO, receiverPointDescription);
+
                 Integer differenceDays = utilsService.countDaysBetweenTwoDates(
                         tariffPeriodConsumptionDTO.getPeriodStart(), tariffPeriodConsumptionDTO.getPeriodEnd());
                 totalNumberOfDays = totalNumberOfDays + differenceDays;
@@ -54,14 +94,35 @@ public class ElectricityOfferCalculationService {
         return totalNumberOfDays;
     }
 
-    private void validIfDatesAreSet(TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO, String receiverPointDescription) {
-        if (tariffPeriodConsumptionDTO.getPeriodStart() == null) {
-            throw new MissingDataException("Value for attribute: periodStart from Object: TariffPeriodConsumptionDTO at "
-                    + receiverPointDescription + ", is required");
-        }
-        if (tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
-            throw new MissingDataException("Value for attribute: periodStop from Object: TariffPeriodConsumptionDTO at "
-                    + receiverPointDescription + ", is required");
+    private void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
+        for (ActualTariff actualTariff : actualTariffList) {
+            List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
+                    actualTariff.getTariffPeriodConsumptionDTOList();
+
+            for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
+
+                if (tariffPeriodConsumptionDTO.getPeriodStart() == null) {
+                    String message = "Value for attribute: periodStart from Object: TariffPeriodConsumptionDTO at "
+                            + receiverPointDescription + ", is required";
+                    throw new MissingDataException(message);
+                }
+                if (tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
+                    String message = "Value for attribute: periodStop from Object: TariffPeriodConsumptionDTO at "
+                            + receiverPointDescription + ", is required";
+                    throw new MissingDataException(message);
+                }
+                if (tariffPeriodConsumptionDTO.getUnitConsumption() == null) {
+                    String message = "Value for attribute: unitConsumption from Object: TariffPeriodConsumptionDTO at "
+                            + receiverPointDescription + ", is required";
+                    throw new MissingDataException(message);
+                }
+                if (tariffPeriodConsumptionDTO.getDocumentNumber() == null || tariffPeriodConsumptionDTO.getDocumentNumber().isEmpty()) {
+                    String message = "Value for attribute: documentNumber from Object: TariffPeriodConsumptionDTO at "
+                            + receiverPointDescription + ", is required and cannot be empty";
+                    throw new MissingDataException(message);
+                }
+
+            }
         }
     }
 
@@ -72,5 +133,6 @@ public class ElectricityOfferCalculationService {
                         + " positions. Receiver point: " + receiverPointDescription);
 
     }
+
 
 }
