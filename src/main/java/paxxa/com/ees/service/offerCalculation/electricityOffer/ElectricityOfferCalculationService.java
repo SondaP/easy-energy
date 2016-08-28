@@ -35,6 +35,7 @@ public class ElectricityOfferCalculationService {
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
             // Validation section
+            validateReceiverPoint(receiverPointDTO);
             validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList,
                     receiverPointDescription);
             validateTariffPeriodsConsumptions(actualTariffList, receiverPointDescription);
@@ -45,7 +46,10 @@ public class ElectricityOfferCalculationService {
             BigDecimal predictedElectricityUnitConsumptionPerYear = calculatePredictedElectricityUnitConsumptionPerYear(
                     new BigDecimal(totalDaysNumberForPeriods), totalElectricityConsumptionUnitsForReceiverPoint);
 
+
             // Setting variables
+            setActualTariffsDetails(actualTariffList, totalElectricityConsumptionUnitsForReceiverPoint);
+
             ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO = new ReceiverPointConsumptionSummaryDTO();
             receiverPointConsumptionSummaryDTO.setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
             receiverPointConsumptionSummaryDTO.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityConsumptionUnitsForReceiverPoint);
@@ -68,6 +72,26 @@ public class ElectricityOfferCalculationService {
             }
         }
         return totalConsumptionUnits;
+    }
+
+    private void setActualTariffsDetails(List<ActualTariff> actualTariffList, BigDecimal totalElectricityConsumptionUnitsForReceiverPoint){
+        for (ActualTariff actualTariff : actualTariffList) {
+            BigDecimal tariffConsumptionUnits = BigDecimal.ZERO;
+            List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
+                    actualTariff.getTariffPeriodConsumptionDTOList();
+            for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
+                BigDecimal unitConsumption = tariffPeriodConsumptionDTO.getUnitConsumption();
+                tariffConsumptionUnits = tariffConsumptionUnits.add(unitConsumption);
+            }
+
+            BigDecimal actualShareOfTotalReceiverPointConsumption = tariffConsumptionUnits
+                    .divide(totalElectricityConsumptionUnitsForReceiverPoint, 2, BigDecimal.ROUND_HALF_UP)
+                    .multiply(new BigDecimal(100));
+
+            actualTariff.setTotalUnitConsumptionFromPeriods(tariffConsumptionUnits);
+            actualTariff.setActualShareOfTotalReceiverPointConsumption(actualShareOfTotalReceiverPointConsumption);
+
+        }
     }
 
     private BigDecimal calculatePredictedElectricityUnitConsumptionPerYear(
@@ -96,6 +120,19 @@ public class ElectricityOfferCalculationService {
 
     private void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
         for (ActualTariff actualTariff : actualTariffList) {
+
+            if (actualTariff.getActualTariffCode() == null || actualTariff.getActualTariffCode().isEmpty()) {
+                String message = "Value for attribute: actualTariffCode from Object: ActualTariff at "
+                        + receiverPointDescription + ", is required";
+                throw new MissingDataException(message);
+            }
+            if (actualTariff.getActualUnitPrice() == null) {
+                String message = "Value for attribute: actualUnitPrice from Object: ActualTariff at "
+                        + receiverPointDescription + ", is required";
+                throw new MissingDataException(message);
+            }
+
+
             List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
                     actualTariff.getTariffPeriodConsumptionDTOList();
 
@@ -131,7 +168,29 @@ public class ElectricityOfferCalculationService {
         if (actualTariffList.size() != expectedNumberOfTariffs) throw new MissingDataException(
                 "Incorrect number of tariffs at actualTariffList, should be " + expectedNumberOfTariffs
                         + " positions. Receiver point: " + receiverPointDescription);
+    }
 
+    private void validateReceiverPoint(ReceiverPointDTO receiverPointDTO){
+        if (receiverPointDTO.getReceiverPointDescription() == null || receiverPointDTO.getReceiverPointDescription().isEmpty()) {
+            String message = "Value for attribute: receiverPointDescription from Object: ReceiverPointDTO at "
+                    + receiverPointDTO.getReceiverPointDescription() + ", is required and cannot be empty";
+            throw new MissingDataException(message);
+        }
+        if (receiverPointDTO.getActualTradeFee() == null) {
+            String message = "Value for attribute: actualTradeFee from Object: ReceiverPointDTO at "
+                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
+            throw new MissingDataException(message);
+        }
+        if (receiverPointDTO.getActualNumberOfTariffs() == null) {
+            String message = "Value for attribute: actualNumberOfTariffs from Object: ReceiverPointDTO at "
+                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
+            throw new MissingDataException(message);
+        }
+        if (receiverPointDTO.getProposalNumberOfTariffs() == null) {
+            String message = "Value for attribute: proposalNumberOfTariffs from Object: ReceiverPointDTO at "
+                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
+            throw new MissingDataException(message);
+        }
     }
 
 

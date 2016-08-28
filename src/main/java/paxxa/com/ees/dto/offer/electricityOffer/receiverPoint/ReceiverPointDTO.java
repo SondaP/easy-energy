@@ -7,8 +7,8 @@ public class ReceiverPointDTO {
 
     private String receiverPointDescription;
     private BigDecimal actualTradeFee;
-    private int actualNumberOfTariffs;
-    private int proposalNumberOfTariffs;
+    private Integer actualNumberOfTariffs;
+    private Integer proposalNumberOfTariffs;
     private List<ActualTariff> actualTariffList;
     private ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO;
     private List<ProposalSeller> proposalSellerList;
@@ -30,19 +30,19 @@ public class ReceiverPointDTO {
         this.actualTradeFee = actualTradeFee;
     }
 
-    public int getActualNumberOfTariffs() {
+    public Integer getActualNumberOfTariffs() {
         return actualNumberOfTariffs;
     }
 
-    public void setActualNumberOfTariffs(int actualNumberOfTariffs) {
+    public void setActualNumberOfTariffs(Integer actualNumberOfTariffs) {
         this.actualNumberOfTariffs = actualNumberOfTariffs;
     }
 
-    public int getProposalNumberOfTariffs() {
+    public Integer getProposalNumberOfTariffs() {
         return proposalNumberOfTariffs;
     }
 
-    public void setProposalNumberOfTariffs(int proposalNumberOfTariffs) {
+    public void setProposalNumberOfTariffs(Integer proposalNumberOfTariffs) {
         this.proposalNumberOfTariffs = proposalNumberOfTariffs;
     }
 
