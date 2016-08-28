@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 
 @ControllerAdvice
-@EnableWebMvc
+/*@EnableWebMvc*/
 public class MissingDataExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(MissingDataException.class)
