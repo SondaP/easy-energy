@@ -22,4 +22,6 @@
     <!-- 1. We need to tick "mvc" namespaces for hibernate validator -->
     <mvc:annotation-driven/>
 
+    <bean class="paxxa.com.ees.service.exception.OfferCalculationException.MissingDataExceptionHandler" />
+
 </beans>
