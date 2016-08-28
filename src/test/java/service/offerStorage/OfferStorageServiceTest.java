@@ -19,7 +19,6 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
-//@WebAppConfiguration
 public class OfferStorageServiceTest {
 
     public static final String USER_NAME = "d";

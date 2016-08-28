@@ -40,24 +40,28 @@ public class ElectricityOfferCalculationService {
                     receiverPointDescription);
             validateTariffPeriodsConsumptions(actualTariffList, receiverPointDescription);
 
-            // Variables
-            Integer totalDaysNumberForPeriods = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
-            BigDecimal totalElectricityConsumptionUnitsForReceiverPoint = calculateTotalConsumptionUnits(actualTariffList, receiverPointDescription);
-            BigDecimal predictedElectricityUnitConsumptionPerYear = calculatePredictedElectricityUnitConsumptionPerYear(
-                    new BigDecimal(totalDaysNumberForPeriods), totalElectricityConsumptionUnitsForReceiverPoint);
+            // Setting ReceiverPointConsumptionSummaryDTO
+            setReceiverPointConsumptionSummaryDTO(actualTariffList, receiverPointDescription, receiverPointDTO);
 
+            setActualTariffsDetails(actualTariffList, receiverPointDTO.getReceiverPointConsumptionSummaryDTO().getTotalElectricityUnitsConsumptionInAllPeriods());
 
-            // Setting variables
-            setActualTariffsDetails(actualTariffList, totalElectricityConsumptionUnitsForReceiverPoint);
-
-            ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO = new ReceiverPointConsumptionSummaryDTO();
-            receiverPointConsumptionSummaryDTO.setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
-            receiverPointConsumptionSummaryDTO.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityConsumptionUnitsForReceiverPoint);
-            receiverPointConsumptionSummaryDTO.setPredictedElectricityUnitConsumptionPerYear(predictedElectricityUnitConsumptionPerYear);
-
-
-            receiverPointDTO.setReceiverPointConsumptionSummaryDTO(receiverPointConsumptionSummaryDTO);
         }
+    }
+
+    private void setReceiverPointConsumptionSummaryDTO(List<ActualTariff> actualTariffList, String receiverPointDescription,
+                                                       ReceiverPointDTO receiverPointDTO){
+        // Variables
+        Integer totalDaysNumberForPeriods = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
+        BigDecimal totalElectricityConsumptionUnitsForReceiverPoint = calculateTotalConsumptionUnits(actualTariffList, receiverPointDescription);
+        BigDecimal predictedElectricityUnitConsumptionPerYear = calculatePredictedElectricityUnitConsumptionPerYear(
+                new BigDecimal(totalDaysNumberForPeriods), totalElectricityConsumptionUnitsForReceiverPoint);
+        // Setting variables
+        ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO = new ReceiverPointConsumptionSummaryDTO();
+        receiverPointConsumptionSummaryDTO.setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
+        receiverPointConsumptionSummaryDTO.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityConsumptionUnitsForReceiverPoint);
+        receiverPointConsumptionSummaryDTO.setPredictedElectricityUnitConsumptionPerYear(predictedElectricityUnitConsumptionPerYear);
+
+        receiverPointDTO.setReceiverPointConsumptionSummaryDTO(receiverPointConsumptionSummaryDTO);
     }
 
     private BigDecimal calculateTotalConsumptionUnits(List<ActualTariff> actualTariffList, String receiverPointDescription) {
@@ -189,6 +193,14 @@ public class ElectricityOfferCalculationService {
         if (receiverPointDTO.getProposalNumberOfTariffs() == null) {
             String message = "Value for attribute: proposalNumberOfTariffs from Object: ReceiverPointDTO at "
                     + receiverPointDTO.getReceiverPointDescription() + ", is required";
+            throw new MissingDataException(message);
+        }
+    }
+
+    private void validateElectricityOfferRoot(ElectricityOfferRootDTO electricityOfferRootDTO){
+        if (electricityOfferRootDTO.getProposalContractMonthLength() == null) {
+            String message = "Value for attribute: proposalContractMonthLength from Object: ElectricityOfferRootDTO" +
+                    ", is required";
             throw new MissingDataException(message);
         }
     }

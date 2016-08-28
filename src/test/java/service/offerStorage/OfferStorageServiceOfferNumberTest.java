@@ -17,7 +17,6 @@ import paxxa.com.ees.service.utils.SampleDataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
-//@WebAppConfiguration
 public class OfferStorageServiceOfferNumberTest {
 
     public static final String USER_NAME = "d";
