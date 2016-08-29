@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class MissingDataExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(MissingDataException.class)
+    @ExceptionHandler(IncorrectDataException.class)
     public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex) {
         ErrorResponse error = new ErrorResponse();
         error.setErrorCode(HttpStatus.UNPROCESSABLE_ENTITY.value());
