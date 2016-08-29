@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
-import paxxa.com.ees.service.exception.OfferCalculationException.IncorrectDataException;
 import paxxa.com.ees.service.utils.UtilsService;
 
 import java.math.BigDecimal;
@@ -17,15 +16,14 @@ public class ElectricityOfferCalculationService {
 
     @Autowired
     private UtilsService utilsService;
+    @Autowired
+    private ElectricityOfferValidationService electricityOfferValidationService;
 
     public ElectricityOfferRootDTO calculateElectricityOffer(ElectricityOfferRootDTO electricityOfferRootDTO, String userName) {
-
         calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointDTOList());
-
 
         return electricityOfferRootDTO;
     }
-
 
     private void calculateReceiversPoint(List<ReceiverPointDTO> receiverPointDTOList) {
         for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
@@ -33,14 +31,14 @@ public class ElectricityOfferCalculationService {
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
             // Validation section
-            validateReceiverPoint(receiverPointDTO);
-            validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList,
+            electricityOfferValidationService.validateReceiverPoint(receiverPointDTO);
+            electricityOfferValidationService.validateNumberOfActualTariffs(receiverPointDTO.getActualNumberOfTariffs(), actualTariffList,
                     receiverPointDescription);
-            validateTariffPeriodsConsumptions(actualTariffList, receiverPointDescription);
+            electricityOfferValidationService.validateTariffPeriodsConsumptions(actualTariffList, receiverPointDescription);
 
-            validateProposalSellers(receiverPointDTO.getProposalSellerList(),
+            electricityOfferValidationService.validateProposalSellers(receiverPointDTO.getProposalSellerList(),
                     receiverPointDescription, receiverPointDTO.getProposalNumberOfTariffs());
-            validateProposalTariffs(receiverPointDTO.getProposalSellerList(),
+            electricityOfferValidationService.validateProposalTariffs(receiverPointDTO.getProposalSellerList(),
                     receiverPointDescription, receiverPointDTO.getProposalNumberOfTariffs(), getActualTariffsCodes(actualTariffList));
 
             // Setting ReceiverPointConsumptionSummaryDTO
@@ -48,13 +46,16 @@ public class ElectricityOfferCalculationService {
             setActualTariffsDetails(actualTariffList,
                     receiverPointDTO.getReceiverPointConsumptionSummaryDTO().getTotalElectricityUnitsConsumptionInAllPeriods());
 
-            // ProposalSellers
+            // Setting ReceiverPointEstimationDTO
             List<ProposalSeller> proposalSellerList = receiverPointDTO.getProposalSellerList();
+            receiverPointDTO.setReceiverPointEstimationList(generateReceiverPointEstimationList(proposalSellerList));
 
         }
     }
 
-
+    /**
+     * Setting ReceiverPointConsumptionSummaryDTO
+     */
     private void setReceiverPointConsumptionSummaryDTO(List<ActualTariff> actualTariffList, String receiverPointDescription,
                                                        ReceiverPointDTO receiverPointDTO) {
         // Variables
@@ -101,7 +102,6 @@ public class ElectricityOfferCalculationService {
 
             actualTariff.setTotalUnitConsumptionFromPeriods(tariffConsumptionUnits);
             actualTariff.setActualShareOfTotalReceiverPointConsumption(actualShareOfTotalReceiverPointConsumption);
-
         }
     }
 
@@ -129,145 +129,27 @@ public class ElectricityOfferCalculationService {
         return totalNumberOfDays;
     }
 
-    private void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
-        for (ActualTariff actualTariff : actualTariffList) {
-
-            if (actualTariff.getActualTariffCode() == null || actualTariff.getActualTariffCode().isEmpty()) {
-                String message = "Value for attribute: actualTariffCode from Object: ActualTariff at "
-                        + receiverPointDescription + ", is required";
-                throw new IncorrectDataException(message);
-            }
-            if (actualTariff.getActualUnitPrice() == null) {
-                String message = "Value for attribute: actualUnitPrice from Object: ActualTariff at "
-                        + receiverPointDescription + ", is required";
-                throw new IncorrectDataException(message);
-            }
-
-
-            List<TariffPeriodConsumptionDTO> tariffPeriodConsumptionDTOList =
-                    actualTariff.getTariffPeriodConsumptionDTOList();
-
-            for (TariffPeriodConsumptionDTO tariffPeriodConsumptionDTO : tariffPeriodConsumptionDTOList) {
-
-                if (tariffPeriodConsumptionDTO.getPeriodStart() == null) {
-                    String message = "Value for attribute: periodStart from Object: TariffPeriodConsumptionDTO at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (tariffPeriodConsumptionDTO.getPeriodEnd() == null) {
-                    String message = "Value for attribute: periodStop from Object: TariffPeriodConsumptionDTO at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (tariffPeriodConsumptionDTO.getUnitConsumption() == null) {
-                    String message = "Value for attribute: unitConsumption from Object: TariffPeriodConsumptionDTO at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (tariffPeriodConsumptionDTO.getDocumentNumber() == null || tariffPeriodConsumptionDTO.getDocumentNumber().isEmpty()) {
-                    String message = "Value for attribute: documentNumber from Object: TariffPeriodConsumptionDTO at "
-                            + receiverPointDescription + ", is required and cannot be empty";
-                    throw new IncorrectDataException(message);
-                }
-
-            }
-        }
-    }
-
-    private void validateNumberOfActualTariffs(Integer expectedNumberOfTariffs, List<ActualTariff> actualTariffList,
-                                               String receiverPointDescription) {
-        if (actualTariffList.size() != expectedNumberOfTariffs) throw new IncorrectDataException(
-                "Incorrect number of tariffs at actualTariffList, should be " + expectedNumberOfTariffs
-                        + " positions. Receiver point: " + receiverPointDescription);
-    }
-
-    private void validateReceiverPoint(ReceiverPointDTO receiverPointDTO) {
-        if (receiverPointDTO.getReceiverPointDescription() == null || receiverPointDTO.getReceiverPointDescription().isEmpty()) {
-            String message = "Value for attribute: receiverPointDescription from Object: ReceiverPointDTO at "
-                    + receiverPointDTO.getReceiverPointDescription() + ", is required and cannot be empty";
-            throw new IncorrectDataException(message);
-        }
-        if (receiverPointDTO.getActualTradeFee() == null) {
-            String message = "Value for attribute: actualTradeFee from Object: ReceiverPointDTO at "
-                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
-            throw new IncorrectDataException(message);
-        }
-        if (receiverPointDTO.getActualNumberOfTariffs() == null) {
-            String message = "Value for attribute: actualNumberOfTariffs from Object: ReceiverPointDTO at "
-                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
-            throw new IncorrectDataException(message);
-        }
-        if (receiverPointDTO.getProposalNumberOfTariffs() == null) {
-            String message = "Value for attribute: proposalNumberOfTariffs from Object: ReceiverPointDTO at "
-                    + receiverPointDTO.getReceiverPointDescription() + ", is required";
-            throw new IncorrectDataException(message);
-        }
-    }
-
-    private void validateElectricityOfferRoot(ElectricityOfferRootDTO electricityOfferRootDTO) {
-        if (electricityOfferRootDTO.getProposalContractMonthLength() == null) {
-            String message = "Value for attribute: proposalContractMonthLength from Object: ElectricityOfferRootDTO" +
-                    ", is required";
-            throw new IncorrectDataException(message);
-        }
-    }
-
-    private void validateProposalSellers(List<ProposalSeller> proposalSellerList, String receiverPointDescription, Integer proposalNumberOfTariffs) {
-        for (ProposalSeller proposalSeller : proposalSellerList) {
-            if (proposalSeller.getSellerCode() == null || proposalSeller.getSellerCode().isEmpty()) {
-                String message = "Value for attribute: sellerCode from Object: ProposalSeller at "
-                        + receiverPointDescription + ", is required";
-                throw new IncorrectDataException(message);
-            }
-            if (proposalSeller.getProposalTradeFee() == null) {
-                String message = "Value for attribute: proposalTradeFee from Object: ProposalSeller at "
-                        + receiverPointDescription + ", is required";
-                throw new IncorrectDataException(message);
-            }
-            if (proposalSeller.getSellerTariffPublicationDate() == null) {
-                String message = "Value for attribute: sellerTariffPublicationDate from Object: ProposalSeller at "
-                        + receiverPointDescription + ", is required";
-                throw new IncorrectDataException(message);
-            }
-            if (proposalSeller.getProposalTariffList() == null || proposalSeller.getProposalTariffList().size() != proposalNumberOfTariffs) {
-                String message = "Value for attribute: proposalTariffList from Object: ProposalSeller at "
-                        + receiverPointDescription + ", is required and list size must be equals to proposalNumberOfTariffs";
-                throw new IncorrectDataException(message);
-            }
-        }
-    }
-
-    private void validateProposalTariffs(List<ProposalSeller> proposalSellerList, String receiverPointDescription,
-                                         Integer proposalNumberOfTariffs, List<String> actualTariffCodesList) {
-        for (ProposalSeller proposalSeller : proposalSellerList) {
-            for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
-                if (proposalTariff.getActualTariffCode() == null) {
-                    String message = "Value for attribute: actualTariffCode from Object: ProposalSeller at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (proposalTariff.getProposalTariffCode() == null) {
-                    String message = "Value for attribute: proposalTariffCode from Object: ProposalSeller at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (proposalTariff.getProposalUnitPrice() == null) {
-                    String message = "Value for attribute: proposalUnitPrice from Object: ProposalSeller at "
-                            + receiverPointDescription + ", is required";
-                    throw new IncorrectDataException(message);
-                }
-                if (!actualTariffCodesList.contains(proposalTariff.getActualTariffCode())) {
-                    String message = "Value for attribute: actualTariffCode from Object: ProposalSeller at "
-                            + receiverPointDescription + ", is incorrect. Value should be the same as one of the " +
-                            "actualTariffCode from ActualTariff ";
-                    throw new IncorrectDataException(message);
-                }
-            }
-        }
-    }
-
     private List<String> getActualTariffsCodes(List<ActualTariff> actualTariffList) {
         return actualTariffList.stream().map(ActualTariff::getActualTariffCode).collect(Collectors.toList());
+    }
+
+    /**
+     * Setting ReceiverPointEstimationDTO
+     */
+
+    private List<ReceiverPointEstimationDTO> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList) {
+        return proposalSellerList.stream()
+                .map(this::generateReceiverPointEstimation).collect(Collectors.toList());
+    }
+
+    private ReceiverPointEstimationDTO generateReceiverPointEstimation(ProposalSeller proposalSeller) {
+        ReceiverPointEstimationDTO receiverPointEstimationDTO = new ReceiverPointEstimationDTO();
+        receiverPointEstimationDTO.setSellerCode(proposalSeller.getSellerCode());
+
+        ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO = new ReceiverPointDataEstimationDTO();
+        receiverPointDataEstimationDTO.setTariffIssueDate(proposalSeller.getSellerTariffPublicationDate());
+
+        return receiverPointEstimationDTO;
     }
 
 
