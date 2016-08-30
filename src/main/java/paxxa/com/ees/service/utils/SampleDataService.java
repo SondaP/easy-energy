@@ -134,28 +134,32 @@ public class SampleDataService {
 
         ProposalTariff proposalTariff_A_TAURON = new ProposalTariff();
         proposalTariff_A_TAURON.setActualTariffCode("Taryfa A");
+        proposalTariff_A_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
         proposalTariff_A_TAURON.setProposalUnitPrice(new BigDecimal(180));
         proposalTariff_A_TAURON.setProposalTariffCode("Taryfa A od Tauron");
 
         ProposalTariff proposalTariff_B_TAURON = new ProposalTariff();
         proposalTariff_B_TAURON.setActualTariffCode("Taryfa B");
+        proposalTariff_B_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
         proposalTariff_B_TAURON.setProposalUnitPrice(new BigDecimal(280));
         proposalTariff_B_TAURON.setProposalTariffCode("Taryfa B od Tauron");
         proposalSeller_1.setProposalTariffList(Arrays.asList(proposalTariff_A_TAURON, proposalTariff_B_TAURON));
 
         // Seller CEZ
         ProposalSeller proposalSeller_2 = new ProposalSeller();
-        proposalSeller_2.setSellerCode("Tauron");
+        proposalSeller_2.setSellerCode("Cez");
         proposalSeller_2.setProposalTradeFee(new BigDecimal(13));
         proposalSeller_2.setSellerTariffPublicationDate(new Date());
 
         ProposalTariff proposalTariff_A_CEZ = new ProposalTariff();
         proposalTariff_A_CEZ.setActualTariffCode("Taryfa A");
+        proposalTariff_A_CEZ.setSellerMinimalUnitPrice(new BigDecimal(110));
         proposalTariff_A_CEZ.setProposalUnitPrice(new BigDecimal(175));
         proposalTariff_A_CEZ.setProposalTariffCode("Taryfa A od CEZ");
 
         ProposalTariff proposalTariff_B_CEZ = new ProposalTariff();
         proposalTariff_B_CEZ.setActualTariffCode("Taryfa B");
+        proposalTariff_B_CEZ.setSellerMinimalUnitPrice(new BigDecimal(185));
         proposalTariff_B_CEZ.setProposalUnitPrice(new BigDecimal(275));
         proposalTariff_B_CEZ.setProposalTariffCode("Taryfa B od CEZ");
         proposalSeller_2.setProposalTariffList(Arrays.asList(proposalTariff_A_CEZ, proposalTariff_B_CEZ));
@@ -320,28 +324,32 @@ public class SampleDataService {
 
         ProposalTariff proposalTariff_A_TAURON = new ProposalTariff();
         proposalTariff_A_TAURON.setActualTariffCode("Taryfa E");
+        proposalTariff_A_TAURON.setSellerMinimalUnitPrice(new BigDecimal(380));
         proposalTariff_A_TAURON.setProposalUnitPrice(new BigDecimal(450));
         proposalTariff_A_TAURON.setProposalTariffCode("Taryfa A od Tauron");
 
         ProposalTariff proposalTariff_B_TAURON = new ProposalTariff();
         proposalTariff_B_TAURON.setActualTariffCode("Taryfa F");
+        proposalTariff_B_TAURON.setSellerMinimalUnitPrice(new BigDecimal(220));
         proposalTariff_B_TAURON.setProposalUnitPrice(new BigDecimal(380));
         proposalTariff_B_TAURON.setProposalTariffCode("Taryfa B od Tauron");
         proposalSeller_1.setProposalTariffList(Arrays.asList(proposalTariff_A_TAURON, proposalTariff_B_TAURON));
 
         // Seller CEZ
         ProposalSeller proposalSeller_2 = new ProposalSeller();
-        proposalSeller_2.setSellerCode("Tauron");
+        proposalSeller_2.setSellerCode("Cez");
         proposalSeller_2.setProposalTradeFee(new BigDecimal(15));
         proposalSeller_2.setSellerTariffPublicationDate(new Date());
 
         ProposalTariff proposalTariff_A_CEZ = new ProposalTariff();
         proposalTariff_A_CEZ.setActualTariffCode("Taryfa E");
+        proposalTariff_A_CEZ.setSellerMinimalUnitPrice(new BigDecimal(320));
         proposalTariff_A_CEZ.setProposalUnitPrice(new BigDecimal(410));
         proposalTariff_A_CEZ.setProposalTariffCode("Taryfa E od CEZ");
 
         ProposalTariff proposalTariff_B_CEZ = new ProposalTariff();
         proposalTariff_B_CEZ.setActualTariffCode("Taryfa F");
+        proposalTariff_B_CEZ.setSellerMinimalUnitPrice(new BigDecimal(280));
         proposalTariff_B_CEZ.setProposalUnitPrice(new BigDecimal(390));
         proposalTariff_B_CEZ.setProposalTariffCode("Taryfa F od CEZ");
         proposalSeller_2.setProposalTariffList(Arrays.asList(proposalTariff_A_CEZ, proposalTariff_B_CEZ));

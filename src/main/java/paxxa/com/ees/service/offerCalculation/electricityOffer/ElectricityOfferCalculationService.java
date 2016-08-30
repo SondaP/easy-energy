@@ -8,6 +8,7 @@ import paxxa.com.ees.service.utils.UtilsService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,10 @@ public class ElectricityOfferCalculationService {
 
             // Setting ReceiverPointEstimationDTO
             List<ProposalSeller> proposalSellerList = receiverPointDTO.getProposalSellerList();
-            receiverPointDTO.setReceiverPointEstimationList(generateReceiverPointEstimationList(proposalSellerList));
+            List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs =
+                    generateReceiverPointEstimationList(proposalSellerList, actualTariffList,
+                            receiverPointDTO.getReceiverPointConsumptionSummaryDTO());
+            receiverPointDTO.setReceiverPointEstimationList(receiverPointEstimationDTOs);
 
         }
     }
@@ -137,19 +141,62 @@ public class ElectricityOfferCalculationService {
      * Setting ReceiverPointEstimationDTO
      */
 
-    private List<ReceiverPointEstimationDTO> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList) {
-        return proposalSellerList.stream()
-                .map(this::generateReceiverPointEstimation).collect(Collectors.toList());
+    private List<ReceiverPointEstimationDTO> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList,
+                                                                                 List<ActualTariff> actualTariffList,
+                                                                                 ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO) {
+        List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs = new ArrayList<>();
+        for (ProposalSeller proposalSeller : proposalSellerList) {
+            ReceiverPointEstimationDTO receiverPointEstimationDTO =
+                    generateReceiverPointEstimation(proposalSeller, actualTariffList, receiverPointConsumptionSummaryDTO);
+            receiverPointEstimationDTOs.add(receiverPointEstimationDTO);
+        }
+        return receiverPointEstimationDTOs;
     }
 
-    private ReceiverPointEstimationDTO generateReceiverPointEstimation(ProposalSeller proposalSeller) {
+    private ReceiverPointEstimationDTO generateReceiverPointEstimation(ProposalSeller proposalSeller,
+                                                                       List<ActualTariff> actualTariffList,
+                                                                       ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO) {
         ReceiverPointEstimationDTO receiverPointEstimationDTO = new ReceiverPointEstimationDTO();
         receiverPointEstimationDTO.setSellerCode(proposalSeller.getSellerCode());
 
         ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO = new ReceiverPointDataEstimationDTO();
         receiverPointDataEstimationDTO.setTariffIssueDate(proposalSeller.getSellerTariffPublicationDate());
 
+        BigDecimal estimatedContractValueInYearScale = calculateEstimatedContractValueInYearScale(proposalSeller, actualTariffList,
+                receiverPointConsumptionSummaryDTO);
+        receiverPointDataEstimationDTO.setEstimatedContractValueInYearScale(estimatedContractValueInYearScale);
+
+
+        receiverPointEstimationDTO.setReceiverPointDataEstimationDTO(receiverPointDataEstimationDTO);
         return receiverPointEstimationDTO;
+    }
+
+    private BigDecimal calculateEstimatedContractValueInYearScale(ProposalSeller proposalSeller,
+                                                                  List<ActualTariff> actualTariffList,
+                                                                  ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO) {
+        BigDecimal profitForAllTariffs = BigDecimal.ZERO;
+        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+            BigDecimal marginForUnitPrice = proposalTariff.getProposalUnitPrice().subtract(proposalTariff.getSellerMinimalUnitPrice());
+            BigDecimal totalElectricityUnitConsumptionForActualTariff =
+                    getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualTariffCode());
+            BigDecimal tariffProfit = marginForUnitPrice
+                    .multiply(totalElectricityUnitConsumptionForActualTariff);
+
+            profitForAllTariffs = profitForAllTariffs.add(tariffProfit.divide(new BigDecimal(1000), 2, RoundingMode.HALF_UP));
+        }
+        Integer totalNumberOfDaysForAllPeriods = receiverPointConsumptionSummaryDTO.getTotalNumberOfDaysForAllPeriods();
+        BigDecimal estimatedContractValueInYearScale = profitForAllTariffs
+                .divide(new BigDecimal(totalNumberOfDaysForAllPeriods), 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(365));
+        return estimatedContractValueInYearScale;
+    }
+
+    private BigDecimal getTotalElectricityUnitConsumptionForActualTariff(List<ActualTariff> actualTariffList, String expectedActualTariffCode) {
+        for (ActualTariff actualTariff : actualTariffList) {
+            if (expectedActualTariffCode.equals(actualTariff.getActualTariffCode())) ;
+            return actualTariff.getTotalUnitConsumptionFromPeriods();
+        }
+        throw new RuntimeException("Unexpected situation, actual tariff should contain TotalElectricityUnitConsumptionForTariff");
     }
 
 

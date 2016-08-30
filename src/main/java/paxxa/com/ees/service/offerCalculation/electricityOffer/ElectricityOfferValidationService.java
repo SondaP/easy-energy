@@ -127,6 +127,11 @@ public class ElectricityOfferValidationService {
                             + receiverPointDescription + ", is required";
                     throw new IncorrectDataException(message);
                 }
+                if (proposalTariff.getSellerMinimalUnitPrice() == null) {
+                    String message = "Value for attribute: sellerMinimalUnitPrice from Object: ProposalSeller at "
+                            + receiverPointDescription + ", is required";
+                    throw new IncorrectDataException(message);
+                }
                 if (proposalTariff.getProposalTariffCode() == null) {
                     String message = "Value for attribute: proposalTariffCode from Object: ProposalSeller at "
                             + receiverPointDescription + ", is required";

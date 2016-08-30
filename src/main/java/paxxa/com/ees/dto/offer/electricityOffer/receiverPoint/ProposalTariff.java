@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class ProposalTariff {
 
     private String actualTariffCode;
+    private BigDecimal sellerMinimalUnitPrice;
     private BigDecimal proposalUnitPrice;
     private String proposalTariffCode;
 
@@ -14,6 +15,14 @@ public class ProposalTariff {
 
     public void setActualTariffCode(String actualTariffCode) {
         this.actualTariffCode = actualTariffCode;
+    }
+
+    public BigDecimal getSellerMinimalUnitPrice() {
+        return sellerMinimalUnitPrice;
+    }
+
+    public void setSellerMinimalUnitPrice(BigDecimal sellerMinimalUnitPrice) {
+        this.sellerMinimalUnitPrice = sellerMinimalUnitPrice;
     }
 
     public BigDecimal getProposalUnitPrice() {
