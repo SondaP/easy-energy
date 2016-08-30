@@ -224,8 +224,8 @@ public class UtilsServiceTest {
 
         ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO_TAURON = new ReceiverPointDataEstimationDTO();
         receiverPointDataEstimationDTO_TAURON.setTariffIssueDate(new Date());
-        receiverPointDataEstimationDTO_TAURON.setEstimatedContractValue(new BigDecimal(5000));
-        receiverPointDataEstimationDTO_TAURON.setEstimatedContractValueInYearScale(new BigDecimal(2500));
+        receiverPointDataEstimationDTO_TAURON.setEstimatedContractProfitValue(new BigDecimal(5000));
+        receiverPointDataEstimationDTO_TAURON.setEstimatedContractProfitValueInYearScale(new BigDecimal(2500));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInYearScale(new BigDecimal(600));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInContractScale(new BigDecimal(1200));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInPercentage(new BigDecimal(30));
@@ -260,8 +260,8 @@ public class UtilsServiceTest {
 
         ReceiverPointDataEstimationDTO receiverDataEstimationDTO_CEZ = new ReceiverPointDataEstimationDTO();
         receiverDataEstimationDTO_CEZ.setTariffIssueDate(new Date());
-        receiverDataEstimationDTO_CEZ.setEstimatedContractValue(new BigDecimal(5000));
-        receiverDataEstimationDTO_CEZ.setEstimatedContractValueInYearScale(new BigDecimal(2500));
+        receiverDataEstimationDTO_CEZ.setEstimatedContractProfitValue(new BigDecimal(5000));
+        receiverDataEstimationDTO_CEZ.setEstimatedContractProfitValueInYearScale(new BigDecimal(2500));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInYearScale(new BigDecimal(600));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInContractScale(new BigDecimal(1200));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInPercentage(new BigDecimal(30));
@@ -410,8 +410,8 @@ public class UtilsServiceTest {
 
         ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO_TAURON = new ReceiverPointDataEstimationDTO();
         receiverPointDataEstimationDTO_TAURON.setTariffIssueDate(new Date());
-        receiverPointDataEstimationDTO_TAURON.setEstimatedContractValue(new BigDecimal(5000));
-        receiverPointDataEstimationDTO_TAURON.setEstimatedContractValueInYearScale(new BigDecimal(2500));
+        receiverPointDataEstimationDTO_TAURON.setEstimatedContractProfitValue(new BigDecimal(5000));
+        receiverPointDataEstimationDTO_TAURON.setEstimatedContractProfitValueInYearScale(new BigDecimal(2500));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInYearScale(new BigDecimal(600));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInContractScale(new BigDecimal(1200));
         receiverPointDataEstimationDTO_TAURON.setEstimatedSavingsInPercentage(new BigDecimal(30));
@@ -446,8 +446,8 @@ public class UtilsServiceTest {
 
         ReceiverPointDataEstimationDTO receiverDataEstimationDTO_CEZ = new ReceiverPointDataEstimationDTO();
         receiverDataEstimationDTO_CEZ.setTariffIssueDate(new Date());
-        receiverDataEstimationDTO_CEZ.setEstimatedContractValue(new BigDecimal(5000));
-        receiverDataEstimationDTO_CEZ.setEstimatedContractValueInYearScale(new BigDecimal(2500));
+        receiverDataEstimationDTO_CEZ.setEstimatedContractProfitValue(new BigDecimal(5000));
+        receiverDataEstimationDTO_CEZ.setEstimatedContractProfitValueInYearScale(new BigDecimal(2500));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInYearScale(new BigDecimal(600));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInContractScale(new BigDecimal(1200));
         receiverDataEstimationDTO_CEZ.setEstimatedSavingsInPercentage(new BigDecimal(30));
