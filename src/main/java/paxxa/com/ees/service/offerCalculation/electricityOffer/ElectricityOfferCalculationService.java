@@ -52,7 +52,9 @@ public class ElectricityOfferCalculationService {
             List<ProposalSeller> proposalSellerList = receiverPointDTO.getProposalSellerList();
             List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs =
                     generateReceiverPointEstimationList(proposalSellerList, actualTariffList,
-                            receiverPointDTO.getReceiverPointConsumptionSummaryDTO(), proposalContractMonthLength);
+                            receiverPointDTO.getReceiverPointConsumptionSummaryDTO(),
+                            proposalContractMonthLength, receiverPointDTO.getActualTradeFee());
+
             receiverPointDTO.setReceiverPointEstimationList(receiverPointEstimationDTOs);
 
         }
@@ -145,11 +147,12 @@ public class ElectricityOfferCalculationService {
     private List<ReceiverPointEstimationDTO> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList,
                                                                                  List<ActualTariff> actualTariffList,
                                                                                  ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO,
-                                                                                 BigDecimal proposalContractMonthLength) {
+                                                                                 BigDecimal proposalContractMonthLength,
+                                                                                 BigDecimal actualTradeFee) {
         List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs = new ArrayList<>();
         for (ProposalSeller proposalSeller : proposalSellerList) {
             ReceiverPointEstimationDTO receiverPointEstimationDTO = generateReceiverPointEstimation(proposalSeller,
-                            actualTariffList, receiverPointConsumptionSummaryDTO, proposalContractMonthLength);
+                    actualTariffList, receiverPointConsumptionSummaryDTO, proposalContractMonthLength, actualTradeFee);
             receiverPointEstimationDTOs.add(receiverPointEstimationDTO);
         }
         return receiverPointEstimationDTOs;
@@ -158,21 +161,78 @@ public class ElectricityOfferCalculationService {
     private ReceiverPointEstimationDTO generateReceiverPointEstimation(ProposalSeller proposalSeller,
                                                                        List<ActualTariff> actualTariffList,
                                                                        ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO,
-                                                                       BigDecimal proposalContractMonthLength) {
+                                                                       BigDecimal proposalContractMonthLength,
+                                                                       BigDecimal actualTradeFee) {
         ReceiverPointEstimationDTO receiverPointEstimationDTO = new ReceiverPointEstimationDTO();
         receiverPointEstimationDTO.setSellerCode(proposalSeller.getSellerCode());
 
+        // Setting estimation
         ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO = new ReceiverPointDataEstimationDTO();
+        BigDecimal estimatedUnitConsumptionInYearScale = calculateEstimatedUnitConsumptionInYearScale(receiverPointConsumptionSummaryDTO);
         BigDecimal estimatedContractProfitValueInYearScale = calculateEstimatedContractProfitValueInYearScale(proposalSeller, actualTariffList,
                 receiverPointConsumptionSummaryDTO);
         BigDecimal estimatedContractProfitValue = calculateEstimatedContractProfitValue(estimatedContractProfitValueInYearScale, proposalContractMonthLength);
 
+        BigDecimal estimatedSavingsInYearScale = calculateEstimatedSavingsInYearScale(proposalSeller, actualTariffList,
+                receiverPointConsumptionSummaryDTO, actualTradeFee);
+
         receiverPointDataEstimationDTO.setTariffIssueDate(proposalSeller.getSellerTariffPublicationDate());
+        receiverPointDataEstimationDTO.setEstimatedUnitConsumptionInYearScale(estimatedUnitConsumptionInYearScale);
         receiverPointDataEstimationDTO.setEstimatedContractProfitValueInYearScale(estimatedContractProfitValueInYearScale);
         receiverPointDataEstimationDTO.setEstimatedContractProfitValue(estimatedContractProfitValue);
+        receiverPointDataEstimationDTO.setEstimatedSavingsInYearScale(estimatedSavingsInYearScale);
+
 
         receiverPointEstimationDTO.setReceiverPointDataEstimationDTO(receiverPointDataEstimationDTO);
         return receiverPointEstimationDTO;
+    }
+
+    private BigDecimal calculateEstimatedSavingsInYearScale(ProposalSeller proposalSeller,
+                                                            List<ActualTariff> actualTariffList,
+                                                            ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO,
+                                                            BigDecimal actualTradeFee) {
+
+        BigDecimal totalActualCostForAllUnitsConsumption = BigDecimal.ZERO;
+        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+            BigDecimal totalElectricityUnitConsumptionForActualTariff =
+                    getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualTariffCode());
+            BigDecimal actualUnitPriceForActualTariff = getActualUnitPriceForActualTariff(actualTariffList, proposalTariff.getActualTariffCode());
+
+            BigDecimal total = totalElectricityUnitConsumptionForActualTariff
+                    .divide(new BigDecimal(1000), 2, RoundingMode.HALF_UP)
+                    .multiply(actualUnitPriceForActualTariff);
+
+            totalActualCostForAllUnitsConsumption = totalActualCostForAllUnitsConsumption.add(total);
+        }
+        totalActualCostForAllUnitsConsumption = totalActualCostForAllUnitsConsumption.add(actualTradeFee);
+
+        BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal = BigDecimal.ZERO;
+        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+            BigDecimal totalElectricityUnitConsumptionForActualTariff =
+                    getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualTariffCode());
+            BigDecimal proposalUnitPrice = proposalTariff.getProposalUnitPrice();
+
+            BigDecimal total = totalElectricityUnitConsumptionForActualTariff
+                    .divide(new BigDecimal(1000), 2, RoundingMode.HALF_UP)
+                    .multiply(proposalUnitPrice);
+
+            totalCostForAllUnitsConsumptionBasedOnProposal = totalCostForAllUnitsConsumptionBasedOnProposal.add(total);
+        }
+        totalCostForAllUnitsConsumptionBasedOnProposal = totalCostForAllUnitsConsumptionBasedOnProposal.add(actualTradeFee);
+
+        BigDecimal totalNumberOfDaysForAllPeriods = new BigDecimal(receiverPointConsumptionSummaryDTO.getTotalNumberOfDaysForAllPeriods());
+        return totalActualCostForAllUnitsConsumption
+                .subtract(totalCostForAllUnitsConsumptionBasedOnProposal)
+                .divide(totalNumberOfDaysForAllPeriods, 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(365));
+    }
+
+    private BigDecimal calculateEstimatedUnitConsumptionInYearScale(ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO) {
+        BigDecimal totalElectricityUnitsConsumptionInAllPeriods = receiverPointConsumptionSummaryDTO.getTotalElectricityUnitsConsumptionInAllPeriods();
+        BigDecimal totalNumberOfDaysForAllPeriods = new BigDecimal(receiverPointConsumptionSummaryDTO.getTotalNumberOfDaysForAllPeriods());
+        return totalElectricityUnitsConsumptionInAllPeriods
+                .divide(totalNumberOfDaysForAllPeriods, 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(365));
     }
 
     private BigDecimal calculateEstimatedContractProfitValue(BigDecimal estimatedContractProfitValueInYearScale, BigDecimal proposalContractMonthLength) {
@@ -203,10 +263,20 @@ public class ElectricityOfferCalculationService {
 
     private BigDecimal getTotalElectricityUnitConsumptionForActualTariff(List<ActualTariff> actualTariffList, String expectedActualTariffCode) {
         for (ActualTariff actualTariff : actualTariffList) {
-            if (expectedActualTariffCode.equals(actualTariff.getActualTariffCode())) ;
-            return actualTariff.getTotalUnitConsumptionFromPeriods();
+            if (expectedActualTariffCode.equals(actualTariff.getActualTariffCode())){
+                return actualTariff.getTotalUnitConsumptionFromPeriods();
+            }
         }
         throw new RuntimeException("Unexpected situation, actual tariff should contain TotalElectricityUnitConsumptionForTariff");
+    }
+
+    private BigDecimal getActualUnitPriceForActualTariff(List<ActualTariff> actualTariffList, String expectedActualTariffCode) {
+        for (ActualTariff actualTariff : actualTariffList) {
+            if (expectedActualTariffCode.equals(actualTariff.getActualTariffCode())){
+                return actualTariff.getActualUnitPrice();
+            }
+        }
+        throw new RuntimeException("Unexpected situation, actual tariff should contain ActualUnitPriceForActualTariff");
     }
 
 
