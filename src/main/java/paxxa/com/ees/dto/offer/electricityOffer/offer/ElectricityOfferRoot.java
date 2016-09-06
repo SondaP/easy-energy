@@ -22,7 +22,7 @@ public class ElectricityOfferRoot extends AbstractOfferDTO {
     private OfferCalculation allReceiverPointsOfferCalculation;
     private OfferSummaryDTO offerSummaryDTO;
     private String offerNote;
-    private boolean isOfferCalculationPerReceiverPointSet;
+    private boolean isOfferCalculationPerReceiverPointSet=true;
 
     public Integer getOfferStorageId() {
         return offerStorageId;
