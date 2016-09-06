@@ -2,7 +2,7 @@ package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint;
 
 import java.math.BigDecimal;
 
-public class ProposalTariff {
+public class ProposalZoneDetails {
 
     private String actualZoneCode;
     private BigDecimal sellerMinimalUnitPrice;

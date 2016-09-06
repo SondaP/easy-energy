@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.domainConstans.DomainConstans;
 import paxxa.com.ees.dto.offer.AbstractOfferDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepository;
@@ -31,18 +31,18 @@ public class OfferStorageService {
     private OfferStorageRepositoryApp offerStorageRepositoryApp;
 
     public OfferStorage createOrUpdateOffer(AbstractOfferDTO abstractOfferDTO, String userName) {
-        if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
+        if (abstractOfferDTO instanceof ElectricityOfferRoot) {
             String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
-            ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
+            ElectricityOfferRoot electricityOfferRoot = (ElectricityOfferRoot) abstractOfferDTO;
 
             if (checkIfOfferAlreadyExists(abstractOfferDTO, userName)) {
                 Date lastEditionDate = new Date();
-                electricityOfferRootDTO.setLastEditionDate(lastEditionDate);
-                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
+                electricityOfferRoot.setLastEditionDate(lastEditionDate);
+                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRoot.class, electricityOfferRoot);
 
                 OfferStorage existingElectricityOffer = getElectricityOffer(abstractOfferDTO);
                 existingElectricityOffer.setLastEdition(lastEditionDate);
-                existingElectricityOffer.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
+                existingElectricityOffer.setCompanyName(electricityOfferRoot.getCompanyDTO().getCompanyName());
 
                 existingElectricityOffer.setAbstractOfferDTO(null);
                 existingElectricityOffer.setAbstractOfferDTO(marshallOffer);
@@ -59,14 +59,14 @@ public class OfferStorageService {
                 offerStorage.setCreationDate(creationDate);
                 offerStorage.setLastEdition(creationDate);
                 offerStorage.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
-                offerStorage.setCompanyName(electricityOfferRootDTO.getCompanyDTO().getCompanyName());
+                offerStorage.setCompanyName(electricityOfferRoot.getCompanyDTO().getCompanyName());
                 offerStorage.setUser(userService.findUserByUserName(userName));
 
-                electricityOfferRootDTO.setOfferNumber(nextAvailableNumberForProductCode);
-                electricityOfferRootDTO.setOfferStorageId(offerStorage.getId());
-                electricityOfferRootDTO.setCreationDate(creationDate);
-                electricityOfferRootDTO.setLastEditionDate(creationDate);
-                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRootDTO.class, electricityOfferRootDTO);
+                electricityOfferRoot.setOfferNumber(nextAvailableNumberForProductCode);
+                electricityOfferRoot.setOfferStorageId(offerStorage.getId());
+                electricityOfferRoot.setCreationDate(creationDate);
+                electricityOfferRoot.setLastEditionDate(creationDate);
+                byte[] marshallOffer = utilsService.marshall(ElectricityOfferRoot.class, electricityOfferRoot);
 
                 offerStorage.setAbstractOfferDTO(marshallOffer);
 
@@ -77,9 +77,9 @@ public class OfferStorageService {
     }
 
     private boolean checkIfOfferAlreadyExists(AbstractOfferDTO abstractOfferDTO, String userName) {
-        if (abstractOfferDTO instanceof ElectricityOfferRootDTO) {
-            ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
-            if (electricityOfferRootDTO.getOfferStorageId() == null) return false;
+        if (abstractOfferDTO instanceof ElectricityOfferRoot) {
+            ElectricityOfferRoot electricityOfferRoot = (ElectricityOfferRoot) abstractOfferDTO;
+            if (electricityOfferRoot.getOfferStorageId() == null) return false;
             OfferStorage offer = getElectricityOffer(abstractOfferDTO);
             if (offer == null) return false;
             return true;
@@ -90,8 +90,8 @@ public class OfferStorageService {
 
     private OfferStorage getElectricityOffer(AbstractOfferDTO abstractOfferDTO) {
         String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;
-        ElectricityOfferRootDTO electricityOfferRootDTO = (ElectricityOfferRootDTO) abstractOfferDTO;
-        return offerStorageRepository.getOne(electricityOfferRootDTO.getOfferStorageId());
+        ElectricityOfferRoot electricityOfferRoot = (ElectricityOfferRoot) abstractOfferDTO;
+        return offerStorageRepository.getOne(electricityOfferRoot.getOfferStorageId());
     }
 
     private Integer getNextAvailableNumberForProductCode(String productCode, String userName) {
@@ -110,7 +110,7 @@ public class OfferStorageService {
         OfferStorage offerStorage = offerStorageRepository.getOne(offerStorageId);
         byte[] abstractOfferDTO = offerStorage.getAbstractOfferDTO();
         if (DomainConstans.PRODUCT_CODE.ELECTRICITY.equals(offerStorage.getProductCode())) {
-            return utilsService.unMarshall(ElectricityOfferRootDTO.class, abstractOfferDTO);
+            return utilsService.unMarshall(ElectricityOfferRoot.class, abstractOfferDTO);
         }
         throw new RuntimeException("Illegal offer type");
     }

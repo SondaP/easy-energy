@@ -6,9 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import paxxa.com.domainConstans.DomainConstans;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepository;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepositoryApp;
@@ -43,9 +42,9 @@ public class OfferStorageServiceOfferNumberTest {
     @Test
     public void shouldGetProperLastOfferNumber() throws InterruptedException {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
-        ElectricityOfferRootDTO electricityRootOfferDTO2 = sampleDataService.createElectricityRootOfferDTO2();
+        ElectricityOfferRoot electricityRootOfferDTO2 = sampleDataService.createElectricityRootOfferDTO2();
         OfferStorage savedOfferStorage2 = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO2, USER_NAME);
 
         String productCode = DomainConstans.PRODUCT_CODE.ELECTRICITY;

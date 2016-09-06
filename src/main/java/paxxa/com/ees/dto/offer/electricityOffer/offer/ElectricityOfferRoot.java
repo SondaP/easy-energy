@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @XmlRootElement
-public class ElectricityOfferRootDTO extends AbstractOfferDTO {
+public class ElectricityOfferRoot extends AbstractOfferDTO {
 
     private Integer offerStorageId;
     private Integer offerNumber;
@@ -22,7 +22,7 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
     private OfferCalculation allReceiverPointsOfferCalculation;
     private OfferSummaryDTO offerSummaryDTO;
     private String offerNote;
-    private boolean setOfferCalculationPerReceiverPoint;
+    private boolean isOfferCalculationPerReceiverPointSet;
 
     public Integer getOfferStorageId() {
         return offerStorageId;
@@ -96,11 +96,11 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
         this.offerNote = offerNote;
     }
 
-    public boolean isSetOfferCalculationPerReceiverPoint() {
-        return setOfferCalculationPerReceiverPoint;
+    public boolean isOfferCalculationPerReceiverPointSet() {
+        return isOfferCalculationPerReceiverPointSet;
     }
 
-    public void setSetOfferCalculationPerReceiverPoint(boolean setOfferCalculationPerReceiverPoint) {
-        this.setOfferCalculationPerReceiverPoint = setOfferCalculationPerReceiverPoint;
+    public void setOfferCalculationPerReceiverPointSet(boolean offerCalculationPerReceiverPointSet) {
+        this.isOfferCalculationPerReceiverPointSet = offerCalculationPerReceiverPointSet;
     }
 }

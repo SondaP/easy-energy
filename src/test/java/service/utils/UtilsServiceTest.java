@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.service.utils.SampleDataService;
 import paxxa.com.ees.service.utils.UtilsService;
 
@@ -26,9 +26,9 @@ public class UtilsServiceTest {
     @Test
     public void shouldMarshalObject() throws JAXBException, ClassNotFoundException {
         //give
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         //when
-        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, sampleDataService.createElectricityRootOfferDTO());
+        byte[] serialized = utilsService.marshall(ElectricityOfferRoot.class, sampleDataService.createElectricityRootOfferDTO());
         //then
         Assert.assertNotNull(serialized);
         System.out.println(serialized.toString());
@@ -38,12 +38,12 @@ public class UtilsServiceTest {
     @Test
     public void shouldUnMarshalObject() throws JAXBException, ClassNotFoundException {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
-        byte[] serialized = utilsService.marshall(ElectricityOfferRootDTO.class, sampleDataService.createElectricityRootOfferDTO());
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        byte[] serialized = utilsService.marshall(ElectricityOfferRoot.class, sampleDataService.createElectricityRootOfferDTO());
         //when
-        Object unMarshaledObject = utilsService.unMarshall(ElectricityOfferRootDTO.class, serialized);
+        Object unMarshaledObject = utilsService.unMarshall(ElectricityOfferRoot.class, serialized);
         //then
-        Assert.assertTrue(unMarshaledObject instanceof ElectricityOfferRootDTO);
+        Assert.assertTrue(unMarshaledObject instanceof ElectricityOfferRoot);
     }
 
     @Test

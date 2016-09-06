@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepository;
 import paxxa.com.ees.repository.offerStorage.OfferStorageRepositoryApp;
@@ -38,7 +37,7 @@ public class OfferStorageServiceTest {
     @Test
     public void shouldSaveOfferToUser() {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         //when
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //then
@@ -49,7 +48,7 @@ public class OfferStorageServiceTest {
     @Test
     public void shouldReturnListOfOfferStorage() {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //when
         List<OfferStorage> userOffers = offerStorageService.getUserOffers(USER_NAME);
@@ -61,20 +60,20 @@ public class OfferStorageServiceTest {
     @Test
     public void shouldReturnOffer() {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //when
         Object offer = offerStorageService.getOffer(savedOfferStorage.getId());
         //then
         Assert.assertNotNull(offer);
-        Assert.assertTrue(offer instanceof ElectricityOfferRootDTO);
+        Assert.assertTrue(offer instanceof ElectricityOfferRoot);
 
     }
 
     @Test
     public void shouldCheckIfOfferExists() {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         //when
         OfferStorage foundOfferAfterSave =
@@ -88,21 +87,21 @@ public class OfferStorageServiceTest {
     @Test
     public void shouldUpDateOffer() {
         //given
-        ElectricityOfferRootDTO electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
+        ElectricityOfferRoot electricityRootOfferDTO = sampleDataService.createElectricityRootOfferDTO();
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, USER_NAME);
         byte[] abstractOfferDTO = savedOfferStorage.getAbstractOfferDTO();
-        Object offer = utilsService.unMarshall(ElectricityOfferRootDTO.class, abstractOfferDTO);
-        ElectricityOfferRootDTO electricityOfferRootDTO_Candidate_For_Update;
-        if (offer instanceof ElectricityOfferRootDTO) {
-            electricityOfferRootDTO_Candidate_For_Update = (ElectricityOfferRootDTO) offer;
+        Object offer = utilsService.unMarshall(ElectricityOfferRoot.class, abstractOfferDTO);
+        ElectricityOfferRoot electricityOfferRoot_Candidate_For_Update;
+        if (offer instanceof ElectricityOfferRoot) {
+            electricityOfferRoot_Candidate_For_Update = (ElectricityOfferRoot) offer;
         } else {
             throw new RuntimeException("Illegal offer type");
         }
         //when
-        electricityOfferRootDTO_Candidate_For_Update.getCompanyDTO().setCompanyName("After upDate");
-        OfferStorage offerStorage_After_UpDate = offerStorageService.createOrUpdateOffer(electricityOfferRootDTO_Candidate_For_Update, USER_NAME);
+        electricityOfferRoot_Candidate_For_Update.getCompanyDTO().setCompanyName("After upDate");
+        OfferStorage offerStorage_After_UpDate = offerStorageService.createOrUpdateOffer(electricityOfferRoot_Candidate_For_Update, USER_NAME);
         //then
-        Assert.assertTrue(electricityOfferRootDTO_Candidate_For_Update.getCompanyDTO().getCompanyName().
+        Assert.assertTrue(electricityOfferRoot_Candidate_For_Update.getCompanyDTO().getCompanyName().
                 equals(offerStorage_After_UpDate.getCompanyName()));
 
         System.err.println(new String(offerStorage_After_UpDate.getAbstractOfferDTO()));

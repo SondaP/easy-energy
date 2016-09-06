@@ -2,7 +2,7 @@ package paxxa.com.ees.service.offerCalculation.electricityOffer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.service.utils.UtilsService;
 
 @Service
@@ -13,11 +13,11 @@ public class ElectricityOfferCalculationService {
     @Autowired
     private ElectricityOfferValidationService electricityOfferValidationService;
 
-   public ElectricityOfferRootDTO calculateElectricityOffer(ElectricityOfferRootDTO electricityOfferRootDTO, String userName) {
-       /* BigDecimal proposalContractMonthLength = new BigDecimal(electricityOfferRootDTO.getProposalContractMonthLength());
-        calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointList(), proposalContractMonthLength);
+   public ElectricityOfferRoot calculateElectricityOffer(ElectricityOfferRoot electricityOfferRoot, String userName) {
+       /* BigDecimal proposalContractMonthLength = new BigDecimal(electricityOfferRoot.getProposalContractMonthLength());
+        calculateReceiversPoint(electricityOfferRoot.getReceiverPointList(), proposalContractMonthLength);
 
-        return electricityOfferRootDTO;*/
+        return electricityOfferRoot;*/
 
        return null;
     }
@@ -190,7 +190,7 @@ public class ElectricityOfferCalculationService {
                                                             BigDecimal actualTradeFee) {
 
         BigDecimal totalActualCostForAllUnitsConsumption = BigDecimal.ZERO;
-        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+        for (ProposalZoneDetails proposalTariff : proposalSeller.getProposalZoneDetailsList()) {
             BigDecimal totalElectricityUnitConsumptionForActualTariff =
                     getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualZoneCode());
             BigDecimal actualUnitPriceForActualTariff = getActualUnitPriceForActualTariff(actualTariffList, proposalTariff.getActualZoneCode());
@@ -204,7 +204,7 @@ public class ElectricityOfferCalculationService {
         totalActualCostForAllUnitsConsumption = totalActualCostForAllUnitsConsumption.add(actualTradeFee);
 
         BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal = BigDecimal.ZERO;
-        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+        for (ProposalZoneDetails proposalTariff : proposalSeller.getProposalZoneDetailsList()) {
             BigDecimal totalElectricityUnitConsumptionForActualTariff =
                     getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualZoneCode());
             BigDecimal proposalUnitPrice = proposalTariff.getProposalUnitPrice();
@@ -242,7 +242,7 @@ public class ElectricityOfferCalculationService {
                                                                         List<ActualTariff> actualTariffList,
                                                                         TotalConsumptionSummary totalConsumptionSummaryDTO) {
         BigDecimal profitForAllTariffs = BigDecimal.ZERO;
-        for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
+        for (ProposalZoneDetails proposalTariff : proposalSeller.getProposalZoneDetailsList()) {
             BigDecimal marginForUnitPrice = proposalTariff.getProposalUnitPrice().subtract(proposalTariff.getSellerMinimalUnitPrice());
             BigDecimal totalElectricityUnitConsumptionForActualTariff =
                     getTotalElectricityUnitConsumptionForActualTariff(actualTariffList, proposalTariff.getActualZoneCode());

@@ -1,6 +1,6 @@
 package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation;
 
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ProposalTariff;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ProposalZoneDetails;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,7 +11,7 @@ public class ProposalSeller {
     private String sellerCode;
     private BigDecimal proposalTradeFee;
     private Date sellerTariffPublicationDate;
-    private List<ProposalTariff> proposalTariffList;
+    private List<ProposalZoneDetails> proposalZoneDetailsList;
     private ReceiverPointEstimation receiverPointEstimation;
 
     public String getSellerCode() {
@@ -38,12 +38,12 @@ public class ProposalSeller {
         this.sellerTariffPublicationDate = sellerTariffPublicationDate;
     }
 
-    public List<ProposalTariff> getProposalTariffList() {
-        return proposalTariffList;
+    public List<ProposalZoneDetails> getProposalZoneDetailsList() {
+        return proposalZoneDetailsList;
     }
 
-    public void setProposalTariffList(List<ProposalTariff> proposalTariffList) {
-        this.proposalTariffList = proposalTariffList;
+    public void setProposalZoneDetailsList(List<ProposalZoneDetails> proposalZoneDetailsList) {
+        this.proposalZoneDetailsList = proposalZoneDetailsList;
     }
 
     public ReceiverPointEstimation getReceiverPointEstimation() {

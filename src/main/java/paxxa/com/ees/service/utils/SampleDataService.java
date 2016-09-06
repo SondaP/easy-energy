@@ -3,7 +3,7 @@ package paxxa.com.ees.service.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.company.CompanyDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEstimationForSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSeller;
@@ -25,25 +25,25 @@ public class SampleDataService {
     private UtilsService utilsService;
 
 
-    public ElectricityOfferRootDTO createElectricityRootOfferDTO() {
-        ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
-        electricityOfferRootDTO.setCompanyDTO(createCompany());
-        electricityOfferRootDTO.setReceiverPointList(Arrays.asList(createReceiverPoint_1()));
-        electricityOfferRootDTO.setOfferSummaryDTO(createOfferSummaryDTO());
-        electricityOfferRootDTO.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
-        return electricityOfferRootDTO;
+    public ElectricityOfferRoot createElectricityRootOfferDTO() {
+        ElectricityOfferRoot electricityOfferRoot = new ElectricityOfferRoot();
+        electricityOfferRoot.setCompanyDTO(createCompany());
+        electricityOfferRoot.setReceiverPointList(Arrays.asList(createReceiverPoint_1()));
+        electricityOfferRoot.setOfferSummaryDTO(createOfferSummaryDTO());
+        electricityOfferRoot.setOfferNote("Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii");
+        return electricityOfferRoot;
     }
 
-    public ElectricityOfferRootDTO createElectricityRootOfferDTO2() {
-        ElectricityOfferRootDTO electricityOfferRootDTO = new ElectricityOfferRootDTO();
+    public ElectricityOfferRoot createElectricityRootOfferDTO2() {
+        ElectricityOfferRoot electricityOfferRoot = new ElectricityOfferRoot();
 
-        electricityOfferRootDTO.setCreationDate(new Date());
-        electricityOfferRootDTO.setLastEditionDate(new Date());
-        electricityOfferRootDTO.setCompanyDTO(createCompany());
-        electricityOfferRootDTO.setOfferNote("FAKE FAKE FAKE FAKE");
-        electricityOfferRootDTO.setReceiverPointList(Arrays.asList(createReceiverPoint_1()));
-        electricityOfferRootDTO.setOfferSummaryDTO(createOfferSummaryDTO());
-        return electricityOfferRootDTO;
+        electricityOfferRoot.setCreationDate(new Date());
+        electricityOfferRoot.setLastEditionDate(new Date());
+        electricityOfferRoot.setCompanyDTO(createCompany());
+        electricityOfferRoot.setOfferNote("FAKE FAKE FAKE FAKE");
+        electricityOfferRoot.setReceiverPointList(Arrays.asList(createReceiverPoint_1()));
+        electricityOfferRoot.setOfferSummaryDTO(createOfferSummaryDTO());
+        return electricityOfferRoot;
     }
 
     private CompanyDTO createCompany() {
@@ -166,18 +166,18 @@ public class SampleDataService {
         proposalSeller_1.setProposalTradeFee(new BigDecimal(12));
         proposalSeller_1.setSellerTariffPublicationDate(new Date());
 
-        ProposalTariff proposalZoneCode_A1_TAURON = new ProposalTariff();
-        proposalZoneCode_A1_TAURON.setActualZoneCode(STREFA_A1);
-        proposalZoneCode_A1_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
-        proposalZoneCode_A1_TAURON.setProposalUnitPrice(new BigDecimal(180));
-        proposalZoneCode_A1_TAURON.setProposalZoneCode("Strefa A1 od Tauron");
+        ProposalZoneDetails proposalZoneDetailsCode_A1_TAURON = new ProposalZoneDetails();
+        proposalZoneDetailsCode_A1_TAURON.setActualZoneCode(STREFA_A1);
+        proposalZoneDetailsCode_A1_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
+        proposalZoneDetailsCode_A1_TAURON.setProposalUnitPrice(new BigDecimal(180));
+        proposalZoneDetailsCode_A1_TAURON.setProposalZoneCode("Strefa A1 od Tauron");
 
-        ProposalTariff proposalZoneCode_C2_TAURON = new ProposalTariff();
-        proposalZoneCode_C2_TAURON.setActualZoneCode(STREFA_C2);
-        proposalZoneCode_C2_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
-        proposalZoneCode_C2_TAURON.setProposalUnitPrice(new BigDecimal(280));
-        proposalZoneCode_C2_TAURON.setProposalZoneCode("Strefa C2 od Tauron");
-        proposalSeller_1.setProposalTariffList(Arrays.asList(proposalZoneCode_A1_TAURON, proposalZoneCode_C2_TAURON));
+        ProposalZoneDetails proposalZoneDetailsCode_C2_TAURON = new ProposalZoneDetails();
+        proposalZoneDetailsCode_C2_TAURON.setActualZoneCode(STREFA_C2);
+        proposalZoneDetailsCode_C2_TAURON.setSellerMinimalUnitPrice(new BigDecimal(150));
+        proposalZoneDetailsCode_C2_TAURON.setProposalUnitPrice(new BigDecimal(280));
+        proposalZoneDetailsCode_C2_TAURON.setProposalZoneCode("Strefa C2 od Tauron");
+        proposalSeller_1.setProposalZoneDetailsList(Arrays.asList(proposalZoneDetailsCode_A1_TAURON, proposalZoneDetailsCode_C2_TAURON));
 
         proposalSeller_1.setReceiverPointEstimation(generateReceiverPointEstimationDTO_ForTauron());
 
@@ -187,18 +187,18 @@ public class SampleDataService {
         proposalSeller_2.setProposalTradeFee(new BigDecimal(13));
         proposalSeller_2.setSellerTariffPublicationDate(new Date());
 
-        ProposalTariff proposalZoneCode_A1_CEZ = new ProposalTariff();
-        proposalZoneCode_A1_CEZ.setActualZoneCode(STREFA_A1);
-        proposalZoneCode_A1_CEZ.setSellerMinimalUnitPrice(new BigDecimal(110));
-        proposalZoneCode_A1_CEZ.setProposalUnitPrice(new BigDecimal(175));
-        proposalZoneCode_A1_CEZ.setProposalZoneCode("Strefa A1 od CEZ");
+        ProposalZoneDetails proposalZoneDetailsCode_A1_CEZ = new ProposalZoneDetails();
+        proposalZoneDetailsCode_A1_CEZ.setActualZoneCode(STREFA_A1);
+        proposalZoneDetailsCode_A1_CEZ.setSellerMinimalUnitPrice(new BigDecimal(110));
+        proposalZoneDetailsCode_A1_CEZ.setProposalUnitPrice(new BigDecimal(175));
+        proposalZoneDetailsCode_A1_CEZ.setProposalZoneCode("Strefa A1 od CEZ");
 
-        ProposalTariff proposalZoneCode_C2_CEZ = new ProposalTariff();
-        proposalZoneCode_C2_CEZ.setActualZoneCode(STREFA_C2);
-        proposalZoneCode_C2_CEZ.setSellerMinimalUnitPrice(new BigDecimal(185));
-        proposalZoneCode_C2_CEZ.setProposalUnitPrice(new BigDecimal(275));
-        proposalZoneCode_C2_CEZ.setProposalZoneCode("Strefa C2 od CEZ");
-        proposalSeller_2.setProposalTariffList(Arrays.asList(proposalZoneCode_A1_CEZ, proposalZoneCode_C2_CEZ));
+        ProposalZoneDetails proposalZoneDetailsCode_C2_CEZ = new ProposalZoneDetails();
+        proposalZoneDetailsCode_C2_CEZ.setActualZoneCode(STREFA_C2);
+        proposalZoneDetailsCode_C2_CEZ.setSellerMinimalUnitPrice(new BigDecimal(185));
+        proposalZoneDetailsCode_C2_CEZ.setProposalUnitPrice(new BigDecimal(275));
+        proposalZoneDetailsCode_C2_CEZ.setProposalZoneCode("Strefa C2 od CEZ");
+        proposalSeller_2.setProposalZoneDetailsList(Arrays.asList(proposalZoneDetailsCode_A1_CEZ, proposalZoneDetailsCode_C2_CEZ));
 
         proposalSeller_2.setReceiverPointEstimation(generateReceiverPointEstimationDTO_ForCez());
 
@@ -395,18 +395,18 @@ public class SampleDataService {
         proposalSeller_1.setProposalTradeFee(new BigDecimal(16));
         proposalSeller_1.setSellerTariffPublicationDate(new Date());
 
-        ProposalTariff proposalTariff_A_TAURON = new ProposalTariff();
+        ProposalZoneDetails proposalTariff_A_TAURON = new ProposalZoneDetails();
         proposalTariff_A_TAURON.setActualZoneCode("Taryfa E");
         proposalTariff_A_TAURON.setSellerMinimalUnitPrice(new BigDecimal(380));
         proposalTariff_A_TAURON.setProposalUnitPrice(new BigDecimal(450));
         proposalTariff_A_TAURON.setProposalZoneCode("Taryfa A od Tauron");
 
-        ProposalTariff proposalTariff_B_TAURON = new ProposalTariff();
+        ProposalZoneDetails proposalTariff_B_TAURON = new ProposalZoneDetails();
         proposalTariff_B_TAURON.setActualZoneCode("Taryfa F");
         proposalTariff_B_TAURON.setSellerMinimalUnitPrice(new BigDecimal(220));
         proposalTariff_B_TAURON.setProposalUnitPrice(new BigDecimal(380));
         proposalTariff_B_TAURON.setProposalZoneCode("Taryfa B od Tauron");
-        proposalSeller_1.setProposalTariffList(Arrays.asList(proposalTariff_A_TAURON, proposalTariff_B_TAURON));
+        proposalSeller_1.setProposalZoneDetailsList(Arrays.asList(proposalTariff_A_TAURON, proposalTariff_B_TAURON));
 
         // Seller CEZ
         ProposalSeller proposalSeller_2 = new ProposalSeller();
@@ -414,18 +414,18 @@ public class SampleDataService {
         proposalSeller_2.setProposalTradeFee(new BigDecimal(15));
         proposalSeller_2.setSellerTariffPublicationDate(new Date());
 
-        ProposalTariff proposalTariff_A_CEZ = new ProposalTariff();
+        ProposalZoneDetails proposalTariff_A_CEZ = new ProposalZoneDetails();
         proposalTariff_A_CEZ.setActualZoneCode("Taryfa E");
         proposalTariff_A_CEZ.setSellerMinimalUnitPrice(new BigDecimal(320));
         proposalTariff_A_CEZ.setProposalUnitPrice(new BigDecimal(410));
         proposalTariff_A_CEZ.setProposalZoneCode("Taryfa E od CEZ");
 
-        ProposalTariff proposalTariff_B_CEZ = new ProposalTariff();
+        ProposalZoneDetails proposalTariff_B_CEZ = new ProposalZoneDetails();
         proposalTariff_B_CEZ.setActualZoneCode("Taryfa F");
         proposalTariff_B_CEZ.setSellerMinimalUnitPrice(new BigDecimal(280));
         proposalTariff_B_CEZ.setProposalUnitPrice(new BigDecimal(390));
         proposalTariff_B_CEZ.setProposalZoneCode("Taryfa F od CEZ");
-        proposalSeller_2.setProposalTariffList(Arrays.asList(proposalTariff_A_CEZ, proposalTariff_B_CEZ));
+        proposalSeller_2.setProposalZoneDetailsList(Arrays.asList(proposalTariff_A_CEZ, proposalTariff_B_CEZ));
 
         return Arrays.asList(proposalSeller_1, proposalSeller_2);
 
@@ -599,7 +599,7 @@ public class SampleDataService {
         allReceiverPointsEstimationForSeller_CEZ.setAllReceiverPointsProvisionForSellerList(Arrays.asList(
                 allReceiverPointsProvisionForSeller_CEZ_1, allReceiverPointsProvisionForSeller_CEZ_2, allReceiverPointsProvisionForSeller_CEZ_3));
 
-        offerSummaryDTO.setElectricityReceiverPointEstimationList(Arrays.asList(
+        offerSummaryDTO.setReceiverPointEstimationList(Arrays.asList(
                 allReceiverPointsEstimationForSeller_TAURON, allReceiverPointsEstimationForSeller_CEZ));
         return offerSummaryDTO;
 
