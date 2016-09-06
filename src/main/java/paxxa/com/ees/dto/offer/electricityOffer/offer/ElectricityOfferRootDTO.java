@@ -4,6 +4,7 @@ import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.AbstractOfferDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.OfferCalculation;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
@@ -16,11 +17,11 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
     private Integer offerNumber;
     private Date creationDate;
     private Date lastEditionDate;
-    private Integer proposalContractMonthLength;
     private CompanyDTO companyDTO;
     private List<ReceiverPointDTO> receiverPointDTOList;
-    private String offerNote;
+    private OfferCalculation offerCalculation;
     private OfferSummaryDTO offerSummaryDTO;
+    private String offerNote;
 
     public Integer getOfferStorageId() {
         return offerStorageId;
@@ -54,14 +55,6 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
         this.lastEditionDate = lastEditionDate;
     }
 
-    public Integer getProposalContractMonthLength() {
-        return proposalContractMonthLength;
-    }
-
-    public void setProposalContractMonthLength(Integer proposalContractMonthLength) {
-        this.proposalContractMonthLength = proposalContractMonthLength;
-    }
-
     public CompanyDTO getCompanyDTO() {
         return companyDTO;
     }
@@ -78,12 +71,12 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
         this.receiverPointDTOList = receiverPointDTOList;
     }
 
-    public String getOfferNote() {
-        return offerNote;
+    public OfferCalculation getOfferCalculation() {
+        return offerCalculation;
     }
 
-    public void setOfferNote(String offerNote) {
-        this.offerNote = offerNote;
+    public void setOfferCalculation(OfferCalculation offerCalculation) {
+        this.offerCalculation = offerCalculation;
     }
 
     public OfferSummaryDTO getOfferSummaryDTO() {
@@ -92,5 +85,13 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
 
     public void setOfferSummaryDTO(OfferSummaryDTO offerSummaryDTO) {
         this.offerSummaryDTO = offerSummaryDTO;
+    }
+
+    public String getOfferNote() {
+        return offerNote;
+    }
+
+    public void setOfferNote(String offerNote) {
+        this.offerNote = offerNote;
     }
 }

@@ -1,4 +1,6 @@
-package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint;
+package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation;
+
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ProposalTariff;
 
 import java.math.BigDecimal;
 import java.util.Date;

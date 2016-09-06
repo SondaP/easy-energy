@@ -1,18 +1,17 @@
 package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint;
 
-import java.math.BigDecimal;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.OfferCalculation;
+
 import java.util.List;
 
 public class ReceiverPointDTO {
 
     private String receiverPointDescription;
-    private BigDecimal actualTradeFee;
-    private Integer actualNumberOfTariffs;
-    private Integer proposalNumberOfTariffs;
-    private List<ActualTariff> actualTariffList;
-    private ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO;
-    private List<ProposalSeller> proposalSellerList;
-    private List<ReceiverPointEstimationDTO> receiverPointEstimationList;
+    private String tariffCode;
+    private Integer actualNumberOfZones;
+    private List<ActualZone> actualZoneList;
+    private List<ActualZoneConsumption> actualZoneConsumptionList;
+    private OfferCalculation offerCalculation;
 
     public String getReceiverPointDescription() {
         return receiverPointDescription;
@@ -22,59 +21,43 @@ public class ReceiverPointDTO {
         this.receiverPointDescription = receiverPointDescription;
     }
 
-    public BigDecimal getActualTradeFee() {
-        return actualTradeFee;
+    public String getTariffCode() {
+        return tariffCode;
     }
 
-    public void setActualTradeFee(BigDecimal actualTradeFee) {
-        this.actualTradeFee = actualTradeFee;
+    public void setTariffCode(String tariffCode) {
+        this.tariffCode = tariffCode;
     }
 
-    public Integer getActualNumberOfTariffs() {
-        return actualNumberOfTariffs;
+    public Integer getActualNumberOfZones() {
+        return actualNumberOfZones;
     }
 
-    public void setActualNumberOfTariffs(Integer actualNumberOfTariffs) {
-        this.actualNumberOfTariffs = actualNumberOfTariffs;
+    public void setActualNumberOfZones(Integer actualNumberOfZones) {
+        this.actualNumberOfZones = actualNumberOfZones;
     }
 
-    public Integer getProposalNumberOfTariffs() {
-        return proposalNumberOfTariffs;
+    public List<ActualZone> getActualZoneList() {
+        return actualZoneList;
     }
 
-    public void setProposalNumberOfTariffs(Integer proposalNumberOfTariffs) {
-        this.proposalNumberOfTariffs = proposalNumberOfTariffs;
+    public void setActualZoneList(List<ActualZone> actualZoneList) {
+        this.actualZoneList = actualZoneList;
     }
 
-    public List<ActualTariff> getActualTariffList() {
-        return actualTariffList;
+    public List<ActualZoneConsumption> getActualZoneConsumptionList() {
+        return actualZoneConsumptionList;
     }
 
-    public void setActualTariffList(List<ActualTariff> actualTariffList) {
-        this.actualTariffList = actualTariffList;
+    public void setActualZoneConsumptionList(List<ActualZoneConsumption> actualZoneConsumptionList) {
+        this.actualZoneConsumptionList = actualZoneConsumptionList;
     }
 
-    public List<ProposalSeller> getProposalSellerList() {
-        return proposalSellerList;
+    public OfferCalculation getOfferCalculation() {
+        return offerCalculation;
     }
 
-    public void setProposalSellerList(List<ProposalSeller> proposalSellerList) {
-        this.proposalSellerList = proposalSellerList;
-    }
-
-    public ReceiverPointConsumptionSummaryDTO getReceiverPointConsumptionSummaryDTO() {
-        return receiverPointConsumptionSummaryDTO;
-    }
-
-    public void setReceiverPointConsumptionSummaryDTO(ReceiverPointConsumptionSummaryDTO receiverPointConsumptionSummaryDTO) {
-        this.receiverPointConsumptionSummaryDTO = receiverPointConsumptionSummaryDTO;
-    }
-
-    public List<ReceiverPointEstimationDTO> getReceiverPointEstimationList() {
-        return receiverPointEstimationList;
-    }
-
-    public void setReceiverPointEstimationList(List<ReceiverPointEstimationDTO> receiverPointEstimationList) {
-        this.receiverPointEstimationList = receiverPointEstimationList;
+    public void setOfferCalculation(OfferCalculation offerCalculation) {
+        this.offerCalculation = offerCalculation;
     }
 }

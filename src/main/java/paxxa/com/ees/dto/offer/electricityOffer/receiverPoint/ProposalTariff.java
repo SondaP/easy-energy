@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 
 public class ProposalTariff {
 
-    private String actualTariffCode;
+    private String actualZoneCode;
     private BigDecimal sellerMinimalUnitPrice;
     private BigDecimal proposalUnitPrice;
-    private String proposalTariffCode;
+    private String proposalZoneCode;
 
-    public String getActualTariffCode() {
-        return actualTariffCode;
+    public String getActualZoneCode() {
+        return actualZoneCode;
     }
 
-    public void setActualTariffCode(String actualTariffCode) {
-        this.actualTariffCode = actualTariffCode;
+    public void setActualZoneCode(String actualZoneCode) {
+        this.actualZoneCode = actualZoneCode;
     }
 
     public BigDecimal getSellerMinimalUnitPrice() {
@@ -33,11 +33,11 @@ public class ProposalTariff {
         this.proposalUnitPrice = proposalUnitPrice;
     }
 
-    public String getProposalTariffCode() {
-        return proposalTariffCode;
+    public String getProposalZoneCode() {
+        return proposalZoneCode;
     }
 
-    public void setProposalTariffCode(String proposalTariffCode) {
-        this.proposalTariffCode = proposalTariffCode;
+    public void setProposalZoneCode(String proposalZoneCode) {
+        this.proposalZoneCode = proposalZoneCode;
     }
 }

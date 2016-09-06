@@ -3,6 +3,7 @@ package paxxa.com.ees.service.offerCalculation.electricityOffer;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ProposalSeller;
 import paxxa.com.ees.service.exception.OfferCalculationException.IncorrectDataException;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class ElectricityOfferValidationService {
 
-    public void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
+  /*  public void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
         for (ActualTariff actualTariff : actualTariffList) {
 
             if (actualTariff.getActualTariffCode() == null || actualTariff.getActualTariffCode().isEmpty()) {
@@ -122,7 +123,7 @@ public class ElectricityOfferValidationService {
                                          Integer proposalNumberOfTariffs, List<String> actualTariffCodesList) {
         for (ProposalSeller proposalSeller : proposalSellerList) {
             for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
-                if (proposalTariff.getActualTariffCode() == null) {
+                if (proposalTariff.getActualZoneCode() == null) {
                     String message = "Value for attribute: actualTariffCode from Object: ProposalSeller at "
                             + receiverPointDescription + ", is required";
                     throw new IncorrectDataException(message);
@@ -132,7 +133,7 @@ public class ElectricityOfferValidationService {
                             + receiverPointDescription + ", is required";
                     throw new IncorrectDataException(message);
                 }
-                if (proposalTariff.getProposalTariffCode() == null) {
+                if (proposalTariff.getProposalZoneCode() == null) {
                     String message = "Value for attribute: proposalTariffCode from Object: ProposalSeller at "
                             + receiverPointDescription + ", is required";
                     throw new IncorrectDataException(message);
@@ -142,7 +143,7 @@ public class ElectricityOfferValidationService {
                             + receiverPointDescription + ", is required";
                     throw new IncorrectDataException(message);
                 }
-                if (!actualTariffCodesList.contains(proposalTariff.getActualTariffCode())) {
+                if (!actualTariffCodesList.contains(proposalTariff.getActualZoneCode())) {
                     String message = "Value for attribute: actualTariffCode from Object: ProposalSeller at "
                             + receiverPointDescription + ", is incorrect. Value should be the same as one of the " +
                             "actualTariffCode from ActualTariff ";
@@ -150,5 +151,5 @@ public class ElectricityOfferValidationService {
                 }
             }
         }
-    }
+    }*/
 }
