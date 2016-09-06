@@ -63,24 +63,24 @@ public class ElectricityOfferValidationService {
                         + " positions. Receiver point: " + receiverPointDescription);
     }
 
-    public void validateReceiverPoint(ReceiverPointDTO receiverPointDTO) {
+    public void validateReceiverPoint(ReceiverPoint receiverPointDTO) {
         if (receiverPointDTO.getReceiverPointDescription() == null || receiverPointDTO.getReceiverPointDescription().isEmpty()) {
-            String message = "Value for attribute: receiverPointDescription from Object: ReceiverPointDTO at "
+            String message = "Value for attribute: receiverPointDescription from Object: ReceiverPoint at "
                     + receiverPointDTO.getReceiverPointDescription() + ", is required and cannot be empty";
             throw new IncorrectDataException(message);
         }
         if (receiverPointDTO.getActualTradeFee() == null) {
-            String message = "Value for attribute: actualTradeFee from Object: ReceiverPointDTO at "
+            String message = "Value for attribute: actualTradeFee from Object: ReceiverPoint at "
                     + receiverPointDTO.getReceiverPointDescription() + ", is required";
             throw new IncorrectDataException(message);
         }
         if (receiverPointDTO.getActualNumberOfTariffs() == null) {
-            String message = "Value for attribute: actualNumberOfTariffs from Object: ReceiverPointDTO at "
+            String message = "Value for attribute: actualNumberOfTariffs from Object: ReceiverPoint at "
                     + receiverPointDTO.getReceiverPointDescription() + ", is required";
             throw new IncorrectDataException(message);
         }
         if (receiverPointDTO.getProposalNumberOfTariffs() == null) {
-            String message = "Value for attribute: proposalNumberOfTariffs from Object: ReceiverPointDTO at "
+            String message = "Value for attribute: proposalNumberOfTariffs from Object: ReceiverPoint at "
                     + receiverPointDTO.getReceiverPointDescription() + ", is required";
             throw new IncorrectDataException(message);
         }

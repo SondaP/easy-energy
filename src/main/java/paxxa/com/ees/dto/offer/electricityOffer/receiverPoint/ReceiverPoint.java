@@ -4,14 +4,14 @@ import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.O
 
 import java.util.List;
 
-public class ReceiverPointDTO {
+public class ReceiverPoint {
 
     private String receiverPointDescription;
     private String tariffCode;
     private Integer actualNumberOfZones;
     private List<ActualZone> actualZoneList;
     private List<ActualZoneConsumption> actualZoneConsumptionList;
-    private OfferCalculation offerCalculation;
+    private OfferCalculation receiverPointOfferCalculation;
 
     public String getReceiverPointDescription() {
         return receiverPointDescription;
@@ -53,11 +53,11 @@ public class ReceiverPointDTO {
         this.actualZoneConsumptionList = actualZoneConsumptionList;
     }
 
-    public OfferCalculation getOfferCalculation() {
-        return offerCalculation;
+    public OfferCalculation getReceiverPointOfferCalculation() {
+        return receiverPointOfferCalculation;
     }
 
-    public void setOfferCalculation(OfferCalculation offerCalculation) {
-        this.offerCalculation = offerCalculation;
+    public void setReceiverPointOfferCalculation(OfferCalculation receiverPointOfferCalculation) {
+        this.receiverPointOfferCalculation = receiverPointOfferCalculation;
     }
 }

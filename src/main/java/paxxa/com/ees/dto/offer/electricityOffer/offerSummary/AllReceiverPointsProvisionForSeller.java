@@ -2,7 +2,7 @@ package paxxa.com.ees.dto.offer.electricityOffer.offerSummary;
 
 import java.math.BigDecimal;
 
-public class AllReceiverPointsProvisionForSellerDTO {
+public class AllReceiverPointsProvisionForSeller {
 
     private String levelCode;
     private BigDecimal traderProvisionInYearScaleForAllPoint;

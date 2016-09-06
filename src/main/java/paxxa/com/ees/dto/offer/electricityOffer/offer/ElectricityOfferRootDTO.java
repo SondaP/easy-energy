@@ -3,7 +3,7 @@ package paxxa.com.ees.dto.offer.electricityOffer.offer;
 import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.AbstractOfferDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPointDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPoint;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.OfferCalculation;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,10 +18,11 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
     private Date creationDate;
     private Date lastEditionDate;
     private CompanyDTO companyDTO;
-    private List<ReceiverPointDTO> receiverPointDTOList;
-    private OfferCalculation offerCalculation;
+    private List<ReceiverPoint> receiverPointList;
+    private OfferCalculation allReceiverPointsOfferCalculation;
     private OfferSummaryDTO offerSummaryDTO;
     private String offerNote;
+    private boolean setOfferCalculationPerReceiverPoint;
 
     public Integer getOfferStorageId() {
         return offerStorageId;
@@ -63,20 +64,20 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
         this.companyDTO = companyDTO;
     }
 
-    public List<ReceiverPointDTO> getReceiverPointDTOList() {
-        return receiverPointDTOList;
+    public List<ReceiverPoint> getReceiverPointList() {
+        return receiverPointList;
     }
 
-    public void setReceiverPointDTOList(List<ReceiverPointDTO> receiverPointDTOList) {
-        this.receiverPointDTOList = receiverPointDTOList;
+    public void setReceiverPointList(List<ReceiverPoint> receiverPointList) {
+        this.receiverPointList = receiverPointList;
     }
 
-    public OfferCalculation getOfferCalculation() {
-        return offerCalculation;
+    public OfferCalculation getAllReceiverPointsOfferCalculation() {
+        return allReceiverPointsOfferCalculation;
     }
 
-    public void setOfferCalculation(OfferCalculation offerCalculation) {
-        this.offerCalculation = offerCalculation;
+    public void setAllReceiverPointsOfferCalculation(OfferCalculation allReceiverPointsOfferCalculation) {
+        this.allReceiverPointsOfferCalculation = allReceiverPointsOfferCalculation;
     }
 
     public OfferSummaryDTO getOfferSummaryDTO() {
@@ -93,5 +94,13 @@ public class ElectricityOfferRootDTO extends AbstractOfferDTO {
 
     public void setOfferNote(String offerNote) {
         this.offerNote = offerNote;
+    }
+
+    public boolean isSetOfferCalculationPerReceiverPoint() {
+        return setOfferCalculationPerReceiverPoint;
+    }
+
+    public void setSetOfferCalculationPerReceiverPoint(boolean setOfferCalculationPerReceiverPoint) {
+        this.setOfferCalculationPerReceiverPoint = setOfferCalculationPerReceiverPoint;
     }
 }

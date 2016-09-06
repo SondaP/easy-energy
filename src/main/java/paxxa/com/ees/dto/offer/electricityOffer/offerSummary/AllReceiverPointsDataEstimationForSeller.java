@@ -3,7 +3,7 @@ package paxxa.com.ees.dto.offer.electricityOffer.offerSummary;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class AllReceiverPointsDataEstimationForSellerDTO {
+public class AllReceiverPointsDataEstimationForSeller {
 
     private Date tariffIssueDate;
     private BigDecimal estimatedContractValueForAllPoint;

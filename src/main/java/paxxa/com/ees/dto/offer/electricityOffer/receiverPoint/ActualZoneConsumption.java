@@ -5,11 +5,20 @@ import java.util.Date;
 
 public class ActualZoneConsumption {
 
+    private Integer orderNumber;
     private String actualZoneCode;
     private String documentNumber;
     private Date periodStart;
     private Date getPeriodStop;
     private BigDecimal unitConsumption;
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 
     public String getActualZoneCode() {
         return actualZoneCode;

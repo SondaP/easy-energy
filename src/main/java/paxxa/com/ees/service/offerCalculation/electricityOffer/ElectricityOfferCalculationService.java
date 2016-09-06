@@ -3,18 +3,7 @@ package paxxa.com.ees.service.offerCalculation.electricityOffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ProposalSeller;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ReceiverPointDataEstimationDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ReceiverPointEstimationDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.TotalConsumptionSummaryDTO;
 import paxxa.com.ees.service.utils.UtilsService;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ElectricityOfferCalculationService {
@@ -26,7 +15,7 @@ public class ElectricityOfferCalculationService {
 
    public ElectricityOfferRootDTO calculateElectricityOffer(ElectricityOfferRootDTO electricityOfferRootDTO, String userName) {
        /* BigDecimal proposalContractMonthLength = new BigDecimal(electricityOfferRootDTO.getProposalContractMonthLength());
-        calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointDTOList(), proposalContractMonthLength);
+        calculateReceiversPoint(electricityOfferRootDTO.getReceiverPointList(), proposalContractMonthLength);
 
         return electricityOfferRootDTO;*/
 
@@ -35,8 +24,8 @@ public class ElectricityOfferCalculationService {
 
      /*
 
-    private void calculateReceiversPoint(List<ReceiverPointDTO> receiverPointDTOList, BigDecimal proposalContractMonthLength) {
-        for (ReceiverPointDTO receiverPointDTO : receiverPointDTOList) {
+    private void calculateReceiversPoint(List<ReceiverPoint> receiverPointDTOList, BigDecimal proposalContractMonthLength) {
+        for (ReceiverPoint receiverPointDTO : receiverPointDTOList) {
 
             List<ActualTariff> actualTariffList = receiverPointDTO.getActualTariffList();
             String receiverPointDescription = receiverPointDTO.getReceiverPointDescription();
@@ -51,14 +40,14 @@ public class ElectricityOfferCalculationService {
             electricityOfferValidationService.validateProposalTariffs(receiverPointDTO.getProposalSellerList(),
                     receiverPointDescription, receiverPointDTO.getProposalNumberOfTariffs(), getActualTariffsCodes(actualTariffList));
 
-            // Setting TotalConsumptionSummaryDTO
+            // Setting TotalConsumptionSummary
             setReceiverPointConsumptionSummaryDTO(actualTariffList, receiverPointDescription, receiverPointDTO);
             setActualTariffsDetails(actualTariffList,
                     receiverPointDTO.getReceiverPointConsumptionSummaryDTO().getTotalElectricityUnitsConsumptionInAllPeriods());
 
-            // Setting ReceiverPointEstimationDTO
+            // Setting ReceiverPointEstimation
             List<ProposalSeller> proposalSellerList = receiverPointDTO.getProposalSellerList();
-            List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs =
+            List<ReceiverPointEstimation> receiverPointEstimationDTOs =
                     generateReceiverPointEstimationList(proposalSellerList, actualTariffList,
                             receiverPointDTO.getReceiverPointConsumptionSummaryDTO(),
                             proposalContractMonthLength, receiverPointDTO.getActualTradeFee());
@@ -69,17 +58,17 @@ public class ElectricityOfferCalculationService {
     }
 
     *//**
-     * Setting TotalConsumptionSummaryDTO
+     * Setting TotalConsumptionSummary
      *//*
     private void setReceiverPointConsumptionSummaryDTO(List<ActualTariff> actualTariffList, String receiverPointDescription,
-                                                       ReceiverPointDTO receiverPointDTO) {
+                                                       ReceiverPoint receiverPointDTO) {
         // Variables
         Integer totalDaysNumberForPeriods = calculateTotalDaysNumberForPeriods(actualTariffList, receiverPointDescription);
         BigDecimal totalElectricityConsumptionUnitsForReceiverPoint = calculateTotalConsumptionUnits(actualTariffList, receiverPointDescription);
         BigDecimal predictedElectricityUnitConsumptionPerYear = calculatePredictedElectricityUnitConsumptionPerYear(
                 new BigDecimal(totalDaysNumberForPeriods), totalElectricityConsumptionUnitsForReceiverPoint);
         // Setting variables
-        TotalConsumptionSummaryDTO totalConsumptionSummaryDTO = new TotalConsumptionSummaryDTO();
+        TotalConsumptionSummary totalConsumptionSummaryDTO = new TotalConsumptionSummary();
         totalConsumptionSummaryDTO.setTotalNumberOfDaysForAllPeriods(totalDaysNumberForPeriods);
         totalConsumptionSummaryDTO.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityConsumptionUnitsForReceiverPoint);
         totalConsumptionSummaryDTO.setPredictedElectricityUnitConsumptionPerYear(predictedElectricityUnitConsumptionPerYear);
@@ -149,33 +138,33 @@ public class ElectricityOfferCalculationService {
     }
 
     *//**
-     * Setting ReceiverPointEstimationDTO
+     * Setting ReceiverPointEstimation
      *//*
 
-    private List<ReceiverPointEstimationDTO> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList,
+    private List<ReceiverPointEstimation> generateReceiverPointEstimationList(List<ProposalSeller> proposalSellerList,
                                                                                  List<ActualTariff> actualTariffList,
-                                                                                 TotalConsumptionSummaryDTO totalConsumptionSummaryDTO,
+                                                                                 TotalConsumptionSummary totalConsumptionSummaryDTO,
                                                                                  BigDecimal proposalContractMonthLength,
                                                                                  BigDecimal actualTradeFee) {
-        List<ReceiverPointEstimationDTO> receiverPointEstimationDTOs = new ArrayList<>();
+        List<ReceiverPointEstimation> receiverPointEstimationDTOs = new ArrayList<>();
         for (ProposalSeller proposalSeller : proposalSellerList) {
-            ReceiverPointEstimationDTO receiverPointEstimationDTO = generateReceiverPointEstimation(proposalSeller,
+            ReceiverPointEstimation receiverPointEstimationDTO = generateReceiverPointEstimation(proposalSeller,
                     actualTariffList, totalConsumptionSummaryDTO, proposalContractMonthLength, actualTradeFee);
             receiverPointEstimationDTOs.add(receiverPointEstimationDTO);
         }
         return receiverPointEstimationDTOs;
     }
 
-    private ReceiverPointEstimationDTO generateReceiverPointEstimation(ProposalSeller proposalSeller,
+    private ReceiverPointEstimation generateReceiverPointEstimation(ProposalSeller proposalSeller,
                                                                        List<ActualTariff> actualTariffList,
-                                                                       TotalConsumptionSummaryDTO totalConsumptionSummaryDTO,
+                                                                       TotalConsumptionSummary totalConsumptionSummaryDTO,
                                                                        BigDecimal proposalContractMonthLength,
                                                                        BigDecimal actualTradeFee) {
-        ReceiverPointEstimationDTO receiverPointEstimationDTO = new ReceiverPointEstimationDTO();
+        ReceiverPointEstimation receiverPointEstimationDTO = new ReceiverPointEstimation();
         receiverPointEstimationDTO.setSellerCode(proposalSeller.getSellerCode());
 
         // Setting estimation
-        ReceiverPointDataEstimationDTO receiverPointDataEstimationDTO = new ReceiverPointDataEstimationDTO();
+        ReceiverPointDataEstimation receiverPointDataEstimationDTO = new ReceiverPointDataEstimation();
         BigDecimal estimatedUnitConsumptionInYearScale = calculateEstimatedUnitConsumptionInYearScale(totalConsumptionSummaryDTO);
         BigDecimal estimatedContractProfitValueInYearScale = calculateEstimatedContractProfitValueInYearScale(proposalSeller, actualTariffList,
                 totalConsumptionSummaryDTO);
@@ -191,13 +180,13 @@ public class ElectricityOfferCalculationService {
         receiverPointDataEstimationDTO.setEstimatedSavingsInYearScale(estimatedSavingsInYearScale);
 
 
-        receiverPointEstimationDTO.setReceiverPointDataEstimationDTO(receiverPointDataEstimationDTO);
+        receiverPointEstimationDTO.setReceiverPointDataEstimation(receiverPointDataEstimationDTO);
         return receiverPointEstimationDTO;
     }
 
     private BigDecimal calculateEstimatedSavingsInYearScale(ProposalSeller proposalSeller,
                                                             List<ActualTariff> actualTariffList,
-                                                            TotalConsumptionSummaryDTO totalConsumptionSummaryDTO,
+                                                            TotalConsumptionSummary totalConsumptionSummaryDTO,
                                                             BigDecimal actualTradeFee) {
 
         BigDecimal totalActualCostForAllUnitsConsumption = BigDecimal.ZERO;
@@ -235,7 +224,7 @@ public class ElectricityOfferCalculationService {
                 .multiply(new BigDecimal(365));
     }
 
-    private BigDecimal calculateEstimatedUnitConsumptionInYearScale(TotalConsumptionSummaryDTO totalConsumptionSummaryDTO) {
+    private BigDecimal calculateEstimatedUnitConsumptionInYearScale(TotalConsumptionSummary totalConsumptionSummaryDTO) {
         BigDecimal totalElectricityUnitsConsumptionInAllPeriods = totalConsumptionSummaryDTO.getTotalElectricityUnitsConsumptionInAllPeriods();
         BigDecimal totalNumberOfDaysForAllPeriods = new BigDecimal(totalConsumptionSummaryDTO.getTotalNumberOfDaysForAllPeriods());
         return totalElectricityUnitsConsumptionInAllPeriods
@@ -251,7 +240,7 @@ public class ElectricityOfferCalculationService {
 
     private BigDecimal calculateEstimatedContractProfitValueInYearScale(ProposalSeller proposalSeller,
                                                                         List<ActualTariff> actualTariffList,
-                                                                        TotalConsumptionSummaryDTO totalConsumptionSummaryDTO) {
+                                                                        TotalConsumptionSummary totalConsumptionSummaryDTO) {
         BigDecimal profitForAllTariffs = BigDecimal.ZERO;
         for (ProposalTariff proposalTariff : proposalSeller.getProposalTariffList()) {
             BigDecimal marginForUnitPrice = proposalTariff.getProposalUnitPrice().subtract(proposalTariff.getSellerMinimalUnitPrice());

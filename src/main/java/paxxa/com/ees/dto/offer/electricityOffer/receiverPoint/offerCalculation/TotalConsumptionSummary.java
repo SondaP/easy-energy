@@ -2,7 +2,7 @@ package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation;
 
 import java.math.BigDecimal;
 
-public class TotalConsumptionSummaryDTO {
+public class TotalConsumptionSummary {
 
     private Integer totalNumberOfDaysForAllPeriods;
     private BigDecimal totalElectricityUnitsConsumptionInAllPeriods;

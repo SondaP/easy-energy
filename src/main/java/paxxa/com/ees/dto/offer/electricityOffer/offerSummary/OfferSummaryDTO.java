@@ -4,13 +4,13 @@ import java.util.List;
 
 public class OfferSummaryDTO {
 
-    private List<AllReceiverPointsEstimationForSellerDTO> electricityReceiverPointEstimationList;
+    private List<AllReceiverPointsEstimationForSeller> electricityReceiverPointEstimationList;
 
-    public List<AllReceiverPointsEstimationForSellerDTO> getElectricityReceiverPointEstimationList() {
+    public List<AllReceiverPointsEstimationForSeller> getElectricityReceiverPointEstimationList() {
         return electricityReceiverPointEstimationList;
     }
 
-    public void setElectricityReceiverPointEstimationList(List<AllReceiverPointsEstimationForSellerDTO> electricityReceiverPointEstimationList) {
+    public void setElectricityReceiverPointEstimationList(List<AllReceiverPointsEstimationForSeller> electricityReceiverPointEstimationList) {
         this.electricityReceiverPointEstimationList = electricityReceiverPointEstimationList;
     }
 }

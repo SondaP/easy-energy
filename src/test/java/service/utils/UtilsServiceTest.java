@@ -6,23 +6,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import paxxa.com.ees.dto.company.CompanyDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRootDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEstimationForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSellerDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.*;
-import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.*;
 import paxxa.com.ees.service.utils.SampleDataService;
 import paxxa.com.ees.service.utils.UtilsService;
 
 import javax.xml.bind.JAXBException;
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})

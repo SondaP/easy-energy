@@ -12,6 +12,7 @@ public class ProposalSeller {
     private BigDecimal proposalTradeFee;
     private Date sellerTariffPublicationDate;
     private List<ProposalTariff> proposalTariffList;
+    private ReceiverPointEstimation receiverPointEstimation;
 
     public String getSellerCode() {
         return sellerCode;
@@ -43,5 +44,13 @@ public class ProposalSeller {
 
     public void setProposalTariffList(List<ProposalTariff> proposalTariffList) {
         this.proposalTariffList = proposalTariffList;
+    }
+
+    public ReceiverPointEstimation getReceiverPointEstimation() {
+        return receiverPointEstimation;
+    }
+
+    public void setReceiverPointEstimation(ReceiverPointEstimation receiverPointEstimation) {
+        this.receiverPointEstimation = receiverPointEstimation;
     }
 }

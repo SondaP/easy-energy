@@ -4,20 +4,18 @@ import java.util.List;
 
 public class OfferCalculation {
 
-    private TotalConsumptionSummaryDTO totalConsumptionSummaryDTO;
+    private TotalConsumptionSummary totalConsumptionSummary;
     private ActualReceiverPointFees actualReceiverPointFees;
     private OfferParameters offerParameters;
-
     private List<ProposalSeller> proposalSellerList;
-    private List<ReceiverPointEstimationDTO> receiverPointEstimationList;
 
 
-    public TotalConsumptionSummaryDTO getTotalConsumptionSummaryDTO() {
-        return totalConsumptionSummaryDTO;
+    public TotalConsumptionSummary getTotalConsumptionSummary() {
+        return totalConsumptionSummary;
     }
 
-    public void setTotalConsumptionSummaryDTO(TotalConsumptionSummaryDTO totalConsumptionSummaryDTO) {
-        this.totalConsumptionSummaryDTO = totalConsumptionSummaryDTO;
+    public void setTotalConsumptionSummary(TotalConsumptionSummary totalConsumptionSummary) {
+        this.totalConsumptionSummary = totalConsumptionSummary;
     }
 
     public ActualReceiverPointFees getActualReceiverPointFees() {
@@ -44,11 +42,4 @@ public class OfferCalculation {
         this.proposalSellerList = proposalSellerList;
     }
 
-    public List<ReceiverPointEstimationDTO> getReceiverPointEstimationList() {
-        return receiverPointEstimationList;
-    }
-
-    public void setReceiverPointEstimationList(List<ReceiverPointEstimationDTO> receiverPointEstimationList) {
-        this.receiverPointEstimationList = receiverPointEstimationList;
-    }
 }
