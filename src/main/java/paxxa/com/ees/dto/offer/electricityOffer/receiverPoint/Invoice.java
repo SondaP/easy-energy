@@ -1,16 +1,17 @@
 package paxxa.com.ees.dto.offer.electricityOffer.receiverPoint;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.InvoiceZoneConsumption;
 
-public class ActualZoneConsumption {
+import java.util.Date;
+import java.util.List;
+
+public class Invoice {
 
     private Integer orderNumber;
-    private String actualZoneCode;
     private String documentNumber;
     private Date periodStart;
     private Date getPeriodStop;
-    private BigDecimal unitConsumption;
+    private List<InvoiceZoneConsumption> invoiceZoneConsumptionList;
 
     public Integer getOrderNumber() {
         return orderNumber;
@@ -18,14 +19,6 @@ public class ActualZoneConsumption {
 
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
-    }
-
-    public String getActualZoneCode() {
-        return actualZoneCode;
-    }
-
-    public void setActualZoneCode(String actualZoneCode) {
-        this.actualZoneCode = actualZoneCode;
     }
 
     public String getDocumentNumber() {
@@ -52,11 +45,11 @@ public class ActualZoneConsumption {
         this.getPeriodStop = getPeriodStop;
     }
 
-    public BigDecimal getUnitConsumption() {
-        return unitConsumption;
+    public List<InvoiceZoneConsumption> getInvoiceZoneConsumptionList() {
+        return invoiceZoneConsumptionList;
     }
 
-    public void setUnitConsumption(BigDecimal unitConsumption) {
-        this.unitConsumption = unitConsumption;
+    public void setInvoiceZoneConsumptionList(List<InvoiceZoneConsumption> invoiceZoneConsumptionList) {
+        this.invoiceZoneConsumptionList = invoiceZoneConsumptionList;
     }
 }

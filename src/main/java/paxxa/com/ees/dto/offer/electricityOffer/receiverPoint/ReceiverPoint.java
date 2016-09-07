@@ -10,7 +10,7 @@ public class ReceiverPoint {
     private String tariffCode;
     private Integer actualNumberOfZones;
     private List<ActualZone> actualZoneList;
-    private List<ActualZoneConsumption> actualZoneConsumptionList;
+    private List<Invoice> invoiceList;
     private OfferCalculation receiverPointOfferCalculation;
 
     public String getReceiverPointDescription() {
@@ -45,12 +45,12 @@ public class ReceiverPoint {
         this.actualZoneList = actualZoneList;
     }
 
-    public List<ActualZoneConsumption> getActualZoneConsumptionList() {
-        return actualZoneConsumptionList;
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
     }
 
-    public void setActualZoneConsumptionList(List<ActualZoneConsumption> actualZoneConsumptionList) {
-        this.actualZoneConsumptionList = actualZoneConsumptionList;
+    public void setInvoiceList(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 
     public OfferCalculation getReceiverPointOfferCalculation() {

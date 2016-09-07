@@ -1,9 +1,41 @@
 package paxxa.com.ees.service.offerCalculation.electricityOffer;
 
 import org.springframework.stereotype.Service;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPoint;
+import paxxa.com.ees.service.exception.OfferCalculationException.IncorrectDataException;
+
+import java.util.List;
 
 @Service
 public class ElectricityOfferValidationService {
+
+    public void validateReceiverPointList(List<ReceiverPoint> receiverPointList) {
+        for (ReceiverPoint receiverPoint : receiverPointList) {
+            if (receiverPoint.getReceiverPointDescription() == null) {
+                String message = "Value for attribute: receiverPointDescription from Object: ReceiverPoint at "
+                        + receiverPoint.getReceiverPointDescription() + ", is required";
+                throw new IncorrectDataException(message);
+            }
+            if (receiverPoint.getActualNumberOfZones() == null) {
+                String message = "Value for attribute: actualNumberOfZones from Object: ReceiverPoint at "
+                        + receiverPoint.getReceiverPointDescription() + ", is required";
+                throw new IncorrectDataException(message);
+            }
+            if (receiverPoint.getTariffCode() == null) {
+                String message = "Value for attribute: tariffCode from Object: ReceiverPoint at "
+                        + receiverPoint.getReceiverPointDescription() + ", is required";
+                throw new IncorrectDataException(message);
+            }
+
+
+        }
+
+
+    }
+
+
+
+
 
   /*  public void validateTariffPeriodsConsumptions(List<ActualTariff> actualTariffList, String receiverPointDescription) {
         for (ActualTariff actualTariff : actualTariffList) {

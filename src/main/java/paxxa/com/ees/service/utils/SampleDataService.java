@@ -65,7 +65,7 @@ public class SampleDataService {
         receiverPoint.setTariffCode("Taryfa Popołudniowa");
         receiverPoint.setActualNumberOfZones(2);
         receiverPoint.setActualZoneList(generateActualZoneList_forPoint_1());
-        receiverPoint.setActualZoneConsumptionList(generateActualZoneConsumption_forPoint_1());
+        receiverPoint.setInvoiceList(generateActualZoneConsumption_forPoint_1());
         receiverPoint.setReceiverPointOfferCalculation(generateOfferCalculation());
         return receiverPoint;
     }
@@ -79,30 +79,40 @@ public class SampleDataService {
         return Arrays.asList(actualZone_1, actualZone_2);
     }
 
-    private List<ActualZoneConsumption> generateActualZoneConsumption_forPoint_1() {
-        ActualZoneConsumption actualZoneConsumption_Zone_A1_Document1 = new ActualZoneConsumption();
-        actualZoneConsumption_Zone_A1_Document1.setActualZoneCode(STREFA_A1);
-        actualZoneConsumption_Zone_A1_Document1.setDocumentNumber("FA 22/08/2016");
-        actualZoneConsumption_Zone_A1_Document1.setPeriodStart(utilsService.getDateObjectForPattern("2016-01-20"));
-        actualZoneConsumption_Zone_A1_Document1.setGetPeriodStop(utilsService.getDateObjectForPattern("2016-05-25"));
-        actualZoneConsumption_Zone_A1_Document1.setUnitConsumption(new BigDecimal(300));
+    private List<Invoice> generateActualZoneConsumption_forPoint_1() {
+        Invoice actualZoneConsumption_Document1 = new Invoice();
+        actualZoneConsumption_Document1.setDocumentNumber("FA 22/08/2016");
+        actualZoneConsumption_Document1.setPeriodStart(utilsService.getDateObjectForPattern("2016-01-20"));
+        actualZoneConsumption_Document1.setGetPeriodStop(utilsService.getDateObjectForPattern("2016-05-25"));
 
-        ActualZoneConsumption actualZoneConsumption_Zone_A1_Document2 = new ActualZoneConsumption();
-        actualZoneConsumption_Zone_A1_Document2.setActualZoneCode(STREFA_A1);
-        actualZoneConsumption_Zone_A1_Document2.setDocumentNumber("FA 55/08/2016");
-        actualZoneConsumption_Zone_A1_Document2.setPeriodStart(utilsService.getDateObjectForPattern("2016-05-10"));
-        actualZoneConsumption_Zone_A1_Document2.setGetPeriodStop(utilsService.getDateObjectForPattern("2016-05-20"));
-        actualZoneConsumption_Zone_A1_Document2.setUnitConsumption(new BigDecimal(300));
+        InvoiceZoneConsumption invoiceZoneConsumption_Zone_A1_Dokument1 = new InvoiceZoneConsumption();
+        invoiceZoneConsumption_Zone_A1_Dokument1.setActualZoneCode(STREFA_A1);
+        invoiceZoneConsumption_Zone_A1_Dokument1.setUnitConsumption(new BigDecimal(300));
 
-        ActualZoneConsumption actualZoneConsumption_Zone_C2_Document1 = new ActualZoneConsumption();
-        actualZoneConsumption_Zone_C2_Document1.setActualZoneCode(STREFA_C2);
-        actualZoneConsumption_Zone_C2_Document1.setDocumentNumber("FA 188/10/2016");
-        actualZoneConsumption_Zone_C2_Document1.setPeriodStart(utilsService.getDateObjectForPattern("2016-03-10"));
-        actualZoneConsumption_Zone_C2_Document1.setGetPeriodStop(utilsService.getDateObjectForPattern("2016-05-10"));
-        actualZoneConsumption_Zone_C2_Document1.setUnitConsumption(new BigDecimal(300));
+        InvoiceZoneConsumption invoiceZoneConsumption_Zone_C2_Dokument1 = new InvoiceZoneConsumption();
+        invoiceZoneConsumption_Zone_C2_Dokument1.setActualZoneCode(STREFA_C2);
+        invoiceZoneConsumption_Zone_C2_Dokument1.setUnitConsumption(new BigDecimal(200));
 
-        return Arrays.asList(actualZoneConsumption_Zone_A1_Document1, actualZoneConsumption_Zone_C2_Document1,
-                actualZoneConsumption_Zone_C2_Document1);
+        actualZoneConsumption_Document1.setInvoiceZoneConsumptionList(Arrays.asList(invoiceZoneConsumption_Zone_A1_Dokument1, invoiceZoneConsumption_Zone_C2_Dokument1));
+
+
+        Invoice actualZoneConsumption_Zone_C2_Document2 = new Invoice();
+        actualZoneConsumption_Zone_C2_Document2.setDocumentNumber("FA 188/10/2016");
+        actualZoneConsumption_Zone_C2_Document2.setPeriodStart(utilsService.getDateObjectForPattern("2016-03-10"));
+        actualZoneConsumption_Zone_C2_Document2.setGetPeriodStop(utilsService.getDateObjectForPattern("2016-05-10"));
+
+        InvoiceZoneConsumption invoiceZoneConsumption_Zone_A1_Dokument2 = new InvoiceZoneConsumption();
+        invoiceZoneConsumption_Zone_A1_Dokument2.setActualZoneCode(STREFA_A1);
+        invoiceZoneConsumption_Zone_A1_Dokument2.setUnitConsumption(new BigDecimal(300));
+
+        InvoiceZoneConsumption invoiceZoneConsumption_Zone_C2_Dokument2 = new InvoiceZoneConsumption();
+        invoiceZoneConsumption_Zone_C2_Dokument2.setActualZoneCode(STREFA_C2);
+        invoiceZoneConsumption_Zone_C2_Dokument2.setUnitConsumption(new BigDecimal(200));
+
+        actualZoneConsumption_Zone_C2_Document2.setInvoiceZoneConsumptionList(Arrays.asList(
+                invoiceZoneConsumption_Zone_A1_Dokument2, invoiceZoneConsumption_Zone_C2_Dokument2));
+
+        return Arrays.asList(actualZoneConsumption_Document1, actualZoneConsumption_Zone_C2_Document2);
     }
 
     private OfferCalculation generateOfferCalculation() {
