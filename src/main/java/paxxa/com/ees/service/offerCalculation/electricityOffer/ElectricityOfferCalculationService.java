@@ -11,6 +11,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.T
 import paxxa.com.ees.service.utils.UtilsService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -44,12 +45,12 @@ public class ElectricityOfferCalculationService {
     }
 
     public void setOfferCalculation(ReceiverPoint receiverPoint){
-        OfferCalculation offerCalculation = new OfferCalculation();
+        OfferCalculation receiverPointOfferCalculation = receiverPoint.getReceiverPointOfferCalculation();
         TotalConsumptionSummary totalConsumptionSummary = calculateTotalConsumptionSummary(receiverPoint.getInvoiceList());
-        offerCalculation.setTotalConsumptionSummary(totalConsumptionSummary);
+        receiverPointOfferCalculation.setTotalConsumptionSummary(totalConsumptionSummary);
 
 
-        receiverPoint.setReceiverPointOfferCalculation(offerCalculation);
+        receiverPoint.setReceiverPointOfferCalculation(receiverPointOfferCalculation);
     }
 
     public TotalConsumptionSummary calculateTotalConsumptionSummary(List<Invoice> invoiceList) {
@@ -60,17 +61,27 @@ public class ElectricityOfferCalculationService {
                     invoice.getPeriodStart(), invoice.getGetPeriodStop());
             totalNumberOfDaysForAllPeriods = totalNumberOfDaysForAllPeriods + differenceDays;
 
-
             BigDecimal invoiceUnitConsumption = invoice.getInvoiceZoneConsumptionList()
                     .stream()
                     .map(InvoiceZoneConsumption::getUnitConsumption)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             totalElectricityUnitsConsumptionInAllPeriods = totalElectricityUnitsConsumptionInAllPeriods.add(invoiceUnitConsumption);
         }
+        BigDecimal predictedElectricityUnitConsumptionPerYear =
+                calculatePredictedElectricityUnitConsumptionPerYear(new BigDecimal(totalNumberOfDaysForAllPeriods), totalElectricityUnitsConsumptionInAllPeriods);
+
         TotalConsumptionSummary totalConsumptionSummary = new TotalConsumptionSummary();
         totalConsumptionSummary.setTotalNumberOfDaysForAllPeriods(totalNumberOfDaysForAllPeriods);
         totalConsumptionSummary.setTotalElectricityUnitsConsumptionInAllPeriods(totalElectricityUnitsConsumptionInAllPeriods);
+        totalConsumptionSummary.setPredictedElectricityUnitConsumptionPerYear(predictedElectricityUnitConsumptionPerYear);
         return totalConsumptionSummary;
+    }
+
+    private BigDecimal calculatePredictedElectricityUnitConsumptionPerYear(
+            BigDecimal totalDaysNumberForPeriods, BigDecimal totalElectricityConsumptionUnitsForReceiverPoint) {
+        return totalElectricityConsumptionUnitsForReceiverPoint
+                .divide(totalDaysNumberForPeriods, 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(365));
     }
 
 
