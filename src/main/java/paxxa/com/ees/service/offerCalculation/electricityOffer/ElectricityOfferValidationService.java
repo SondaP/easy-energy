@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class ElectricityOfferValidationService {
 
+
     public void validateReceiverPointList(List<ReceiverPoint> receiverPointList) {
         for (ReceiverPoint receiverPoint : receiverPointList) {
             if (receiverPoint.getReceiverPointDescription() == null) {
@@ -62,10 +63,15 @@ public class ElectricityOfferValidationService {
                                 + receiverPoint.getReceiverPointDescription() + ", is required";
                         throw new IncorrectDataException(message);
                     }
-
+                    List<ActualZone> actualZoneList = receiverPoint.getActualZoneList();
+                    List<String> actualZonesCodes = getActualZonesCodes(actualZoneList);
+                    if (!actualZonesCodes.contains(invoiceZoneConsumption.getActualZoneCode())) {
+                        String message = "Value for attribute: actualZoneCode from InvoiceZoneConsumption, at ReceiverPoint: "
+                                + receiverPoint.getReceiverPointDescription() + ", does not match witch provided ActualZoneCodes for receiver point";
+                        throw new IncorrectDataException(message);
+                    }
                 }
             }
-
         }
     }
 
