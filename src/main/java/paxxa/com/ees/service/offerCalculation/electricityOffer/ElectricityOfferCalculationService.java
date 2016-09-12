@@ -81,12 +81,12 @@ public class ElectricityOfferCalculationService {
         return totalConsumptionSummary;
     }
 
-    private List<ZoneTotalConsumptionSummary> getCalculatedZoneTotalConsumptionSummaryList(List<Invoice> invoiceList){
+    private List<ZoneTotalConsumptionSummary> getCalculatedZoneTotalConsumptionSummaryList(List<Invoice> invoiceList) {
         Map<String, ZoneTotalConsumptionSummary> zoneTotalConsumptionMap = new HashMap<>();
         for (Invoice invoice : invoiceList) {
             for (InvoiceZoneConsumption invoiceZoneConsumption : invoice.getInvoiceZoneConsumptionList()) {
                 String actualZoneCode = invoiceZoneConsumption.getActualZoneCode();
-                if(zoneTotalConsumptionMap.containsKey(actualZoneCode)){
+                if (zoneTotalConsumptionMap.containsKey(actualZoneCode)) {
                     ZoneTotalConsumptionSummary zoneTotalConsumptionSummary = zoneTotalConsumptionMap.get(actualZoneCode);
                     BigDecimal actualTotalUnitConsumption = zoneTotalConsumptionSummary.getTotalUnitConsumption();
                     zoneTotalConsumptionSummary.setTotalUnitConsumption(actualTotalUnitConsumption.
@@ -99,7 +99,7 @@ public class ElectricityOfferCalculationService {
                 }
             }
         }
-    return new ArrayList<>(zoneTotalConsumptionMap.values());
+        return new ArrayList<>(zoneTotalConsumptionMap.values());
     }
 
     private BigDecimal calculatePredictedElectricityUnitConsumptionPerYear(BigDecimal totalDaysNumberForPeriods,
@@ -173,7 +173,7 @@ public class ElectricityOfferCalculationService {
         BigDecimal profitForAllZones = BigDecimal.ZERO;
         for (ProposalZoneDetails proposalZoneDetails : proposalSeller.getProposalZoneDetailsList()) {
             BigDecimal marginForUnitPrice = proposalZoneDetails.getProposalUnitPrice().subtract(proposalZoneDetails.getSellerMinimalUnitPrice());
-            BigDecimal totalElectricityUnitConsumptionForZoneCode = getTotalElectricityUnitConsumptionForZoneCode(invoiceList, proposalZoneDetails.getActualZoneCode());
+            BigDecimal totalElectricityUnitConsumptionForZoneCode = getTotalElectricityUnitConsumptionForZoneCode(totalConsumptionSummary, proposalZoneDetails.getActualZoneCode());
 
             BigDecimal zoneProfit = marginForUnitPrice
                     .multiply(totalElectricityUnitConsumptionForZoneCode);
@@ -186,16 +186,13 @@ public class ElectricityOfferCalculationService {
         return estimatedContractValueInYearScale;
     }
 
-    private BigDecimal getTotalElectricityUnitConsumptionForZoneCode(List<Invoice> invoiceList, String expectedZoneCode) {
-        BigDecimal totalElectricityUnitConsumptionForZoneCode = BigDecimal.ZERO;
-        for (Invoice invoice : invoiceList) {
-            for (InvoiceZoneConsumption invoiceZoneConsumption : invoice.getInvoiceZoneConsumptionList()) {
-                if (expectedZoneCode.equals(invoiceZoneConsumption.getActualZoneCode())) {
-                    totalElectricityUnitConsumptionForZoneCode = totalElectricityUnitConsumptionForZoneCode.add(invoiceZoneConsumption.getUnitConsumption());
-                }
-            }
-        }
-        return totalElectricityUnitConsumptionForZoneCode;
+    private BigDecimal getTotalElectricityUnitConsumptionForZoneCode(TotalConsumptionSummary totalConsumptionSummary, String expectedZoneCode) {
+        return totalConsumptionSummary.getZoneTotalConsumptionSummaryList()
+                .stream()
+                .filter(x -> expectedZoneCode.equals(x.getActualZoneCode()))
+                .findFirst()
+                .map(ZoneTotalConsumptionSummary::getTotalUnitConsumption)
+                .orElse(BigDecimal.ZERO);
     }
 
     private BigDecimal calculateEstimatedContractProfitValue(BigDecimal estimatedContractProfitValueInYearScale, BigDecimal proposalContractMonthLength) {
@@ -252,14 +249,6 @@ public class ElectricityOfferCalculationService {
     }
 
     */
-
-
-
-
-
-
-
-
 
 
     //Calculating ReceiverPointProvisionList
