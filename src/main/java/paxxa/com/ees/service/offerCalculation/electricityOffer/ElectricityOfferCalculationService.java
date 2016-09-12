@@ -146,8 +146,10 @@ public class ElectricityOfferCalculationService {
         BigDecimal estimatedUnitConsumptionInYearScale = calculateEstimatedUnitConsumptionInYearScale(totalConsumptionSummary);
         BigDecimal estimatedContractProfitValueInYearScale = calculateEstimatedContractProfitValueInYearScale(
                 proposalSeller, actualReceiverPointFees, totalConsumptionSummary);
-        BigDecimal estimatedContractProfitValue = calculateEstimatedContractProfitValue(estimatedContractProfitValueInYearScale, proposalContractMonthLength);
-        BigDecimal estimatedSavingsInYearScale = calculateEstimatedSavingsInYearScale(proposalSeller, actualReceiverPointFees, totalConsumptionSummary, proposalContractMonthLength);
+        BigDecimal estimatedContractProfitValue = calculateEstimatedContractProfitValue(
+                estimatedContractProfitValueInYearScale, proposalContractMonthLength);
+        BigDecimal estimatedSavingsInYearScale =
+                calculateEstimatedSavingsInYearScale(proposalSeller, actualReceiverPointFees, totalConsumptionSummary, proposalContractMonthLength);
 
         ReceiverPointDataEstimation receiverPointDataEstimation = new ReceiverPointDataEstimation();
         receiverPointDataEstimation.setTariffIssueDate(proposalSeller.getSellerTariffPublicationDate());
