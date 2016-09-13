@@ -8,6 +8,7 @@ public class TotalConsumptionSummary {
     private Integer totalNumberOfDaysForAllPeriods;
     private BigDecimal totalElectricityUnitsConsumptionInAllPeriods;
     private BigDecimal predictedElectricityUnitConsumptionPerYear;
+    private Integer invoiceNumbers;
     private List<ZoneTotalConsumptionSummary> zoneTotalConsumptionSummaryList;
 
     public Integer getTotalNumberOfDaysForAllPeriods() {
@@ -32,6 +33,14 @@ public class TotalConsumptionSummary {
 
     public void setPredictedElectricityUnitConsumptionPerYear(BigDecimal predictedElectricityUnitConsumptionPerYear) {
         this.predictedElectricityUnitConsumptionPerYear = predictedElectricityUnitConsumptionPerYear;
+    }
+
+    public Integer getInvoiceNumbers() {
+        return invoiceNumbers;
+    }
+
+    public void setInvoiceNumbers(Integer invoiceNumbers) {
+        this.invoiceNumbers = invoiceNumbers;
     }
 
     public List<ZoneTotalConsumptionSummary> getZoneTotalConsumptionSummaryList() {
