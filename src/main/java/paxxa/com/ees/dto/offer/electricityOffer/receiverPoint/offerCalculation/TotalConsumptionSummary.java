@@ -10,6 +10,8 @@ public class TotalConsumptionSummary {
     private BigDecimal predictedElectricityUnitConsumptionPerYear;
     private Integer invoiceNumbers;
     private List<ZoneTotalConsumptionSummary> zoneTotalConsumptionSummaryList;
+    private BigDecimal totalActualCostForAllUnitsConsumption;
+    private BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal;
 
     public Integer getTotalNumberOfDaysForAllPeriods() {
         return totalNumberOfDaysForAllPeriods;
@@ -49,5 +51,21 @@ public class TotalConsumptionSummary {
 
     public void setZoneTotalConsumptionSummaryList(List<ZoneTotalConsumptionSummary> zoneTotalConsumptionSummaryList) {
         this.zoneTotalConsumptionSummaryList = zoneTotalConsumptionSummaryList;
+    }
+
+    public BigDecimal getTotalActualCostForAllUnitsConsumption() {
+        return totalActualCostForAllUnitsConsumption;
+    }
+
+    public void setTotalActualCostForAllUnitsConsumption(BigDecimal totalActualCostForAllUnitsConsumption) {
+        this.totalActualCostForAllUnitsConsumption = totalActualCostForAllUnitsConsumption;
+    }
+
+    public BigDecimal getTotalCostForAllUnitsConsumptionBasedOnProposal() {
+        return totalCostForAllUnitsConsumptionBasedOnProposal;
+    }
+
+    public void setTotalCostForAllUnitsConsumptionBasedOnProposal(BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal) {
+        this.totalCostForAllUnitsConsumptionBasedOnProposal = totalCostForAllUnitsConsumptionBasedOnProposal;
     }
 }

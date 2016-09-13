@@ -152,6 +152,7 @@ public class ElectricityOfferCalculationService {
         BigDecimal estimatedSavingsInYearScale =
                 calculateEstimatedSavingsInYearScale(proposalSeller, actualReceiverPointFees, totalConsumptionSummary);
         BigDecimal estimatedSavingsInContractScale = calculateEstimatedSavingsInContractScale(estimatedSavingsInYearScale, proposalContractMonthLength);
+        BigDecimal estimatedSavingsInPercentage = calculateEstimatedSavingsInPercentage(totalConsumptionSummary);
 
 
         ReceiverPointDataEstimation receiverPointDataEstimation = new ReceiverPointDataEstimation();
@@ -161,6 +162,7 @@ public class ElectricityOfferCalculationService {
         receiverPointDataEstimation.setEstimatedContractProfitValue(estimatedContractProfitValue);
         receiverPointDataEstimation.setEstimatedSavingsInYearScale(estimatedSavingsInYearScale);
         receiverPointDataEstimation.setEstimatedSavingsInContractScale(estimatedSavingsInContractScale);
+        receiverPointDataEstimation.setEstimatedSavingsInPercentage(estimatedSavingsInPercentage);
 
         return receiverPointDataEstimation;
     }
@@ -191,7 +193,7 @@ public class ElectricityOfferCalculationService {
         BigDecimal actualTotalTradeFee = invoiceNumbers.multiply(actualReceiverPointFees.getActualTradeFee());
 
         profitForAllZones = profitForAllZones.add(proposalTotalTradeFee.subtract(actualTotalTradeFee));
-        
+
         Integer totalNumberOfDaysForAllPeriods = totalConsumptionSummary.getTotalNumberOfDaysForAllPeriods();
         BigDecimal estimatedContractValueInYearScale = profitForAllZones
                 .divide(new BigDecimal(totalNumberOfDaysForAllPeriods), 2, RoundingMode.HALF_EVEN)
@@ -234,6 +236,7 @@ public class ElectricityOfferCalculationService {
         }
         BigDecimal actualTotalTradeFee = invoiceNumbers.multiply(actualReceiverPointFees.getActualTradeFee());
         totalActualCostForAllUnitsConsumption = totalActualCostForAllUnitsConsumption.add(actualTotalTradeFee);
+        totalConsumptionSummary.setTotalActualCostForAllUnitsConsumption(totalActualCostForAllUnitsConsumption);
 
         BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal = BigDecimal.ZERO;
         List<ProposalZoneDetails> proposalZoneDetailsList = proposalSeller.getProposalZoneDetailsList();
@@ -249,6 +252,8 @@ public class ElectricityOfferCalculationService {
         BigDecimal proposalTradeFee = proposalSeller.getProposalTradeFee();
         BigDecimal proposalTotalTradeFee = invoiceNumbers.multiply(proposalTradeFee);
         totalCostForAllUnitsConsumptionBasedOnProposal = totalCostForAllUnitsConsumptionBasedOnProposal.add(proposalTotalTradeFee);
+        totalConsumptionSummary.setTotalCostForAllUnitsConsumptionBasedOnProposal(totalCostForAllUnitsConsumptionBasedOnProposal);
+
 
         BigDecimal totalNumberOfDaysForAllPeriods = new BigDecimal(totalConsumptionSummary.getTotalNumberOfDaysForAllPeriods());
         return totalActualCostForAllUnitsConsumption
@@ -274,8 +279,10 @@ public class ElectricityOfferCalculationService {
                 .multiply(proposalContractMonthLength);
     }
 
-    private BigDecimal calculateEstimatedSavingsInPercentage() {
-        return null;
+    private BigDecimal calculateEstimatedSavingsInPercentage(TotalConsumptionSummary totalConsumptionSummary) {
+        BigDecimal ratio = totalConsumptionSummary.getTotalCostForAllUnitsConsumptionBasedOnProposal()
+                .divide(totalConsumptionSummary.getTotalActualCostForAllUnitsConsumption(), 2, BigDecimal.ROUND_HALF_EVEN);
+        return (BigDecimal.ONE.subtract(ratio)).multiply(new BigDecimal(100));
     }
 
 
