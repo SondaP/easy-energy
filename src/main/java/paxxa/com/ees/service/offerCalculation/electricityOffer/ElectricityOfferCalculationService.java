@@ -150,6 +150,8 @@ public class ElectricityOfferCalculationService {
                 estimatedContractProfitValueInYearScale, proposalContractMonthLength);
         BigDecimal estimatedSavingsInYearScale =
                 calculateEstimatedSavingsInYearScale(proposalSeller, actualReceiverPointFees, totalConsumptionSummary, proposalContractMonthLength);
+        BigDecimal estimatedSavingsInContractScale = calculateEstimatedSavingsInContractScale(estimatedSavingsInYearScale, proposalContractMonthLength);
+
 
         ReceiverPointDataEstimation receiverPointDataEstimation = new ReceiverPointDataEstimation();
         receiverPointDataEstimation.setTariffIssueDate(proposalSeller.getSellerTariffPublicationDate());
@@ -157,6 +159,7 @@ public class ElectricityOfferCalculationService {
         receiverPointDataEstimation.setEstimatedContractProfitValueInYearScale(estimatedContractProfitValueInYearScale);
         receiverPointDataEstimation.setEstimatedContractProfitValue(estimatedContractProfitValue);
         receiverPointDataEstimation.setEstimatedSavingsInYearScale(estimatedSavingsInYearScale);
+        receiverPointDataEstimation.setEstimatedSavingsInContractScale(estimatedSavingsInContractScale);
 
         return receiverPointDataEstimation;
     }
@@ -247,6 +250,13 @@ public class ElectricityOfferCalculationService {
                 .findFirst()
                 .map(ActualZoneFee::getActualUnitPrice)
                 .orElseThrow(() -> new RuntimeException("Did not fount actual Unit price for expected ZoneCode:" + expectedZoneCode));
+    }
+
+    private BigDecimal calculateEstimatedSavingsInContractScale(BigDecimal estimatedSavingsInYearScale, BigDecimal proposalContractMonthLength){
+        BigDecimal year = new BigDecimal(12);
+        return estimatedSavingsInYearScale
+                .divide(year, 2, BigDecimal.ROUND_HALF_UP)
+                .multiply(proposalContractMonthLength);
     }
 
 
