@@ -8,6 +8,11 @@ public class DomainConstans {
         String ROLE_TRADER = "ROLE_TRADER";
     }
 
+    public interface SELLER_CODE {
+        String CEZ_SELLER = "CEZ_SELLER";
+        String TAURON_SELLER = "TAURON";
+    }
+
     public interface PRODUCT_CODE {
         String ELECTRICITY = "Energia elektryczna";
         String GAS = "Gas";

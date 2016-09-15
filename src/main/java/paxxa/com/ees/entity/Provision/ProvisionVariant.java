@@ -1,21 +1,17 @@
-package paxxa.com.ees.entity.traderProvisionDetails;
+package paxxa.com.ees.entity.Provision;
 
-import paxxa.com.ees.entity.user.User;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 @Entity
-public class TraderProvisionDetails {
+public class ProvisionVariant {
 
     @Id
     @GeneratedValue
     private Integer id;
-    @OneToOne
-    @JoinColumn(name = "FK_USER")
-    private User user;
-    private String productCode;
-    private String sellerCode;
+
     private String provisionLevelCode;
     private BigDecimal provisionPercentageValue;
 
@@ -25,30 +21,6 @@ public class TraderProvisionDetails {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getSellerCode() {
-        return sellerCode;
-    }
-
-    public void setSellerCode(String sellerCode) {
-        this.sellerCode = sellerCode;
     }
 
     public String getProvisionLevelCode() {

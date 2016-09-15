@@ -1,0 +1,64 @@
+package paxxa.com.ees.entity.Provision;
+
+import paxxa.com.ees.entity.user.User;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+public class Provision {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    private String productCode;
+    private String sellerCode;
+
+    @OneToMany
+    private List<ProvisionVariant> provisionVariantList;
+
+    @OneToOne
+    @JoinColumn(name = "FK_USER")
+    private User user;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getSellerCode() {
+        return sellerCode;
+    }
+
+    public void setSellerCode(String sellerCode) {
+        this.sellerCode = sellerCode;
+    }
+
+    public List<ProvisionVariant> getProvisionVariantList() {
+        return provisionVariantList;
+    }
+
+    public void setProvisionVariantList(List<ProvisionVariant> provisionVariantList) {
+        this.provisionVariantList = provisionVariantList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+}
