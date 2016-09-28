@@ -35,7 +35,7 @@
 
             </td>
             <td>
-                <a href="<spring:url value="${pageContext.request.contextPath}/a/electricityOffer/${offer.id}.json"/>"
+                <a href="<spring:url value="/a/electricityOffer/${offer.id}.json"/>"
                    class="btn btn-info"> Wyświetl
                 </a>
                 <a href="<spring:url value="#" />" class="btn btn-primary">

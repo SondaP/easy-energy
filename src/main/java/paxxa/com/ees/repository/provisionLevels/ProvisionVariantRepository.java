@@ -1,4 +1,4 @@
-package paxxa.com.ees.repository.provision;
+package paxxa.com.ees.repository.provisionLevels;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import paxxa.com.ees.entity.Provision.ProvisionVariant;

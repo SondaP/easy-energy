@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Provision {
+public class ProvisionLevels {
 
     @Id
     @GeneratedValue

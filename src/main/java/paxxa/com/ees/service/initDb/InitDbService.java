@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
-import paxxa.com.ees.entity.Provision.Provision;
+import paxxa.com.ees.entity.Provision.ProvisionLevels;
 import paxxa.com.ees.entity.Provision.ProvisionVariant;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
@@ -17,8 +17,8 @@ import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.company.CompanyRepository;
 import paxxa.com.ees.repository.personalData.PersonalDataRepository;
-import paxxa.com.ees.repository.provision.ProvisionRepository;
-import paxxa.com.ees.repository.provision.ProvisionVariantRepository;
+import paxxa.com.ees.repository.provisionLevels.ProvisionLevelsRepository;
+import paxxa.com.ees.repository.provisionLevels.ProvisionVariantRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.seller.SellerRepository;
 import paxxa.com.ees.repository.user.UserRepository;
@@ -51,7 +51,7 @@ public class InitDbService {
     @Autowired
     private OfferStorageService offerStorageService;
     @Autowired
-    private ProvisionRepository provisionRepository;
+    private ProvisionLevelsRepository provisionLevelsRepository;
     @Autowired
     private ProvisionVariantRepository provisionVariantRepository;
 
@@ -150,7 +150,7 @@ public class InitDbService {
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, userAdmin_Paxxa.getName());
 
         /**
-         * Setting Provision levels for Paxxa
+         * Setting ProvisionLevels levels for Paxxa
          */
         ProvisionVariant provisionVariant_CEZ_1 = new ProvisionVariant();
         provisionVariant_CEZ_1.setProvisionLevelCode("Próg I");
@@ -164,11 +164,11 @@ public class InitDbService {
 
         provisionVariantRepository.save(provisionVariant_CEZ_2);
 
-        Provision provision = new Provision();
-        provision.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
-        provision.setUser(userAdmin_Paxxa);
-        provision.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
-        provisionRepository.save(provision);
+        ProvisionLevels provisionLevels = new ProvisionLevels();
+        provisionLevels.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        provisionLevels.setUser(userAdmin_Paxxa);
+        provisionLevels.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
+        provisionLevelsRepository.save(provisionLevels);
 
     }
 
