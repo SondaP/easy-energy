@@ -45,7 +45,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                         aria-expanded="false" aria-controls="navbar">
                 </button>
-                <a class="navbar-brand" href="<spring:url value="/"/>">Easy-energy</a>
+                <a class="navbar-brand" >Easy-energy</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

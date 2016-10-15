@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 HOME PAGE
-<c:redirect url="${pageContext.request.contextPath}/login"/>
+<% response.sendRedirect("${pageContext.request.contextPath}/login.html"); %>
+
