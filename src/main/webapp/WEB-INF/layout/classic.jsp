@@ -67,7 +67,7 @@
 
                     <%-- ADMIN (PARTNER) --%>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="<spring:url value="${pageContext.request.contextPath}/a/electricityOffer.json"/>">Dodaj
+                        <li><a href="<spring:url value="/a/electricityOffer/newOffer.html"/>">Dodaj
                             ofertę energii</a></li>
                         <li class="${currentDef == 'a-offers' ? 'active' : ''}"><a
                                 href="<spring:url value="/a/offers.html"/>">Oferty</a></li>

@@ -8,86 +8,90 @@
     </definition><!-- commons -->
     <definition name="index" extends="common">
         <put-attribute name="title" value="Easy energy"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/index/index.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/index/index.jsp"/>
         <put-attribute name="currentDef" value="index"/>
     </definition>
     <definition name="login" extends="common">
         <put-attribute name="title" value="Logowanie"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/common/login.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/login.jsp"/>
         <put-attribute name="currentDef" value="login"/>
     </definition>
     <definition name="logout" extends="common">
         <put-attribute name="title" value="Wylogowano"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/common/logout.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/logout.jsp"/>
         <put-attribute name="currentDef" value="logout"/>
     </definition>
 
     <!-- SUPER ADMIN -->
     <definition name="sa-users" extends="common">
         <put-attribute name="title" value="Użytkownicy"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/users.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/superAdmin/users.jsp"/>
         <put-attribute name="currentDef" value="sa-users"/>
     </definition>
 
     <definition name="sa-userDetails" extends="common">
         <put-attribute name="title" value="Szczegóły użytkownika"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/userDetails.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/superAdmin/userDetails.jsp"/>
         <put-attribute name="currentDef" value="sa-users"/>
     </definition>
 
     <definition name="sa-adminRegister" extends="common">
         <put-attribute name="title" value="Rejestracja konta admin"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/superAdmin/adminRegistration.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/superAdmin/adminRegistration.jsp"/>
         <put-attribute name="currentDef" value="sa-adminRegister"/>
     </definition>
 
-    <!-- ADMIN -->
+    <!-- ADMIN (Partner) -->
     <definition name="a-users" extends="common">
         <put-attribute name="title" value="Handlowcy"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/users.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/users.jsp"/>
         <put-attribute name="currentDef" value="a-users"/>
     </definition>
     <definition name="a-settings" extends="common">
         <put-attribute name="title" value="Konto"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/settings.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/settings.jsp"/>
         <put-attribute name="currentDef" value="a-settings"/>
     </definition>
     <definition name="a-account" extends="common">
         <put-attribute name="title" value="Konto"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/account.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/account.jsp"/>
         <put-attribute name="currentDef" value="a-account"/>
     </definition>
     <definition name="a-accountEdit" extends="common">
         <put-attribute name="title" value="Educja konta"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/accountEdit.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/accountEdit.jsp"/>
         <put-attribute name="currentDef" value="a-account"/>
     </definition>
     <definition name="a-sellers" extends="common">
         <put-attribute name="title" value="Sprzedawcy"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/sellers.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/sellers.jsp"/>
         <put-attribute name="currentDef" value="a-sellers"/>
     </definition>
     <definition name="a-offers" extends="common">
         <put-attribute name="title" value="Oferty"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/offers.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/offers.jsp"/>
         <put-attribute name="currentDef" value="a-offers"/>
+    </definition>
+    <definition name="a-electricityOffer-newOffer"
+                template="/WEB-INF/view/admin/electricityCalculator.jsp" >
+      <put-attribute name="title" value="Nowa Oferta"/>
     </definition>
 
 
     <!-- TRADER -->
     <definition name="a-userRegister" extends="common">
         <put-attribute name="title" value="Rejestracja konta handlowca"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin/userRegistration.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/userRegistration.jsp"/>
         <put-attribute name="currentDef" value="a-userRegister"/>
     </definition>
     <definition name="t-account" extends="common">
         <put-attribute name="title" value="Konto"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/trader/account.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/trader/account.jsp"/>
         <put-attribute name="currentDef" value="t-account"/>
     </definition>
     <definition name="t-accountEdit" extends="common">
         <put-attribute name="title" value="Educja konta"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/trader/accountEdit.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/trader/accountEdit.jsp"/>
         <put-attribute name="currentDef" value="t-account"/>
     </definition>
 

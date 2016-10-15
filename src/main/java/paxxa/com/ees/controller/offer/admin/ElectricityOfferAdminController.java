@@ -17,4 +17,12 @@ public class ElectricityOfferAdminController {
         offerStorageService.removeOffer(id);
         return "redirect:/a/offers.html";
     }
+
+    @RequestMapping(value = "/a/electricityOffer/newOffer")
+    public String createNewOffer(){
+
+        return "a-electricityOffer-newOffer";
+    }
+
+
 }

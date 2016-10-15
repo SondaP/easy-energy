@@ -6,8 +6,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <c:if test="${param.logoutSuccess eq true}">
-            <div class="alert alert-success"><center>You have been successfully
-                logout</center></div>
+            <div class="alert alert-success"><center>Nastąpiło poprawne wylogowanie</center></div>
         </c:if>
 
         <c:if test="${param.sessionExpired eq true}">
