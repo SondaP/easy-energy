@@ -2,8 +2,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
     .controller('myCtrl', ["$scope", "$http", "ModalService", function($scope, $http, ModalService) {
 
         /* Resources */
-        var resource_GET_DATA = 'http://localhost:8080/a/electricityOffer/1.json';
-        var template_yesNo = 'http://localhost:8080/resources/energyOfferCalc_V_1/templates/yesno.jsp';
+        var resource_GET_DATA = '/a/electricityOffer/1.json';
+        var template_yesNo = '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
 
         //GET DATA
         $http({
