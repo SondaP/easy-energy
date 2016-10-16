@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../layout/taglib.jsp" %>
-<script src="/resources/js/registrationValidation.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/registrationValidation.js"></script>
 
 <c:if test="${param.success eq true}">
     <div class="alert alert-success">Rejestracja zakończona powodzeniem</div>
