@@ -6,11 +6,11 @@
 <html lang="pl" data-ng-app="myApp" data-ng-controller="myCtrl">
 
 <head>
-    <link rel="stylesheet" href="/resources/energyOfferCalc_V_1/css/font-awesome.css">
-    <script src="/resources/energyOfferCalc_V_1/js/lib/jquery-3.1.0.min.js"></script>
-    <script src="/resources/energyOfferCalc_V_1/js/lib/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/resources/energyOfferCalc_V_1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/energyOfferCalc_V_1/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/css/font-awesome.css">
+    <script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/lib/jquery-3.1.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=5">
     <meta charset="UTF-8">
     <title>Oferta</title>
@@ -712,12 +712,12 @@
     <button class="btn btn-success pull-right" data-ng-click='sendData()'>Zapisz ofertę</button>
 </article>
 
-<script src="/resources/energyOfferCalc_V_1/js/lib/angular.min.js"></script>
-<script src="/resources/energyOfferCalc_V_1/js/lib/angular-animate.min.js"></script>
-<script src="/resources/energyOfferCalc_V_1/js/services/angular-modal-service.js"></script>
+<script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/lib/angular.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/lib/angular-animate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/services/angular-modal-service.js"></script>
 
-<script src="/resources/energyOfferCalc_V_1/js/app.js"></script>
-<script src='/resources/energyOfferCalc_V_1/js/controllers/yesnocontroller.js'></script>
+<script src="${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/app.js"></script>
+<script src='${pageContext.request.contextPath}/resources/energyOfferCalc_V_1/js/controllers/yesnocontroller.js'></script>
 
 </body>
 

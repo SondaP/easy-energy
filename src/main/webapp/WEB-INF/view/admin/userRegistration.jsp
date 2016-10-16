@@ -6,7 +6,7 @@
     <div class="alert alert-success">Rejestracja zakończona powodzeniem</div>
 </c:if>
 
-<form:form commandName="user" action="/a/register.html" cssClass="form-horizontal registrationForm">
+<form:form commandName="user" action="${pageContext.request.contextPath}/a/register.html" cssClass="form-horizontal registrationForm">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Nazwa:</label>
         <div class="col-sm-10">
