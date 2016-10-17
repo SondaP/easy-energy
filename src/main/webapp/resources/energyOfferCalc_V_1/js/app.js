@@ -2,15 +2,18 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
     .controller('myCtrl', ["$scope", "$http", "ModalService", function($scope, $http, ModalService) {
 
         /* Resources */
-        var resource_GET_DATA = '/a/electricityOffer/1.json';
-        var template_yesNo = '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
+        var resource_GET_DATA = '/calc/a/electricityOffer/1.json';
+        var local_pathTemplateYesNo = '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
+
+
+        var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
+        var pathTemplateYesNo = pageContext + '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
+
 
         //GET DATA
         $http({
             method: 'GET',
-            // url: 'https://easy-energy.herokuapp.com/a/electricityOffer/{id}'
-            url: resource_GET_DATA,
-            //url:'./resources/energyOfferCalc_V_1/data/punct.json',
+            url: pathGetOfferData,
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             }
@@ -19,6 +22,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             convertDate();
 
         });
+
+
 
 
         //POST DATA
@@ -229,7 +234,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         $scope.removeOfferRetailer = function(c, p) {
             ModalService.showModal({
-                templateUrl: template_yesNo,
+                templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
             }).then(function(modal) {
                 modal.element.modal();
@@ -300,7 +305,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         $scope.removeReciverPoint = function(z) {
             ModalService.showModal({
-                templateUrl: template_yesNo,
+                templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
             }).then(function(modal) {
                 modal.element.modal();
@@ -393,7 +398,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         $scope.deleteNumberOfZones = function(z) {
 
             ModalService.showModal({
-                templateUrl: template_yesNo,
+                templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
             }).then(function(modal) {
                 modal.element.modal();
@@ -462,7 +467,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         $scope.deleteUse = function(a, b) {
             ModalService.showModal({
-                templateUrl: template_yesNo,
+                templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
             }).then(function(modal) {
                 modal.element.modal();

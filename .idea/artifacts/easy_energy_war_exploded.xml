@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="easy-energy:war exploded">
-    <output-path>$PROJECT_DIR$/target/calc</output-path>
+    <output-path>$PROJECT_DIR$/target/calcTest</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -70,7 +70,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/calc/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/calcTest/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="easy-energy/web/Web" />
     </root>

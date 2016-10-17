@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="easy-energy:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="calc.war">
+    <root id="archive" name="calcTest.war">
       <element id="artifact" artifact-name="easy-energy:war exploded" />
     </root>
   </artifact>

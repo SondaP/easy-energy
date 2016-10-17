@@ -8,7 +8,7 @@
     <artifactId>easy-energy-calc</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
-        <finalName>calc</finalName>
+        <finalName>calcTest</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

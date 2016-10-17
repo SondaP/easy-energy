@@ -722,3 +722,8 @@
 </body>
 
 </html>
+
+
+<script>
+    var pageContext = "${pageContext.request.contextPath}";
+</script>
