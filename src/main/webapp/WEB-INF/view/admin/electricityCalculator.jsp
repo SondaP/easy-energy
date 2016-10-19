@@ -712,17 +712,17 @@
     <button class="btn btn-success pull-right" data-ng-click='sendData()'>Zapisz ofertę</button>
 </article>
 
-<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular-animate.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/services/angular-modal-service.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/app.js"></script>
-<script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/yesnocontroller.js'></script>
 
 </body>
 
 </html>
 
+<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular-animate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/services/angular-modal-service.js"></script>
+<script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/app.js"></script>
+<script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/yesnocontroller.js'></script>
 
 <script>
     var pageContext = "${pageContext.request.contextPath}";

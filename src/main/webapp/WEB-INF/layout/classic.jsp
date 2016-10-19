@@ -29,7 +29,7 @@
     <!-- taglib for Security expressions   -->
     <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
     <%--Local Css Style --%>
-    <link href="${pageContext.request.contextPath}/resources/css/classic.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/common/css/classic.css" rel="stylesheet">
 
 
     <title><tiles:getAsString name="title"></tiles:getAsString></title>
