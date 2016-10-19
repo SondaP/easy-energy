@@ -1,30 +1,101 @@
 angular.module('myApp', ['angularModalService', 'ngAnimate'])
-    .controller('myCtrl', ["$scope", "$http", "ModalService", function($scope, $http, ModalService) {
+ .controller('myCtrl', ["$scope", "$http", "ModalService", function($scope, $http, ModalService) {
 
-        /* Resources */
-        var resource_GET_DATA = '/calc/a/electricityOffer/1.json';
-        var local_pathTemplateYesNo = '/resources/a/electricityCalculator/templates/yesno.jsp';
-
-        var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
-        var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
+     /* Resources */
+     var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
+     var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
 
 
         //GET DATA
         $http({
             method: 'GET',
+            // url: 'http://easy-energy.ovh/calc/a/electricityOffer/1.json',
             url: pathGetOfferData,
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             }
         }).then(function(response) {
+
             $scope.content = response.data;
+            convertDate();
+
+        }, function error(response) {
+            $scope.getNewOffer();
             convertDate();
 
         });
 
+        $scope.getNewOffer = function() {
+
+            $scope.content = {
+
+                "creationDate": new Date(),
+                "lastEditionDate": new Date(),
+                "companyDTO": {},
+                "receiverPointList": [
+
+                    {
+                        "receiverPointDescription": "new point description",
+                        "tariffCode": "new taryfa",
+                        "actualNumberOfZones": 1,
+                        "actualZoneList": [{
+                            "actualZoneCodeCode": "Strefa A1"
+                        }],
+                        "invoiceList": [{
+                            "orderNumber": null,
+                            "documentNumber": "FA 00/00/0000",
+                            "periodStart": new Date(),
+                            "getPeriodStop": new Date(),
+                            "invoiceZoneConsumptionList": [{
+                                "actualZoneCode": "Strefa A1",
+                                "unitConsumption": 0
+                            }]
+                        }],
+                        "receiverPointOfferCalculation": {
+                            "totalConsumptionSummary": {},
+                            "actualReceiverPointFees": {
+                                "actualTradeFee": 0,
+                                "actualZoneFeeList": [{
+                                    "actualZoneCode": "Strefa A1",
+                                    "actualUnitPrice": 0
+                                }]
+                            },
+                            "offerParameters": {
+                                "proposalContractMonthLength": 0,
+                                "defaultProposalTradeFee": 0,
+                                "defaultZoneParamsList": [{
+                                    "actualZoneCode": "Strefa A1",
+                                    "defaultUnitPrice": 0
+                                }],
+                                "defaultZoneCodesSameAsActual": false
+                            },
+                            "proposalSellerList": [{
+                                "sellerCode": "new Seller Code",
+                                "proposalTradeFee": 0,
+                                "sellerTariffPublicationDate": new Date(),
+                                "proposalZoneDetailsList": [{
+                                    "actualZoneCode": "Strefa A1",
+                                    "sellerMinimalUnitPrice": 0,
+                                    "proposalUnitPrice": 0,
+                                    "proposalZoneCode": "Strefa A1 od new Seller Code"
+                                }],
+                                "receiverPointEstimation": {
+                                    "sellerCode": "new Seller Code",
+                                    "receiverPointDataEstimation": {},
+                                    "receiverPointProvisionList": []
+                                }
+                            }]
+                        }
+                    }
+                ],
+                "allReceiverPointsOfferCalculation": null,
+                "offerSummaryDTO": {},
+                "offerNote": "Comment",
+                "offerCalculationPerReceiverPointSet": true
+            }
 
 
-
+        };
         //POST DATA
         $scope.sendData = function() {
 
@@ -67,8 +138,6 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             convertDate();
 
         };
-
-
 
         var convertDate = function() {
             $scope.content.creationDate = new Date($scope.content.creationDate);
@@ -478,6 +547,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             });
 
         };
+
+
 
         $scope.disableFields = function() {
             $scope.disableFirstSection = true;

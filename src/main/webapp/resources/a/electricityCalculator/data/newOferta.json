@@ -169,61 +169,7 @@
         }
     ],
     "allReceiverPointsOfferCalculation": null,
-    "offerSummaryDTO": {
-        "receiverPointEstimationList": [{
-            "sellerCode": "TAURON",
-            "allReceiverPointsDataEstimationForSeller": {
-                "tariffIssueDate": 1473325469351,
-                "estimatedContractValueForAllPoint": 5000,
-                "estimatedContractValueInYearScaleForAllPoint": 2500,
-                "estimatedSavingsInYearScaleForAllPoint": 600,
-                "estimatedSavingsInContractScaleForAllPoint": 1200,
-                "estimatedSavingsInPercentageForAllPoint": 30
-            },
-            "allReceiverPointsProvisionForSellerList": [{
-                "levelCode": "Próg I",
-                "traderProvisionInYearScaleForAllPoint": 300,
-                "traderProvisionInContractScaleForAllPoint": 600,
-                "partnerProvisionInContractScaleForAllPoint": 150
-            }, {
-                "levelCode": "Próg II",
-                "traderProvisionInYearScaleForAllPoint": 400,
-                "traderProvisionInContractScaleForAllPoint": 800,
-                "partnerProvisionInContractScaleForAllPoint": 200
-            }, {
-                "levelCode": "Próg III",
-                "traderProvisionInYearScaleForAllPoint": 500,
-                "traderProvisionInContractScaleForAllPoint": 1000,
-                "partnerProvisionInContractScaleForAllPoint": 250
-            }]
-        }, {
-            "sellerCode": "CEZ",
-            "allReceiverPointsDataEstimationForSeller": {
-                "tariffIssueDate": 1473325469352,
-                "estimatedContractValueForAllPoint": 2500,
-                "estimatedContractValueInYearScaleForAllPoint": 1250,
-                "estimatedSavingsInYearScaleForAllPoint": 300,
-                "estimatedSavingsInContractScaleForAllPoint": 600,
-                "estimatedSavingsInPercentageForAllPoint": 30
-            },
-            "allReceiverPointsProvisionForSellerList": [{
-                "levelCode": "Próg I",
-                "traderProvisionInYearScaleForAllPoint": 350,
-                "traderProvisionInContractScaleForAllPoint": 700,
-                "partnerProvisionInContractScaleForAllPoint": 175
-            }, {
-                "levelCode": "Próg II",
-                "traderProvisionInYearScaleForAllPoint": 450,
-                "traderProvisionInContractScaleForAllPoint": 900,
-                "partnerProvisionInContractScaleForAllPoint": 225
-            }, {
-                "levelCode": "Próg III",
-                "traderProvisionInYearScaleForAllPoint": 550,
-                "traderProvisionInContractScaleForAllPoint": 1100,
-                "partnerProvisionInContractScaleForAllPoint": 275
-            }]
-        }]
-    },
-    "offerNote": "Estymacja może ulec zmianie w przypadku zmian cen sprzedawcy energii",
+    "offerSummaryDTO": {},
+    "offerNote": "Content",
     "offerCalculationPerReceiverPointSet": true
 }

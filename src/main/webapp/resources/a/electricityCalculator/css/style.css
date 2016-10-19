@@ -1,12 +1,48 @@
 body {
-  margin: 1% 3% !important;
-  padding: 0;
+  font-size: 10px !important;
+}
+label,
+span,
+input[type="text"],
+input[type="number"],
+input[type='date'] {
+  height: 24px !important;
+  font-size: 10px !important;
+}
+nav {
+  min-height: 24px !important;
+  margin-bottom: 5px !important;
+}
+nav .navbar-text {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+.navbar-brand {
+  padding: 2px 10px !important;
+}
+.btn {
+  font-size: 10px !important;
+  padding: 4.5px 12px !important;
+}
+h1,
+h2 {
+  font-size: 12px !important;
+}
+span.btn {
+  padding: 4px 8px !important;
+  top: 0px;
+}
+label {
+  padding: 5px 12px !important;
 }
 .left {
   float: left;
 }
 .right {
   float: right;
+}
+.close-puncts {
+  display: none !important;
 }
 ul {
   list-style: none;
@@ -43,12 +79,28 @@ ul {
   float: right;
 }
 .punct-item {
-  border: 0.5px solid #008000;
+  border: 1px solid #00f;
   border-radius: 4px;
   overflow: hidden;
 }
+.checkbox {
+  margin-left: 10px;
+}
+.checkbox label {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: none !important;
+}
+input[type='checkbox'] {
+  margin: 0 !important;
+  margin-left: -14px !important;
+}
 table th {
   vertical-align: middle !important;
+  padding: 4px !important;
+}
+table td {
+  padding: 4px !important;
 }
 table thead tr {
   background-color: #6e7623;
@@ -59,11 +111,11 @@ table thead th {
   text-align: center;
 }
 article {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 .comment {
-  border: 1px solid #f00;
+  border: 1px solid #808080;
   border-radius: 4px;
 }
 .comment p {
@@ -111,40 +163,37 @@ label {
   margin: 0 10px;
 }
 .calc-offer-out {
-  border: 2px solid #808080;
+  border: 1px solid #00f;
   border-radius: 4px;
 }
 .calc-offer h2,
 .summary-info h2,
 .calc-offer-out h2 {
   overflow: hidden;
-  padding: 10px;
+  padding: 4px;
   background-color: #008000;
   color: #fff;
   font-size: 20px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  border-bottom: 3px solid #000;
+  margin-top: 0px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #000;
 }
 .summary-info {
-  border: 2px solid #808080;
+  border: 1px solid #ffa500;
   overflow: hidden;
   border-radius: 4px;
 }
 .summary-info .summary-info-item {
   margin: 10px 10px;
-  border: 3px solid #008000;
+  border: 1px solid #008000;
   overflow: hidden;
 }
 .summary-info .summary-info-item h2 {
   margin-top: 0;
   background-color: #90ee90;
 }
-.buttons {
-  margin-bottom: 10px;
-}
 .offers-retailers-item {
-  border: 2px solid #f00;
+  border: 1px solid #f00;
   overflow: hidden;
   border-radius: 4px;
 }

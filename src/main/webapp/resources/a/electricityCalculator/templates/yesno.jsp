@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
