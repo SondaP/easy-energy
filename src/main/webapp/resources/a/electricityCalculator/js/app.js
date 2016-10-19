@@ -3,11 +3,10 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         /* Resources */
         var resource_GET_DATA = '/calc/a/electricityOffer/1.json';
-        var local_pathTemplateYesNo = '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
-
+        var local_pathTemplateYesNo = '/resources/a/electricityCalculator/templates/yesno.jsp';
 
         var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
-        var pathTemplateYesNo = pageContext + '/resources/energyOfferCalc_V_1/templates/yesno.jsp';
+        var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
 
 
         //GET DATA
