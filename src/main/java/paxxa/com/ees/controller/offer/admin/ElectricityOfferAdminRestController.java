@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 @RestController
 public class ElectricityOfferAdminRestController {
 
-    final static Logger logger = Logger.getLogger(ElectricityOfferAdminRestController.class);
+    final static Logger LOG = Logger.getLogger(ElectricityOfferAdminRestController.class);
 
     @Autowired
     private SampleDataService sampleDataService;
@@ -47,6 +47,7 @@ public class ElectricityOfferAdminRestController {
     @RequestMapping(value = "/a/electricityOffer", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<ElectricityOfferRoot> createOrUpdate(@RequestBody ElectricityOfferRoot electricityOfferRoot,
                                                                Principal principal) {
+        LOG.debug("Saving electricity offer");
         OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRoot, principal.getName());
         System.out.println(electricityOfferRoot.toString());
         return new ResponseEntity<ElectricityOfferRoot>(electricityOfferRoot, HttpStatus.OK);
@@ -55,7 +56,7 @@ public class ElectricityOfferAdminRestController {
     @RequestMapping(value = "/a/calculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<ElectricityOfferRoot> calculateElectricityOffer(
             @RequestBody ElectricityOfferRoot electricityOfferRoot, Principal principal) {
-
+        LOG.debug("Start offer calculation");
         ElectricityOfferRoot calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(
                 electricityOfferRoot, principal.getName());
         return new ResponseEntity<ElectricityOfferRoot>(calculatedOffer, HttpStatus.OK);

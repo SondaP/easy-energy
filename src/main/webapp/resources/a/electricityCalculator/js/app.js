@@ -16,7 +16,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         //POST offer data
         var savePath = pageContext + '/a/electricityOffer.json';
         //CALCULATE offer
-        var calculatePath = pageContext + '/a/CalculateElectricityOffer';
+        var calculatePath = pageContext + '/a/calculateElectricityOffer.json';
 
 
         var sourceTypeEditOffer = 'editOffer';
