@@ -121,7 +121,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json'
                 }
             }).success(function (response) {
-                $scope.response = response;
+                $scope.content = response;
             }).error(function (error) {
                 $scope.error = error;
             });
@@ -142,7 +142,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json'
                 }
             }).success(function (response) {
-                $scope.response = response;
+                $scope.content = response;
             }).error(function (error) {
                 $scope.error = error;
             });
