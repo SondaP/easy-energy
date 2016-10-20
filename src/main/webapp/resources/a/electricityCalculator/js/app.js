@@ -2,19 +2,21 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
     .controller('myCtrl', ["$scope", "$http", "ModalService", function ($scope, $http, ModalService) {
 
         /* Resources */
-        var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
+        //Boghan
+        /*var pathGetOfferDataForEdition = "http://easy-energy.ovh/calc/a/electricityOffer/1.json";
+        var pathTemplateYesNo = "../templates/yesno.html";*/
+
+        //app
         var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
         var pathGetOfferDataForEdition = pageContext + "/a/electricityOffer/" + offerIdForEdition + ".json";
 
         var sourceTypeEditOffer = 'editOffer';
         var sourceNewOffer = 'newOffer';
 
-
         //GET DATA
         if (requestSourceType == sourceTypeEditOffer) {
             $http({
                 method: 'GET',
-                // url: 'http://easy-energy.ovh/calc/a/electricityOffer/1.json',
                 url: pathGetOfferDataForEdition,
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -23,17 +25,12 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 $scope.content = response.data;
                 convertDate();
             });
-
         }
-
         if (requestSourceType == sourceNewOffer) {
-            $scope.getNewOffer();
-            convertDate();
+            initNewOffer($scope)
         }
 
-
-        $scope.getNewOffer = function () {
-
+        function initNewOffer($scope) {
             $scope.content = {
 
                 "creationDate": new Date(),
@@ -100,9 +97,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 "offerNote": "Comment",
                 "offerCalculationPerReceiverPointSet": true
             }
-
-
         };
+
         //POST DATA
         $scope.sendData = function () {
 
