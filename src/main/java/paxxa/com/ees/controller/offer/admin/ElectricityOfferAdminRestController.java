@@ -25,7 +25,8 @@ public class ElectricityOfferAdminRestController {
 
 
 
-    @RequestMapping(value = "/a/electricityOffer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/a/electricityOffer/{id}",
+            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ElectricityOfferRoot> getOfferByOfferStorageId(@PathVariable int id) {
 
         Object offer = offerStorageService.getOffer(id);
@@ -39,14 +40,16 @@ public class ElectricityOfferAdminRestController {
 
 
     @RequestMapping(value = "/a/electricityOffer", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<ElectricityOfferRoot> createOrUpdate(@RequestBody ElectricityOfferRoot electricityOfferRoot, Principal principal) {
+    public ResponseEntity<ElectricityOfferRoot> createOrUpdate(@RequestBody ElectricityOfferRoot electricityOfferRoot,
+                                                               Principal principal) {
         OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRoot, principal.getName());
         System.out.println(electricityOfferRoot.toString());
         return new ResponseEntity<ElectricityOfferRoot>(electricityOfferRoot, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/a/calculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<ElectricityOfferRoot> calculateElectricityOffer(@RequestBody ElectricityOfferRoot electricityOfferRoot, Principal principal) {
+    public ResponseEntity<ElectricityOfferRoot> calculateElectricityOffer(
+            @RequestBody ElectricityOfferRoot electricityOfferRoot, Principal principal) {
 
         ElectricityOfferRoot calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(
                 electricityOfferRoot, principal.getName());

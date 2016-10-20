@@ -730,6 +730,7 @@
     </article>
 </div>
 
+
 </body>
 
 </html>
@@ -745,4 +746,7 @@
 
 <script>
     var pageContext = "${pageContext.request.contextPath}";
+    var requestSourceType = "${requestSourceType}";
+    var offerIdForEdition = "${offerIdForEdition}";
 </script>
+

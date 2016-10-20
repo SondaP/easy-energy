@@ -38,7 +38,7 @@
                 <a href="<spring:url value="/a/electricityOffer/${offer.id}.json"/>"
                    class="btn btn-info"> Wyświetl
                 </a>
-                <a href="<spring:url value="#" />" class="btn btn-primary">
+                <a href="<spring:url value="/a/electricityOffer/editOffer/${offer.id}.html"/>" class="btn btn-primary">
                     Edytuj
                 </a>
                 <a href="<spring:url value="#" />" class="btn btn-success">

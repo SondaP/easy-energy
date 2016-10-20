@@ -76,6 +76,10 @@
                 template="/WEB-INF/view/admin/electricityCalculator.jsp" >
       <put-attribute name="title" value="Nowa Oferta"/>
     </definition>
+    <definition name="a-electricityOffer-editOffer"
+                template="/WEB-INF/view/admin/electricityCalculator.jsp" >
+        <put-attribute name="title" value="Edytuj oferte"/>
+    </definition>
 
 
     <!-- TRADER -->

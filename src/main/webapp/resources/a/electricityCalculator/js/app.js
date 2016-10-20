@@ -1,31 +1,38 @@
 angular.module('myApp', ['angularModalService', 'ngAnimate'])
- .controller('myCtrl', ["$scope", "$http", "ModalService", function($scope, $http, ModalService) {
+    .controller('myCtrl', ["$scope", "$http", "ModalService", function ($scope, $http, ModalService) {
 
-     /* Resources */
-     var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
-     var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
+        /* Resources */
+        var pathGetOfferData = pageContext + "/a/electricityOffer/1.json";
+        var pathTemplateYesNo = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
+        var pathGetOfferDataForEdition = pageContext + "/a/electricityOffer/" + offerIdForEdition + ".json";
+
+        var sourceTypeEditOffer = 'editOffer';
+        var sourceNewOffer = 'newOffer';
 
 
         //GET DATA
-        $http({
-            method: 'GET',
-            // url: 'http://easy-energy.ovh/calc/a/electricityOffer/1.json',
-            url: pathGetOfferData,
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        }).then(function(response) {
+        if (requestSourceType == sourceTypeEditOffer) {
+            $http({
+                method: 'GET',
+                // url: 'http://easy-energy.ovh/calc/a/electricityOffer/1.json',
+                url: pathGetOfferDataForEdition,
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            }).then(function (response) {
+                $scope.content = response.data;
+                convertDate();
+            });
 
-            $scope.content = response.data;
-            convertDate();
+        }
 
-        }, function error(response) {
+        if (requestSourceType == sourceNewOffer) {
             $scope.getNewOffer();
             convertDate();
+        }
 
-        });
 
-        $scope.getNewOffer = function() {
+        $scope.getNewOffer = function () {
 
             $scope.content = {
 
@@ -35,7 +42,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 "receiverPointList": [
 
                     {
-                        "receiverPointDescription": "new point description",
+                        "receiverPointDescription": "opis punktu odbioru",
                         "tariffCode": "new taryfa",
                         "actualNumberOfZones": 1,
                         "actualZoneList": [{
@@ -97,7 +104,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
         //POST DATA
-        $scope.sendData = function() {
+        $scope.sendData = function () {
 
             convertDateFromObject();
 
@@ -109,16 +116,16 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).success(function(response) {
+            }).success(function (response) {
                 $scope.response = response;
-            }).error(function(error) {
+            }).error(function (error) {
                 $scope.error = error;
             });
             convertDate();
         };
 
         //CALCULATE DATA
-        $scope.sendCalculation = function() {
+        $scope.sendCalculation = function () {
 
             convertDateFromObject();
 
@@ -130,27 +137,27 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).success(function(response) {
+            }).success(function (response) {
                 $scope.response = response;
-            }).error(function(error) {
+            }).error(function (error) {
                 $scope.error = error;
             });
             convertDate();
 
         };
 
-        var convertDate = function() {
+        var convertDate = function () {
             $scope.content.creationDate = new Date($scope.content.creationDate);
             $scope.content.lastEditionDate = new Date($scope.content.lastEditionDate);
 
-            angular.forEach($scope.content.receiverPointList, function(receiverPointList) {
-                angular.forEach(receiverPointList.invoiceList, function(invoiceList) {
+            angular.forEach($scope.content.receiverPointList, function (receiverPointList) {
+                angular.forEach(receiverPointList.invoiceList, function (invoiceList) {
                     invoiceList.periodStart = new Date(invoiceList.periodStart);
                     invoiceList.getPeriodStop = new Date(invoiceList.getPeriodStop);
                 });
 
                 if ($scope.content.offerCalculationPerReceiverPointSet == true) {
-                    angular.forEach(receiverPointList.receiverPointOfferCalculation.proposalSellerList, function(proposalSellerList) {
+                    angular.forEach(receiverPointList.receiverPointOfferCalculation.proposalSellerList, function (proposalSellerList) {
                         proposalSellerList.sellerTariffPublicationDate = new Date(proposalSellerList.sellerTariffPublicationDate);
                     });
 
@@ -161,18 +168,18 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             });
         };
 
-        var convertDateFromObject = function() {
+        var convertDateFromObject = function () {
             $scope.content.creationDate = +new Date($scope.content.creationDate);
             $scope.content.lastEditionDate = +new Date($scope.content.lastEditionDate);
 
-            angular.forEach($scope.content.receiverPointList, function(receiverPointList) {
-                angular.forEach(receiverPointList.invoiceList, function(invoiceList) {
+            angular.forEach($scope.content.receiverPointList, function (receiverPointList) {
+                angular.forEach(receiverPointList.invoiceList, function (invoiceList) {
                     invoiceList.periodStart = +new Date(invoiceList.periodStart);
                     invoiceList.getPeriodStop = +new Date(invoiceList.getPeriodStop);
                 });
 
                 if ($scope.content.offerCalculationPerReceiverPointSet == true) {
-                    angular.forEach(receiverPointList.receiverPointOfferCalculation.proposalSellerList, function(proposalSellerList) {
+                    angular.forEach(receiverPointList.receiverPointOfferCalculation.proposalSellerList, function (proposalSellerList) {
                         proposalSellerList.sellerTariffPublicationDate = +new Date(proposalSellerList.sellerTariffPublicationDate);
                     });
 
@@ -184,17 +191,17 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.changeSettingsCheckbox = function() {
+        $scope.changeSettingsCheckbox = function () {
             if ($scope.content.allReceiverPointsOfferCalculation == null) {
 
                 $scope.content.allReceiverPointsOfferCalculation = $scope.content.receiverPointList[0].receiverPointOfferCalculation;
-                angular.forEach($scope.content.receiverPointList, function(val) {
+                angular.forEach($scope.content.receiverPointList, function (val) {
                     val.receiverPointOfferCalculation = null;
                 })
 
             } else if ($scope.content.allReceiverPointsOfferCalculation != null) {
                 $scope.newMyVar = $scope.content.allReceiverPointsOfferCalculation;
-                angular.forEach($scope.content.receiverPointList, function(v) {
+                angular.forEach($scope.content.receiverPointList, function (v) {
 
                     v.receiverPointOfferCalculation = $scope.newMyVar;
 
@@ -203,31 +210,31 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             }
         };
 
-        $scope.changeNameOfZoneCode = function(p, z, x) {
+        $scope.changeNameOfZoneCode = function (p, z, x) {
 
             if ($scope.content.offerCalculationPerReceiverPointSet == true) {
 
-                angular.forEach($scope.content.receiverPointList[p].invoiceList, function(invoiceList) {
+                angular.forEach($scope.content.receiverPointList[p].invoiceList, function (invoiceList) {
 
                     invoiceList.invoiceZoneConsumptionList[z].actualZoneCode = x;
                 });
                 $scope.content.receiverPointList[p].receiverPointOfferCalculation.actualReceiverPointFees.actualZoneFeeList[z].actualZoneCode = x;
                 $scope.content.receiverPointList[p].receiverPointOfferCalculation.offerParameters.defaultZoneParamsList[z].actualZoneCode = x;
 
-                angular.forEach($scope.content.receiverPointList[p].receiverPointOfferCalculation.proposalSellerList, function(v) {
+                angular.forEach($scope.content.receiverPointList[p].receiverPointOfferCalculation.proposalSellerList, function (v) {
                     v.proposalZoneDetailsList[z].actualZoneCode = x;
 
                 });
             } else if ($scope.content.offerCalculationPerReceiverPointSet == false) {
 
-                angular.forEach($scope.content.receiverPointList[p].invoiceList, function(invoiceList) {
+                angular.forEach($scope.content.receiverPointList[p].invoiceList, function (invoiceList) {
 
                     invoiceList.invoiceZoneConsumptionList[z].actualZoneCode = x;
                 });
                 $scope.content.allReceiverPointsOfferCalculation.actualReceiverPointFees.actualZoneFeeList[z].actualZoneCode = x;
                 $scope.content.allReceiverPointsOfferCalculation.offerParameters.defaultZoneParamsList[z].actualZoneCode = x;
-                angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function(v) {
-                    angular.forEach(v.proposalZoneDetailsList, function(val) {
+                angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function (v) {
+                    angular.forEach(v.proposalZoneDetailsList, function (val) {
                         val.actualZoneCode = x;
                     });
 
@@ -236,13 +243,13 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.addPunctItem = function() {
+        $scope.addPunctItem = function () {
             if ($scope.content.receiverPointList.length == 0) {
                 $scope.content.receiverPointList.push({
                     "actualNumberOfZones": 1,
                     "actualZoneList": [{
-                            "actualZoneCodeCode": "Strefa A1"
-                        }
+                        "actualZoneCodeCode": "Strefa A1"
+                    }
 
                     ],
                     "invoiceList": [{
@@ -251,9 +258,9 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                         "periodStart": new Date(),
                         "getPeriodStop": new Date(),
                         "invoiceZoneConsumptionList": [{
-                                "actualZoneCode": "Strefa A1",
-                                "unitConsumption": 0
-                            }
+                            "actualZoneCode": "Strefa A1",
+                            "unitConsumption": 0
+                        }
 
                         ]
                     }],
@@ -275,16 +282,16 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                             "defaultZoneCodesSameAsActual": false
                         },
                         "proposalSellerList": [{
-                                "sellerTariffPublicationDate": new Date(),
-                                "proposalZoneDetailsList": [{
-                                        "actualZoneCode": "Strefa A1",
-                                        "sellerMinimalUnitPrice": 0,
-                                        "proposalUnitPrice": 0,
-                                        "proposalZoneCode": "Strefa A1 od "
-                                    },
+                            "sellerTariffPublicationDate": new Date(),
+                            "proposalZoneDetailsList": [{
+                                "actualZoneCode": "Strefa A1",
+                                "sellerMinimalUnitPrice": 0,
+                                "proposalUnitPrice": 0,
+                                "proposalZoneCode": "Strefa A1 od "
+                            },
 
-                                ]
-                            }
+                            ]
+                        }
 
                         ]
                     }
@@ -300,13 +307,13 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.removeOfferRetailer = function(c, p) {
+        $scope.removeOfferRetailer = function (c, p) {
             ModalService.showModal({
                 templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
-            }).then(function(modal) {
+            }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(function(result) {
+                modal.close.then(function (result) {
                     if (result == true) {
                         if ($scope.content.offerCalculationPerReceiverPointSet == true) {
                             $scope.content.receiverPointList[p].receiverPointOfferCalculation.proposalSellerList.splice(c, 1);
@@ -319,7 +326,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.addCalculationOfferPoints = function(b) {
+        $scope.addCalculationOfferPoints = function (b) {
             if ($scope.content.allReceiverPointsOfferCalculation.proposalSellerList.length !== 0) {
                 $scope.propZoneDetail = angular.copy($scope.content.allReceiverPointsOfferCalculation.proposalSellerList[0].proposalZoneDetailsList);
                 $scope.content.allReceiverPointsOfferCalculation.proposalSellerList.push({
@@ -328,7 +335,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 });
             } else if ($scope.content.allReceiverPointsOfferCalculation.proposalSellerList.length == 0) {
                 $scope.proposalZoneDetailsListForAll = [];
-                angular.forEach($scope.content.receiverPointList[0].actualZoneList, function(v) {
+                angular.forEach($scope.content.receiverPointList[0].actualZoneList, function (v) {
                     $scope.proposalZoneDetailsListForAll.push({
                         "actualZoneCode": v.actualZoneCodeCode,
                         "sellerMinimalUnitPrice": 0,
@@ -345,7 +352,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.addCalculationOffer = function(a) {
+        $scope.addCalculationOffer = function (a) {
             if ($scope.content.receiverPointList[a].receiverPointOfferCalculation.proposalSellerList.length !== 0) {
                 $scope.propZoneDetailOffer = angular.copy($scope.content.receiverPointList[a].receiverPointOfferCalculation.proposalSellerList[0].proposalZoneDetailsList);
                 $scope.content.receiverPointList[a].receiverPointOfferCalculation.proposalSellerList.push({
@@ -354,7 +361,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 });
             } else {
                 $scope.proposalZoneDetailsListNew = [];
-                angular.forEach($scope.content.receiverPointList[a].actualZoneList, function(v) {
+                angular.forEach($scope.content.receiverPointList[a].actualZoneList, function (v) {
                     $scope.proposalZoneDetailsListNew.push({
                         "actualZoneCode": v.actualZoneCodeCode,
                         "sellerMinimalUnitPrice": 0,
@@ -371,13 +378,13 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.removeReciverPoint = function(z) {
+        $scope.removeReciverPoint = function (z) {
             ModalService.showModal({
                 templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
-            }).then(function(modal) {
+            }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(function(result) {
+                modal.close.then(function (result) {
                     if (result == true) {
                         $scope.content.receiverPointList.splice(z, 1);
                     }
@@ -386,7 +393,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.addNumberOfZones = function(z) {
+        $scope.addNumberOfZones = function (z) {
             $scope.num = $scope.content.receiverPointList[0].actualNumberOfZones;
 
             if ($scope.num >= 1 && $scope.num < 4) {
@@ -397,7 +404,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                         "actualZoneCodeCode": "new Strefa"
                     });
 
-                    angular.forEach($scope.content.receiverPointList[z].invoiceList, function(value) {
+                    angular.forEach($scope.content.receiverPointList[z].invoiceList, function (value) {
                         value.invoiceZoneConsumptionList.push({
                             "actualZoneCode": "new Strefa",
                             "unitConsumption": 0
@@ -414,7 +421,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
                     });
 
-                    angular.forEach($scope.content.receiverPointList[z].receiverPointOfferCalculation.proposalSellerList, function(value) {
+                    angular.forEach($scope.content.receiverPointList[z].receiverPointOfferCalculation.proposalSellerList, function (value) {
                         value.proposalZoneDetailsList.push({
                             "actualZoneCode": "new Strefa",
                             "sellerMinimalUnitPrice": 0,
@@ -427,12 +434,12 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                 //Коли чекбокс фолс,тоді для всіх пунктів один лічильник
                 else if ($scope.content.offerCalculationPerReceiverPointSet == false) {
 
-                    angular.forEach($scope.content.receiverPointList, function(receiverPointList) {
+                    angular.forEach($scope.content.receiverPointList, function (receiverPointList) {
                         receiverPointList.actualNumberOfZones += 1;
                         receiverPointList.actualZoneList.push({
                             "actualZoneCodeCode": "new Strefa"
                         });
-                        angular.forEach(receiverPointList.invoiceList, function(invoiceList) {
+                        angular.forEach(receiverPointList.invoiceList, function (invoiceList) {
                             invoiceList.invoiceZoneConsumptionList.push({
                                 "actualZoneCode": "new Strefa",
                                 "unitConsumption": 0
@@ -450,7 +457,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
                     });
 
-                    angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function(value) {
+                    angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function (value) {
                         value.proposalZoneDetailsList.push({
                             "actualZoneCode": "new Strefa",
                             "sellerMinimalUnitPrice": 0,
@@ -463,14 +470,14 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         };
 
-        $scope.deleteNumberOfZones = function(z) {
+        $scope.deleteNumberOfZones = function (z) {
 
             ModalService.showModal({
                 templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
-            }).then(function(modal) {
+            }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(function(result) {
+                modal.close.then(function (result) {
                     if (result == true) {
 
                         $scope.numDel = $scope.content.receiverPointList[0].actualNumberOfZones;
@@ -481,12 +488,12 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
                                 $scope.content.receiverPointList[z].actualNumberOfZones -= 1;
                                 $scope.content.receiverPointList[z].actualZoneList.splice(z, 1);
-                                angular.forEach($scope.content.receiverPointList[z].invoiceList, function(value) {
+                                angular.forEach($scope.content.receiverPointList[z].invoiceList, function (value) {
                                     value.invoiceZoneConsumptionList.splice(-1, 1);
                                 });
                                 $scope.content.receiverPointList[z].receiverPointOfferCalculation.actualReceiverPointFees.actualZoneFeeList.splice(-1, 1);
                                 $scope.content.receiverPointList[z].receiverPointOfferCalculation.offerParameters.defaultZoneParamsList.splice(-1, 1);
-                                angular.forEach($scope.content.receiverPointList[z].receiverPointOfferCalculation.proposalSellerList, function(value) {
+                                angular.forEach($scope.content.receiverPointList[z].receiverPointOfferCalculation.proposalSellerList, function (value) {
                                     value.proposalZoneDetailsList.splice(-1, 1);
                                 });
 
@@ -494,17 +501,17 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                             // Коли чекбокс фолс,тоді для всіх пунктів один лічильник
                             else if ($scope.content.offerCalculationPerReceiverPointSet == false) {
 
-                                angular.forEach($scope.content.receiverPointList, function(val) {
+                                angular.forEach($scope.content.receiverPointList, function (val) {
                                     val.actualNumberOfZones -= 1;
                                     val.actualZoneList.splice(z, 1);
-                                    angular.forEach(val.invoiceList, function(value) {
+                                    angular.forEach(val.invoiceList, function (value) {
                                         value.invoiceZoneConsumptionList.splice(-1, 1);
                                     });
                                 });
 
                                 $scope.content.allReceiverPointsOfferCalculation.actualReceiverPointFees.actualZoneFeeList.splice(-1, 1);
                                 $scope.content.allReceiverPointsOfferCalculation.offerParameters.defaultZoneParamsList.splice(-1, 1);
-                                angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function(value) {
+                                angular.forEach($scope.content.allReceiverPointsOfferCalculation.proposalSellerList, function (value) {
                                     value.proposalZoneDetailsList.splice(-1, 1);
                                 });
 
@@ -516,9 +523,9 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             });
         };
 
-        $scope.addUse = function(a, b) {
+        $scope.addUse = function (a, b) {
             $scope.myVar = angular.copy($scope.content.receiverPointList[a].invoiceList[0].invoiceZoneConsumptionList);
-            angular.forEach($scope.myVar, function(val) {
+            angular.forEach($scope.myVar, function (val) {
                 val.unitConsumption = 0;
             });
 
@@ -533,13 +540,13 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             convertDate();
         };
 
-        $scope.deleteUse = function(a, b) {
+        $scope.deleteUse = function (a, b) {
             ModalService.showModal({
                 templateUrl: pathTemplateYesNo,
                 controller: "YesNoController"
-            }).then(function(modal) {
+            }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(function(result) {
+                modal.close.then(function (result) {
                     if (result == true) {
                         $scope.content.receiverPointList[a].invoiceList.splice(b, 1);
                     }
@@ -549,29 +556,28 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         };
 
 
-
-        $scope.disableFields = function() {
+        $scope.disableFields = function () {
             $scope.disableFirstSection = true;
         };
-        $scope.enableFields = function() {
+        $scope.enableFields = function () {
             $scope.disableFirstSection = false;
         };
-        $scope.disableActualSection = function() {
+        $scope.disableActualSection = function () {
             $scope.disableActualPrice = true;
         };
-        $scope.enableActualSection = function() {
+        $scope.enableActualSection = function () {
             $scope.disableActualPrice = false;
         };
-        $scope.disableParametersSection = function() {
+        $scope.disableParametersSection = function () {
             $scope.disableParametersOffer = true;
         };
-        $scope.enableParametersSection = function() {
+        $scope.enableParametersSection = function () {
             $scope.disableParametersOffer = false;
         };
-        $scope.disableCalculationSection = function() {
+        $scope.disableCalculationSection = function () {
             $scope.disableCalculationOffer = true;
         };
-        $scope.enableCalculationSection = function() {
+        $scope.enableCalculationSection = function () {
             $scope.disableCalculationOffer = false;
         };
 
