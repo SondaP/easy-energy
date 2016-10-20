@@ -40,18 +40,18 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
                     {
                         "receiverPointDescription": "opis punktu odbioru",
-                        "tariffCode": "new taryfa",
+                        "tariffCode": "nazwa taryfy",
                         "actualNumberOfZones": 1,
                         "actualZoneList": [{
-                            "actualZoneCodeCode": "Strefa A1"
+                            "actualZoneCodeCode": "Strefa 1"
                         }],
                         "invoiceList": [{
                             "orderNumber": null,
-                            "documentNumber": "FA 00/00/0000",
+                            "documentNumber": "Numer faktury",
                             "periodStart": new Date(),
                             "getPeriodStop": new Date(),
                             "invoiceZoneConsumptionList": [{
-                                "actualZoneCode": "Strefa A1",
+                                "actualZoneCode": "Strefa 1",
                                 "unitConsumption": 0
                             }]
                         }],
@@ -60,7 +60,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                             "actualReceiverPointFees": {
                                 "actualTradeFee": 0,
                                 "actualZoneFeeList": [{
-                                    "actualZoneCode": "Strefa A1",
+                                    "actualZoneCode": "Strefa 1",
                                     "actualUnitPrice": 0
                                 }]
                             },
@@ -68,7 +68,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                                 "proposalContractMonthLength": 0,
                                 "defaultProposalTradeFee": 0,
                                 "defaultZoneParamsList": [{
-                                    "actualZoneCode": "Strefa A1",
+                                    "actualZoneCode": "Strefa 1",
                                     "defaultUnitPrice": 0
                                 }],
                                 "defaultZoneCodesSameAsActual": false
@@ -78,10 +78,10 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                                 "proposalTradeFee": 0,
                                 "sellerTariffPublicationDate": new Date(),
                                 "proposalZoneDetailsList": [{
-                                    "actualZoneCode": "Strefa A1",
+                                    "actualZoneCode": "Strefa 1",
                                     "sellerMinimalUnitPrice": 0,
                                     "proposalUnitPrice": 0,
-                                    "proposalZoneCode": "Strefa A1 od new Seller Code"
+                                    "proposalZoneCode": "Strefa 1 od new Seller Code"
                                 }],
                                 "receiverPointEstimation": {
                                     "sellerCode": "new Seller Code",
