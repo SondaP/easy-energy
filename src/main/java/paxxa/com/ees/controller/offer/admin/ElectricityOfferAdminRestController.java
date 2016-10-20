@@ -13,8 +13,13 @@ import paxxa.com.ees.service.utils.SampleDataService;
 
 import java.security.Principal;
 
+import org.apache.log4j.Logger;
+
+
 @RestController
 public class ElectricityOfferAdminRestController {
+
+    final static Logger logger = Logger.getLogger(ElectricityOfferAdminRestController.class);
 
     @Autowired
     private SampleDataService sampleDataService;
