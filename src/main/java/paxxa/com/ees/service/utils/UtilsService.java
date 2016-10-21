@@ -50,11 +50,11 @@ public class UtilsService {
     public Integer countDaysBetweenTwoDates(Date startDate, Date endDate) {
         Long difference = endDate.getTime() - startDate.getTime();
         Long convert = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-        return convert.intValue();
+        return convert.intValue() + 1;
 
     }
 
-    public Date getDateObjectForPattern(String yyy_MM_dd){
+    public Date getDateObjectForPattern(String yyy_MM_dd) {
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = yyy_MM_dd;
         Date dateObject = null;

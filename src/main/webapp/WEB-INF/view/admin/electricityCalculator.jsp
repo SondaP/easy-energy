@@ -339,11 +339,11 @@
                                     <thead>
                                     <tr>
                                         <th>Na podstawienie cennika z dnia</th>
-                                        <th>Szacowana masa marży dla wszystkich punktów</th>
-                                        <th>Szacowana całkowita masa marży w skali roku</th>
-                                        <th>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
+                                        <th>Szacowana masa marży dla całej umowy</th>
+                                        <th>Szacowana masa marży w skali roku</th>
+                                        <th>Szacowana oszczędność w skali roku</th>
                                         <th>Szacowana oszczędność w skali umowy</th>
-                                        <th>Oszczędność w ujęciu procentowym dla wszystkich punktów</th>
+                                        <th>Oszczędność w ujęciu procentowym</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -580,11 +580,11 @@
                             <thead>
                             <tr>
                                 <th>Na podstawienie cennika z dnia</th>
-                                <th>Szacowana masa marży dla wszystkich punktów</th>
-                                <th>Szacowana całkowita masa marży w skali roku</th>
-                                <th>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
+                                <th>Szacowana masa marży dla całej umowy</th>
+                                <th>Szacowana masa marży w skali roku</th>
+                                <th>Szacowana oszczędność w skali roku</th>
                                 <th>Szacowana oszczędność w skali umowy</th>
-                                <th>Oszczędność w ujęciu procentowym dla wszystkich punktów</th>
+                                <th>Oszczędność w ujęciu procentowym</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -660,11 +660,11 @@
                         <thead>
                         <tr>
                             <th>Na podstawienie cennika z dnia</th>
-                            <th>Szacowana masa marży dla całej umowy</th>
-                            <th>Szacowana masa marży w skali roku</th>
-                            <th>Szacowana oszczędność w skali roku</th>
+                            <th>Szacowana masa marży dla wszystkich punktów</th>
+                            <th>Szacowana całkowita masa marży w skali roku</th>
+                            <th>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
                             <th>Szacowana oszczędność w skali umowy</th>
-                            <th>Oszczędność w ujęciu procentowym</th>
+                            <th>Oszczędność w ujęciu procentowym dla wszystkich punktów</th>
                         </tr>
                         </thead>
                         <tbody>
