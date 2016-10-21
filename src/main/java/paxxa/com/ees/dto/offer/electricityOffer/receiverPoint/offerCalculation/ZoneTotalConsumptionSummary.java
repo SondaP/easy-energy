@@ -23,3 +23,4 @@ public class ZoneTotalConsumptionSummary {
         this.totalUnitConsumption = totalUnitConsumption;
     }
 }
+ 
