@@ -320,12 +320,12 @@
                                             <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                         </th>
                                     </tr>
-                                    <tr>
+                                   <%-- <tr>
                                         <th>Nazwa oferowanej strefy (some description)</th>
                                         <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                             <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
                                         </th>
-                                    </tr>
+                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </article>
@@ -352,13 +352,13 @@
                                             {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate}}
                                         </th>
                                         <th>
-                                            {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedUnitConsumptionInYearScale}}
-                                        </th>
-                                        <th>
                                             {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValue}}
                                         </th>
                                         <th>
                                             {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValueInYearScale}}
+                                        </th>
+                                        <th>
+                                            {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedSavingsInYearScale}}
                                         </th>
                                         <th>
                                             {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedSavingsInContractScale}}
@@ -561,12 +561,12 @@
                                     <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                 </th>
                             </tr>
-                            <tr>
+                            <%--<tr>
                                 <th>Nazwa oferowanej strefy (some description)</th>
                                 <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                     <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
                                 </th>
-                            </tr>
+                            </tr>--%>
                             </tbody>
                         </table>
                     </article>
@@ -593,13 +593,13 @@
                                     {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate}}
                                 </th>
                                 <th>
-                                    {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedUnitConsumptionInYearScale}}
-                                </th>
-                                <th>
                                     {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValue}}
                                 </th>
                                 <th>
                                     {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValueInYearScale}}
+                                </th>
+                                <th>
+                                    {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedSavingsInYearScale}}
                                 </th>
                                 <th>
                                     {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedSavingsInContractScale}}
