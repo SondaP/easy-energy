@@ -188,11 +188,11 @@ public class ElectricityOfferCalculationService {
             profitForAllZones = profitForAllZones.add(zoneProfit.divide(new BigDecimal(1000), 2, RoundingMode.HALF_EVEN));
         }
         //Total profit from trade fee
-        BigDecimal invoiceNumbers = new BigDecimal(totalConsumptionSummary.getInvoiceNumbers());
+      /*  BigDecimal invoiceNumbers = new BigDecimal(totalConsumptionSummary.getInvoiceNumbers());
         BigDecimal proposalTotalTradeFee = invoiceNumbers.multiply(proposalSeller.getProposalTradeFee());
         BigDecimal actualTotalTradeFee = invoiceNumbers.multiply(actualReceiverPointFees.getActualTradeFee());
 
-        profitForAllZones = profitForAllZones.add(proposalTotalTradeFee.subtract(actualTotalTradeFee));
+        profitForAllZones = profitForAllZones.add(proposalTotalTradeFee.subtract(actualTotalTradeFee)); */
 
         Integer totalNumberOfDaysForAllPeriods = totalConsumptionSummary.getTotalNumberOfDaysForAllPeriods();
         BigDecimal estimatedContractValueInYearScale = profitForAllZones
@@ -275,7 +275,7 @@ public class ElectricityOfferCalculationService {
     private BigDecimal calculateEstimatedSavingsInContractScale(BigDecimal estimatedSavingsInYearScale, BigDecimal proposalContractMonthLength) {
         BigDecimal year = new BigDecimal(12);
         return estimatedSavingsInYearScale
-                .divide(year, 2, BigDecimal.ROUND_HALF_EVEN)
+                .divide(year, 2, BigDecimal.ROUND_UNNECESSARY)
                 .multiply(proposalContractMonthLength);
     }
 

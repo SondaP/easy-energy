@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 public class ProposalZoneDetails {
 
     private String actualZoneCode;
+    /**
+     * Energy for sell purchased cost
+     */
     private BigDecimal sellerMinimalUnitPrice;
     private BigDecimal proposalUnitPrice;
     private String proposalZoneCode;
