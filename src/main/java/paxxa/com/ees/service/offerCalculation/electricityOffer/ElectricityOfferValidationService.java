@@ -1,5 +1,6 @@
 package paxxa.com.ees.service.offerCalculation.electricityOffer;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ActualZone;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.Invoice;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class ElectricityOfferValidationService {
 
+    final static Logger LOG = Logger.getLogger(ElectricityOfferValidationService.class);
+
 
     public void validateReceiverPointList(List<ReceiverPoint> receiverPointList) {
         for (ReceiverPoint receiverPoint : receiverPointList) {
@@ -20,24 +23,40 @@ public class ElectricityOfferValidationService {
             if (receiverPoint.getReceiverPointDescription() == null) {
                 String message = "Value for attribute: receiverPointDescription from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
+                LOG.debug(message);
                 throw new IncorrectDataException(message);
             }
             // ActualNumberOfZones
             if (receiverPoint.getActualNumberOfZones() == null) {
                 String message = "Value for attribute: actualNumberOfZones from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
+                LOG.debug(message);
                 throw new IncorrectDataException(message);
             }
+            // ActualZoneList
+            if (receiverPoint.getActualZoneList().size() != receiverPoint.getActualNumberOfZones()) {
+                String message = "Incorrect size of actualZoneList: from Object: ReceiverPoint at "
+                        + receiverPoint.getReceiverPointDescription() + ". Expected size: "
+                        + receiverPoint.getActualNumberOfZones();
+                LOG.debug(message);
+                throw new IncorrectDataException(message);
+            }
+            // ActualZoneList validate if zoneCodes are unique
+            validateActualZoneCodes(receiverPoint.getActualNumberOfZones(), receiverPoint.getActualZoneList(),
+                    receiverPoint.getReceiverPointDescription());
+
             // TariffCode
             if (receiverPoint.getTariffCode() == null) {
                 String message = "Value for attribute: tariffCode from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
+                LOG.debug(message);
                 throw new IncorrectDataException(message);
             }
             // InvoiceList size
             if (receiverPoint.getInvoiceList().size() == 0) {
                 String message = "Value for attribute: invoiceList from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required and cannot be empty";
+                LOG.debug(message);
                 throw new IncorrectDataException(message);
             }
             // InvoiceList -> Invoice data
@@ -46,35 +65,54 @@ public class ElectricityOfferValidationService {
                 if (invoice.getDocumentNumber() == null) {
                     String message = "Value for attribute: documentNumber from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", is required";
+                    LOG.debug(message);
                     throw new IncorrectDataException(message);
                 }
-                //
+                // PeriodStart
                 if (invoice.getPeriodStart() == null) {
                     String message = "Value for attribute: periodStart from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", is required";
+                    LOG.debug(message);
                     throw new IncorrectDataException(message);
                 }
+                // PeriodStop
                 if (invoice.getGetPeriodStop() == null) {
                     String message = "Value for attribute: periodStop from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", is required";
+                    LOG.debug(message);
                     throw new IncorrectDataException(message);
                 }
+                // PeriodStart compare to PeriodStop
+                if (invoice.getGetPeriodStop().compareTo(invoice.getPeriodStart()) < 0 ||
+                        invoice.getGetPeriodStop().compareTo(invoice.getPeriodStart()) == 0) {
+                    String message = "Value for attribute: periodStop from Object: ReceiverPoint at "
+                            + receiverPoint.getReceiverPointDescription() + ", must be greater then periodStart";
+                    LOG.debug(message);
+                    throw new IncorrectDataException(message);
+                }
+                // InvoiceZoneConsumption
                 for (InvoiceZoneConsumption invoiceZoneConsumption : invoice.getInvoiceZoneConsumptionList()) {
+                    // ZoneUnitConsumption
                     if (invoiceZoneConsumption.getUnitConsumption() == null) {
                         String message = "Value for attribute: unitConsumption from Object: ReceiverPoint at "
                                 + receiverPoint.getReceiverPointDescription() + ", is required";
+                        LOG.debug(message);
                         throw new IncorrectDataException(message);
                     }
+                    // Consumption ActualZoneCode
                     if (invoiceZoneConsumption.getActualZoneCode() == null) {
                         String message = "Value for attribute: actualZoneCode from Object: ReceiverPoint at "
                                 + receiverPoint.getReceiverPointDescription() + ", is required";
+                        LOG.debug(message);
                         throw new IncorrectDataException(message);
                     }
                     List<ActualZone> actualZoneList = receiverPoint.getActualZoneList();
                     List<String> actualZonesCodes = getActualZonesCodes(actualZoneList);
                     if (!actualZonesCodes.contains(invoiceZoneConsumption.getActualZoneCode())) {
-                        String message = "Value for attribute: actualZoneCode from InvoiceZoneConsumption, at ReceiverPoint: "
-                                + receiverPoint.getReceiverPointDescription() + ", does not match witch provided ActualZoneCodes for receiver point";
+                        String message = "Value for attribute: actualZoneCode from InvoiceZoneConsumption, " +
+                                "at ReceiverPoint: " + receiverPoint.getReceiverPointDescription()
+                                + ", does not match witch provided ActualZoneCodes for receiver point";
+                        LOG.debug(message);
                         throw new IncorrectDataException(message);
                     }
                 }
@@ -82,8 +120,20 @@ public class ElectricityOfferValidationService {
         }
     }
 
-    private List<String> getActualZonesCodes(List<ActualZone> actualZoneList){
+    private List<String> getActualZonesCodes(List<ActualZone> actualZoneList) {
         return actualZoneList.stream().map(x -> x.getActualZoneCodeCode()).collect(Collectors.toList());
+    }
+
+    private void validateActualZoneCodes(final int actualNumberOfZones, List<ActualZone> actualZoneList,
+                                         final String receiverPointDescription) {
+        List<ActualZone> distinctZoneCodes = actualZoneList.stream().distinct().collect(Collectors.toList());
+        if (actualNumberOfZones != distinctZoneCodes.size()) {
+            String message = "ActualZoneList at ReceiverPoint: "
+                    + receiverPointDescription + ", does not contain unique Zone Codes";
+            LOG.debug(message);
+            throw new IncorrectDataException(message);
+        }
+
     }
 
 
