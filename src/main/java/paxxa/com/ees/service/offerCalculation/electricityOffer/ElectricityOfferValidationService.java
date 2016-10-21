@@ -8,7 +8,9 @@ import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPoint;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.InvoiceZoneConsumption;
 import paxxa.com.ees.service.exception.OfferCalculationException.IncorrectDataException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -126,7 +128,11 @@ public class ElectricityOfferValidationService {
 
     private void validateActualZoneCodes(final int actualNumberOfZones, List<ActualZone> actualZoneList,
                                          final String receiverPointDescription) {
-        List<ActualZone> distinctZoneCodes = actualZoneList.stream().distinct().collect(Collectors.toList());
+
+        Set<String> distinctZoneCodes = actualZoneList
+                .stream()
+                .map(ActualZone::getActualZoneCodeCode)
+                .collect(Collectors.toSet());
         if (actualNumberOfZones != distinctZoneCodes.size()) {
             String message = "ActualZoneList at ReceiverPoint: "
                     + receiverPointDescription + ", does not contain unique Zone Codes";

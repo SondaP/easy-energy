@@ -49,7 +49,7 @@ public class ElectricityOfferAdminRestController {
         LOG.debug("Started saving electricity offer");
         OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRoot, principal.getName());
         System.out.println(electricityOfferRoot.toString());
-        LOG.debug("Succeed calculation for offer with offer number: " + offerStorage.getOfferNumber() + "for user: "
+        LOG.debug("Succeed saving for electricity offer. Saved offer with number: " + offerStorage.getOfferNumber() + ", for user: "
                 + principal.getName());
         return new ResponseEntity<ElectricityOfferRoot>(electricityOfferRoot, HttpStatus.OK);
     }
@@ -57,10 +57,10 @@ public class ElectricityOfferAdminRestController {
     @RequestMapping(value = "/a/calculateElectricityOffer", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<ElectricityOfferRoot> calculateElectricityOffer(
             @RequestBody ElectricityOfferRoot electricityOfferRoot, Principal principal) {
-        LOG.debug("Started offer calculation");
+        LOG.debug("Started electricity offer calculation");
         ElectricityOfferRoot calculatedOffer = electricityOfferCalculationService.calculateElectricityOffer(
                 electricityOfferRoot, principal.getName());
-        LOG.debug("Succeed calculation for offer with offer number: " + calculatedOffer.getOfferNumber() + "for user: "
+        LOG.debug("Succeed calculation for electricity offer with offer number: " + calculatedOffer.getOfferNumber() + ", for user: "
                 + principal.getName());
         return new ResponseEntity<ElectricityOfferRoot>(calculatedOffer, HttpStatus.OK);
     }
