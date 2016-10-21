@@ -16,32 +16,39 @@ public class ElectricityOfferValidationService {
 
     public void validateReceiverPointList(List<ReceiverPoint> receiverPointList) {
         for (ReceiverPoint receiverPoint : receiverPointList) {
+            // ReceiverPointDescription
             if (receiverPoint.getReceiverPointDescription() == null) {
                 String message = "Value for attribute: receiverPointDescription from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
                 throw new IncorrectDataException(message);
             }
+            // ActualNumberOfZones
             if (receiverPoint.getActualNumberOfZones() == null) {
                 String message = "Value for attribute: actualNumberOfZones from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
                 throw new IncorrectDataException(message);
             }
+            // TariffCode
             if (receiverPoint.getTariffCode() == null) {
                 String message = "Value for attribute: tariffCode from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
                 throw new IncorrectDataException(message);
             }
+            // InvoiceList size
             if (receiverPoint.getInvoiceList().size() == 0) {
                 String message = "Value for attribute: invoiceList from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required and cannot be empty";
                 throw new IncorrectDataException(message);
             }
+            // InvoiceList -> Invoice data
             for (Invoice invoice : receiverPoint.getInvoiceList()) {
+                // DocumentNumber
                 if (invoice.getDocumentNumber() == null) {
                     String message = "Value for attribute: documentNumber from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", is required";
                     throw new IncorrectDataException(message);
                 }
+                //
                 if (invoice.getPeriodStart() == null) {
                     String message = "Value for attribute: periodStart from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", is required";

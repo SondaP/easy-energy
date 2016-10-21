@@ -72,7 +72,7 @@ public class ElectricityOfferCalculationService {
                 calculatePredictedElectricityUnitConsumptionPerYear(
                         new BigDecimal(totalNumberOfDaysForAllPeriods), totalElectricityUnitsConsumptionInAllPeriods);
         List<ZoneTotalConsumptionSummary> calculatedZoneTotalConsumptionSummaryList =
-                getCalculatedZoneTotalConsumptionSummaryList(invoiceList);
+                calculateZoneTotalConsumptionSummaryList(invoiceList);
 
         TotalConsumptionSummary totalConsumptionSummary = new TotalConsumptionSummary();
         totalConsumptionSummary.setTotalNumberOfDaysForAllPeriods(totalNumberOfDaysForAllPeriods);
@@ -83,7 +83,7 @@ public class ElectricityOfferCalculationService {
         return totalConsumptionSummary;
     }
 
-    private List<ZoneTotalConsumptionSummary> getCalculatedZoneTotalConsumptionSummaryList(List<Invoice> invoiceList) {
+    private List<ZoneTotalConsumptionSummary> calculateZoneTotalConsumptionSummaryList(List<Invoice> invoiceList) {
         Map<String, ZoneTotalConsumptionSummary> zoneTotalConsumptionMap = new HashMap<>();
         for (Invoice invoice : invoiceList) {
             for (InvoiceZoneConsumption invoiceZoneConsumption : invoice.getInvoiceZoneConsumptionList()) {
