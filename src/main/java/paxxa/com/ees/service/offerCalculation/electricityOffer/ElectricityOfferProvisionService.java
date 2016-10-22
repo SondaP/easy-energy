@@ -33,12 +33,17 @@ public class ElectricityOfferProvisionService {
             receiverPointProvision.setLevelCode(variant.getProvisionLevelDescription());
 
             BigDecimal provisionPercentageValue = variant.getProvisionPercentageValue();
-            receiverPointProvision.setTraderProvisionInContractScale(
-                    estimatedContractProfitValue
-                            .multiply(provisionPercentageValue));
+            BigDecimal traderContractProvision = estimatedContractProfitValue
+                    .multiply(provisionPercentageValue);
+            receiverPointProvision.setTraderProvisionInContractScale(traderContractProvision);
             receiverPointProvision.setTraderProvisionInYearScale(
                     estimatedContractProfitValueInYearScale
                             .multiply(provisionPercentageValue));
+            receiverPointProvision.setPartnerProvisionInContractScale(
+                    estimatedContractProfitValue
+                            .subtract(traderContractProvision));
+
+            receiverPointProvisionList.add(receiverPointProvision);
         }
         return receiverPointProvisionList;
     }

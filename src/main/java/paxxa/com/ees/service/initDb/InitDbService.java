@@ -138,12 +138,12 @@ public class InitDbService {
          * Setting SELLER
          */
         Seller seller_1 = new Seller();
-        seller_1.setSellerName(DomainConstans.SELLER_NAME.TAURON_SELLER);
+        seller_1.setSellerName(DomainConstans.SELLER_CODE.TAURON_SELLER);
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
 
         Seller seller_2 = new Seller();
-        seller_2.setSellerName(DomainConstans.SELLER_NAME.CEZ_SELLER);
+        seller_2.setSellerName(DomainConstans.SELLER_CODE.CEZ_SELLER);
         seller_2.setEnabled(true);
         sellerRepository.save(seller_2);
 
@@ -172,7 +172,7 @@ public class InitDbService {
 
         ProvisionConditions provisionConditions = new ProvisionConditions();
         provisionConditions.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
-        provisionConditions.setSellerCode(DomainConstans.SELLER_NAME.CEZ_SELLER);
+        provisionConditions.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
         provisionConditions.setUser(userAdmin_Paxxa);
         provisionConditions.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
         provisionConditionsRepository.save(provisionConditions);
