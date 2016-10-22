@@ -11,9 +11,9 @@ public class Seller {
     @Id
     @GeneratedValue
     private Integer id;
-    private String name;
-    private String sellerCode;
-    private boolean enabled;
+    @Column(nullable = false, unique = true)
+    private String sellerName;
+    private boolean enabled = true;
 
     @OneToOne
     @JoinColumn
@@ -28,20 +28,12 @@ public class Seller {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSellerCode() {
-        return sellerCode;
-    }
-
-    public void setSellerCode(String sellerCode) {
-        this.sellerCode = sellerCode;
+    public void setSellerName(String sellerCode) {
+        this.sellerName = sellerCode;
     }
 
     public boolean isEnabled() {

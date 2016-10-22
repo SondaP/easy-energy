@@ -14,7 +14,7 @@ public class ProvisionVariant {
     @GeneratedValue
     private Integer id;
 
-    private String provisionLevelCode;
+    private String provisionLevelDescription;
     private BigDecimal provisionPercentageValue;
 
     public Integer getId() {
@@ -25,12 +25,12 @@ public class ProvisionVariant {
         this.id = id;
     }
 
-    public String getProvisionLevelCode() {
-        return provisionLevelCode;
+    public String getProvisionLevelDescription() {
+        return provisionLevelDescription;
     }
 
-    public void setProvisionLevelCode(String provisionLevelCode) {
-        this.provisionLevelCode = provisionLevelCode;
+    public void setProvisionLevelDescription(String provisionLevelCode) {
+        this.provisionLevelDescription = provisionLevelCode;
     }
 
     public BigDecimal getProvisionPercentageValue() {

@@ -6,12 +6,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "PROVISION_LEVEL")
-public class ProvisionLevel {
+@Table(name = "PROVISION")
+public class Provision {
 
     @Id
     @GeneratedValue
     private Integer id;
+
+    @OneToOne
+    @JoinColumn(name = "FK_USER")
+    private User user;
 
     private String productCode;
     private String sellerCode;
@@ -19,9 +23,7 @@ public class ProvisionLevel {
     @OneToMany
     private List<ProvisionVariant> provisionVariantList;
 
-    @OneToOne
-    @JoinColumn(name = "FK_USER")
-    private User user;
+
 
     public Integer getId() {
         return id;

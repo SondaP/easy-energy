@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
-import paxxa.com.ees.entity.provision.ProvisionLevel;
+import paxxa.com.ees.entity.provision.Provision;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
@@ -17,8 +17,8 @@ import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.company.CompanyRepository;
 import paxxa.com.ees.repository.personalData.PersonalDataRepository;
-import paxxa.com.ees.repository.provisionLevels.ProvisionLevelsRepository;
-import paxxa.com.ees.repository.provisionLevels.ProvisionVariantRepository;
+import paxxa.com.ees.repository.provision.ProvisionRepository;
+import paxxa.com.ees.repository.provision.ProvisionVariantRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.seller.SellerRepository;
 import paxxa.com.ees.repository.user.UserRepository;
@@ -51,7 +51,7 @@ public class InitDbService {
     @Autowired
     private OfferStorageService offerStorageService;
     @Autowired
-    private ProvisionLevelsRepository provisionLevelsRepository;
+    private ProvisionRepository provisionRepository;
     @Autowired
     private ProvisionVariantRepository provisionVariantRepository;
 
@@ -138,7 +138,7 @@ public class InitDbService {
          * Setting SELLER
          */
         Seller seller_1 = new Seller();
-        seller_1.setName("TAURON");
+        seller_1.setSellerName(DomainConstans.SELLER_NAME.TAURON_SELLER);
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
 
@@ -150,25 +150,25 @@ public class InitDbService {
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, userAdmin_Paxxa.getName());
 
         /**
-         * Setting ProvisionLevel levels for Paxxa
+         * Setting Provision levels for Paxxa
          */
         ProvisionVariant provisionVariant_CEZ_1 = new ProvisionVariant();
-        provisionVariant_CEZ_1.setProvisionLevelCode("Próg I");
+        provisionVariant_CEZ_1.setProvisionLevelDescription("Próg I");
         provisionVariant_CEZ_1.setProvisionPercentageValue(new BigDecimal(0.65));
 
         provisionVariantRepository.save(provisionVariant_CEZ_1);
 
         ProvisionVariant provisionVariant_CEZ_2 = new ProvisionVariant();
-        provisionVariant_CEZ_2.setProvisionLevelCode("Próg II");
+        provisionVariant_CEZ_2.setProvisionLevelDescription("Próg II");
         provisionVariant_CEZ_2.setProvisionPercentageValue(new BigDecimal(0.75));
 
         provisionVariantRepository.save(provisionVariant_CEZ_2);
 
-        ProvisionLevel provisionLevel = new ProvisionLevel();
-        provisionLevel.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
-        provisionLevel.setUser(userAdmin_Paxxa);
-        provisionLevel.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
-        provisionLevelsRepository.save(provisionLevel);
+        Provision provision = new Provision();
+        provision.setSellerCode(DomainConstans.SELLER_NAME.CEZ_SELLER);
+        provision.setUser(userAdmin_Paxxa);
+        provision.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
+        provisionRepository.save(provision);
 
     }
 
