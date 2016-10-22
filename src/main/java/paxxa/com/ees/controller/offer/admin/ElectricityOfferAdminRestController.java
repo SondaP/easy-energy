@@ -9,9 +9,11 @@ import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.service.offerCalculation.electricityOffer.ElectricityOfferCalculationService;
 import paxxa.com.ees.service.offerStorage.OfferStorageService;
+import paxxa.com.ees.service.seller.SellerService;
 import paxxa.com.ees.service.utils.SampleDataService;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -27,6 +29,8 @@ public class ElectricityOfferAdminRestController {
     private OfferStorageService offerStorageService;
     @Autowired
     private ElectricityOfferCalculationService electricityOfferCalculationService;
+    @Autowired
+    private SellerService sellerService;
 
 
     @RequestMapping(value = "/a/electricityOffer/{id}",
@@ -64,6 +68,16 @@ public class ElectricityOfferAdminRestController {
                 + principal.getName());
         return new ResponseEntity<ElectricityOfferRoot>(calculatedOffer, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/a/calculateElectricityOffer/availableSellers",
+            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> getActiveAvailableSellers() {
+        LOG.debug("Get available active sellers codes");
+        List<String> activeAvailableSellers = sellerService.getActiveAvailableSellers();
+        return new ResponseEntity<List<String>>(activeAvailableSellers, HttpStatus.OK);
+    }
+
+
 
 
 }
