@@ -138,12 +138,12 @@ public class InitDbService {
          * Setting SELLER
          */
         Seller seller_1 = new Seller();
-        seller_1.setSellerName(DomainConstans.SELLER_CODE.TAURON_SELLER);
+        seller_1.setSellerCode(DomainConstans.SELLER_CODE.TAURON_SELLER);
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
 
         Seller seller_2 = new Seller();
-        seller_2.setSellerName(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        seller_2.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
         seller_2.setEnabled(true);
         sellerRepository.save(seller_2);
 

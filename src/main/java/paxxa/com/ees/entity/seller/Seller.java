@@ -12,7 +12,7 @@ public class Seller {
     @GeneratedValue
     private Integer id;
     @Column(nullable = false, unique = true)
-    private String sellerName;
+    private String sellerCode;
     private boolean enabled = true;
 
     @OneToOne
@@ -28,12 +28,12 @@ public class Seller {
         this.id = id;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public String getSellerCode() {
+        return sellerCode;
     }
 
-    public void setSellerName(String sellerCode) {
-        this.sellerName = sellerCode;
+    public void setSellerCode(String sellerCode) {
+        this.sellerCode = sellerCode;
     }
 
     public boolean isEnabled() {
