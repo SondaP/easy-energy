@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
-import paxxa.com.ees.entity.provision.Provision;
+import paxxa.com.ees.entity.provision.ProvisionConditions;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
@@ -17,7 +17,7 @@ import paxxa.com.ees.entity.user.User;
 import paxxa.com.ees.repository.client.ClientRepository;
 import paxxa.com.ees.repository.company.CompanyRepository;
 import paxxa.com.ees.repository.personalData.PersonalDataRepository;
-import paxxa.com.ees.repository.provision.ProvisionRepository;
+import paxxa.com.ees.repository.provision.ProvisionConditionsRepository;
 import paxxa.com.ees.repository.provision.ProvisionVariantRepository;
 import paxxa.com.ees.repository.role.RoleRepository;
 import paxxa.com.ees.repository.seller.SellerRepository;
@@ -51,7 +51,7 @@ public class InitDbService {
     @Autowired
     private OfferStorageService offerStorageService;
     @Autowired
-    private ProvisionRepository provisionRepository;
+    private ProvisionConditionsRepository provisionConditionsRepository;
     @Autowired
     private ProvisionVariantRepository provisionVariantRepository;
 
@@ -142,6 +142,12 @@ public class InitDbService {
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
 
+        Seller seller_2 = new Seller();
+        seller_2.setSellerName(DomainConstans.SELLER_NAME.CEZ_SELLER);
+        seller_2.setEnabled(true);
+        sellerRepository.save(seller_2);
+
+
 
         /**
          * Setting electricity offer to Paxxa
@@ -150,7 +156,7 @@ public class InitDbService {
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, userAdmin_Paxxa.getName());
 
         /**
-         * Setting Provision levels for Paxxa
+         * Setting ProvisionConditions levels for Paxxa
          */
         ProvisionVariant provisionVariant_CEZ_1 = new ProvisionVariant();
         provisionVariant_CEZ_1.setProvisionLevelDescription("Próg I");
@@ -164,11 +170,12 @@ public class InitDbService {
 
         provisionVariantRepository.save(provisionVariant_CEZ_2);
 
-        Provision provision = new Provision();
-        provision.setSellerCode(DomainConstans.SELLER_NAME.CEZ_SELLER);
-        provision.setUser(userAdmin_Paxxa);
-        provision.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
-        provisionRepository.save(provision);
+        ProvisionConditions provisionConditions = new ProvisionConditions();
+        provisionConditions.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
+        provisionConditions.setSellerCode(DomainConstans.SELLER_NAME.CEZ_SELLER);
+        provisionConditions.setUser(userAdmin_Paxxa);
+        provisionConditions.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
+        provisionConditionsRepository.save(provisionConditions);
 
     }
 

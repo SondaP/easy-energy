@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "PROVISION")
-public class Provision {
+@Table(name = "PROVISION_CONDITIONS")
+public class ProvisionConditions {
 
     @Id
     @GeneratedValue

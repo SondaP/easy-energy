@@ -3,7 +3,8 @@ package paxxa.com.ees.service.provisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
-import paxxa.com.ees.repository.provision.ProvisionRepository;
+import paxxa.com.ees.repository.provision.ProvisionConditionsRepositoryApp;
+import paxxa.com.ees.service.user.UserService;
 
 import java.util.List;
 
@@ -11,13 +12,16 @@ import java.util.List;
 public class ProvisionService {
 
     @Autowired
-    private ProvisionRepository provisionRepository;
+    private UserService userService;
+    @Autowired
+    private ProvisionConditionsRepositoryApp provisionConditionsRepositoryApp;
 
 
     public List<ProvisionVariant> getProvisionVariants(final String userName,
                                                        final String PRODUCT_CODE,
-                                                       final String SELLER_CODE) {
-        return null;
+                                                       final String SELLER_NAME) {
+        Integer userIdByUserName = userService.getUserIdByUserName(userName);
+        return provisionConditionsRepositoryApp.getProvisionVariants(userIdByUserName, PRODUCT_CODE, SELLER_NAME);
     }
 
 }
