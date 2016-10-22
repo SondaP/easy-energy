@@ -9,7 +9,7 @@ public class DomainConstans {
     }
 
     public interface SELLER_NAME {
-        String CEZ_SELLER = "CEZ_SELLER";
+        String CEZ_SELLER = "CEZ";
         String TAURON_SELLER = "TAURON";
     }
 

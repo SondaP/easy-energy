@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.entity.provision.ProvisionConditions;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.repository.user.UserRepository;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Transactional
 @Service
 public class ProvisionConditionsRepositoryApp {
 

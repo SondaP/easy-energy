@@ -21,6 +21,8 @@ public class ElectricityOfferCalculationService {
     private UtilsService utilsService;
     @Autowired
     private ElectricityOfferValidationService electricityOfferValidationService;
+    @Autowired
+    private ElectricityOfferProvisionService electricityOfferProvisionService;
 
     public ElectricityOfferRoot calculateElectricityOffer(ElectricityOfferRoot electricityOfferRoot,
                                                           String userName) {
@@ -134,6 +136,7 @@ public class ElectricityOfferCalculationService {
         List<ReceiverPointProvision> receiverPointProvisionList = calculateReceiverPointProvisionList(
                 receiverPointDataEstimation.getEstimatedContractProfitValue(),
                 receiverPointDataEstimation.getEstimatedContractProfitValueInYearScale(),
+                proposalSeller.getSellerCode(),
                 userName);
 
         ReceiverPointEstimation receiverPointEstimation = new ReceiverPointEstimation();
@@ -293,10 +296,9 @@ public class ElectricityOfferCalculationService {
 
     //Calculating ReceiverPointProvisionList
     private List<ReceiverPointProvision> calculateReceiverPointProvisionList(final BigDecimal estimatedContractProfitValue
-            , final BigDecimal estimatedContractProfitValueInYearScale, final String userName) {
-        List<ReceiverPointProvision> receiverPointProvisionList = new ArrayList<>();
-
-        return receiverPointProvisionList;
+            , final BigDecimal estimatedContractProfitValueInYearScale, final String sellerName, final String userName) {
+        return electricityOfferProvisionService.calculateReceiverPointProvisionList(estimatedContractProfitValue,
+                estimatedContractProfitValueInYearScale, sellerName, userName);
     }
 
 }
