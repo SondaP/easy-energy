@@ -28,7 +28,7 @@ public class ElectricityOfferCalculationService {
         electricityOfferValidationService.validateReceiverPointList(receiverPointList);
 
         if (electricityOfferRoot.isOfferCalculationPerReceiverPointSet()) {
-            calculateOfferCalculation(electricityOfferRoot.getReceiverPointList());
+            calculateOfferCalculation(electricityOfferRoot.getReceiverPointList(), userName);
 
 
         } else {
@@ -38,10 +38,10 @@ public class ElectricityOfferCalculationService {
         return electricityOfferRoot;
     }
 
-    private void calculateOfferCalculation(List<ReceiverPoint> receiverPointList) {
+    private void calculateOfferCalculation(List<ReceiverPoint> receiverPointList, final String userName) {
         for (ReceiverPoint receiverPoint : receiverPointList) {
             setTotalConsumptionSummary(receiverPoint);
-            setCalculatedProposalSellerList(receiverPoint.getReceiverPointOfferCalculation());
+            setCalculatedProposalSellerList(receiverPoint.getReceiverPointOfferCalculation(), userName);
         }
 
     }
@@ -112,24 +112,29 @@ public class ElectricityOfferCalculationService {
     }
 
     //Setting ProposalSellerList
-    private void setCalculatedProposalSellerList(OfferCalculation receiverPointOfferCalculation) {
+    private void setCalculatedProposalSellerList(OfferCalculation receiverPointOfferCalculation, final String userName) {
         List<ProposalSeller> proposalSellerList = receiverPointOfferCalculation.getProposalSellerList();
         TotalConsumptionSummary totalConsumptionSummary = receiverPointOfferCalculation.getTotalConsumptionSummary();
         BigDecimal proposalContractMonthLength = receiverPointOfferCalculation.getOfferParameters().getProposalContractMonthLength();
         ActualReceiverPointFees actualReceiverPointFees = receiverPointOfferCalculation.getActualReceiverPointFees();
 
         for (ProposalSeller proposalSeller : proposalSellerList) {
-            calculateProposalSeller(proposalSeller, actualReceiverPointFees, totalConsumptionSummary, proposalContractMonthLength);
+            calculateProposalSeller(proposalSeller, actualReceiverPointFees, totalConsumptionSummary,
+                    proposalContractMonthLength, userName);
         }
     }
 
     private void calculateProposalSeller(ProposalSeller proposalSeller,
                                          ActualReceiverPointFees actualReceiverPointFees,
                                          TotalConsumptionSummary totalConsumptionSummary,
-                                         BigDecimal proposalContractMonthLength) {
+                                         final BigDecimal proposalContractMonthLength,
+                                         final String userName) {
         ReceiverPointDataEstimation receiverPointDataEstimation = calculateReceiverPointDataEstimation(
                 proposalSeller, actualReceiverPointFees, totalConsumptionSummary, proposalContractMonthLength);
-        List<ReceiverPointProvision> receiverPointProvisionList = calculateReceiverPointProvisionList();
+        List<ReceiverPointProvision> receiverPointProvisionList = calculateReceiverPointProvisionList(
+                receiverPointDataEstimation.getEstimatedContractProfitValue(),
+                receiverPointDataEstimation.getEstimatedContractProfitValueInYearScale(),
+                userName);
 
         ReceiverPointEstimation receiverPointEstimation = new ReceiverPointEstimation();
         receiverPointEstimation.setSellerCode(proposalSeller.getSellerCode());
@@ -287,7 +292,8 @@ public class ElectricityOfferCalculationService {
 
 
     //Calculating ReceiverPointProvisionList
-    private List<ReceiverPointProvision> calculateReceiverPointProvisionList() {
+    private List<ReceiverPointProvision> calculateReceiverPointProvisionList(final BigDecimal estimatedContractProfitValue
+            , final BigDecimal estimatedContractProfitValueInYearScale, final String userName) {
         List<ReceiverPointProvision> receiverPointProvisionList = new ArrayList<>();
 
         return receiverPointProvisionList;
