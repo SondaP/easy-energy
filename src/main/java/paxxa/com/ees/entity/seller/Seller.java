@@ -5,6 +5,7 @@ import paxxa.com.ees.entity.company.Company;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "SELLER")
 public class Seller {
 
     @Id

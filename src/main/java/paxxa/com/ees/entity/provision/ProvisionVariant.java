@@ -1,11 +1,13 @@
-package paxxa.com.ees.entity.Provision;
+package paxxa.com.ees.entity.provision;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "PROVISION_VARIANT")
 public class ProvisionVariant {
 
     @Id

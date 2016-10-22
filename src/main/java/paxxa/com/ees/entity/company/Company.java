@@ -1,13 +1,12 @@
 package paxxa.com.ees.entity.company;
 
-import paxxa.com.ees.entity.client.Client;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "COMPANY")
 public class Company {
 
     @Id

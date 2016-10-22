@@ -1,4 +1,4 @@
-package paxxa.com.ees.entity.Provision;
+package paxxa.com.ees.entity.provision;
 
 import paxxa.com.ees.entity.user.User;
 
@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class ProvisionLevels {
+@Table(name = "PROVISION_LEVEL")
+public class ProvisionLevel {
 
     @Id
     @GeneratedValue

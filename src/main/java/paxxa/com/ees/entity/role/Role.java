@@ -2,13 +2,11 @@ package paxxa.com.ees.entity.role;
 
 import paxxa.com.ees.entity.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "USER_ROLE")
 public class Role {
 
     @Id

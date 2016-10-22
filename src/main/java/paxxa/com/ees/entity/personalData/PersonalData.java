@@ -3,8 +3,10 @@ package paxxa.com.ees.entity.personalData;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PERSONAL_DATA")
 public class PersonalData {
 
     @Id

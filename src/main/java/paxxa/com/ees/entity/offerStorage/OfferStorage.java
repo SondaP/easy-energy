@@ -1,13 +1,12 @@
 package paxxa.com.ees.entity.offerStorage;
 
-import org.hibernate.annotations.Type;
-import org.hibernate.metamodel.source.annotations.attribute.type.LobTypeResolver;
 import paxxa.com.ees.entity.user.User;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "OFFER_STORAGE")
 public class OfferStorage {
 
     @Id

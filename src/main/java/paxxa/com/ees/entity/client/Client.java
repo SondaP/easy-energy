@@ -6,6 +6,7 @@ import paxxa.com.ees.entity.user.User;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "CLIENT")
 public class Client {
 
     @Id

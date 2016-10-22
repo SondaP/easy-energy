@@ -5,8 +5,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
-import paxxa.com.ees.entity.Provision.ProvisionLevels;
-import paxxa.com.ees.entity.Provision.ProvisionVariant;
+import paxxa.com.ees.entity.provision.ProvisionLevel;
+import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.entity.client.Client;
 import paxxa.com.ees.entity.company.Company;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
@@ -150,7 +150,7 @@ public class InitDbService {
         OfferStorage savedOfferStorage = offerStorageService.createOrUpdateOffer(electricityRootOfferDTO, userAdmin_Paxxa.getName());
 
         /**
-         * Setting ProvisionLevels levels for Paxxa
+         * Setting ProvisionLevel levels for Paxxa
          */
         ProvisionVariant provisionVariant_CEZ_1 = new ProvisionVariant();
         provisionVariant_CEZ_1.setProvisionLevelCode("Próg I");
@@ -164,11 +164,11 @@ public class InitDbService {
 
         provisionVariantRepository.save(provisionVariant_CEZ_2);
 
-        ProvisionLevels provisionLevels = new ProvisionLevels();
-        provisionLevels.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
-        provisionLevels.setUser(userAdmin_Paxxa);
-        provisionLevels.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
-        provisionLevelsRepository.save(provisionLevels);
+        ProvisionLevel provisionLevel = new ProvisionLevel();
+        provisionLevel.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        provisionLevel.setUser(userAdmin_Paxxa);
+        provisionLevel.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
+        provisionLevelsRepository.save(provisionLevel);
 
     }
 
