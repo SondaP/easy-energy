@@ -8,6 +8,7 @@ import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPoint;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.InvoiceZoneConsumption;
 import paxxa.com.ees.service.exception.OfferCalculationException.IncorrectDataException;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -93,6 +94,7 @@ public class ElectricityOfferValidationService {
                     throw new IncorrectDataException(message);
                 }
                 // InvoiceZoneConsumption
+                BigDecimal tempTotalZoneConsumptionSummary = BigDecimal.ZERO;
                 for (InvoiceZoneConsumption invoiceZoneConsumption : invoice.getInvoiceZoneConsumptionList()) {
                     // ZoneUnitConsumption
                     if (invoiceZoneConsumption.getUnitConsumption() == null) {
@@ -117,6 +119,15 @@ public class ElectricityOfferValidationService {
                         LOG.debug(message);
                         throw new IncorrectDataException(message);
                     }
+                    tempTotalZoneConsumptionSummary.add(invoiceZoneConsumption.getUnitConsumption());
+                }
+                // Invoice total Zone consumption
+                if (tempTotalZoneConsumptionSummary.compareTo(BigDecimal.ZERO) == 0) {
+                    String message = "Provide unitConsumption greater then zero for at least one zone at invoice: "
+                            + invoice.getDocumentNumber() + "from ReceiverPoint: "
+                            + receiverPoint.getReceiverPointDescription();
+                    LOG.debug(message);
+                    throw new IncorrectDataException(message);
                 }
             }
         }

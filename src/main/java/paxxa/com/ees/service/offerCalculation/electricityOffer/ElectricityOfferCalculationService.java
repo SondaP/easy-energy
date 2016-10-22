@@ -253,7 +253,7 @@ public class ElectricityOfferCalculationService {
             BigDecimal totalUnitConsumptionForZoneCode = getTotalUnitConsumptionForZoneCode(totalConsumptionSummary, actualZoneCode);
             BigDecimal proposalUnitPrice = proposalZoneDetails.getProposalUnitPrice();
             BigDecimal total = totalUnitConsumptionForZoneCode
-                    .divide(new BigDecimal(1000), 4, RoundingMode.HALF_EVEN)
+                    .divide(new BigDecimal(1000), 2, RoundingMode.HALF_EVEN)
                     .multiply(proposalUnitPrice);
             totalCostForAllUnitsConsumptionBasedOnProposal = totalCostForAllUnitsConsumptionBasedOnProposal.add(total);
         }
@@ -266,7 +266,7 @@ public class ElectricityOfferCalculationService {
         BigDecimal totalNumberOfDaysForAllPeriods = new BigDecimal(totalConsumptionSummary.getTotalNumberOfDaysForAllPeriods());
         return totalActualCostForAllUnitsConsumption
                 .subtract(totalCostForAllUnitsConsumptionBasedOnProposal)
-                .divide(totalNumberOfDaysForAllPeriods, 4, RoundingMode.HALF_EVEN)
+                .divide(totalNumberOfDaysForAllPeriods, 2, RoundingMode.HALF_EVEN)
                 .multiply(new BigDecimal(365));
     }
 
@@ -283,13 +283,13 @@ public class ElectricityOfferCalculationService {
     private BigDecimal calculateEstimatedSavingsInContractScale(BigDecimal estimatedSavingsInYearScale, BigDecimal proposalContractMonthLength) {
         BigDecimal year = new BigDecimal(12);
         return estimatedSavingsInYearScale
-                .divide(year, 2, BigDecimal.ROUND_HALF_UP)
-                .multiply(proposalContractMonthLength);
+                .multiply(proposalContractMonthLength)
+                .divide(year, 2, BigDecimal.ROUND_HALF_UP);
     }
 
     private BigDecimal calculateEstimatedSavingsInPercentage(TotalConsumptionSummary totalConsumptionSummary) {
         BigDecimal ratio = totalConsumptionSummary.getTotalCostForAllUnitsConsumptionBasedOnProposal()
-                .divide(totalConsumptionSummary.getTotalActualCostForAllUnitsConsumption(), 2, BigDecimal.ROUND_HALF_EVEN);
+                .divide(totalConsumptionSummary.getTotalActualCostForAllUnitsConsumption(), 4, BigDecimal.ROUND_HALF_EVEN);
         return (BigDecimal.ONE.subtract(ratio)).multiply(new BigDecimal(100));
     }
 
