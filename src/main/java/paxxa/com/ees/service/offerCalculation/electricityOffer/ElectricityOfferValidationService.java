@@ -119,7 +119,8 @@ public class ElectricityOfferValidationService {
                         LOG.debug(message);
                         throw new IncorrectDataException(message);
                     }
-                    tempTotalZoneConsumptionSummary.add(invoiceZoneConsumption.getUnitConsumption());
+                    tempTotalZoneConsumptionSummary = tempTotalZoneConsumptionSummary
+                            .add(invoiceZoneConsumption.getUnitConsumption());
                 }
                 // Invoice total Zone consumption
                 if (tempTotalZoneConsumptionSummary.compareTo(BigDecimal.ZERO) == 0) {

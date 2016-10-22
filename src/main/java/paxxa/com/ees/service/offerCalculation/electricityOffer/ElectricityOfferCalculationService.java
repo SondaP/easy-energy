@@ -284,7 +284,7 @@ public class ElectricityOfferCalculationService {
         BigDecimal year = new BigDecimal(12);
         return estimatedSavingsInYearScale
                 .multiply(proposalContractMonthLength)
-                .divide(year, 2, BigDecimal.ROUND_HALF_UP);
+                .divide(year, BigDecimal.ROUND_HALF_UP);
     }
 
     private BigDecimal calculateEstimatedSavingsInPercentage(TotalConsumptionSummary totalConsumptionSummary) {
