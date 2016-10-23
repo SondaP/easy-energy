@@ -26,8 +26,8 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
     private ElectricityOfferProvisionService electricityOfferProvisionService;
 
 
-    public OfferSummaryDTO calculateAllReceiverPointsEstimationForSellerList(final List<ReceiverPoint> receiverPointList,
-                                                                             final String userName) {
+    public OfferSummaryDTO calculateOfferTotalSummary(final List<ReceiverPoint> receiverPointList,
+                                                      final String userName) {
         OfferSummaryDTO offerSummaryDTO = new OfferSummaryDTO();
 
         HashMap<String, AllReceiverPointsDataEstimationForSeller> cache = new HashMap<>();
@@ -50,6 +50,29 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
         offerSummaryDTO.setReceiverPointEstimationList(allReceiverPointsEstimationForSellerList);
         return offerSummaryDTO;
     }
+
+    // Dla przypadku kiedy parametry ofwrty mamy na jednym obiekcie
+    public OfferSummaryDTO calculateOfferTotalSummary_caseOneData(final List<ProposalSeller> proposalSellerList,
+                                                                             final String userName) {
+        OfferSummaryDTO offerSummaryDTO = new OfferSummaryDTO();
+        HashMap<String, AllReceiverPointsDataEstimationForSeller> cache = new HashMap<>();
+
+        for (ProposalSeller proposalSeller : proposalSellerList) {
+            String sellerCode = proposalSeller.getSellerCode();
+
+            ReceiverPointEstimation receiverPointEstimation = proposalSeller.getReceiverPointEstimation();
+            ReceiverPointDataEstimation receiverPointDataEstimation = receiverPointEstimation
+                    .getReceiverPointDataEstimation();
+
+            updateCache(proposalSeller.getSellerCode(), cache, receiverPointDataEstimation);
+        }
+
+        List<AllReceiverPointsEstimationForSeller> allReceiverPointsEstimationForSellerList =
+                extractAllReceiverPointsEstimationForSellerList(cache, userName);
+        offerSummaryDTO.setReceiverPointEstimationList(allReceiverPointsEstimationForSellerList);
+        return offerSummaryDTO;
+    }
+
 
     private void updateCache(String sellerCode,
                              HashMap<String, AllReceiverPointsDataEstimationForSeller> cache,

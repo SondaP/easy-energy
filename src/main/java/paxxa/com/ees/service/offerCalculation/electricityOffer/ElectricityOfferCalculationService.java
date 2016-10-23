@@ -40,7 +40,7 @@ public class ElectricityOfferCalculationService {
         }
 
         OfferSummaryDTO offerSummaryDTO = electricityOfferAllReceiverPointsSummaryService
-                .calculateAllReceiverPointsEstimationForSellerList(receiverPointList, userName);
+                .calculateOfferTotalSummary(receiverPointList, userName);
         electricityOfferRoot.setOfferSummaryDTO(offerSummaryDTO);
         return electricityOfferRoot;
     }
