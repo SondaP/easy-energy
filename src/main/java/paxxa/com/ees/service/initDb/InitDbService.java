@@ -158,6 +158,7 @@ public class InitDbService {
         /**
          * Setting ProvisionConditions levels for Paxxa
          */
+        //CEZ
         ProvisionVariant provisionVariant_CEZ_1 = new ProvisionVariant();
         provisionVariant_CEZ_1.setProvisionLevelDescription("Próg I");
         provisionVariant_CEZ_1.setProvisionPercentageValue(new BigDecimal(0.65));
@@ -170,12 +171,31 @@ public class InitDbService {
 
         provisionVariantRepository.save(provisionVariant_CEZ_2);
 
-        ProvisionConditions provisionConditions = new ProvisionConditions();
-        provisionConditions.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
-        provisionConditions.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
-        provisionConditions.setUser(userAdmin_Paxxa);
-        provisionConditions.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
-        provisionConditionsRepository.save(provisionConditions);
+        ProvisionConditions provisionConditions_CEZ = new ProvisionConditions();
+        provisionConditions_CEZ.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
+        provisionConditions_CEZ.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        provisionConditions_CEZ.setUser(userAdmin_Paxxa);
+        provisionConditions_CEZ.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
+        provisionConditionsRepository.save(provisionConditions_CEZ);
+
+        //TAURON
+        ProvisionVariant provisionVariant_TAURON_1 = new ProvisionVariant();
+        provisionVariant_TAURON_1.setProvisionLevelDescription("Próg I");
+        provisionVariant_TAURON_1.setProvisionPercentageValue(new BigDecimal(0.65));
+
+        provisionVariantRepository.save(provisionVariant_TAURON_1);
+
+        ProvisionVariant provisionVariant_TAURON_2 = new ProvisionVariant();
+        provisionVariant_TAURON_2.setProvisionLevelDescription("Próg II");
+        provisionVariant_TAURON_2.setProvisionPercentageValue(new BigDecimal(0.75));
+
+        provisionVariantRepository.save(provisionVariant_TAURON_2);
+        ProvisionConditions provisionConditions_TAURON = new ProvisionConditions();
+        provisionConditions_TAURON.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
+        provisionConditions_TAURON.setSellerCode(DomainConstans.SELLER_CODE.TAURON_SELLER);
+        provisionConditions_TAURON.setUser(userAdmin_Paxxa);
+        provisionConditions_TAURON.setProvisionVariantList(Arrays.asList(provisionVariant_TAURON_1, provisionVariant_TAURON_2));
+        provisionConditionsRepository.save(provisionConditions_TAURON);
 
     }
 

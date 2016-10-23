@@ -3,6 +3,7 @@ package paxxa.com.ees.service.offerCalculation.electricityOffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
+import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ActualZoneFee;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.Invoice;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ProposalZoneDetails;
@@ -23,6 +24,8 @@ public class ElectricityOfferCalculationService {
     private ElectricityOfferValidationService electricityOfferValidationService;
     @Autowired
     private ElectricityOfferProvisionService electricityOfferProvisionService;
+    @Autowired
+    private ElectricityOfferAllReceiverPointsSummaryService electricityOfferAllReceiverPointsSummaryService;
 
     public ElectricityOfferRoot calculateElectricityOffer(ElectricityOfferRoot electricityOfferRoot,
                                                           String userName) {
@@ -32,11 +35,13 @@ public class ElectricityOfferCalculationService {
         if (electricityOfferRoot.isOfferCalculationPerReceiverPointSet()) {
             calculateOfferCalculation(electricityOfferRoot.getReceiverPointList(), userName);
 
-
         } else {
 
         }
 
+        OfferSummaryDTO offerSummaryDTO = electricityOfferAllReceiverPointsSummaryService
+                .calculateAllReceiverPointsEstimationForSellerList(receiverPointList);
+        electricityOfferRoot.setOfferSummaryDTO(offerSummaryDTO);
         return electricityOfferRoot;
     }
 
