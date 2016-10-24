@@ -60,3 +60,43 @@ app.controller('ShowHideCalculationCtrl', ['$scope', function($scope) {
     };
 
 }]);
+
+app.controller('ShowHideSummaryCalculation', ['$scope', function($scope) {
+    var vm = this;
+
+    vm.statusSummaryCalculation = 'glyphicon-minus';
+    vm.isSummaryCalcHide = false;
+    vm.showhideSummaryCalculation = function() {
+
+
+        if (vm.isSummaryCalcHide === false) {
+           vm.isSummaryCalcHide = true;
+            vm.statusSummaryCalculation = 'glyphicon-plus-sign';
+        } else {
+            vm.isSummaryCalcHide = false;
+            vm.statusSummaryCalculation = 'glyphicon-minus';
+        }
+
+    };
+
+}]);
+
+app.controller('ShowHideOfertu', ['$scope', function($scope) {
+    var vm = this;
+
+    vm.statusOfertu = 'glyphicon-minus';
+    vm.isOfertuHide = false;
+    vm.showhideOfertu = function() {
+
+
+        if (vm.isOfertuHide === false) {
+           vm.isOfertuHide = true;
+            vm.statusOfertu = 'glyphicon-plus-sign';
+        } else {
+            vm.isOfertuHide = false;
+            vm.statusOfertu = 'glyphicon-minus';
+        }
+
+    };
+
+}]);
