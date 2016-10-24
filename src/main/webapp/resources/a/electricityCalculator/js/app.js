@@ -40,7 +40,6 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         }
         if (requestSourceType == sourceNewOffer) {
             initNewOffer($scope);
-            //convertDate();
         }
 
         function initNewOffer($scope) {
@@ -148,15 +147,11 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json'
                 }
             }).success(function(response) {
-
-                if (response.errorCode != null) {
-                    errorModal(response.errorCode, response.message);
-                }
-
                 $scope.content = response;
-
                 convertDate();
+                
             }).error(function(error) {
+                if (error.errorCode != null) {errorModal(error.errorCode, error.message);}
 
                 $scope.error = error;
             });
