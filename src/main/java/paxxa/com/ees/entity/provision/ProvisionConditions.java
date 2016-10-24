@@ -12,7 +12,7 @@ public class ProvisionConditions {
     @Id
     @GeneratedValue
     private Integer id;
-
+ 
     @OneToOne
     @JoinColumn(name = "FK_USER")
     private User user;
