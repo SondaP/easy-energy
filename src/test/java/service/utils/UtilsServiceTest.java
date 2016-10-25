@@ -54,7 +54,7 @@ public class UtilsServiceTest {
         //when
         Integer differenceDays = utilsService.countDaysBetweenTwoDates(startDate, endDate);
         //then
-        Assert.assertTrue(differenceDays == 26);
+        Assert.assertTrue(differenceDays == 25);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class UtilsServiceTest {
         //when
         Integer differenceDays = utilsService.countDaysBetweenTwoDates(startDate, endDate);
         //then
-        Assert.assertTrue(differenceDays == 1);
+        Assert.assertTrue(differenceDays == 0);
     }
 
 }
