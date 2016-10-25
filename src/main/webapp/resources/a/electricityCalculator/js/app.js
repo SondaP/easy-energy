@@ -149,7 +149,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             }).success(function(response) {
                 $scope.content = response;
                 convertDate();
-                
+
             }).error(function(error) {
                 if (error.errorCode != null) {errorModal(error.errorCode, error.message);}
 
