@@ -50,7 +50,7 @@ public class UtilsService {
     public Integer countDaysBetweenTwoDates(Date startDate, Date endDate) {
         Long difference = endDate.getTime() - startDate.getTime();
         Long convert = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-        return convert.intValue() + 1;
+        return convert.intValue();
 
     }
 

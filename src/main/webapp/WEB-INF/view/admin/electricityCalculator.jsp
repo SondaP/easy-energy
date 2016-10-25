@@ -1,19 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pl" data-ng-app="myApp" data-ng-controller="myCtrl">
+<!--Boghan-->
 
-<%--Boghan--%>
 <%--<head>
     <link rel="stylesheet" href="css/font-awesome.css">
     <script src="js/lib/jquery-3.1.0.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Oferta</title>
 </head>--%>
-
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/a/electricityCalculator/css/font-awesome.css">
     <script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/jquery-3.1.0.min.js"></script>
@@ -25,7 +23,7 @@
     <title>Oferta</title>
 </head>
 
-<body>
+<body ng-controller='DatepickerPopupDemoCtrl'>
 <div class="container">
     <article class='col-xs-12 no-padding'>
         <section class="col-xs-2 no-padding">
@@ -38,13 +36,13 @@
             <label>Data utworzenia:</label>
         </section>
         <section class="col-xs-2">
-            <input type="date" data-ng-model="content.creationDate" class="form-control" value='' readonly>
+            <input type="text" uib-datepicker-popup="{{format}}" data-ng-model="content.creationDate" class="form-control" value='' readonly>
         </section>
         <section class="col-xs-2 ">
             <label>Ostatinia edycja:</label>
         </section>
         <section class="col-xs-2 no-padding">
-            <input type="date" data-ng-model="content.lastEditionDate" class="form-control" readonly>
+            <input type="text"  uib-datepicker-popup="{{format}}" data-ng-model="content.lastEditionDate" class="form-control" readonly>
         </section>
     </article>
     <!-- Section Dodaj klienta  -->
@@ -132,7 +130,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <th class='col-xs-1 fields-color'>Nazwa strefy:</th>
+                        <th class='col-xs-1'>Nazwa strefy:</th>
                         <th class='col-xs-1 ' data-ng-repeat='actualZoneList in receiverPointList.actualZoneList'>
                             <input data-ng-disabled="disableFirstSection" class='form-control' type="text" data-ng-model='actualZoneList.actualZoneCodeCode' data-ng-change='changeNameOfZoneCode($parent.$index,$index,actualZoneList.actualZoneCodeCode)'>
                         </th>
@@ -156,15 +154,28 @@
                     </thead>
                     <tbody>
                     <tr data-ng-repeat='invoiceList in receiverPointList.invoiceList'>
-                        <th class='fields-color'>{{$index+1}}</th>
+                        <th>{{$index+1}}</th>
                         <th>
                             <input type="text" class='form-control' data-ng-model='invoiceList.documentNumber' data-ng-disabled="disableFirstSection">
                         </th>
                         <th>
-                            <input type="date" class='form-control' data-ng-model='invoiceList.periodStart' data-ng-disabled="disableFirstSection">
+
+                            <p class="input-group">
+                                <input  data-ng-disabled="disableFirstSection" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoiceList.periodStart" is-open="opened[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+                                     <button data-ng-disabled="disableFirstSection" type="button" class="btn btn-default" ng-click="open($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                     </span>
+                            </p>
                         </th>
                         <th>
-                            <input type="date" class='form-control' data-ng-model='invoiceList.getPeriodStop' data-ng-disabled="disableFirstSection">
+
+                            <p class="input-group">
+                                <input  data-ng-disabled="disableFirstSection" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoiceList.getPeriodStop" is-open="opened2[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+                                     <button data-ng-disabled="disableFirstSection" type="button" class="btn btn-default" ng-click="open2($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                     </span>
+                            </p>
+
                         </th>
                         <th data-ng-repeat='invoiceZone in invoiceList.invoiceZoneConsumptionList'>
                             <input type="number" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
@@ -194,16 +205,16 @@
                         <table class="table table-bordered ">
                             <tbody>
                             <tr>
-                                <th class='fields-color'>Łącznia ilość dni na podstawie zakresów</th>
+                                <th>Łącznia ilość dni na podstawie zakresów</th>
                                 <th>
                                     {{receiverPointList.receiverPointOfferCalculation.totalConsumptionSummary.totalNumberOfDaysForAllPeriods}}</th>
                             </tr>
                             <tr>
-                                <th class='fields-color'>Łączna ilość kwH w podanych zakresach</th>
+                                <th>Łączna ilość kwH w podanych zakresach</th>
                                 <th>{{receiverPointList.receiverPointOfferCalculation.totalConsumptionSummary.totalElectricityUnitsConsumptionInAllPeriods}}</th>
                             </tr>
                             <tr>
-                                <th class='fields-color'>Szacowane zużycie roczne w Mwh</th>
+                                <th>Szacowane zużycie roczne w Mwh</th>
                                 <th>{{receiverPointList.receiverPointOfferCalculation.totalConsumptionSummary.predictedElectricityUnitConsumptionPerYear}}</th>
                             </tr>
                             </tbody>
@@ -220,7 +231,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th class='fields-color'>Aktualne ceny za kWH</th>
+                                <th>Aktualne ceny za kWH</th>
                                 <th data-ng-repeat='actualZoneFeeList in receiverPointList.receiverPointOfferCalculation.actualReceiverPointFees.actualZoneFeeList'>
                                     <input type="number" class='form-control' data-ng-model='actualZoneFeeList.actualUnitPrice' data-ng-disabled='disableActualPrice'>
                                 </th>
@@ -246,13 +257,14 @@
                             <label class='fields-color'>Proponowana długość kontraktu:</label>
                         </section>
                         <section class="col-xs-2">
-                            <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.defaultProposalTradeFee' class="form-control">
+                            <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.proposalContractMonthLength' class="form-control">
                         </section>
                         <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Domyślna oferowana opłata handlowa:</label>
                         </section>
                         <section class="col-xs-2">
-                            <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.proposalContractMonthLength' class="form-control">
+
+                            <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.defaultProposalTradeFee' class="form-control">
                         </section>
                     </article>
                     <section class="col-xs-12">
@@ -265,7 +277,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th class='fields-color'>Domyślna oferowana cena:</th>
+                                <th>Domyślna oferowana cena:</th>
                                 <th data-ng-repeat='defaultZoneParamsList in receiverPointList.receiverPointOfferCalculation.offerParameters.defaultZoneParamsList'>
                                     <input data-ng-disabled='disableParametersOffer' type="number" class='form-control' data-ng-model='defaultZoneParamsList.defaultUnitPrice'>
                                 </th>
@@ -303,7 +315,14 @@
                                     <label class='fields-color'>Data aktualizacji cennika taryfy:</label>
                                 </section>
                                 <section class="col-xs-2">
-                                    <input type="date" data-ng-disabled='disableCalculationOffer' data-ng-model='proposalSellerList.sellerTariffPublicationDate' class="form-control">
+
+
+                                    <p class="input-group" data-ng-disabled='disableCalculationOffer'>
+                                        <input type="text"  data-ng-disabled='disableCalculationOffer' class="form-control" uib-datepicker-popup="{{format}}" ng-model="proposalSellerList.sellerTariffPublicationDate" is-open="opened3[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                     <button type="button" data-ng-disabled='disableCalculationOffer' class="btn btn-default" ng-click="open3($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                     </span>
+                                    </p>
                                 </section>
                             </article>
                             <article class="col-xs-12">
@@ -326,23 +345,23 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <th class='fields-color'>Cena Operatora z cennika</th>
+                                        <th>Cena Operatora z cennika</th>
                                         <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                             <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.sellerMinimalUnitPrice'>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th class='fields-color'>Oferowana cena / MWh (some description)</th>
+                                        <th>Oferowana cena / MWh (some description)</th>
                                         <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                             <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                         </th>
                                     </tr>
-                                  <%--  <tr>
-                                        <th class='fields-color'>Nazwa oferowanej strefy (some description)</th>
-                                        <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
-                                            <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
-                                        </th>
-                                    </tr>--%>
+                                    <%--  <tr>
+                                <th>Nazwa oferowanej strefy (some description)</th>
+                                <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
+                                    <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
+                                </th>
+                            </tr>--%>
                                     </tbody>
                                 </table>
                             </article>
@@ -366,7 +385,7 @@
                                     <tbody>
                                     <tr>
                                         <th>
-                                            {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate}}
+                                            {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate | date:'dd/MM/yyyy'}}
                                         </th>
                                         <th>
                                             {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValue}}
@@ -425,7 +444,7 @@
     <!-- End Punct Item -->
     <article class="col-xs-12 no-padding">
         <section class="col-xs-2 no-padding">
-            <label>Dodaj punkt odbioru:</label>
+            <label class='color-blue'>Dodaj punkt odbioru:</label>
         </section>
         <section class="col-xs-2">
             <span class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click='addPunctItem()' aria-hidden="true"></span>
@@ -444,16 +463,16 @@
                     <table class="table table-bordered ">
                         <tbody>
                         <tr>
-                            <th class='fields-color'>Łącznia ilość dni na podstawie zakresów</th>
+                            <th>Łącznia ilość dni na podstawie zakresów</th>
                             <th>
                                 {{content.allReceiverPointsOfferCalculation.totalConsumptionSummary.totalNumberOfDaysForAllPeriods}}</th>
                         </tr>
                         <tr>
-                            <th class='fields-color'>Łączna ilość kwH w podanych zakresach</th>
+                            <th>Łączna ilość kwH w podanych zakresach</th>
                             <th>{{content.allReceiverPointsOfferCalculation.totalConsumptionSummary.totalElectricityUnitsConsumptionInAllPeriods}}</th>
                         </tr>
                         <tr>
-                            <th class='fields-color'>Szacowane zużycie roczne w Mwh</th>
+                            <th>Szacowane zużycie roczne w Mwh</th>
                             <th>{{content.allReceiverPointsOfferCalculation.totalConsumptionSummary.predictedElectricityUnitConsumptionPerYear}}</th>
                         </tr>
                         </tbody>
@@ -470,7 +489,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th class='fields-color'>Aktualne ceny za kWH</th>
+                            <th>Aktualne ceny za kWH</th>
                             <th data-ng-repeat='actualZoneFeeList in content.allReceiverPointsOfferCalculation.actualReceiverPointFees.actualZoneFeeList'>
                                 <input type="number" class='form-control' data-ng-model='actualZoneFeeList.actualUnitPrice' data-ng-disabled='disableActualPrice'>
                             </th>
@@ -517,7 +536,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th class='fields-color'>Domyślna oferowana cena:</th>
+                                <th>Domyślna oferowana cena:</th>
                                 <th data-ng-repeat='defaultZoneParamsList in content.allReceiverPointsOfferCalculation.offerParameters.defaultZoneParamsList'>
                                     <input data-ng-disabled='disableParametersOffer' type="number" class='form-control' data-ng-model='defaultZoneParamsList.defaultUnitPrice'>
                                 </th>
@@ -557,7 +576,13 @@
                                 <label class='fields-color'>Data aktualizacji cennika taryfy:</label>
                             </section>
                             <section class="col-xs-2">
-                                <input type="date" data-ng-disabled='disableCalculationOffer' data-ng-model='proposalSellerList.sellerTariffPublicationDate' class="form-control">
+
+                                <p class="input-group" data-ng-disabled='disableCalculationOffer'>
+                                    <input data-ng-disabled='disableCalculationOffer' type="text"  data-ng-disabled='disableCalculationOffer' class="form-control" uib-datepicker-popup="{{format}}" ng-model="proposalSellerList.sellerTariffPublicationDate" is-open="opened4[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                    <span class="input-group-btn">
+                                     <button data-ng-disabled='disableCalculationOffer' type="button" data-ng-disabled='disableCalculationOffer' class="btn btn-default" ng-click="open4($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                     </span>
+                                </p>
                             </section>
                         </article>
                         <article class="col-xs-12">
@@ -580,23 +605,23 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <th class='fields-color'>Cena Operatora z cennika</th>
+                                    <th>Cena Operatora z cennika</th>
                                     <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                         <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.sellerMinimalUnitPrice'>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class='fields-color'>Oferowana cena / MWh (some description)</th>
+                                    <th>Oferowana cena / MWh (some description)</th>
                                     <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                         <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                     </th>
                                 </tr>
-                               <%-- <tr>
-                                    <th class='fields-color'>Nazwa oferowanej strefy (some description)</th>
-                                    <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
-                                        <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
-                                    </th>
-                                </tr>--%>
+                                <%-- <tr>
+                            <th >Nazwa oferowanej strefy (some description)</th>
+                            <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
+                                <input type="text" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalZoneCode'>
+                            </th>
+                        </tr>--%>
                                 </tbody>
                             </table>
                         </article>
@@ -620,7 +645,7 @@
                                 <tbody>
                                 <tr>
                                     <th>
-                                        {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate}}
+                                        {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.tariffIssueDate | date:'dd/MM/yyyy'}}
                                     </th>
                                     <th>
                                         {{proposalSellerList.receiverPointEstimation.receiverPointDataEstimation.estimatedContractProfitValue}}
@@ -664,9 +689,9 @@
                         </article>
                     </div>
                 </article>
-                <article class="col-xs-12 no-padding">
+                <article class="col-xs-12 ">
                     <section class="col-xs-2 no-padding">
-                        <label>Dodaj sprzedawcę</label>
+                        <label class='fields-color'>Dodaj sprzedawcę</label>
                     </section>
                     <section class="col-xs-2">
                         <span class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click='addCalculationOfferPoints($index)' aria-hidden="true"></span>
@@ -701,7 +726,7 @@
                         <tbody>
                         <tr>
                             <th>
-                                {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.tariffIssueDate}}
+                                {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.tariffIssueDate | date:'dd/MM/yyyy'}}
                             </th>
                             <th>
                                 {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.estimatedContractValueForAllPoint}}
@@ -762,27 +787,35 @@
 <%--<script src="js/lib/angular.min.js"></script>
 <script src="js/lib/angular-animate.min.js"></script>
 <script src="js/services/angular-modal-service.js"></script>
+<script src='js/lib/ui-bootstrap-tpls-2.2.0.min.js'></script>
+
 <script src="js/app.js"></script>
 <script src='js/services/closeservice.js'></script>
+<script src='js/controllers/dateFormatConroller.js'></script>
 <script src='js/controllers/yesnocontroller.js'></script>
 <script src='js/controllers/erorrcontroller.js'></script>
 <script src='js/controllers/showhide.js'></script>
-<script src='js/controllers/closesectioncontroller.js'></script>
-</body>--%>
+<script src='js/controllers/closesectioncontroller.js'></script>--%>
+</body>
 
 </html>
 
 <script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/angular-animate.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/services/angular-modal-service.js"></script>
+<script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/lib/ui-bootstrap-tpls-2.2.0.min.js'></script>
+
 <script src="${pageContext.request.contextPath}/resources/a/electricityCalculator/js/app.js"></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/services/closeservice.js'></script>
+<script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/dateFormatConroller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/yesnocontroller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/erorrcontroller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/showhide.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/closesectioncontroller.js'></script>
+
+
 <script>
-    var pageContext = "${pageContext.request.contextPath}";
-    var requestSourceType = "${requestSourceType}";
-    var offerIdForEdition = "${offerIdForEdition}";
+var pageContext = "${pageContext.request.contextPath}";
+var requestSourceType = "${requestSourceType}";
+var offerIdForEdition = "${offerIdForEdition}";
 </script>
