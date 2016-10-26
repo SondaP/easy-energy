@@ -256,18 +256,18 @@
                         <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Proponowana długość kontraktu:</label>
                         </section>
-                        <section class="col-xs-2">
+                        <section class="col-xs-1">
                             <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.proposalContractMonthLength' class="form-control">
                         </section>
-                        <section class="col-xs-3 no-padding">
+                       <%-- <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Domyślna oferowana opłata handlowa:</label>
                         </section>
-                        <section class="col-xs-2"> 
+                        <section class="col-xs-2">
 
                             <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.defaultProposalTradeFee' class="form-control">
-                        </section>
+                        </section>--%>
                     </article>
-                    <section class="col-xs-12">
+                    <%--<section class="col-xs-12">
                         <table class="table table-bordered ">
                             <thead>
                             <tr>
@@ -284,7 +284,7 @@
                             </tr>
                             </tbody>
                         </table>
-                    </section>
+                    </section>--%>
                     <article class="buttons col-xs-12">
                         <button class="btn button-color pull-right" data-ng-model='disableParametersOffer' data-ng-click='disableParametersSection()'>Zatwierdź sekcję</button>
                         <button class="btn button-color pull-right" data-ng-click='enableParametersSection()'>Edytuj sekcję</button>
@@ -308,7 +308,7 @@
                                 <section class="col-xs-2 no-padding">
                                     <label class='fields-color'>Nazwa sprzedawcy:</label>
                                 </section>
-                                <section class="col-xs-2">
+                                <section class="col-xs-3">
                                     <select class='form-control' ng-model="proposalSellerList.sellerCode" data-ng-disabled='disableCalculationOffer'>
                                         <option >{{proposalSellerList.sellerCode}}</option>
                                         <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>
@@ -519,17 +519,17 @@
                         <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Proponowana długość kontraktu:</label>
                         </section>
-                        <section class="col-xs-2">
+                        <section class="col-xs-1">
                             <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='content.allReceiverPointsOfferCalculation.offerParameters.defaultProposalTradeFee' class="form-control">
                         </section>
-                        <section class="col-xs-3 no-padding">
+                       <%-- <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Domyślna oferowana opłata handlowa:</label>
                         </section>
                         <section class="col-xs-2">
                             <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='content.allReceiverPointsOfferCalculation.offerParameters.proposalContractMonthLength' class="form-control">
-                        </section>
+                        </section>--%>
                     </article>
-                    <section class="col-xs-12">
+                    <%--<section class="col-xs-12">
                         <table class="table table-bordered ">
                             <thead>
                             <tr>
@@ -547,7 +547,7 @@
                             </tr>
                             </tbody>
                         </table>
-                    </section>
+                    </section>--%>
                     <article class="buttons col-xs-12">
                         <button class="btn button-color pull-right" data-ng-model='disableParametersOffer' data-ng-click='disableParametersSection()'>Zatwierdź sekcję</button>
                         <button class="btn button-color pull-right" data-ng-click='enableParametersSection()'>Edytuj sekcję</button>
@@ -573,7 +573,7 @@
                             <section class="col-xs-2 no-padding">
                                 <label class='fields-color'>Nazwa sprzedawcy:</label>
                             </section>
-                            <section class="col-xs-2">
+                            <section class="col-xs-3">
                                 <select class='form-control' ng-model="proposalSellerList.sellerCode" data-ng-disabled='disableCalculationOffer'>
                                     <option >{{proposalSellerList.sellerCode}}</option>
                                     <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>
