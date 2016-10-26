@@ -84,17 +84,17 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
                             "defaultZoneCodesSameAsActual": false
                         },
                         "proposalSellerList": [{
-                            "sellerCode": "new Seller Code",
+                            "sellerCode": "nazwa sprzedawcy",
                             "proposalTradeFee": 0,
                             "sellerTariffPublicationDate": new Date(),
                             "proposalZoneDetailsList": [{
                                 "actualZoneCode": "Strefa 1",
                                 "sellerMinimalUnitPrice": 0,
                                 "proposalUnitPrice": 0,
-                                "proposalZoneCode": "Strefa 1 od new Seller Code"
+                                "proposalZoneCode": "Strefa 1 od nazwa sprzedawcy"
                             }],
                             "receiverPointEstimation": {
-                                "sellerCode": "new Seller Code",
+                                "sellerCode": "nazwa sprzedawcy",
                                 "receiverPointDataEstimation": {},
                                 "receiverPointProvisionList": []
                             }
