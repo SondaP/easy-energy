@@ -369,3 +369,10 @@ label {
   border-color: #2d6c6c;
   color: #fff;
 }
+
+/*"Dodaj sprzedawce" button*/
+.btn-addSeller {
+  background-color: #72B095;
+  border-color: #72B095;
+  color: #fff;
+}

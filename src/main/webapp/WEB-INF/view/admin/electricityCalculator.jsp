@@ -431,7 +431,7 @@
                     </article>
                     <article class="col-xs-12 ">
                         <section class="col-xs-2 no-padding">
-                            <label class='fields-color'>Dodaj sprzedawcę</label>
+                            <label class='btn-addSeller'>Dodaj sprzedawcę</label>
                         </section>
                         <section class="col-xs-2">
                             <span class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click='addCalculationOffer($index)' aria-hidden="true"></span>
