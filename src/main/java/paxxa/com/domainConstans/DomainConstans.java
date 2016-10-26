@@ -9,8 +9,12 @@ public class DomainConstans {
     }
 
     public interface SELLER_CODE {
-        String CEZ_SELLER = "CEZ";
-        String TAURON_SELLER = "TAURON";
+        String EWE = "EWE";
+        String CORRENTE = "CORRENTE";
+        String ELEKTRIX = "ELEKTRIX";
+        String EDF = "EDF";
+        String KONERG = "KONERG";
+        String CEZ = "CEZ";
     }
 
     public interface PRODUCT_CODE {

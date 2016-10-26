@@ -261,28 +261,35 @@ label {
   background-color: #337ab7;
   color: #fff;
 }
+/*Sekcja kalkulacji oferty*/
+/*frame*/
 .calc-offer {
-  border: 1px solid #9055a2;
+  border: 1px solid #1287A8;
   border-radius: 4px;
 }
+/*headLine*/
 .calc-offer nav {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
 }
+/*buttons*/
 .calc-offer .button-color {
-  background-color: #9055a2;
+  background-color: #1287A8;
   color: #fff;
 }
+/*fields*/
 .calc-offer .fields-color {
-  background-color: #9055a2;
+  background-color: #1287A8;
   color: #fff;
 }
+/*show/hide button*/
 .calc-offer .showhide-color {
-  background-color: #9055a2;
+  background-color: #1287A8;
   color: #fff;
 }
+/*Sekcja oferty sprzedawców*/
 .offers-retailers {
-  border: 1px solid #d9534f;
+  border: 1px solid #829356;
   border-radius: 4px;
 }
 .offers-retailers nav {
@@ -290,20 +297,21 @@ label {
   border-color: #e7e7e7;
 }
 .offers-retailers .button-color {
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #829356;
+  border-color: #829356;
   color: #fff;
 }
 .offers-retailers .fields-color {
-  background-color: #d9534f;
+  background-color: #829356;
   color: #fff;
 }
 .offers-retailers .showhide-color {
-  background-color: #d9534f;
+  background-color: #829356;
   color: #fff;
 }
+/*Sekcja podsumowania oferty*/
 .summary-info {
-  border: 1px solid #f0ad4e;
+  border: 1px solid #C2571A;
   border-radius: 4px;
 }
 .summary-info nav {
@@ -311,18 +319,19 @@ label {
   border-color: #e7e7e7;
 }
 .summary-info .button-color {
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #C2571A;
+  border-color: #C2571A;
   color: #fff;
 }
 .summary-info .fields-color {
-  background-color: #f0ad4e;
+  background-color: #C2571A;
   color: #fff;
 }
 .summary-info .showhide-color {
-  background-color: #f0ad4e;
+  background-color: #C2571A;
   color: #fff;
 }
+/*Sekcja kalkulacji oferty*/
 .calc-offer-out {
   border: 1px solid #800080;
   border-radius: 4px;

@@ -138,14 +138,34 @@ public class InitDbService {
          * Setting SELLER
          */
         Seller seller_1 = new Seller();
-        seller_1.setSellerCode(DomainConstans.SELLER_CODE.TAURON_SELLER);
+        seller_1.setSellerCode(DomainConstans.SELLER_CODE.EWE);
         seller_1.setEnabled(true);
         sellerRepository.save(seller_1);
 
         Seller seller_2 = new Seller();
-        seller_2.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        seller_2.setSellerCode(DomainConstans.SELLER_CODE.CORRENTE);
         seller_2.setEnabled(true);
         sellerRepository.save(seller_2);
+
+        Seller seller_3 = new Seller();
+        seller_3.setSellerCode(DomainConstans.SELLER_CODE.ELEKTRIX);
+        seller_3.setEnabled(true);
+        sellerRepository.save(seller_3);
+
+        Seller seller_4 = new Seller();
+        seller_4.setSellerCode(DomainConstans.SELLER_CODE.EDF);
+        seller_4.setEnabled(true);
+        sellerRepository.save(seller_4);
+
+        Seller seller_5 = new Seller();
+        seller_5.setSellerCode(DomainConstans.SELLER_CODE.KONERG);
+        seller_5.setEnabled(true);
+        sellerRepository.save(seller_5);
+
+        Seller seller_6 = new Seller();
+        seller_6.setSellerCode(DomainConstans.SELLER_CODE.CEZ);
+        seller_6.setEnabled(true);
+        sellerRepository.save(seller_6);
 
 
 
@@ -173,29 +193,28 @@ public class InitDbService {
 
         ProvisionConditions provisionConditions_CEZ = new ProvisionConditions();
         provisionConditions_CEZ.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
-        provisionConditions_CEZ.setSellerCode(DomainConstans.SELLER_CODE.CEZ_SELLER);
+        provisionConditions_CEZ.setSellerCode(DomainConstans.SELLER_CODE.CEZ);
         provisionConditions_CEZ.setUser(userAdmin_Paxxa);
         provisionConditions_CEZ.setProvisionVariantList(Arrays.asList(provisionVariant_CEZ_1, provisionVariant_CEZ_2));
         provisionConditionsRepository.save(provisionConditions_CEZ);
 
         //TAURON
-        ProvisionVariant provisionVariant_TAURON_1 = new ProvisionVariant();
-        provisionVariant_TAURON_1.setProvisionLevelDescription("Próg I");
-        provisionVariant_TAURON_1.setProvisionPercentageValue(new BigDecimal(0.65));
+        ProvisionVariant provisionVariant_EWE_1 = new ProvisionVariant();
+        provisionVariant_EWE_1.setProvisionLevelDescription("Próg I");
+        provisionVariant_EWE_1.setProvisionPercentageValue(new BigDecimal(0.65));
+        provisionVariantRepository.save(provisionVariant_EWE_1);
 
-        provisionVariantRepository.save(provisionVariant_TAURON_1);
+        ProvisionVariant provisionVariant_EWE_2 = new ProvisionVariant();
+        provisionVariant_EWE_2.setProvisionLevelDescription("Próg II");
+        provisionVariant_EWE_2.setProvisionPercentageValue(new BigDecimal(0.75));
+        provisionVariantRepository.save(provisionVariant_EWE_2);
 
-        ProvisionVariant provisionVariant_TAURON_2 = new ProvisionVariant();
-        provisionVariant_TAURON_2.setProvisionLevelDescription("Próg II");
-        provisionVariant_TAURON_2.setProvisionPercentageValue(new BigDecimal(0.75));
-
-        provisionVariantRepository.save(provisionVariant_TAURON_2);
-        ProvisionConditions provisionConditions_TAURON = new ProvisionConditions();
-        provisionConditions_TAURON.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
-        provisionConditions_TAURON.setSellerCode(DomainConstans.SELLER_CODE.TAURON_SELLER);
-        provisionConditions_TAURON.setUser(userAdmin_Paxxa);
-        provisionConditions_TAURON.setProvisionVariantList(Arrays.asList(provisionVariant_TAURON_1, provisionVariant_TAURON_2));
-        provisionConditionsRepository.save(provisionConditions_TAURON);
+        ProvisionConditions provisionConditions_EWE = new ProvisionConditions();
+        provisionConditions_EWE.setProductCode(DomainConstans.PRODUCT_CODE.ELECTRICITY);
+        provisionConditions_EWE.setSellerCode(DomainConstans.SELLER_CODE.EWE);
+        provisionConditions_EWE.setUser(userAdmin_Paxxa);
+        provisionConditions_EWE.setProvisionVariantList(Arrays.asList(provisionVariant_EWE_1, provisionVariant_EWE_2));
+        provisionConditionsRepository.save(provisionConditions_EWE);
 
     }
 
