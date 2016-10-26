@@ -374,12 +374,12 @@
                                 <table class="table table-bordered table-striped col-xs-12 ">
                                     <thead>
                                     <tr>
-                                        <th>Na podstawienie cennika z dnia</th>
-                                        <th>Szacowana masa marży dla całej umowy</th>
-                                        <th>Szacowana masa marży w skali roku</th>
-                                        <th>Szacowana oszczędność w skali roku</th>
-                                        <th>Szacowana oszczędność w skali umowy</th>
-                                        <th>Oszczędność w ujęciu procentowym</th>
+                                        <th class='fields-color'>Na podstawienie cennika z dnia</th>
+                                        <th class='fields-color'>Szacowana masa marży dla całej umowy</th>
+                                        <th class='fields-color'>Szacowana masa marży w skali roku</th>
+                                        <th class='fields-color'>Szacowana oszczędność w skali roku</th>
+                                        <th class='fields-color'>Szacowana oszczędność w skali umowy</th>
+                                        <th class='fields-color'>Oszczędność w ujęciu procentowym</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -634,12 +634,12 @@
                             <table class="table table-bordered table-striped col-xs-12 ">
                                 <thead>
                                 <tr>
-                                    <th>Na podstawienie cennika z dnia</th>
-                                    <th>Szacowana masa marży dla całej umowy</th>
-                                    <th>Szacowana masa marży w skali roku</th>
-                                    <th>Szacowana oszczędność w skali roku</th>
-                                    <th>Szacowana oszczędność w skali umowy</th>
-                                    <th>Oszczędność w ujęciu procentowym</th>
+                                    <th class='fields-color'>Na podstawienie cennika z dnia</th>
+                                    <th class='fields-color'>Szacowana masa marży dla całej umowy</th>
+                                    <th class='fields-color'>Szacowana masa marży w skali roku</th>
+                                    <th class='fields-color'>Szacowana oszczędność w skali roku</th>
+                                    <th class='fields-color'>Szacowana oszczędność w skali umowy</th>
+                                    <th class='fields-color'>Oszczędność w ujęciu procentowym</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -715,12 +715,12 @@
                     <table class="table table-bordered table-striped col-xs-12 ">
                         <thead>
                         <tr>
-                            <th>Na podstawienie cennika z dnia</th>
-                            <th>Szacowana masa marży dla wszystkich punktów</th>
-                            <th>Szacowana całkowita masa marży w skali roku</th>
-                            <th>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
-                            <th>Szacowana oszczędność w skali umowy</th>
-                            <th>Oszczędność w ujęciu procentowym dla wszystkich punktów</th>
+                            <th class='fields-color'>Na podstawienie cennika z dnia</th>
+                            <th class='fields-color'>Szacowana masa marży dla wszystkich punktów</th>
+                            <th class='fields-color'>Szacowana całkowita masa marży w skali roku</th>
+                            <th class='fields-color'>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
+                            <th class='fields-color'>Szacowana oszczędność w skali umowy</th>
+                            <th class='fields-color'>Oszczędność w ujęciu procentowym dla wszystkich punktów</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -731,7 +731,7 @@
                             <th>
                                 {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.estimatedContractValueForAllPoint}}
                             </th>
-                            <th>
+                            <th >
                                 {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.estimatedContractValueInYearScaleForAllPoint}}
                             </th>
                             <th>
