@@ -2,15 +2,15 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
     .controller('myCtrl', ["$scope", "$http","$filter","ModalService", function($scope, $http,$filter,ModalService) {
 
         /* Resources */
-       /* //Boghan
-        var getOfferDataForEditionPath = "../data/punct.json";
+        //Boghan
+       /* var getOfferDataForEditionPath = "../data/punct.json";
         var yesNoTemplatePath = "../templates/yesno.html";
         var errorTemplatePath = '../templates/error.html'
         var savePath = 'https://easy-energy.herokuapp.com/a/electricityOffer.json';
         var calculatePath = 'http://easy-energy.ovh/calc/a/calculateElectricityOffer.json';
-        var requestSourceType = 'editOffer';*/
-
-
+        var requestSourceType = 'editOffer';
+        var aviableSellersPath='../data/sellers.json'*/
+       
         //Get resources
         var getOfferDataForEditionPath = pageContext + "/a/electricityOffer/" + offerIdForEdition + ".json";
         //GET offer data
@@ -20,10 +20,23 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
         var savePath = pageContext + '/a/electricityOffer.json';
         //CALCULATE offer
         var calculatePath = pageContext + '/a/calculateElectricityOffer.json';
-
+        var aviableSellersPath= pageContext +  '/a/calculateElectricityOffer/availableSellers.json'
 
         var sourceTypeEditOffer = 'editOffer';
         var sourceNewOffer = 'newOffer';
+    
+        //Get aviableSellers
+        $http({
+                method: 'GET',
+                url: aviableSellersPath,
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            }).then(function(response) {
+                  $scope.aviableSellers = response.data;
+
+         });
+
 
         //GET DATA
         if (requestSourceType == sourceTypeEditOffer) {
@@ -41,6 +54,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
         if (requestSourceType == sourceNewOffer) {
             initNewOffer($scope);
         }
+
+       
 
         function initNewOffer($scope) {
             $scope.content = {
