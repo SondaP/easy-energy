@@ -262,7 +262,7 @@
                         <section class="col-xs-3 no-padding">
                             <label class='fields-color'>Domyślna oferowana opłata handlowa:</label>
                         </section>
-                        <section class="col-xs-2">
+                        <section class="col-xs-2"> 
 
                             <input data-ng-disabled='disableParametersOffer' type="number" data-ng-model='receiverPointList.receiverPointOfferCalculation.offerParameters.defaultProposalTradeFee' class="form-control">
                         </section>
