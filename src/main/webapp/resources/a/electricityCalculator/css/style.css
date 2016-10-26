@@ -95,7 +95,7 @@ ul {
 }
 /*Receiver Point frame*/
 .punct-item {
-  border: 2px solid #336699;
+  border: 2px solid #00628B;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -161,8 +161,8 @@ article {
 }
 /*Top labels*/
 label {
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #00628B;
+  border-color: #00628B;
   color: #fff;
   display: block;
   width: 100%;
@@ -170,7 +170,7 @@ label {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  border: 1px solid #337ab7;
+  border: 1px solid #00628B;
   border-radius: 4px;
 }
 .btn-group .btn {
@@ -180,7 +180,7 @@ label {
   margin: 0 10px;
 }
 .calc-offer-out {
-  border: 1px solid #337ab7;
+  border: 1px solid #00628B;
   border-radius: 4px;
 }
 .calc-offer h2,
@@ -241,7 +241,7 @@ label {
   width: 100%;
 }
 .color-blue {
-  background-color: #337ab7;
+  background-color: #00628B;
 }
 /*Receiver Point*/
 .punct-item {
@@ -257,11 +257,11 @@ label {
   color: #fff;
 }
 .punct-item .fields-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 .punct-item .showhide-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 /*Sekcja kalkulacji oferty*/
@@ -282,12 +282,12 @@ label {
 }
 /*fields*/
 .calc-offer .fields-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 /*show/hide button*/
 .calc-offer .showhide-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 /*Sekcja oferty sprzedawców*/
@@ -306,11 +306,11 @@ label {
   color: #fff;
 }
 .offers-retailers .fields-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 .offers-retailers .showhide-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 /*Sekcja podsumowania całej oferty*/
@@ -337,7 +337,7 @@ label {
 }
 /*Sekcja kalkulacji oferty*/
 .calc-offer-out {
-  border: 2px solid #337ab7;
+  border: 2px solid #00628B;
   border-radius: 4px;
 }
 .calc-offer-out nav {
@@ -345,14 +345,14 @@ label {
   border-color: #e7e7e7;
 }
 .calc-offer-out .button-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 .calc-offer-out .fields-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 }
 .calc-offer-out .showhide-color {
-  background-color: #337ab7;
+  background-color: #00628B;
   color: #fff;
 } 
