@@ -27,7 +27,7 @@
 <div class="container">
     <article class='col-xs-12 no-padding'>
         <section class="col-xs-2 no-padding">
-            <label>Nazva ofertu</label>
+            <label>Systemowy numer oferty:</label>
         </section>
         <section class="col-xs-2">
             <input type="number" data-ng-model='content.offerNumber' class="form-control" readonly>
@@ -715,7 +715,7 @@
                     <table class="table table-bordered table-striped col-xs-12 ">
                         <thead>
                         <tr>
-                            <th class='fields-color'>Na podstawienie cennika z dnia</th>
+                            <%--<th class='fields-color'>Na podstawienie cennika z dnia</th>--%>
                             <th class='fields-color'>Szacowana masa marży dla wszystkich punktów</th>
                             <th class='fields-color'>Szacowana całkowita masa marży w skali roku</th>
                             <th class='fields-color'>Szacowana oszczędność w skali roku dla wszystkich punktów</th>
@@ -725,9 +725,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th>
+                            <%--<th>
                                 {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.tariffIssueDate | date:'dd/MM/yyyy'}}
-                            </th>
+                            </th>--%>
                             <th>
                                 {{receiverPointEstimationList.allReceiverPointsDataEstimationForSeller.estimatedContractValueForAllPoint}}
                             </th>
