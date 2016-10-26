@@ -305,6 +305,12 @@ label {
   border-color: #72B095;
   color: #fff;
 }
+/*"Wylicz oferte" button*/
+.offers-retailers .button-color-calculate {
+  background-color: #2d6c6c;
+  border-color: #2d6c6c;
+  color: #fff;
+}
 .offers-retailers .fields-color {
   background-color: #00628B;
   color: #fff;
@@ -355,4 +361,11 @@ label {
 .calc-offer-out .showhide-color {
   background-color: #00628B;
   color: #fff;
-} 
+}
+
+/*"Zapisz" button*/
+.btn-save {
+  background-color: #2d6c6c;
+  border-color: #2d6c6c;
+  color: #fff;
+}

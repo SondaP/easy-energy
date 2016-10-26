@@ -366,7 +366,7 @@
                                 </table>
                             </article>
                             <section class="buttons col-xs-12">
-                                <button class="btn button-color pull-right" data-ng-click='sendCalculation()'>Wylicz ofertę</button>
+                                <button class="btn button-color-calculate pull-right" data-ng-click='sendCalculation()'>Wylicz ofertę</button>
                                 <button class="btn button-color pull-right" data-ng-model='disableCalculationOffer' data-ng-click='disableCalculationSection()'>Zatwierdź sekcję</button>
                                 <button class="btn button-color pull-right" data-ng-click='enableCalculationSection()'>Edytuj sekcję</button>
                             </section>
@@ -626,7 +626,7 @@
                             </table>
                         </article>
                         <section class="buttons col-xs-12">
-                            <button class="btn button-color pull-right" data-ng-click='sendCalculation()'>Wylicz ofertę</button>
+                            <button class="btn button-color-calculate pull-right" data-ng-click='sendCalculation()'>Wylicz ofertę</button>
                             <button class="btn button-color pull-right" data-ng-model='disableCalculationOffer' data-ng-click='disableCalculationSection()'>Zatwierdź sekcję</button>
                             <button class="btn button-color pull-right" data-ng-click='enableCalculationSection()'>Edytuj sekcję</button>
                         </section>
@@ -781,7 +781,7 @@
     </article>
     <!-- End Comment -->
     <article class="col-xs-12 no-padding">
-        <button class="btn btn-success pull-right" data-ng-click='sendData()'>Zapisz ofertę</button>
+        <button class="btn btn-save pull-right" data-ng-click='sendData()'>Zapisz ofertę</button>
     </article>
 </div>
 <%--<script src="js/lib/angular.min.js"></script>
