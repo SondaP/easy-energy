@@ -308,7 +308,7 @@
                                 <section class="col-xs-2 no-padding">
                                     <label class='fields-color'>Nazwa sprzedawcy:</label>
                                 </section>
-                                <section class="col-xs-3">
+                                <section class="col-xs-2">
                                     <select class='form-control' ng-model="proposalSellerList.sellerCode" data-ng-disabled='disableCalculationOffer'>
                                         <option >{{proposalSellerList.sellerCode}}</option>
                                         <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>
@@ -573,7 +573,7 @@
                             <section class="col-xs-2 no-padding">
                                 <label class='fields-color'>Nazwa sprzedawcy:</label>
                             </section>
-                            <section class="col-xs-3">
+                            <section class="col-xs-2">
                                 <select class='form-control' ng-model="proposalSellerList.sellerCode" data-ng-disabled='disableCalculationOffer'>
                                     <option >{{proposalSellerList.sellerCode}}</option>
                                     <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>

@@ -158,7 +158,7 @@
                                     <input type="text" class='form-control' data-ng-model='invoiceList.documentNumber' data-ng-disabled="disableFirstSection">
                                 </th>
                                 <th>
-                                
+
                                   <p class="input-group">
                                      <input  data-ng-disabled="disableFirstSection" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoiceList.periodStart" is-open="opened[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Zamknąć" alt-input-formats="altInputFormats" />
                                      <span class="input-group-btn">
@@ -167,14 +167,14 @@
                                 </p>
                                 </th>
                                 <th>
-                                    
+
                                       <p class="input-group">
                                      <input  data-ng-disabled="disableFirstSection" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoiceList.getPeriodStop" is-open="opened2[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Zamknąć" alt-input-formats="altInputFormats" />
                                      <span class="input-group-btn">
                                      <button data-ng-disabled="disableFirstSection" type="button" class="btn btn-default" ng-click="open2($index)"><i class="glyphicon glyphicon-calendar"></i></button>
                                      </span>
                                 </p>
-                    
+
                                 </th>
                                 <th data-ng-repeat='invoiceZone in invoiceList.invoiceZoneConsumptionList'>
                                     <input type="number" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
@@ -312,13 +312,13 @@
                                             <option >{{proposalSellerList.sellerCode}}</option>
                                              <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>
                                         </select>
-                                       
+
                                     </section>
                                     <section class="col-xs-3 no-padding">
                                         <label class='fields-color'>Data aktualizacji cennika taryfy:</label>
                                     </section>
                                     <section class="col-xs-2">
-                                      
+
 
                                          <p class="input-group" data-ng-disabled='disableCalculationOffer'>
                                      <input type="text"  data-ng-disabled='disableCalculationOffer' class="form-control" uib-datepicker-popup="{{format}}" ng-model="proposalSellerList.sellerTariffPublicationDate" is-open="opened3[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Zamknąć" alt-input-formats="altInputFormats" />
@@ -577,13 +577,13 @@
                                             <option >{{proposalSellerList.sellerCode}}</option>
                                              <option ng-repeat="item in aviableSellers" value="{{item}}">{{item}}</option>
                                         </select>
-                                    
+
                                 </section>
                                 <section class="col-xs-3 no-padding">
                                     <label class='fields-color'>Data aktualizacji cennika taryfy:</label>
                                 </section>
                                 <section class="col-xs-2">
-                                    
+
                                          <p class="input-group" data-ng-disabled='disableCalculationOffer'>
                                      <input data-ng-disabled='disableCalculationOffer' type="text"  data-ng-disabled='disableCalculationOffer' class="form-control" uib-datepicker-popup="{{format}}" ng-model="proposalSellerList.sellerTariffPublicationDate" is-open="opened4[$index]"  datepicker-options="dateOptions" ng-required="true" close-text="Zamknąć" alt-input-formats="altInputFormats" />
                                      <span class="input-group-btn">
