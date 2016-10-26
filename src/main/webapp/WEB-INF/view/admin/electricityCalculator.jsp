@@ -351,7 +351,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th>Oferowana cena / MWh (some description)</th>
+                                        <th>Oferowana cena / MWh</th>
                                         <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                             <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                         </th>
@@ -611,7 +611,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th>Oferowana cena / MWh (some description)</th>
+                                    <th>Oferowana cena / MWh</th>
                                     <th data-ng-repeat='proposalZoneDetailsList in proposalSellerList.proposalZoneDetailsList'>
                                         <input type="number" data-ng-disabled='disableCalculationOffer' class='form-control' data-ng-model='proposalZoneDetailsList.proposalUnitPrice'>
                                     </th>

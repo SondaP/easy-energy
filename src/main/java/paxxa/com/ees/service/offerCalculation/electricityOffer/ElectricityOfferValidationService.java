@@ -27,13 +27,15 @@ public class ElectricityOfferValidationService {
                 String message = "Value for attribute: receiverPointDescription from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
                 LOG.debug(message);
-                throw new IncorrectDataException(message);
+                String messageView = "Należy podać: Numer licznika / opis punktu odbioru";
+                throw new IncorrectDataException(messageView);
             }
             // ActualNumberOfZones
             if (receiverPoint.getActualNumberOfZones() == null) {
                 String message = "Value for attribute: actualNumberOfZones from Object: ReceiverPoint at "
                         + receiverPoint.getReceiverPointDescription() + ", is required";
                 LOG.debug(message);
+
                 throw new IncorrectDataException(message);
             }
             // ActualZoneList
@@ -91,7 +93,10 @@ public class ElectricityOfferValidationService {
                     String message = "Value for attribute: periodStop from Object: ReceiverPoint at "
                             + receiverPoint.getReceiverPointDescription() + ", must be greater then periodStart";
                     LOG.debug(message);
-                    throw new IncorrectDataException(message);
+                    String messageView = "Data początku okresu powinna być wcześniejsza od daty końca okresu. " +
+                            "Punkt odbioru: " + receiverPoint.getReceiverPointDescription() + " , dokument: "
+                            + invoice.getDocumentNumber();
+                    throw new IncorrectDataException(messageView);
                 }
                 // InvoiceZoneConsumption
                 BigDecimal tempTotalZoneConsumptionSummary = BigDecimal.ZERO;
@@ -128,7 +133,9 @@ public class ElectricityOfferValidationService {
                             + invoice.getDocumentNumber() + "from ReceiverPoint: "
                             + receiverPoint.getReceiverPointDescription();
                     LOG.debug(message);
-                    throw new IncorrectDataException(message);
+                    String messageView = "Należy podać zużycie większe od zera dla conajmniej jednej strefy - dokument: "
+                            + invoice.getDocumentNumber() + " , w punkcie: " + receiverPoint.getReceiverPointDescription();
+                    throw new IncorrectDataException(messageView);
                 }
             }
         }
@@ -149,6 +156,7 @@ public class ElectricityOfferValidationService {
             String message = "ActualZoneList at ReceiverPoint: "
                     + receiverPointDescription + ", does not contain unique Zone Codes";
             LOG.debug(message);
+            String messageView = "Należy podać unikalne nazwy stref dla licznika: " + receiverPointDescription;
             throw new IncorrectDataException(message);
         }
 
