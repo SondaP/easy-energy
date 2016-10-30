@@ -204,8 +204,8 @@ article {
 
 /*Top labels*/
 label {
-    background-color: #00628B;
-    border-color: #00628B;
+    background-color: #4f3775;
+    border-color: #4f3775;
     color: #fff;
     display: block;
     width: 100%;
@@ -213,7 +213,7 @@ label {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    border: 1px solid #00628B;
+    border: 1px solid #4f3775;
     border-radius: 4px;
 }
 
@@ -226,7 +226,7 @@ label {
 }
 
 .calc-offer-out {
-    border: 1px solid #00628B;
+    border: 1px solid #4f3775;
     border-radius: 4px;
 }
 
@@ -300,12 +300,12 @@ label {
 }
 
 .color-blue {
-    background-color: #00628B;
+    background-color: #4f3775;
 }
 
 /*Receiver Point*/
 .punct-item {
-    border-color: #0D3257;
+    border-color: #4f3775;
 }
 
 .punct-item nav {
@@ -314,18 +314,18 @@ label {
 }
 
 .punct-item .button-color {
-    background-color: #72B095;
-    border-color: #72B095;
+    background-color: #9b45bc;
+    border-color: #9b45bc;
     color: #fff;
 }
 
 .punct-item .fields-color {
-    background-color: #00628B;
+    background-color: #4f3775;
     color: #fff;
 }
 
 .punct-item .showhide-color {
-    background-color: #00628B;
+    background-color: #9b45bc;
     color: #fff;
 }
 
@@ -344,19 +344,19 @@ label {
 
 /*buttons*/
 .calc-offer .button-color {
-    background-color: #72B095;
+    background-color: #9b45bc;
     color: #fff;
 }
 
 /*fields*/
 .calc-offer .fields-color {
-    background-color: #00628B;
+    background-color: #4f3775;
     color: #fff;
 }
 
 /*show/hide button*/
 .calc-offer .showhide-color {
-    background-color: #00628B;
+    background-color: #9b45bc;
     color: #fff;
 }
 
@@ -373,31 +373,31 @@ label {
 
 /*Buttons for Kalkulacja*/
 .offers-retailers .button-color {
-    background-color: #72B095;
-    border-color: #72B095;
+    background-color: #9b45bc;
+    border-color: #9b45bc;
     color: #fff;
 }
 
 /*"Wylicz oferte" button*/
 .offers-retailers .button-color-calculate {
-    background-color: #2d6c6c;
-    border-color: #2d6c6c;
+    background-color: #6c3083;
+    border-color: #6c3083;
     color: #fff;
 }
 
 .offers-retailers .fields-color {
-    background-color: #00628B;
+    background-color: #4f3775;
     color: #fff;
 }
 
 .offers-retailers .showhide-color {
-    background-color: #00628B;
+    background-color: #9b45bc;
     color: #fff;
 }
 
 /*Sekcja podsumowania całej oferty*/
 .summary-info {
-    border: 2px solid #2d6c6c;
+    border: 2px solid #725e90;
     border-radius: 4px;
 }
 
@@ -407,24 +407,24 @@ label {
 }
 
 .summary-info .button-color {
-    background-color: #2d6c6c;
-    border-color: #2d6c6c;
+    background-color: #604b82;
+    border-color: #604b82;
     color: #fff;
 }
 
 .summary-info .fields-color {
-    background-color: #2d6c6c;
+    background-color: #604b82;
     color: #fff;
 }
 
 .summary-info .showhide-color {
-    background-color: #2d6c6c;
+    background-color: #9b45bc;
     color: #fff;
 }
 
 /*Sekcja kalkulacji oferty*/
 .calc-offer-out {
-    border: 2px solid #00628B;
+    border: 2px solid #6c3083;
     border-radius: 4px;
 }
 
@@ -434,30 +434,30 @@ label {
 }
 
 .calc-offer-out .button-color {
-    background-color: #00628B;
+    background-color: #9b45bc;
     color: #fff;
 }
 
 .calc-offer-out .fields-color {
-    background-color: #00628B;
+    background-color: #6c3083;
     color: #fff;
 }
 
 .calc-offer-out .showhide-color {
-    background-color: #00628B;
+    background-color: #9b45bc;
     color: #fff;
 }
 
 /*"Zapisz" button*/
 .btn-save {
-    background-color: #2d6c6c;
-    border-color: #2d6c6c;
+    background-color: #6c3083;
+    border-color: #6c3083;
     color: #fff;
 }
 
 /*"Dodaj sprzedawce" button*/
 .btn-addSeller {
-    background-color: #72B095;
-    border-color: #72B095;
+    background-color: #9b45bc;
+    border-color: #9b45bc;
     color: #fff;
 }
