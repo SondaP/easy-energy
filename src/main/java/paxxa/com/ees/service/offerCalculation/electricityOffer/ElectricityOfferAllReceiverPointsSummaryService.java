@@ -1,13 +1,13 @@
 package paxxa.com.ees.service.offerCalculation.electricityOffer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsDataEstimationForSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsEstimationForSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.AllReceiverPointsProvisionForSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.offerSummary.OfferSummaryDTO;
+import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ProposalZoneDetails;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.ReceiverPoint;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ProposalSeller;
 import paxxa.com.ees.dto.offer.electricityOffer.receiverPoint.offerCalculation.ReceiverPointDataEstimation;
@@ -33,39 +33,39 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
         OfferSummaryDTO offerSummaryDTO = new OfferSummaryDTO();
 
         HashMap<String, AllReceiverPointsDataEstimationForSeller> cache_AllPintsDataEstimation = new HashMap<>();
-        HashMap<String, TotalConsumptionSummary> cache_TotalConsumptionSummary = new HashMap<>();
+        HashMap<String, TotalSavingsInPercentageCounterDTO> cache_TotalSavingsInPercentageGroupBySeller = new HashMap<>();
 
+
+        // initialize caches
         for (ReceiverPoint receiverPoint : receiverPointList) {
             List<ProposalSeller> proposalSellerList = receiverPoint.getReceiverPointOfferCalculation()
                     .getProposalSellerList();
             for (ProposalSeller proposalSeller : proposalSellerList) {
                 String sellerCode = proposalSeller.getSellerCode();
 
-                //
-                updateCache_TotalConsumptionSummary(
-                        proposalSeller.getSellerCode(),
-                        cache_TotalConsumptionSummary,
-                        receiverPoint.getReceiverPointOfferCalculation().getTotalConsumptionSummary());
-
-                //
+                // cache for cache_AllPintsDataEstimation
                 ReceiverPointEstimation receiverPointEstimation = proposalSeller.getReceiverPointEstimation();
                 ReceiverPointDataEstimation receiverPointDataEstimation = receiverPointEstimation
                         .getReceiverPointDataEstimation();
-                updateCache_AllPointsDataEstimation(proposalSeller.getSellerCode(),
-                        cache_AllPintsDataEstimation, cache_TotalConsumptionSummary, receiverPointDataEstimation);
-
-
-
+                generateCache_AllPointsDataEstimation(proposalSeller.getSellerCode(),
+                        cache_AllPintsDataEstimation, cache_TotalSavingsInPercentageGroupBySeller, receiverPointDataEstimation);
+                // cache_TotalSavingsInPercentageGroupBySeller
+                generateCacheTotalSavingsInPercentageGroupedBySeller(proposalSeller.getSellerCode(),
+                        cache_TotalSavingsInPercentageGroupBySeller, receiverPointDataEstimation.getEstimatedSavingsInPercentage());
             }
         }
+        // set total data
         List<AllReceiverPointsEstimationForSeller> allReceiverPointsEstimationForSellerList =
-                extractAllReceiverPointsEstimationForSellerList(cache_AllPintsDataEstimation, userName);
+                extractAllReceiverPointsEstimationForSellerList(cache_AllPintsDataEstimation,
+                        cache_TotalSavingsInPercentageGroupBySeller, userName);
         offerSummaryDTO.setReceiverPointEstimationList(allReceiverPointsEstimationForSellerList);
+
         return offerSummaryDTO;
     }
 
+
     // Dla przypadku kiedy parametry ofwrty mamy na jednym obiekcie
-    public OfferSummaryDTO calculateOfferTotalSummary_caseOneData(final List<ProposalSeller> proposalSellerList,
+ /*   public OfferSummaryDTO calculateOfferTotalSummary_caseOneData(final List<ProposalSeller> proposalSellerList,
                                                                   final String userName) {
         OfferSummaryDTO offerSummaryDTO = new OfferSummaryDTO();
         HashMap<String, AllReceiverPointsDataEstimationForSeller> cache_AllPintsDataEstimation = new HashMap<>();
@@ -78,7 +78,7 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
             ReceiverPointDataEstimation receiverPointDataEstimation = receiverPointEstimation
                     .getReceiverPointDataEstimation();
 
-            updateCache_AllPointsDataEstimation(proposalSeller.getSellerCode(), cache_AllPintsDataEstimation,
+            generateCache_AllPointsDataEstimation(proposalSeller.getSellerCode(), cache_AllPintsDataEstimation,
                     cache_TotalConsumptionSummary, receiverPointDataEstimation);
 
         }
@@ -87,13 +87,13 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
                 extractAllReceiverPointsEstimationForSellerList(cache_AllPintsDataEstimation, userName);
         offerSummaryDTO.setReceiverPointEstimationList(allReceiverPointsEstimationForSellerList);
         return offerSummaryDTO;
-    }
+    }*/
 
 
-    private void updateCache_AllPointsDataEstimation(String sellerCode,
-                                                     HashMap<String, AllReceiverPointsDataEstimationForSeller> cache,
-                                                     HashMap<String, TotalConsumptionSummary> cache_TotalConsumptionSummary,
-                                                     ReceiverPointDataEstimation receiverPointDataEstimation) {
+    private void generateCache_AllPointsDataEstimation(String sellerCode,
+                                                       HashMap<String, AllReceiverPointsDataEstimationForSeller> cache,
+                                                       HashMap<String, TotalSavingsInPercentageCounterDTO> cache_TotalSavingsInPercentageGroupBySeller,
+                                                       ReceiverPointDataEstimation receiverPointDataEstimation) {
         if (cache.get(sellerCode) != null) {
             AllReceiverPointsDataEstimationForSeller allReceiverPointsDataEstimationForSeller = cache.get(sellerCode);
             //estimatedContractValueForAllPoint
@@ -124,10 +124,6 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
                     .add(receiverPointDataEstimation.getEstimatedSavingsInYearScale());
             allReceiverPointsDataEstimationForSeller.setEstimatedSavingsInYearScaleForAllPoint(
                     estimatedSavingsInYearScaleForAllPoint_updated);
-            //estimatedSavingsInPercentageForAllPoint
-            allReceiverPointsDataEstimationForSeller.setEstimatedSavingsInPercentageForAllPoint(
-                    calculateSavingsInPercentage(cache_TotalConsumptionSummary, sellerCode));
-
         } else {
             AllReceiverPointsDataEstimationForSeller allReceiverPointsDataEstimationForSeller =
                     new AllReceiverPointsDataEstimationForSeller();
@@ -143,16 +139,36 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
             //estimatedSavingsInYearScaleForAllPoint
             allReceiverPointsDataEstimationForSeller.setEstimatedSavingsInYearScaleForAllPoint(
                     receiverPointDataEstimation.getEstimatedSavingsInYearScale());
-            //estimatedSavingsInPercentageForAllPoint
-            allReceiverPointsDataEstimationForSeller.setEstimatedSavingsInPercentageForAllPoint(
-                    calculateSavingsInPercentage(cache_TotalConsumptionSummary, sellerCode));
 
             cache.put(sellerCode, allReceiverPointsDataEstimationForSeller);
         }
     }
 
+    private void generateCacheTotalSavingsInPercentageGroupedBySeller(String sellerCode,
+                                                                      HashMap<String, TotalSavingsInPercentageCounterDTO>
+                                                                              cache_TotalSavingsInPercentageGroupBySeller,
+                                                                      BigDecimal estimatedSavingsInPercentage) {
+        if (cache_TotalSavingsInPercentageGroupBySeller.get(sellerCode) != null) {
+            TotalSavingsInPercentageCounterDTO totalSavingsInPercentageCounterDTO = cache_TotalSavingsInPercentageGroupBySeller.get(sellerCode);
+            BigDecimal totalBase = totalSavingsInPercentageCounterDTO.getTotalBase();
+            totalSavingsInPercentageCounterDTO.setTotalBase(totalBase.add(BigDecimal.ONE));
+
+            BigDecimal totalSummaryOfSavingsInPercentage = totalSavingsInPercentageCounterDTO.getTotalSummaryOfSavingsInPercentage();
+            totalSavingsInPercentageCounterDTO.setTotalSummaryOfSavingsInPercentage(
+                    totalSummaryOfSavingsInPercentage.add(estimatedSavingsInPercentage));
+        } else {
+            TotalSavingsInPercentageCounterDTO totalSavingsInPercentageCounterDTO = new TotalSavingsInPercentageCounterDTO();
+            totalSavingsInPercentageCounterDTO.setTotalBase(BigDecimal.ONE);
+            totalSavingsInPercentageCounterDTO.setTotalSummaryOfSavingsInPercentage(estimatedSavingsInPercentage);
+            cache_TotalSavingsInPercentageGroupBySeller.put(sellerCode, totalSavingsInPercentageCounterDTO);
+        }
+
+
+    }
+
     private List<AllReceiverPointsEstimationForSeller> extractAllReceiverPointsEstimationForSellerList(
             HashMap<String, AllReceiverPointsDataEstimationForSeller> cache,
+            HashMap<String, TotalSavingsInPercentageCounterDTO> cache_TotalSavingsInPercentageGroupBySeller,
             final String userName) {
         List<AllReceiverPointsEstimationForSeller> allReceiverPointsDataEstimationForSellerList = new ArrayList<>();
 
@@ -162,6 +178,9 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
             allReceiverPointsEstimationForSeller.setSellerCode(sellerCode);
             AllReceiverPointsDataEstimationForSeller allReceiverPointsDataEstimationForSeller =
                     (AllReceiverPointsDataEstimationForSeller) entry.getValue();
+            //
+            BigDecimal estimatedSavingsInPercentageForAllPoint = calculateSavingsInPercentage(cache_TotalSavingsInPercentageGroupBySeller, sellerCode);
+            allReceiverPointsDataEstimationForSeller.setEstimatedSavingsInPercentageForAllPoint(estimatedSavingsInPercentageForAllPoint);
 
 
             allReceiverPointsEstimationForSeller.setAllReceiverPointsDataEstimationForSeller(allReceiverPointsDataEstimationForSeller);
@@ -179,52 +198,18 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
         return allReceiverPointsDataEstimationForSellerList;
     }
 
-    private BigDecimal calculateSavingsInPercentage(HashMap<String, TotalConsumptionSummary> cache_TotalConsumptionSummary,
+    private BigDecimal calculateSavingsInPercentage(HashMap<String, TotalSavingsInPercentageCounterDTO> cache_TotalSavingsInPercentageGroupBySeller,
                                                     String sellerCode) {
-        TotalConsumptionSummary totalConsumptionSummary = cache_TotalConsumptionSummary.get(sellerCode);
-        return calculateEstimatedSavingsInPercentage(totalConsumptionSummary);
+        TotalSavingsInPercentageCounterDTO totalSavingsInPercentageCounterDTO = cache_TotalSavingsInPercentageGroupBySeller.get(sellerCode);
+        BigDecimal totalBase = totalSavingsInPercentageCounterDTO.getTotalBase();
+        BigDecimal baseForResult = totalBase.multiply(new BigDecimal(100));
+        BigDecimal totalSummaryOfSavingsInPercentage = totalSavingsInPercentageCounterDTO.getTotalSummaryOfSavingsInPercentage();
+
+        return totalSummaryOfSavingsInPercentage.divide(totalBase, 4, BigDecimal.ROUND_HALF_EVEN);
     }
 
-    private BigDecimal calculateEstimatedSavingsInPercentage(TotalConsumptionSummary totalConsumptionSummary) {
-        BigDecimal ratio = totalConsumptionSummary.getTotalCostForAllUnitsConsumptionBasedOnProposal()
-                .divide(totalConsumptionSummary.getTotalActualCostForAllUnitsConsumption(), 4, BigDecimal.ROUND_HALF_EVEN);
-        return (BigDecimal.ONE.subtract(ratio)).multiply(new BigDecimal(100));
-    }
 
-    private void updateCache_TotalConsumptionSummary(String sellerCode,
-                                                     HashMap<String, TotalConsumptionSummary> cache_TotalConsumptionSummary,
-                                                     TotalConsumptionSummary totalConsumptionSummary) {
-        if (cache_TotalConsumptionSummary.get(sellerCode) != null) {
-            TotalConsumptionSummary totalConsumptionSummary_cache = cache_TotalConsumptionSummary.get(sellerCode);
-            //totalCostForAllUnitsConsumptionBasedOnProposal
-            BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal = totalConsumptionSummary_cache
-                    .getTotalCostForAllUnitsConsumptionBasedOnProposal();
-            BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal_updated =
-                    totalCostForAllUnitsConsumptionBasedOnProposal.add(totalConsumptionSummary
-                            .getTotalCostForAllUnitsConsumptionBasedOnProposal());
-            totalConsumptionSummary_cache.setTotalCostForAllUnitsConsumptionBasedOnProposal(
-                    totalCostForAllUnitsConsumptionBasedOnProposal_updated);
-            //totalActualCostForAllUnitsConsumption
-            BigDecimal totalActualCostForAllUnitsConsumption = totalConsumptionSummary_cache
-                    .getTotalActualCostForAllUnitsConsumption();
-            BigDecimal totalActualCostForAllUnitsConsumption_updated = totalActualCostForAllUnitsConsumption
-                    .add(totalConsumptionSummary.getTotalActualCostForAllUnitsConsumption());
-            totalConsumptionSummary_cache.setTotalActualCostForAllUnitsConsumption(totalActualCostForAllUnitsConsumption_updated);
 
-            cache_TotalConsumptionSummary.put(sellerCode, totalConsumptionSummary_cache);
-        } else {
-            //totalCostForAllUnitsConsumptionBasedOnProposal
-            TotalConsumptionSummary totalConsumptionSummary_cache = new TotalConsumptionSummary();
-            totalConsumptionSummary_cache.setTotalCostForAllUnitsConsumptionBasedOnProposal(totalConsumptionSummary
-                    .getTotalCostForAllUnitsConsumptionBasedOnProposal());
-            //totalActualCostForAllUnitsConsumption
-            totalConsumptionSummary_cache.setTotalActualCostForAllUnitsConsumption(totalConsumptionSummary
-                    .getTotalActualCostForAllUnitsConsumption());
-
-            cache_TotalConsumptionSummary.put(sellerCode, totalConsumptionSummary_cache);
-        }
-
-    }
 
     private List<AllReceiverPointsProvisionForSeller> calculateProvision(final BigDecimal totalEstimatedContractProfitValue,
                                                                          final BigDecimal totalEstimatedContractProfitValueInYearScale,
@@ -232,5 +217,12 @@ public class ElectricityOfferAllReceiverPointsSummaryService {
                                                                          final String userName) {
         return electricityOfferProvisionService.calculateAllReceiverPointProvisionList(totalEstimatedContractProfitValue,
                 totalEstimatedContractProfitValueInYearScale, sellerName, userName);
+    }
+
+    private BigDecimal getTotalPredictedProposalZoneCostsForSeller(String sellerCode,
+                                                                   TotalConsumptionSummary totalConsumptionSummary,
+                                                                   List<ProposalZoneDetails> proposalZoneDetails) {
+        return null;
+
     }
 }

@@ -11,6 +11,7 @@ public class TotalConsumptionSummary {
     private Integer invoiceNumbers;
     private List<ZoneTotalConsumptionSummary> zoneTotalConsumptionSummaryList;
     private BigDecimal totalActualCostForAllUnitsConsumption;
+    //helper
     private BigDecimal totalCostForAllUnitsConsumptionBasedOnProposal;
 
     public Integer getTotalNumberOfDaysForAllPeriods() {
