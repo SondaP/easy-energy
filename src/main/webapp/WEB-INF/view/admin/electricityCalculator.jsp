@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="pl" data-ng-app="myApp" data-ng-controller="myCtrl">
 <!--Boghan-->
-<%--
-<head>
+
+<%--<head>
     <link rel="stylesheet" href="css/font-awesome.css">
     <script src="js/lib/jquery-3.1.0.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
@@ -179,7 +179,7 @@
 
                         </th>
                         <th data-ng-repeat='invoiceZone in invoiceList.invoiceZoneConsumptionList'>
-                            <input type="number" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
+                            <input type="number" ng-pattern="/^\d+$/" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
                         </th>
                         <th>
                             <div class="btn-group">
@@ -415,7 +415,7 @@
                                 </table>
                             </article>
                             <article class="col-xs-12">
-                                <table class="table table-bordered table-striped col-xs-12 " ng-hide="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0">
+                                <table class="table table-bordered table-striped col-xs-12 " ng-hide="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0" ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
                                     <thead>
                                     <tr>
                                         <th class='fields-color'>Pułap</th>
@@ -679,7 +679,7 @@
                         </article>
                         <article class="col-xs-12">
 
-                            <table class="table table-bordered table-striped col-xs-12 " ng-hide='proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0'>
+                            <table class="table table-bordered table-striped col-xs-12 " ng-hide='proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0' ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
                                 <thead>
                                 <tr>
                                     <th class='fields-color'>Pułap</th>
@@ -758,10 +758,13 @@
                         </tbody>
                     </table>
                 </section>
-                <h2 class='fields-color' ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0">Prowizje z punktu odbioru</h2>
+                <h2 class='fields-color' ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0"
+                    ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0"
+                >Prowizje z punktu odbioru</h2>
                 <article class="col-xs-12">
 
-                    <table class="table table-bordered table-striped col-xs-12 " ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0">
+                    <table class="table table-bordered table-striped col-xs-12 " ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0"
+                           ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0">
                         <thead>
                         <tr>
                             <th class='fields-color'>Pułap</th>
@@ -807,6 +810,7 @@
 <script src='js/controllers/dateFormatConroller.js'></script>
 <script src='js/controllers/yesnocontroller.js'></script>
 <script src='js/controllers/erorrcontroller.js'></script>
+<script src='js/controllers/succescontoller.js'></script>
 <script src='js/controllers/showhide.js'></script>
 <script src='js/controllers/closesectioncontroller.js'></script>--%>
 </body>
@@ -823,6 +827,7 @@
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/dateFormatConroller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/yesnocontroller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/erorrcontroller.js'></script>
+<script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/succescontoller.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/showhide.js'></script>
 <script src='${pageContext.request.contextPath}/resources/a/electricityCalculator/js/controllers/closesectioncontroller.js'></script>
 <script>

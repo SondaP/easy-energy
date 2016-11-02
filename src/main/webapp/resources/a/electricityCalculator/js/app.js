@@ -1,21 +1,24 @@
-angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
-    .controller('myCtrl', ["$scope", "$http","$filter","ModalService", function($scope, $http,$filter,ModalService) {
+angular.module('myApp', ['angularModalService', 'ngAnimate', 'ui.bootstrap'])
+    .controller('myCtrl', ["$scope", "$http", "$filter", "ModalService", function($scope, $http, $filter, ModalService) {
 
         /* Resources */
         //Boghan
-       /* var getOfferDataForEditionPath = "../data/punct.json";
+/*        var getOfferDataForEditionPath = "../data/punct.json";
         var yesNoTemplatePath = "../templates/yesno.html";
         var errorTemplatePath = '../templates/error.html'
+        var successTemplatePath = "../templates/success.html";
         var savePath = 'https://easy-energy.herokuapp.com/a/electricityOffer.json';
         var calculatePath = 'http://easy-energy.ovh/calc/a/calculateElectricityOffer.json';
         var requestSourceType = 'editOffer';
-        var aviableSellersPath='../data/sellers.json'*/
-       
+        var aviableSellersPath = '../data/sellers.json'*/
+
+
         //Get resources
         var getOfferDataForEditionPath = pageContext + "/a/electricityOffer/" + offerIdForEdition + ".json";
         //GET offer data
         var yesNoTemplatePath = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
         var errorTemplatePath = pageContext + '/resources/a/electricityCalculator/templates/error.jsp';
+        var successTemplatePath = pageContext + '/resources/a/electricityCalculator/templates/success.jsp';
         //POST offer data
         var savePath = pageContext + '/a/electricityOffer.json';
         //CALCULATE offer
@@ -24,18 +27,18 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
 
         var sourceTypeEditOffer = 'editOffer';
         var sourceNewOffer = 'newOffer';
-    
+
         //Get aviableSellers
         $http({
-                method: 'GET',
-                url: aviableSellersPath,
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                }
-            }).then(function(response) {
-                  $scope.aviableSellers = response.data;
+            method: 'GET',
+            url: aviableSellersPath,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then(function(response) {
+            $scope.aviableSellers = response.data;
 
-         });
+        });
 
 
         //GET DATA
@@ -48,14 +51,14 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
                 }
             }).then(function(response) {
                 $scope.content = response.data;
-                
+
             });
         }
         if (requestSourceType == sourceNewOffer) {
             initNewOffer($scope);
         }
 
-       
+
 
         function initNewOffer($scope) {
             $scope.content = {
@@ -125,8 +128,8 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
 
         //POST DATA
         $scope.sendData = function() {
-            
-           convertDateFromObject();
+
+            convertDateFromObject();
 
 
             $http({
@@ -138,22 +141,34 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
                     'Content-Type': 'application/json'
                 }
             }).success(function(response) {
-                if (response.errorCode != null) {
-                    errorModal(response.errorCode, response.message);
-                }
+
                 $scope.content = response;
-             
+
+                ModalService.showModal({
+                    templateUrl: successTemplatePath,
+                    controller: "SuccessController"
+                }).then(function(modal) {
+                    modal.element.modal();
+                    modal.close.then(function(result) {
+
+                    });
+                });
+
+
             }).error(function(error) {
+                if (error.errorCode != null) { errorModal(error.errorCode, error.message); }
                 $scope.error = error;
             });
-           
+
         };
+
+
 
         //CALCULATE DATA
         $scope.sendCalculation = function() {
 
             convertDateFromObject();
-            console.log($scope.content);
+
             $http({
                 method: 'POST',
                 dataType: 'json',
@@ -164,14 +179,15 @@ angular.module('myApp', ['angularModalService', 'ngAnimate','ui.bootstrap'])
                 }
             }).success(function(response) {
                 $scope.content = response;
-               
+
+
 
             }).error(function(error) {
-                if (error.errorCode != null) {errorModal(error.errorCode, error.message);}
+                if (error.errorCode != null) { errorModal(error.errorCode, error.message); }
 
                 $scope.error = error;
             });
-         
+
 
         };
         var errorModal = function(errorCode, message) {
