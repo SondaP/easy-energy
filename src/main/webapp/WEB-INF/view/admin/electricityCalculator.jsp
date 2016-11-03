@@ -179,7 +179,7 @@
 
                         </th>
                         <th data-ng-repeat='invoiceZone in invoiceList.invoiceZoneConsumptionList'>
-                            <input type="number" ng-pattern="/^\d+$/" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
+                            <input type="number" class='form-control' data-ng-model='invoiceZone.unitConsumption' data-ng-disabled="disableFirstSection">
                         </th>
                         <th>
                             <div class="btn-group">
@@ -415,7 +415,8 @@
                                 </table>
                             </article>
                             <article class="col-xs-12">
-                                <table class="table table-bordered table-striped col-xs-12 " ng-hide="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0" ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
+
+                                <table class="table table-bordered table-striped col-xs-12 " ng-hide="proposalSellerList.receiverPointEstimation.receiverPointProvisionList==null || proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0 " ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList!=null || proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
                                     <thead>
                                     <tr>
                                         <th class='fields-color'>Pułap</th>
@@ -679,7 +680,7 @@
                         </article>
                         <article class="col-xs-12">
 
-                            <table class="table table-bordered table-striped col-xs-12 " ng-hide='proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0' ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
+                            <table class="table table-bordered table-striped col-xs-12 " ng-hide="proposalSellerList.receiverPointEstimation.receiverPointProvisionList==null || proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length==0 " ng-show="proposalSellerList.receiverPointEstimation.receiverPointProvisionList!=null || proposalSellerList.receiverPointEstimation.receiverPointProvisionList.length>0">
                                 <thead>
                                 <tr>
                                     <th class='fields-color'>Pułap</th>
@@ -758,13 +759,10 @@
                         </tbody>
                     </table>
                 </section>
-                <h2 class='fields-color' ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0"
-                    ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0"
-                >Prowizje z punktu odbioru</h2>
+                <h2 class='fields-color' ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList==null || receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0 " ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList!=null || receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0">Prowizje z punktu odbioru</h2>
                 <article class="col-xs-12">
 
-                    <table class="table table-bordered table-striped col-xs-12 " ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0"
-                           ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0">
+                    <table class="table table-bordered table-striped col-xs-12" ng-hide="receiverPointEstimationList.allReceiverPointsProvisionForSellerList==null || receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length==0 " ng-show="receiverPointEstimationList.allReceiverPointsProvisionForSellerList!=null || receiverPointEstimationList.allReceiverPointsProvisionForSellerList.length>0">
                         <thead>
                         <tr>
                             <th class='fields-color'>Pułap</th>
