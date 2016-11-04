@@ -81,6 +81,12 @@
         <put-attribute name="title" value="Edytuj oferte"/>
     </definition>
 
+    <definition name="a-provision-users" extends="common">
+        <put-attribute name="title" value="Handlowcy"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/provisionSettings/provisionUsers.jsp"/>
+        <put-attribute name="currentDef" value="a-provision-users"/>
+    </definition>
+
 
     <!-- TRADER -->
     <definition name="a-userRegister" extends="common">

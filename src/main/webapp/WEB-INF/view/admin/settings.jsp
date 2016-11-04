@@ -30,7 +30,8 @@
             <div class="panel-body">
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Ustaw poziomy prowizji dla zarejestrowanych handlowców</a>
+                    <a href='<spring:url value="/a/provision/users.html"></spring:url>'
+                       class="list-group-item">Ustaw poziomy prowizji dla zarejestrowanych handlowców</a>
                 </div>
             </div>
         </div>

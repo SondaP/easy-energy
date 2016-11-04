@@ -33,7 +33,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public List<User> findAllUsersForUser(String userName){
+    public List<User> findAllHierarchyUsersForUser(String userName){
         return userRepositoryApp.findAllUsersForUser(userName);
     }
 

@@ -55,8 +55,8 @@ public class AdminController {
     }
 
     @RequestMapping("/users")
-    public String getUsers(Model model, Principal principal) {
-        model.addAttribute("users", userService.findAllUsersForUser(principal.getName()));
+    public String getHierarchyUsers(Model model, Principal principal) {
+        model.addAttribute("users", userService.findAllHierarchyUsersForUser(principal.getName()));
         return "a-users";
     }
 
