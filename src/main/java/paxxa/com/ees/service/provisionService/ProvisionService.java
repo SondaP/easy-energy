@@ -2,10 +2,12 @@ package paxxa.com.ees.service.provisionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import paxxa.com.ees.dto.provisionSettings.ProvisionVariantDTO;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.repository.provision.ProvisionConditionsRepositoryApp;
 import paxxa.com.ees.service.user.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,23 @@ public class ProvisionService {
                                                        final String SELLER_NAME) {
         Integer userIdByUserName = userService.getUserIdByUserName(userName);
         return provisionConditionsRepositoryApp.getProvisionVariants(userIdByUserName, PRODUCT_CODE, SELLER_NAME);
+    }
+
+    public List<ProvisionVariantDTO> getProvisionVariantsDTO(final String userName,
+                                                         final String PRODUCT_CODE,
+                                                         final String SELLER_NAME) {
+        Integer userIdByUserName = userService.getUserIdByUserName(userName);
+
+        List<ProvisionVariantDTO> results = new ArrayList<>();
+        List<ProvisionVariant> provisionVariants = provisionConditionsRepositoryApp
+                .getProvisionVariants(userIdByUserName, PRODUCT_CODE, SELLER_NAME);
+        provisionVariants.forEach(x -> {
+            ProvisionVariantDTO provisionVariantDTO = new ProvisionVariantDTO();
+            provisionVariantDTO.setProvisionPercentageValue(x.getProvisionPercentageValue());
+            provisionVariantDTO.setProvisionLevelDescription(x.getProvisionLevelDescription());
+            results.add(provisionVariantDTO);
+        });
+        return results;
     }
 
 }

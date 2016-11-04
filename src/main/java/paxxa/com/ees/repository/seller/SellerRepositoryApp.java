@@ -26,4 +26,10 @@ public class SellerRepositoryApp {
         criteria.setProjection(Property.forName("sellerCode"));
         return criteria.list();
     }
+
+    public List<Seller> getSellers(){
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Seller.class);
+        return criteria.list();
+    }
 }
