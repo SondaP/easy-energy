@@ -38,7 +38,7 @@ public class ProvisionConditionsRepositoryApp {
 
     private DetachedCriteria getProvisionIdForUser(final Integer userId,
                                                    final String PRODUCT_CODE,
-                                                   final String SELLER_CODE){
+                                                   final String SELLER_CODE) {
         Session session = entityManager.unwrap(Session.class);
 
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(ProvisionConditions.class, "provisionConditions");
@@ -49,6 +49,17 @@ public class ProvisionConditionsRepositoryApp {
         detachedCriteria.add(Restrictions.eq("user.id", userId));
         detachedCriteria.setProjection(Property.forName("provisionVariantList.id"));
         return detachedCriteria;
+    }
+
+    public ProvisionConditions getUserProvisionConditions(final Integer userId,
+                                                           final String PRODUCT_CODE,
+                                                           final String SELLER_CODE) {
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(ProvisionConditions.class, "provisionConditions");
+        criteria.add(Restrictions.eq("productCode", PRODUCT_CODE));
+        criteria.add(Restrictions.eq("sellerCode", SELLER_CODE));
+        criteria.add(Restrictions.eq("user.id", userId));
+        return (ProvisionConditions) criteria.uniqueResult();
     }
 
 }
