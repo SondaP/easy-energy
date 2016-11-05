@@ -2,11 +2,14 @@ package paxxa.com.ees.service.provisionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.ees.dto.provisionSettings.ProvisionVariantDTO;
 import paxxa.com.ees.dto.provisionSettings.UserProvisionDTO;
 import paxxa.com.ees.entity.provision.ProvisionConditions;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
+import paxxa.com.ees.repository.provision.ProvisionConditionsRepository;
 import paxxa.com.ees.repository.provision.ProvisionConditionsRepositoryApp;
+import paxxa.com.ees.repository.provision.ProvisionVariantRepository;
 import paxxa.com.ees.service.user.UserService;
 
 import java.util.ArrayList;
@@ -14,13 +17,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class ProvisionService {
 
     @Autowired
     private UserService userService;
     @Autowired
+    private ProvisionConditionsRepository provisionConditionsRepository;
+    @Autowired
     private ProvisionConditionsRepositoryApp provisionConditionsRepositoryApp;
+    @Autowired
+    private ProvisionVariantRepository provisionVariantRepository;
+
 
 
     public List<ProvisionVariant> getProvisionVariants(final String userName,
@@ -61,24 +70,31 @@ public class ProvisionService {
     }
 
     public void updateUserProvisionVariants(UserProvisionDTO userProvisionDTO) {
-
         String sellerCode = userProvisionDTO.getSellerCode();
         String productCode = userProvisionDTO.getProductCode();
         Integer userIdByUserName = userService.getUserIdByUserName(userProvisionDTO.getUserName());
         ProvisionConditions userProvisionConditions = provisionConditionsRepositoryApp
                 .getUserProvisionConditions(userIdByUserName, productCode, sellerCode);
-        List<ProvisionVariant> provisionVariantList = userProvisionConditions.getProvisionVariantList();
 
+        List<ProvisionVariant> provisionVariantList = userProvisionConditions.getProvisionVariantList();
         List<ProvisionVariantDTO> provisionVariantDTOList = userProvisionDTO.getProvisionVariantDTOList();
 
+        deleteMissingVariants(provisionVariantList, provisionVariantDTOList);
+
+        provisionConditionsRepository.save(userProvisionConditions);
     }
 
     private void updateExistingVariants() {
 
     }
 
-    private void deleteMissingVariants() {
-
+    private void deleteMissingVariants(List<ProvisionVariant> provisionVariantList,
+                                       List<ProvisionVariantDTO> provisionVariantDTOList) {
+        List<Integer> missingVariantsIds = getMissingVariantsIds(provisionVariantList, provisionVariantDTOList);
+        for (Integer missingVariantsId : missingVariantsIds) {
+            ProvisionVariant provisionVariantForRemove = provisionVariantRepository.getOne(missingVariantsId);
+            provisionVariantList.remove(provisionVariantForRemove);
+        }
     }
 
     private void addNewVariants() {
@@ -87,7 +103,7 @@ public class ProvisionService {
 
     private List<Integer> getMissingVariantsIds(List<ProvisionVariant> provisionVariantList,
                                                 List<ProvisionVariantDTO> provisionVariantDTOList) {
-        List<Integer> provisionVariantIdList = provisionVariantDTOList
+        List<Integer> provisionVariantIdList = provisionVariantList
                 .stream()
                 .map(x -> x.getId())
                 .collect(Collectors.toList());

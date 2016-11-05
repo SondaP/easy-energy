@@ -20,7 +20,7 @@ public class ProvisionConditions {
     private String productCode;
     private String sellerCode;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ProvisionVariant.class)
     private List<ProvisionVariant> provisionVariantList;
 
 

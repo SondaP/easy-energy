@@ -64,9 +64,16 @@ public class ProvisionSettingsRestController {
     }
 
     @RequestMapping(value = "/a/provision/userProvision", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<UserProvisionDTO> updateUserProvisionVariants(@RequestBody UserProvisionDTO userProvisionDTO,
-                                                                        Principal principal) {
-        return new ResponseEntity<>(userProvisionDTO, HttpStatus.OK);
+    public ResponseEntity<UserProvisionDTO> updateUserProvisionVariants(@RequestBody UserProvisionDTO userProvisionDTO) {
+
+        provisionService.updateUserProvisionVariants(userProvisionDTO);
+
+        String userName = userProvisionDTO.getUserName();
+        String product_code = userProvisionDTO.getProductCode();
+        String seller_code = userProvisionDTO.getSellerCode();
+        UserProvisionDTO userProvisionDTOAfterUpdate = provisionService.getUserProvisionDTO(userName, product_code, seller_code);
+
+        return new ResponseEntity<>(userProvisionDTOAfterUpdate, HttpStatus.OK);
     }
 
 
