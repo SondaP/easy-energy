@@ -3,6 +3,7 @@ package paxxa.com.ees.service.provisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paxxa.com.ees.dto.provisionSettings.ProvisionVariantDTO;
+import paxxa.com.ees.dto.provisionSettings.UserProvisionDTO;
 import paxxa.com.ees.entity.provision.ProvisionVariant;
 import paxxa.com.ees.repository.provision.ProvisionConditionsRepositoryApp;
 import paxxa.com.ees.service.user.UserService;
@@ -26,9 +27,21 @@ public class ProvisionService {
         return provisionConditionsRepositoryApp.getProvisionVariants(userIdByUserName, PRODUCT_CODE, SELLER_NAME);
     }
 
+    public UserProvisionDTO getUserProvisionDTO(final String userName,
+                                                final String PRODUCT_CODE,
+                                                final String SELLER_NAME) {
+        List<ProvisionVariantDTO> provisionVariantsDTO = getProvisionVariantsDTO(userName, PRODUCT_CODE, SELLER_NAME);
+        UserProvisionDTO userProvisionDTO = new UserProvisionDTO();
+        userProvisionDTO.setProvisionVariantDTOList(provisionVariantsDTO);
+        userProvisionDTO.setUserName(userName);
+        userProvisionDTO.setProductCode(PRODUCT_CODE);
+        userProvisionDTO.setSellerCode(SELLER_NAME);
+        return userProvisionDTO;
+    }
+
     public List<ProvisionVariantDTO> getProvisionVariantsDTO(final String userName,
-                                                         final String PRODUCT_CODE,
-                                                         final String SELLER_NAME) {
+                                                             final String PRODUCT_CODE,
+                                                             final String SELLER_NAME) {
         Integer userIdByUserName = userService.getUserIdByUserName(userName);
 
         List<ProvisionVariantDTO> results = new ArrayList<>();

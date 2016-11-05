@@ -7,9 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paxxa.com.domainConstans.DomainConstans;
-import paxxa.com.ees.dto.provisionSettings.ProvisionVariantDTO;
 import paxxa.com.ees.dto.provisionSettings.ProvisionVariantsProspectDTO;
 import paxxa.com.ees.dto.provisionSettings.SellerForProvisionDTO;
+import paxxa.com.ees.dto.provisionSettings.UserProvisionDTO;
 import paxxa.com.ees.service.provisionService.ProvisionService;
 import paxxa.com.ees.service.seller.SellerService;
 import paxxa.com.ees.service.user.UserService;
@@ -49,18 +49,24 @@ public class ProvisionSettingsRestController {
 
 
     @RequestMapping(value = "/a/provision/provisionVariants", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<List<ProvisionVariantDTO>> getProvisionVariants(@RequestBody ProvisionVariantsProspectDTO provisionVariantsProspectDTO,
-                                                                          Principal principal) {
-        if(!userService.hasUserExpectedRole(principal.getName(), DomainConstans.ROLE.ROLE_ADMIN)){
+    public ResponseEntity<UserProvisionDTO> getProvisionVariants(@RequestBody ProvisionVariantsProspectDTO
+                                                                         provisionVariantsProspectDTO,
+                                                                 Principal principal) {
+        if (!userService.hasUserExpectedRole(principal.getName(), DomainConstans.ROLE.ROLE_ADMIN)) {
             return null;
         }
 
         String userName = provisionVariantsProspectDTO.getUserName();
         String product_code = provisionVariantsProspectDTO.getProductCode();
         String seller_code = provisionVariantsProspectDTO.getSellerCode();
-        List<ProvisionVariantDTO> provisionVariantsDTO = provisionService
-                .getProvisionVariantsDTO(userName, product_code, seller_code);
-        return new ResponseEntity<>(provisionVariantsDTO, HttpStatus.OK);
+        UserProvisionDTO userProvisionDTO = provisionService.getUserProvisionDTO(userName, product_code, seller_code);
+        return new ResponseEntity<>(userProvisionDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/a/provision/userProvision", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<UserProvisionDTO> updateUserProvisionVariants(@RequestBody UserProvisionDTO userProvisionDTO,
+                                                                        Principal principal) {
+        return new ResponseEntity<>(userProvisionDTO, HttpStatus.OK);
     }
 
 
