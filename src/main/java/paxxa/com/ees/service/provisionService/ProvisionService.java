@@ -31,7 +31,6 @@ public class ProvisionService {
     private ProvisionVariantRepository provisionVariantRepository;
 
 
-
     public List<ProvisionVariant> getProvisionVariants(final String userName,
                                                        final String PRODUCT_CODE,
                                                        final String SELLER_NAME) {
@@ -80,12 +79,31 @@ public class ProvisionService {
         List<ProvisionVariantDTO> provisionVariantDTOList = userProvisionDTO.getProvisionVariantDTOList();
 
         deleteMissingVariants(provisionVariantList, provisionVariantDTOList);
+        addNewVariants(provisionVariantList, provisionVariantDTOList);
+        updateExistingVariants(provisionVariantDTOList);
 
         provisionConditionsRepository.save(userProvisionConditions);
     }
 
-    private void updateExistingVariants() {
+    private void updateExistingVariants(List<ProvisionVariantDTO> provisionVariantDTOList) {
+        List<ProvisionVariantDTO> provisionVariantsForUpdate = getProvisionVariantsForUpdate(provisionVariantDTOList);
+        provisionVariantsForUpdate.forEach(x -> {
+                    ProvisionVariant provisionVariant = new ProvisionVariant();
+                    provisionVariant.setId(x.getId());
+                    provisionVariant.setProvisionPercentageValue(x.getProvisionPercentageValue());
+                    provisionVariant.setProvisionLevelDescription(x.getProvisionLevelDescription());
+                    provisionVariantRepository.save(provisionVariant);
+                }
+        );
 
+
+    }
+
+    private List<ProvisionVariantDTO> getProvisionVariantsForUpdate(List<ProvisionVariantDTO> provisionVariantDTOList) {
+        return provisionVariantDTOList
+                .stream()
+                .filter(x -> x.getId() != null)
+                .collect(Collectors.toList());
     }
 
     private void deleteMissingVariants(List<ProvisionVariant> provisionVariantList,
@@ -94,10 +112,25 @@ public class ProvisionService {
         for (Integer missingVariantsId : missingVariantsIds) {
             ProvisionVariant provisionVariantForRemove = provisionVariantRepository.getOne(missingVariantsId);
             provisionVariantList.remove(provisionVariantForRemove);
+            provisionVariantRepository.delete(missingVariantsId);
         }
+
     }
 
-    private void addNewVariants() {
+    private void addNewVariants(List<ProvisionVariant> provisionVariantList,
+                                List<ProvisionVariantDTO> provisionVariantDTOList) {
+        List<ProvisionVariantDTO> newProvisionVariantDTO = getNewProvisionVariantDTO(provisionVariantDTOList);
+
+        List<ProvisionVariant> provisionVariantsForSave = new ArrayList<>();
+        newProvisionVariantDTO.forEach(x -> {
+                    ProvisionVariant provisionVariant = new ProvisionVariant();
+                    provisionVariant.setProvisionPercentageValue(x.getProvisionPercentageValue());
+                    provisionVariant.setProvisionLevelDescription(x.getProvisionLevelDescription());
+                    ProvisionVariant savedProvisionVariant = provisionVariantRepository.save(provisionVariant);
+                    provisionVariantsForSave.add(savedProvisionVariant);
+                }
+        );
+        provisionVariantList.addAll(provisionVariantsForSave);
 
     }
 
@@ -123,6 +156,13 @@ public class ProvisionService {
         } else {
             return missingProvisionVariantsIds;
         }
+    }
+
+    private List<ProvisionVariantDTO> getNewProvisionVariantDTO(List<ProvisionVariantDTO> provisionVariantDTOList) {
+        return provisionVariantDTOList
+                .stream()
+                .filter(x -> x.getId() == null)
+                .collect(Collectors.toList());
     }
 
 
