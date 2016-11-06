@@ -46,7 +46,7 @@ public class ProvisionSettingsRestController {
         List<String> productCodes = Arrays.asList(electricity, gas);
         return new ResponseEntity<>(productCodes, HttpStatus.OK);
     }
-
+ 
 
     @RequestMapping(value = "/a/provision/provisionVariants", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<UserProvisionDTO> getProvisionVariants(@RequestBody ProvisionVariantsProspectDTO
