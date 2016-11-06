@@ -52,10 +52,10 @@ public class ProvisionSettingsRestController {
     public ResponseEntity<UserProvisionDTO> getProvisionVariants(@RequestBody ProvisionVariantsProspectDTO
                                                                          provisionVariantsProspectDTO,
                                                                  Principal principal) {
+        LOG.debug("Get provision variants for user: " + principal.getName());
         if (!userService.hasUserExpectedRole(principal.getName(), DomainConstans.ROLE.ROLE_ADMIN)) {
             return null;
         }
-
         String userName = provisionVariantsProspectDTO.getUserName();
         String product_code = provisionVariantsProspectDTO.getProductCode();
         String seller_code = provisionVariantsProspectDTO.getSellerCode();
@@ -64,8 +64,9 @@ public class ProvisionSettingsRestController {
     }
 
     @RequestMapping(value = "/a/provision/userProvision", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<UserProvisionDTO> updateUserProvisionVariants(@RequestBody UserProvisionDTO userProvisionDTO) {
-
+    public ResponseEntity<UserProvisionDTO> updateUserProvisionVariants(@RequestBody UserProvisionDTO userProvisionDTO,
+                                                                        Principal principal) {
+        LOG.debug("Update provision variants for user: " + principal.getName());
         provisionService.updateUserProvisionVariants(userProvisionDTO);
 
         String userName = userProvisionDTO.getUserName();
