@@ -20,6 +20,7 @@ public class ElectricityOfferAdminController {
     @RequestMapping("/offers")
     public String showOffers(Model model, Principal principal){
         model.addAttribute("offers", offerStorageService.getUserOffers(principal.getName()));
+        model.addAttribute("countedOffers", offerStorageService.countUserOffers(principal.getName()));
         return "a-offers";
     }
 

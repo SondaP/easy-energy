@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paxxa.com.ees.dto.offer.electricityOffer.offer.ElectricityOfferRoot;
+import paxxa.com.ees.dto.pageRequest.PageRequest;
 import paxxa.com.ees.entity.offerStorage.OfferStorage;
 import paxxa.com.ees.service.offerCalculation.electricityOffer.ElectricityOfferCalculationService;
 import paxxa.com.ees.service.offerStorage.OfferStorageService;
@@ -46,10 +47,16 @@ public class ElectricityOfferAdminRestController {
         throw new RuntimeException("Illegal offer type");
     }
 
+    @RequestMapping(value = "/a/electricityOffer/getElectricityOffers", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<PageRequest> getUserElectricityOffers(@RequestBody PageRequest pageRequest) {
+        System.out.println("sss");
+        return new ResponseEntity<>(pageRequest, HttpStatus.OK);
+    }
+
 
     @RequestMapping(value = "/a/electricityOffer", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<ElectricityOfferRoot> createOrUpdate(@RequestBody ElectricityOfferRoot electricityOfferRoot,
-                                                               Principal principal) {
+    public ResponseEntity<ElectricityOfferRoot> createOrUpdateElectricityOffer(@RequestBody ElectricityOfferRoot electricityOfferRoot,
+                                                                               Principal principal) {
         LOG.debug("Started saving electricity offer");
         OfferStorage offerStorage = offerStorageService.createOrUpdateOffer(electricityOfferRoot, principal.getName());
         System.out.println(electricityOfferRoot.toString());
@@ -76,8 +83,6 @@ public class ElectricityOfferAdminRestController {
         List<String> activeAvailableSellers = sellerService.getActiveAvailableSellers();
         return new ResponseEntity<List<String>>(activeAvailableSellers, HttpStatus.OK);
     }
-
-
 
 
 }

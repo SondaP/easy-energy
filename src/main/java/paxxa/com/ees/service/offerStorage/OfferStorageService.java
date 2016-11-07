@@ -1,6 +1,8 @@
 package paxxa.com.ees.service.offerStorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import paxxa.com.domainConstans.DomainConstans;
@@ -103,7 +105,13 @@ public class OfferStorageService {
 
     public List<OfferStorage> getUserOffers(String userName) {
         User userByUserName = userService.findUserByUserName(userName);
-        return offerStorageRepository.findByUser_IdOrderByCreationDateAsc(userByUserName.getId());
+        PageRequest pageRequest = new PageRequest(0, 10, Sort.Direction.ASC, "creationDate");
+        return offerStorageRepository.findByUser_Id(userByUserName.getId(), pageRequest);
+    }
+
+    public Integer countUserOffers(String userName){
+        User userByUserName = userService.findUserByUserName(userName);
+        return offerStorageRepository.countByUser_Id(userByUserName.getId());
     }
 
     public Object getOffer(final int offerStorageId) {
