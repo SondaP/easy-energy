@@ -4,6 +4,7 @@ package paxxa.com.ees.controller.provisionSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import paxxa.com.ees.service.user.UserService;
 
@@ -23,6 +24,14 @@ public class ProvisionSettingsController {
         model.addAttribute("users", userService.findAllHierarchyUsersForUser(principal.getName()));
         return "a-provision-users";
     }
+
+    @RequestMapping("/userProvision/{id}")
+    public String showUserProvisionSettings(@PathVariable Integer id, Model model) {
+        model.addAttribute("userName", userService.getUserNameById(id));
+        return "a-provision-settings";
+    }
+
+
 
 
 }

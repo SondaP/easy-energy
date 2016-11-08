@@ -25,7 +25,7 @@ public class UserRepositoryApp {
     private EntityManager entityManager;
 
 
-    public List<User> findAllUsersForUser(String userName){
+    public List<User> findAllUsersForUser(String userName) {
         Session session = entityManager.unwrap(Session.class);
 
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
@@ -56,7 +56,7 @@ public class UserRepositoryApp {
     }
 
     private void unLockClient(List<Client> clients) {
-        for(Client client: clients){
+        for (Client client : clients) {
             client.setCurrentAdvisor(null);
         }
     }
@@ -76,6 +76,13 @@ public class UserRepositoryApp {
         }
     }
 
+    public String getUserNameById(final Integer userId) {
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Restrictions.eq("id", userId));
+        criteria.setProjection(Property.forName("name"));
+        return (String) criteria.uniqueResult();
+    }
 
 
 }

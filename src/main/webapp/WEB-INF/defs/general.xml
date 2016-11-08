@@ -87,6 +87,12 @@
         <put-attribute name="currentDef" value="a-provision-users"/>
     </definition>
 
+    <definition name="a-provision-settings" extends="common">
+        <put-attribute name="title" value="Ustawienia prowizji"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/provisionSettings/provisionSettings.jsp"/>
+        <put-attribute name="currentDef" value="a-provision-users"/>
+    </definition>
+
 
     <!-- TRADER -->
     <definition name="a-userRegister" extends="common">

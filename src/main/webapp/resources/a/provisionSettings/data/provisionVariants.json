@@ -1,0 +1,17 @@
+{
+ "userName": "paxxa",
+ "productCode": "Energia",
+ "sellerCode": "CEZ",
+ "provisionVariantDTOList": [
+   {
+     "id": 1,
+     "provisionLevelDescription": "Próg I",
+     "provisionPercentageValue": 0.65
+   },
+   {
+     "id": 2,
+     "provisionLevelDescription": "Próg II",
+     "provisionPercentageValue": 0.75
+   }
+ ]
+}

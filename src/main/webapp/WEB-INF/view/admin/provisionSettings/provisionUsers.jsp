@@ -17,7 +17,7 @@
                     ${user.name}
             </td>
             <td>
-                <a href="<spring:url value="#" />" class="btn btn-primary triggerRemove">
+                <a href="<spring:url value="/a/provision/userProvision/${user.id}.html" />" class="btn btn-primary triggerRemove">
                     prowizje
                 </a>
             </td>

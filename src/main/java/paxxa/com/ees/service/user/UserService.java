@@ -88,6 +88,8 @@ public class UserService {
         return userRepository.findByName(userName).getId();
     }
 
-
+    public String getUserNameById(final Integer userId){
+        return userRepositoryApp.getUserNameById(userId);
+    }
 
 }

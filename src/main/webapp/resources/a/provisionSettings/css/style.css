@@ -1,0 +1,111 @@
+body {
+  font-size: 10px;
+  font-family: sans-serif;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.conf-block {
+  margin-top: 100px;
+  border: 2px solid #008000;
+}
+.conf-block .header {
+  background-color: #d3d3d3;
+  padding: 10px 0;
+  border-bottom: 2px solid #008000;
+}
+.conf-block .header h1 {
+  font-size: 20px;
+  margin: 0 !important;
+  line-height: 34px;
+}
+.conf-block .header span {
+  display: block;
+  line-height: 34px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.conf-block .header select {
+  line-height: 34px;
+}
+.conf-block .sel ul {
+  border: 2px solid #000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.conf-block .sel ul .title {
+  padding: 15px 0px 15px 5px;
+  font-family: Arial;
+  font-size: 14px;
+  background-color: #808080;
+}
+.conf-block .sel ul li {
+  padding-left: 5px;
+}
+.conf-block .sel ul li:not(.title) {
+  border-top: 1px solid #000;
+  cursor: pointer;
+  padding: 10px 0px 10px 5px;
+}
+table {
+  text-align: center;
+}
+table th {
+  text-align: center;
+}
+table td {
+  line-height: 22px !important;
+}
+table span {
+  border: 1px solid #000;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+table input {
+  border: 0;
+  border: 1px solid #000;
+  background-color: #fff;
+  padding-left: 5px;
+}
+.gray {
+  background-color: #d3d3d3;
+}
+.red {
+  background-color: #90ee90;
+}
+.plus-block span {
+  border: 1px solid #808080;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.provision-list {
+  border-left: 2px solid #008000;
+}
+.my-row {
+  height: 100%;
+  display: table;
+  width: 100%;
+}
+.my-row .my-cell {
+  padding: 20px 0;
+  float: none;
+  display: table-cell;
+  vertical-align: middle;
+}
+.sel {
+  width: 30%;
+}
+.pro {
+  border-left: 2px solid #008000;
+  width: 70%;
+}
+.pro button {
+  color: #000;
+  margin-top: 20px;
+  background-color: #d3d3d3;
+  border-color: #008000;
+}
