@@ -3,23 +3,23 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
 
         /* Resources */
         //Boghan
-        var getSellersPath = "../data/sellers.json";
+       /* var getSellersPath = "../data/sellers.json";
         var getProductCodesPath = '../data/productCodes.json'
         var getProvisionVariantsPath = "/a/provision/provisionVariants";
         var sendDataPath="/a/provision/userProvision";
-        var yesNoTemplatePath = "../templates/yesno.html"
+        var yesNoTemplatePath = "../templates/yesno.html"*/
+
         var userName = 'paxxa';
 
 
+        /*Get resources*/
+        var yesNoTemplatePath = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
 
-        // Get resources
-        // var yesNoTemplatePath = pageContext + '/resources/a/electricityCalculator/templates/yesno.jsp';
-
-        // var getSellersPath = pageContext + "/a/provision/sellers";
-        // var getProductCodesPath= pageContext + "/a/provision/productCodes";
-        // POST
-        // var getProvisionVariantsPath = pageContext + "/a/provision/provisionVariants";
-        // var sendDataPath=pageContext+"/a/provision/userProvision"
+        var getSellersPath = pageContext + "/a/provision/sellers.json";
+        var getProductCodesPath = pageContext + "/a/provision/productCodes.json";
+        /*POST*/
+        var getProvisionVariantsPath = pageContext + "/a/provision/provisionVariants.json";
+        var sendDataPath = pageContext + "/a/provision/userProvision.json"
 
 
         $scope.userName = userName;
@@ -43,7 +43,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             }
         }).then(function(response) {
             $scope.productCodes = response.data;
-            $scope.productCodeReq = $scope.productCodes[0].productCode;
+            $scope.productCodeReq = $scope.productCodes[0];
 
         });
 
@@ -77,7 +77,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
             };
 
             //POST and GET ProvisionVariants
-           
+
             $http({
                 method: 'POST',
                 url: getProvisionVariantsPath,
@@ -95,7 +95,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         }
 
         $scope.saveData=function(){
-             $http({
+            $http({
                 method: 'POST',
                 url: sendDataPath,
                 data: $scope.provisionVariants,
@@ -103,7 +103,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then(function(response) {
-               $scope.provisionVariants=response.data;
+                $scope.provisionVariants=response.data;
 
 
             }).then(function(response) {
