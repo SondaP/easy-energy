@@ -6,9 +6,10 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
        /* var getSellersPath = "../data/sellers.json";
         var getProductCodesPath = '../data/productCodes.json'
         var getProvisionVariantsPath = "/a/provision/provisionVariants";
-        var sendDataPath="/a/provision/userProvision";
-        var yesNoTemplatePath = "../templates/yesno.html"*/
-
+        var sendDataPath = "/a/provision/userProvision";
+        var yesNoTemplatePath = "../templates/yesno.html"
+        */
+       
         var userName = 'paxxa';
 
 
@@ -86,15 +87,19 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then(function(response) {
-                $scope.provisionVariants=response.data;
+                $scope.provisionVariants = response.data;
 
 
             }).then(function(response) {
 
+
             });
         }
 
-        $scope.saveData=function(){
+        $scope.saveData = function() {
+            angular.forEach( $scope.provisionVariants.provisionVariantDTOList,function(val){
+                val.provisionPercentageValue=parseFloat(val.provisionPercentageValue);
+            })
             $http({
                 method: 'POST',
                 url: sendDataPath,
@@ -103,7 +108,7 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then(function(response) {
-                $scope.provisionVariants=response.data;
+                $scope.provisionVariants = response.data;
 
 
             }).then(function(response) {
@@ -113,17 +118,21 @@ angular.module('myApp', ['angularModalService', 'ngAnimate'])
         }
         $scope.nubmerValidate = function(index) {
             $scope.$watch('provisionVariants.provisionVariantDTOList[' + index + '].provisionPercentageValue', function(newValue, oldValue) {
+
                 var arr = String(newValue).split("");
-                $scope.provisionVariants.provisionVariantDTOList[index].provisionPercentageValue = parseFloat($scope.provisionVariants.provisionVariantDTOList[index].provisionPercentageValue);
+
 
                 if (arr.length === 0) return;
-                if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.')) return parseFloat(newValue);
-                if (arr.length === 2 && newValue === '-.') return parseFloat(newValue);
+                if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.')) return ;
+                if (arr.length === 2 && newValue === '-.') return;
                 if (isNaN(newValue)) {
-                    $scope.provisionVariants.provisionVariantDTOList[index].provisionPercentageValue = parseFloat(oldValue);
+                    $scope.provisionVariants.provisionVariantDTOList[index].provisionPercentageValue = oldValue;
                 }
 
             });
+
+
+
 
         }
         $scope.addProvisionVariant = function() {
